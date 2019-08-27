@@ -1,0 +1,41 @@
+ <app-retailer-nav></app-retailer-nav>
+ <mat-sidenav-container>
+   <mat-sidenav #sidenav (opend)="log('opened')" (closed)="log('Closed')" mode="side" [(opened)]="opened">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+              <div class="btn-group-vertical example-button-row " > 
+          
+                      
+                    
+                  <div class="list-group" id="list-tab" role="tablist">
+                      <a class="list-group-item list-group-item-action transparent" id="list-home-list" routerLink="currentOrders" >Current Orders</a>
+                      <a class="list-group-item list-group-item-action transparent" id="list-profile-list"  routerLink="#" >New Orders</a>
+                      <a class="list-group-item list-group-item-action transparent" id="list-messages-list"  routerLink="#" >Register Items</a>
+                      <a class="list-group-item list-group-item-action transparent" id="list-settings-list"  routerLink="#" >New Items</a>
+                      <a class="list-group-item list-group-item-action transparent" id="list-settings-list"  routerLink="#" >Preivous Orders</a>
+                    </div>
+              </div>  
+         </div>
+      </div>
+    </div>
+   </mat-sidenav>
+
+   <mat-sidenav-content>
+     <button class="btn btn-light" (click)="sidenav.toggle()"><i class="material-icons">
+        list
+        </i></button>
+    <div class="container">
+      <div class="row">
+          <router-outlet></router-outlet>
+      </div>
+    </div>
+     
+
+      
+   </mat-sidenav-content>
+
+
+ </mat-sidenav-container>
+
+ <app-fotter></app-fotter>

@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8" style="padding-top: 20%; padding-left: 25%">
+            <h3>Register with us</h3>
+            <div class="example-container">
+
+                  <br>
+                    <mat-form-field>
+                      <input [formControl]="name" matInput placeholder="Shop Name" required>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                            <input matInput placeholder="Enter your email" [formControl]="email" required>
+                            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  
+                    <mat-form-field>
+                      <textarea [formControl]="password" matInput placeholder="Your Address" required></textarea>
+                    </mat-form-field>
+                  
+                    <mat-form-field class="example-full-width">
+                        <span matPrefix>+94 &nbsp;</span>
+                        <input [formControl]="mobile" type="tel" matInput placeholder="Telephone" required>
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                    </mat-form-field>
+                    
+                    <div class="example-button-row">
+                        <button mat-raised-button color="primary" (click)="save()">Items</button>
+                    </div>
+                   
+                        <!-- <div class="example-button-row">
+                          <button mat-raised-button color="primary">Register</button>
+                          <button mat-raised-button color="primary">Reset</button>
+                        </div> -->
+                      
+              </div>
+        </div>
+    </div>
+</div>
