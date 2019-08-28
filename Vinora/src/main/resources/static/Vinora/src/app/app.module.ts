@@ -22,6 +22,8 @@ import { NewOrderComponent } from './retailer/new-order/new-order.component';
 import { RegisteredItemComponent } from './retailer/registered-item/registered-item.component';
 import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
+import { ManagerComponent } from './manager/manager.component';
+import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,9 @@ import { PreviousOrdersComponent } from './retailer/previous-orders/previous-ord
     NewOrderComponent,
     RegisteredItemComponent,
     NewItemsComponent,
-    PreviousOrdersComponent
+    PreviousOrdersComponent,
+    ManagerComponent,
+    ManagerNavComponent
   ],
   imports: [
     BrowserModule,

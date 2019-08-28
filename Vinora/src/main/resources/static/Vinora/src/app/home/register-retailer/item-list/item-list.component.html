@@ -1,12 +1,37 @@
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
-<app-item></app-item>
+<div class="row">
+    <div class="col">
+        <h3>Items Available</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a  href=""
+                    *ngFor="let item of items">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                          <div mat-card-avatar ><img src="{{item.brandImagePath}}" alt="{{item.brand}}" class="brandLogo"></div>
+                          <mat-card-title>{{item.name}}</mat-card-title>
+                          <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image src="{{item.imagePath}}" alt="Photo of a Shiba Inu">
+                        <mat-card-content>
+                          <p>
+                            {{item.description}}
+                          </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                          <button mat-button>LIKE</button>
+                          <button mat-button>SHARE</button>
+                        </mat-card-actions>
+                      </mat-card>
+                </a>
+                <br>
+                <br>
+            </li>
+            
+          </ul>
+    </div>
+</div>
