@@ -24,6 +24,8 @@ import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 import { ManagerComponent } from './manager/manager.component';
 import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component';
+import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
+import { ItemServiceService } from './item/item-service.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component
     NewItemsComponent,
     PreviousOrdersComponent,
     ManagerComponent,
-    ManagerNavComponent
+    ManagerNavComponent,
+    RegisterNewItemComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,7 @@ import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component
     MatModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ItemServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

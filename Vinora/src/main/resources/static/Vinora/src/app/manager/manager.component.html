@@ -1,4 +1,4 @@
-<app-retailer-nav></app-retailer-nav>
+<app-manager-nav></app-manager-nav>
 <mat-sidenav-container>
   <mat-sidenav #sidenav (opend)="log('opened')" (closed)="log('Closed')" mode="side" [(opened)]="opened">
    <div class="container">
@@ -9,7 +9,7 @@
                      
                    
                  <div class="list-group" id="list-tab" role="tablist">
-                     <a class="list-group-item list-group-item-action transparent" id="list-home-list" routerLink="currentOrders" >Current Orders</a>
+                     <a class="list-group-item list-group-item-action transparent" id="list-home-list" routerLink="registerNewItem" >Register New Item</a>
                      <a class="list-group-item list-group-item-action transparent" id="list-profile-list"  routerLink="newOrder" >New Orders</a>
                      <a class="list-group-item list-group-item-action transparent" id="list-messages-list"  routerLink="registerItems" >Register Items</a>
                      <a class="list-group-item list-group-item-action transparent" id="list-settings-list"  routerLink="newItems" >New Items</a>

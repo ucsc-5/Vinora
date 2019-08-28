@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col">
+            
+        <form class="example-form" (ngSubmit)="onAddItem(f)" #f="ngForm">
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Item Name"    name="itemName" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Item Name"  name="itemImage" ngModel >
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Item Name"    name="brandImage" ngModel >
+                        </mat-form-field>
+            
+                <!-- <div class="input-group mb-3">   
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Item Image</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" name="itemImage" ngModel class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div> -->
+            
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Brand Name"   name="brandName" ngModel>
+                </mat-form-field>
+<!--             
+                <div class="input-group mb-3">   
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Brand Logo</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" name="brandImage" ngModel class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div> -->
+
+                
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Quantity"   name="quantity" ngModel >
+                    </mat-form-field>
+
+                <div class="input-group">
+                        <input type="text"   name="unitPrice"  ngModel class="form-control" placeholder="Unit Price" aria-label="Dollar amount (with dot and two decimal places)">
+                        <div class="input-group-append">
+                          <span class="input-group-text">Rs</span>
+                        </div>
+                </div>
+
+                <button>Add</button>
+        </form>
+        
+    </div>
+</div>
