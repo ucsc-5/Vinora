@@ -18,6 +18,10 @@ import { ItemListComponent } from './home/register-retailer/item-list/item-list.
 import { ItemComponent } from './item/item.component';
 import { EditListComponent } from './home/register-retailer/edit-list/edit-list.component';
 import { ItemFormComponent } from './home/register-retailer/item-form/item-form.component';
+import { NewOrderComponent } from './retailer/new-order/new-order.component';
+import { RegisteredItemComponent } from './retailer/registered-item/registered-item.component';
+import { NewItemsComponent } from './retailer/new-items/new-items.component';
+import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +36,11 @@ import { ItemFormComponent } from './home/register-retailer/item-form/item-form.
     ItemListComponent,
     ItemComponent,
     EditListComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    NewOrderComponent,
+    RegisteredItemComponent,
+    NewItemsComponent,
+    PreviousOrdersComponent
   ],
   imports: [
     BrowserModule,

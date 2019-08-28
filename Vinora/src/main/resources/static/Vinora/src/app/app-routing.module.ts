@@ -6,6 +6,10 @@ import { RetailerComponent } from './retailer/retailer.component';
 import { HomeComponent } from './home/home.component';
 import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';
 import { ItemFormComponent } from './home/register-retailer/item-form/item-form.component';
+import { NewOrderComponent } from './retailer/new-order/new-order.component';
+import { RegisteredItemComponent } from './retailer/registered-item/registered-item.component';
+import { NewItemsComponent } from './retailer/new-items/new-items.component';
+import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -15,7 +19,11 @@ const routes: Routes = [
       {path: 'register/itemList', component: ItemFormComponent} 
     ]},
   {path: 'retailer',component: RetailerComponent, children:[
-    {path: 'currentOrders', component: CurrentOrdersComponent}
+    {path: 'currentOrders', component: CurrentOrdersComponent},
+    {path: 'newOrder', component: NewOrderComponent},
+    {path: 'registerItems', component: RegisteredItemComponent},
+    {path: 'newItems', component: NewItemsComponent},
+    {path: 'previousOrder', component: PreviousOrdersComponent}
   ]}
 ];
 

@@ -6,7 +6,7 @@
 
                   <br>
                     <mat-form-field>
-                      <input [formControl]="name" matInput placeholder="Shop Name" required>
+                      <input matInput placeholder="Shop Name" required>
                     </mat-form-field>
 
                     <mat-form-field>
@@ -15,17 +15,17 @@
                     </mat-form-field>
                   
                     <mat-form-field>
-                      <textarea [formControl]="password" matInput placeholder="Your Address" required></textarea>
+                      <textarea matInput placeholder="Your Address" required></textarea>
                     </mat-form-field>
                   
                     <mat-form-field class="example-full-width">
                         <span matPrefix>+94 &nbsp;</span>
-                        <input [formControl]="mobile" type="tel" matInput placeholder="Telephone" required>
+                        <input type="tel" matInput placeholder="Telephone" required>
                         <mat-icon matSuffix>mode_edit</mat-icon>
                     </mat-form-field>
                     
                     <div class="example-button-row">
-                        <button mat-raised-button color="primary" (click)="save()">Items</button>
+                        <button mat-raised-button color="primary" routerLink="itemList">Items</button>
                     </div>
                    
                         <!-- <div class="example-button-row">
