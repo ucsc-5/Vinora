@@ -10,8 +10,11 @@ export class Item {
     public brandImagePath: string;
     public description: string;
 
+    public constructor(){
+        
+    }
     
-    public newItem(name: string, imagePath: string,brand: string,  brandImagePath: string,unit_price: number = 0, quantity: number= 0,state: string= "new",description: string= "none" ){
+    public newItem({ name, imagePath, brand, brandImagePath, unit_price = 0, quantity = 0, state = "new", description = "none" }: { name: string; imagePath: string; brand: string; brandImagePath: string; unit_price?: number; quantity?: number; state?: string; description?: string; }){
         this.id; 
         this.name = name;
         this.brand = brand;

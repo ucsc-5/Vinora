@@ -11,6 +11,8 @@ import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 import { ManagerComponent } from './manager/manager.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
+import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
+import { NewStockComponent } from './retailer/new-stock/new-stock.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,9 +23,11 @@ const routes: Routes = [
   {path: 'retailer',component: RetailerComponent, children:[
     {path: 'currentOrders', component: CurrentOrdersComponent},
     {path: 'newOrder', component: NewOrderComponent},
-    {path: 'registerItems', component: RegisteredItemComponent},
+    {path: 'registeredItems', component: RegisteredItemComponent},
     {path: 'newItems', component: NewItemsComponent},
-    {path: 'previousOrder', component: PreviousOrdersComponent}
+    {path: 'previousOrder', component: PreviousOrdersComponent},
+    {path: 'registeredStocks', component: RegisteredStockComponent},
+    {path: 'newStock', component: NewStockComponent}
   ]},
   {path: 'manager', component: ManagerComponent, children:[
     {path: 'registerNewItem', component: RegisterNewItemComponent}

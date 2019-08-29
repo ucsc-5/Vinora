@@ -23,7 +23,7 @@ export class RegisterNewItemComponent implements OnInit {
   onAddItem(form: NgForm){
     const value = form.value;
     const item = new Item();
-    item.newItem(value.itemName,value.itemImage,value.brandName,value.brandImage,value.unitPrice,value.quantity);
+    item.newItem({ name: value.itemName, imagePath: value.itemImage, brand: value.brandName, brandImagePath: value.brandImage, unit_price: value.unitPrice, quantity: value.quantity });
     this.itemService.storeNewItem(item).subscribe(
       (response)=> console.log(response),
       (error) => console.log(error)

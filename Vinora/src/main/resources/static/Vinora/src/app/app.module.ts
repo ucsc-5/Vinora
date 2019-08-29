@@ -23,6 +23,11 @@ import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
 import { ItemServiceService } from './item/item-service.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { ItemStockOrgComponent } from './item-stock-org/item-stock-org.component';
+import { NewStockComponent } from './retailer/new-stock/new-stock.component';
+import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
+import { StockComponent } from './stock/stock.component';
+import { StockService } from './stock/stock.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +46,11 @@ import { DataStorageService } from './shared/data-storage.service';
     PreviousOrdersComponent,
     ManagerComponent,
     ManagerNavComponent,
-    RegisterNewItemComponent
+    RegisterNewItemComponent,
+    ItemStockOrgComponent,
+    NewStockComponent,
+    RegisteredStockComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +59,7 @@ import { DataStorageService } from './shared/data-storage.service';
     MatModule,
     HttpClientModule
   ],
-  providers: [ItemServiceService,DataStorageService],
+  providers: [ItemServiceService,DataStorageService,StockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
