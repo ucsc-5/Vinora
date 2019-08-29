@@ -13,11 +13,7 @@ import { RetailerNavComponent } from './retailer/retailer-nav/retailer-nav.compo
 import { FotterComponent } from './fotter/fotter.component';
 import { HomeComponent } from './home/home.component';
 import { HomeNavComponent } from './home/home-nav/home-nav.component';
-import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';
-import { ItemListComponent } from './home/register-retailer/item-list/item-list.component';
-import { ItemComponent } from './item/item.component';
-import { EditListComponent } from './home/register-retailer/edit-list/edit-list.component';
-import { ItemFormComponent } from './home/register-retailer/item-form/item-form.component';
+import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';import { ItemComponent } from './item/item.component';
 import { NewOrderComponent } from './retailer/new-order/new-order.component';
 import { RegisteredItemComponent } from './retailer/registered-item/registered-item.component';
 import { NewItemsComponent } from './retailer/new-items/new-items.component';
@@ -38,10 +34,7 @@ import { DataStorageService } from './shared/data-storage.service';
     HomeComponent,
     HomeNavComponent,
     CurrentOrdersComponent,
-    ItemListComponent,
     ItemComponent,
-    EditListComponent,
-    ItemFormComponent,
     NewOrderComponent,
     RegisteredItemComponent,
     NewItemsComponent,

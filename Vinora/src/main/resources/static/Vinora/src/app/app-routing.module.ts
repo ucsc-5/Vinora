@@ -5,7 +5,6 @@ import { RegisterRetailerComponent } from './home/register-retailer/register-ret
 import { RetailerComponent } from './retailer/retailer.component';
 import { HomeComponent } from './home/home.component';
 import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';
-import { ItemFormComponent } from './home/register-retailer/item-form/item-form.component';
 import { NewOrderComponent } from './retailer/new-order/new-order.component';
 import { RegisteredItemComponent } from './retailer/registered-item/registered-item.component';
 import { NewItemsComponent } from './retailer/new-items/new-items.component';
@@ -17,8 +16,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, children: [
       {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterRetailerComponent},
-      {path: 'register/itemList', component: ItemFormComponent} 
+      {path: 'register', component: RegisterRetailerComponent} 
     ]},
   {path: 'retailer',component: RetailerComponent, children:[
     {path: 'currentOrders', component: CurrentOrdersComponent},
