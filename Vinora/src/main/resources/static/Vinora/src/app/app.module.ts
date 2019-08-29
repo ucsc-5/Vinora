@@ -26,6 +26,7 @@ import { ManagerComponent } from './manager/manager.component';
 import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
 import { ItemServiceService } from './item/item-service.service';
+import { DataStorageService } from './shared/data-storage.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,7 @@ import { ItemServiceService } from './item/item-service.service';
     MatModule,
     HttpClientModule
   ],
-  providers: [ItemServiceService],
+  providers: [ItemServiceService,DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

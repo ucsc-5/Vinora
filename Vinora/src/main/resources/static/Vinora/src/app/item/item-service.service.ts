@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Item } from './item.model';
+import { Item } from './item';
+// import { Observable } from 'rxjs/Observable';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,6 @@ export class ItemServiceService {
   }
 
   getItem(){
-    return this.http.get('https://vinora-dc8a2.firebaseio.com/items.json');
+    return this.http.get<Item[]>('https://vinora-dc8a2.firebaseio.com/items.json');
   }
 }
