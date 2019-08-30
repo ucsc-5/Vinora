@@ -1,1 +1,4 @@
-<p>registered-item works!</p>
+<div class="row">
+        <app-registered-item-element *ngFor="let itemEl of items; let i = index" [item]="itemEl" [i]='i'></app-registered-item-element>
+    </div>
+    

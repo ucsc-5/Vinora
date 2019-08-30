@@ -12,7 +12,10 @@ export class NewItemElementComponent implements OnInit {
   item = Item;
   @Input()
   i : number;
-  constructor() { }
+  
+  constructor() {
+    console.log(this.item);
+   }
 
   ngOnInit() {
   }
