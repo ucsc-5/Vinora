@@ -21,13 +21,13 @@ export class RegisterNewItemComponent implements OnInit {
   }
 
   onAddItem(form: NgForm){
-    const value = form.value;
-    const item = new Item();
-    item.newItem(1,value.itemName,value.brandName,'',value.itemImage,value.brandImage,value.quantity,value.unitPrice,'new' );
-    this.itemService.storeNewItem(item).subscribe(
-      (response)=> console.log(response),
-      (error) => console.log(error)
-    )  
+    // const value = form.value;
+    // const item = new Item();
+    // item.newItem(1,value.itemName,value.brandName,'',value.itemImage,value.brandImage,value.quantity,value.unitPrice,'new' );
+    // this.itemService.storeNewItem(item).subscribe(
+    //   (response)=> console.log(response),
+    //   (error) => console.log(error)
+    // )  
   }
 
  

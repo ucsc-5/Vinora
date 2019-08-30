@@ -14,7 +14,7 @@ export class ItemServiceService {
   constructor(private http: HttpClient) { }
 
   private items: Item[] = [
-    new Item(), new Item()
+    // new Item(), new Item()
   ]
 
   storeNewItem(item:Item){

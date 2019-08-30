@@ -9,13 +9,21 @@ export class Item {
     public brandImagePath: string;
     public description: string;
 
-    public constructor(){
-        
+    public constructor(id:number,itemName:string,brand:string,description: string,imagePath:string,brandImagePath:string,quantity:number,unitPrice:number,state:string){
+        this.id=id; 
+        this.itmeName = itemName;
+        this.brand = brand;
+        this.description = description;
+        this.imagePath = imagePath;
+        this.brandImagePath = brandImagePath;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice; 
+        this.state = state;
     }
     
     public newItem(id:number,itemName:string,brand:string,description: string,imagePath:string,brandImagePath:string,quantity:number,unitPrice:number,state:string){
         this.id=id; 
-        this.itmeName = name;
+        this.itmeName = itemName;
         this.brand = brand;
         this.description = description;
         this.imagePath = imagePath;

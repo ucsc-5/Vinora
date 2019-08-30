@@ -1,1 +1,3 @@
-<p>new-items works!</p>
+<div class="row">
+    <app-new-item-element *ngFor="let itemEl of items; let i = index" [item]="stockEl" [i]='i'></app-new-item-element>
+</div>
