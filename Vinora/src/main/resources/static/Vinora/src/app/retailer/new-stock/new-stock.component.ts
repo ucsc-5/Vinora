@@ -10,7 +10,7 @@ import { Manager } from 'src/app/manager/manager.model';
 export class NewStockComponent implements OnInit {
 
   
-  stocks: Stock[]=[new Stock(1,'royal vintage','id','rangala' ,'royalvintage@gmail.com','colombo 05','0119876567','http://www.krakowpost.com/wp-content/uploads/2018/03/closed-shop.jpg')]
+  stocks: Stock[]=[new Stock(1,'royal vintage','id','rangala' ,'royalvintage@gmail.com','colombo 05','0119876567','https://ofdollarsanddata.com/wp-content/uploads/2019/12/markets_trading.jpg')]
   
   constructor() {
 

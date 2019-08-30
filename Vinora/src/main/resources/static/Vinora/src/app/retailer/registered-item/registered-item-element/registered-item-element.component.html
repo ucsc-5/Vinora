@@ -2,7 +2,9 @@
 <a >
         <mat-card class="example-card">
                 <mat-card-header>
+                        {{i+1}} <br>
                   <div mat-card-avatar class="example-header-image"></div>
+                  
                   <mat-card-title>{{item.itemName}}</mat-card-title>
                   <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
                 </mat-card-header>
@@ -10,12 +12,13 @@
                 <mat-card-content>
                   <p>
                     {{item.description}} <br>
-                    {{i+1}}
+                    
+                    Availabale : {{count}}
                   </p>
+
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button>LIKE</button>
-                  <button mat-button>SHARE</button>
+                        <button mat-raised-button color="warn">Remove</button>
                 </mat-card-actions>
         </mat-card>
 </a>

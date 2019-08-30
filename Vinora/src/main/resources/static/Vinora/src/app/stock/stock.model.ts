@@ -18,7 +18,7 @@ export class Stock extends Manager{
         this.email=email;
         this.address=address;
         this.contactNumber=contactNumber;
-        this.imagePath;
+        this.imagePath=imagePath;
     }
 
 }
