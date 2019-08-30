@@ -1,10 +1,9 @@
 export class Item {
     public id: number;
-    public name: string;
+    public itmeName: string;
     public brand: string;
     public quantity: number;
-    public unit_price: number;
-   
+    public unitPrice: number;
     public state: string;
     public imagePath: string;
     public brandImagePath: string;
@@ -14,14 +13,15 @@ export class Item {
         
     }
     
-    public newItem({ name, imagePath, brand, brandImagePath, unit_price = 0, quantity = 0, state = "new", description = "none" }: { name: string; imagePath: string; brand: string; brandImagePath: string; unit_price?: number; quantity?: number; state?: string; description?: string; }){
-        this.id; 
-        this.name = name;
+    public newItem(id:number,itemName:string,brand:string,description: string,imagePath:string,brandImagePath:string,quantity:number,unitPrice:number,state:string){
+        this.id=id; 
+        this.itmeName = name;
         this.brand = brand;
         this.description = description;
         this.imagePath = imagePath;
         this.brandImagePath = brandImagePath;
-        this.quantity = quantity; 
+        this.quantity = quantity;
+        this.unitPrice = unitPrice; 
         this.state = state;
     }
 }    

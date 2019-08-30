@@ -28,6 +28,8 @@ import { NewStockComponent } from './retailer/new-stock/new-stock.component';
 import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
 import { StockComponent } from './stock/stock.component';
 import { StockService } from './stock/stock.service';
+import { RegisteredStockElementComponent } from './retailer/registered-stock/registered-stock-element/registered-stock-element.component';
+import { NewStockElemetComponent } from './retailer/new-stock/new-stock-elemet/new-stock-elemet.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,9 @@ import { StockService } from './stock/stock.service';
     ItemStockOrgComponent,
     NewStockComponent,
     RegisteredStockComponent,
-    StockComponent
+    StockComponent,
+    RegisteredStockElementComponent,
+    NewStockElemetComponent
   ],
   imports: [
     BrowserModule,

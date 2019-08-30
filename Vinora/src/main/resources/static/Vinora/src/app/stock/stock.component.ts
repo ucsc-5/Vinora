@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Stock } from './stock.model';
 
 @Component({
   selector: 'app-stock',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockComponent implements OnInit {
 
+  @Input()
+
+  stock : Stock
   constructor() { }
 
   ngOnInit() {

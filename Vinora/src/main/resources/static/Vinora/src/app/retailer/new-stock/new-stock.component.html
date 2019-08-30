@@ -1,1 +1,4 @@
-<p>new-stock works!</p>
+<div class="row">
+    <app-new-stock-elemet *ngFor="let stockEl of stocks; let i = index" [stock]="stockEl" [i]='i'></app-new-stock-elemet>
+</div>
+    

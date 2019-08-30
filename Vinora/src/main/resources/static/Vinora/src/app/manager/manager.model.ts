@@ -1,11 +1,11 @@
 export class Manager{
 
     managerId: string;
-    name: string;
+    managerName: string;
 
     public constructor(id:string,name:string){
         this.managerId=id;
-        this.name=name;
-    }
+        this.managerName=name;
+    }   
 
 }
