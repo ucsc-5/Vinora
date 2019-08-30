@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Item } from 'src/app/item/item.model';
 
 @Component({
@@ -12,12 +12,18 @@ export class NewItemElementComponent implements OnInit {
   item = Item;
   @Input()
   i : number;
-  
+ 
+  @Output() itemAdded = new EventEmitter<void>();
+
   constructor() {
-    console.log(this.item);
    }
 
   ngOnInit() {
+  }
+
+  onAdded(){
+  
+    this.itemAdded.emit();
   }
 
 }

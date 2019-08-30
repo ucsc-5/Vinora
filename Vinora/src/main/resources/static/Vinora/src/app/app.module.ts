@@ -30,8 +30,11 @@ import { StockComponent } from './stock/stock.component';
 import { StockService } from './stock/stock.service';
 import { RegisteredStockElementComponent } from './retailer/registered-stock/registered-stock-element/registered-stock-element.component';
 import { NewStockElemetComponent } from './retailer/new-stock/new-stock-elemet/new-stock-elemet.component';
-import { NewItemElementComponent } from './retailer/new-items/new-item-element/new-item-element.component';
+import { NewItemElementComponent } from './retailer/new-items/items-to-select/new-item-element/new-item-element.component';
 import { RegisteredItemElementComponent } from './retailer/registered-item/registered-item-element/registered-item-element.component';
+import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
+import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
+import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +61,10 @@ import { RegisteredItemElementComponent } from './retailer/registered-item/regis
     RegisteredStockElementComponent,
     NewStockElemetComponent,
     NewItemElementComponent,
-    RegisteredItemElementComponent
+    RegisteredItemElementComponent,
+    ItemsToSelectComponent,
+    ItemsSelectedComponent,
+    NewItemElementSelectedComponent
   ],
   imports: [
     BrowserModule,
