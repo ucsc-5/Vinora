@@ -4,16 +4,55 @@
         <form class="example-form" (ngSubmit)="onAddItem(f)" #f="ngForm">
 
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Item Name"    name="itemName" ngModel >
+                    <input matInput placeholder="Id"    name="Id" ngModel >
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Item Name" name="itemName" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Item Image"    name="imagePath" ngModel >
+                </mat-form-field>
+
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Brand"    name="brand" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Brand Logo"    name="quantity" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Quantity"    name="quantity" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Unit Price"    name="unitPrice" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="state"    name="state" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Description"    name="description" ngModel >
+                </mat-form-field>
+
+
+
+
+
+
+
+                <!-- <mat-form-field class="example-full-width">
                         <input matInput placeholder="Item Name"  name="itemImage" ngModel >
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                             <input matInput placeholder="Item Name"    name="brandImage" ngModel >
-                        </mat-form-field>
+                        </mat-form-field> -->
             
                 <!-- <div class="input-group mb-3">   
                     <div class="input-group-prepend">
@@ -25,9 +64,9 @@
                     </div>
                 </div> -->
             
-                <mat-form-field class="example-full-width">
+                <!-- <mat-form-field class="example-full-width">
                     <input matInput placeholder="Brand Name"   name="brandName" ngModel>
-                </mat-form-field>
+                </mat-form-field> -->
 <!--             
                 <div class="input-group mb-3">   
                     <div class="input-group-prepend">
@@ -40,7 +79,7 @@
                 </div> -->
 
                 
-                <mat-form-field class="example-full-width">
+                <!-- <mat-form-field class="example-full-width">
                         <input matInput placeholder="Quantity"   name="quantity" ngModel >
                     </mat-form-field>
 
@@ -49,9 +88,9 @@
                         <div class="input-group-append">
                           <span class="input-group-text">Rs</span>
                         </div>
-                </div>
+                </div> -->
 
-                <button>Add</button>
+                <button class="btn btn-success">Add</button>
         </form>
         
     </div>

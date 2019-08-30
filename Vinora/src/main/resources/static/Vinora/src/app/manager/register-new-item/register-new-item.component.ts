@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Item } from 'src/app/item/item.model';
 import { ItemServiceService } from 'src/app/item/item-service.service';
@@ -10,8 +10,8 @@ import { ItemServiceService } from 'src/app/item/item-service.service';
 })
 export class RegisterNewItemComponent implements OnInit {
 
- 
-  
+  @Output() newItem = new EventEmitter<Item>();
+    
 
   constructor(private itemService: ItemServiceService) {
    }
@@ -28,7 +28,14 @@ export class RegisterNewItemComponent implements OnInit {
     //   (response)=> console.log(response),
     //   (error) => console.log(error)
     // )  
+
+    const value = form.value;
+    const newItem = new Item(value.id,value.itemName,value.brandName,value.description,value.itemImage,value.brandImage,value.quantity,value.unitPrice,value.state);
+    this.newItem.emit(newItem);
+
   }
+
+ 
 
  
 
