@@ -6,7 +6,7 @@ import { ItemServiceService } from 'src/app/item/item-service.service';
   selector: 'app-items-to-select',
   templateUrl: './items-to-select.component.html',
   styleUrls: ['./items-to-select.component.css'],
-  providers: [ItemServiceService]
+
 })
 export class ItemsToSelectComponent implements OnInit {
 

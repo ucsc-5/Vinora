@@ -73,7 +73,7 @@ import { NewItemElementSelectedComponent } from './retailer/new-items/items-sele
     MatModule,
     HttpClientModule
   ],
-  providers: [ItemServiceService,DataStorageService,StockService],
+  providers: [ItemServiceService,DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,13 +9,16 @@ import { Item } from 'src/app/item/item.model';
 export class NewItemElementSelectedComponent implements OnInit {
 
   @Input()
-  item = Item;
+  item : Item;
   @Input()
   i : number;
   
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit() {
+    
   }
 
 }
