@@ -11,6 +11,7 @@ import { Item } from 'src/app/item/item.model';
 export class ItemServiceService {
 
   itemSelected = new EventEmitter<Item>();
+  itemsChanged = new EventEmitter<Item[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +32,16 @@ export class ItemServiceService {
 
   getItem(){
     return this.items.slice();
+  }
+
+  addNewItem(item:Item){
+    this.items.push(item);
+    this.itemsChanged.emit(this.items.slice());
+    console.log(this.items);
+  }
+
+  retailerAddNewItem(item:Item){
+    this.items.push(item);
   }
 
 

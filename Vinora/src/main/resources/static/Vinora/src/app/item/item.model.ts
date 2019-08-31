@@ -1,6 +1,6 @@
 export class Item {
     public id: number;
-    public itmeName: string;
+    public itemName: string;
     public brand: string;
     public quantity: number;
     public unitPrice: number;
@@ -11,7 +11,7 @@ export class Item {
 
     public constructor(id:number,itemName:string,brand:string,description: string,imagePath:string,brandImagePath:string,quantity:number,unitPrice:number,state:string){
         this.id=id; 
-        this.itmeName = itemName;
+        this.itemName = itemName;
         this.brand = brand;
         this.description = description;
         this.imagePath = imagePath;
@@ -23,7 +23,7 @@ export class Item {
     
     public newItem(id:number,itemName:string,brand:string,description: string,imagePath:string,brandImagePath:string,quantity:number,unitPrice:number,state:string){
         this.id=id; 
-        this.itmeName = itemName;
+        this.itemName = itemName;
         this.brand = brand;
         this.description = description;
         this.imagePath = imagePath;

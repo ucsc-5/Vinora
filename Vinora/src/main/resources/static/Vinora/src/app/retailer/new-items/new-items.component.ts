@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/item/item.model';
 import { ItemServiceService } from 'src/app/item/item-service.service';
+import { RetailerItemService } from '../retailer-items/retailer-item.service';
 
 @Component({
   selector: 'app-new-items',
@@ -12,16 +13,16 @@ export class NewItemsComponent implements OnInit {
 
   selectedItem : Item;
 
-  constructor(private itemService: ItemServiceService) {
-    // console.log(this.selectedItem);
+  constructor(private itemService: RetailerItemService) {
+   
    }
 
   ngOnInit() {
+  
     this.itemService.itemSelected.subscribe(
-      (item: Item)=>{
-        this.selectedItem= item;
+      (item:Item) =>{
+        this.selectedItem = item;
       }
     )
   }
-
 }

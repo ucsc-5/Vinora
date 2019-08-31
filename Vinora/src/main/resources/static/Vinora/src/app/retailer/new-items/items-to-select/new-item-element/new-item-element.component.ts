@@ -2,6 +2,7 @@
 import { Item } from 'src/app/item/item.model';
 import { ItemServiceService } from 'src/app/item/item-service.service';
 import { Input, OnInit, Component } from '@angular/core';
+import { RetailerItemService } from 'src/app/retailer/retailer-items/retailer-item.service';
 
 @Component({
   selector: 'app-new-item-element',
@@ -13,16 +14,13 @@ export class NewItemElementComponent implements OnInit {
 
   @Input() item : Item;
 
- 
-
-
-  constructor(private itemService:ItemServiceService) {
+  constructor(private itemService:RetailerItemService) {
    }
 
   ngOnInit() {
   }
 
   onAdded(){
-     this.itemService.itemSelected.emit(this.item);
+    this.itemService.itemSelected.emit(this.item);
   }
 }

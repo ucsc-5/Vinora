@@ -35,6 +35,7 @@ import { RegisteredItemElementComponent } from './retailer/registered-item/regis
 import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
 import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
 import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
+import { RetailerItemsComponent } from './retailer/retailer-items/retailer-items.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { NewItemElementSelectedComponent } from './retailer/new-items/items-sele
     RegisteredItemElementComponent,
     ItemsToSelectComponent,
     ItemsSelectedComponent,
-    NewItemElementSelectedComponent
+    NewItemElementSelectedComponent,
+    RetailerItemsComponent
   ],
   imports: [
     BrowserModule,
