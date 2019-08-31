@@ -18,7 +18,7 @@ export class NewItemElementSelectedComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+
   }
 
 }

@@ -22,5 +22,7 @@ export class NewItemElementComponent implements OnInit {
 
   onAdded(){
     this.itemService.itemSelected.emit(this.item);
+    this.itemService.addSelectedItems(this.item);
   }
+
 }

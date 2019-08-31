@@ -15,12 +15,10 @@ export class ItemsSelectedComponent implements OnInit {
 
   items: Item[]; 
      
-  constructor(private itemService:RetailerItemService) {
-    this.items=this.itemService.getRetailerItemsSelected();
-  }
+  constructor(private itemService:RetailerItemService) {}
 
   ngOnInit() {
-    this.items.push(this.item);
+    this.items=this.itemService.getRetailerItemsSelected();
     console.log(this.items);
   }
 

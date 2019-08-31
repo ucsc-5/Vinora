@@ -29,4 +29,8 @@ export class RetailerItemService {
     return this.selectedItems;
   }
 
+  addSelectedItems(item: Item){
+    this.selectedItems.push(item);
+  }
+
 }
