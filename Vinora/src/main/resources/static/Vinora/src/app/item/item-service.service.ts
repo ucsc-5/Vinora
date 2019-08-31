@@ -13,6 +13,8 @@ export class ItemServiceService {
   itemSelected = new EventEmitter<Item>();
   itemsChanged = new EventEmitter<Item[]>();
 
+  item : Item
+
   constructor(private http: HttpClient) { }
 
   private items: Item[] = [ new Item(1,'first Item','first Brand','The discription here','http://2.bp.blogspot.com/-1-LqHgUvJN4/Vm122nf8VRI/AAAAAAAAAEA/FyO4TcIr36M/s1600/masoor%2Bdal%2Bbenefits.png','https://www.unilever.com/Images/heartbrand_tcm244-408761.gif',1000,40.00,'new'),
@@ -31,13 +33,15 @@ export class ItemServiceService {
   // }
 
   getItem(){
-    return this.items.slice();
+    return this.items;
   }
 
   addNewItem(item:Item){
-    this.items.push(item);
-    this.itemsChanged.emit(this.items.slice());
-    console.log(this.items);
+      this.itemSelected.subscribe((item:Item)=>{
+        this.item=item;
+      })
+      this.items.push(item);
+      console.log(this.items);
   }
 
   retailerAddNewItem(item:Item){

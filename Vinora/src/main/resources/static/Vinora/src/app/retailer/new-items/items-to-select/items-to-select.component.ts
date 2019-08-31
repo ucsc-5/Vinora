@@ -21,7 +21,8 @@ export class ItemsToSelectComponent implements OnInit {
   constructor(private ratailerItemService: RetailerItemService,private itemService:ItemServiceService) { }
 
   ngOnInit() {
-    this.items=this.ratailerItemService.getRetailerItemsToSelect();
+    this.items=this.itemService.getItem();
+    console.log(this.items);
   }
 
 }

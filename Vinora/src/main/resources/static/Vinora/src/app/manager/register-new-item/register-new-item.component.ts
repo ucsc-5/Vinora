@@ -11,6 +11,7 @@ import { ItemServiceService } from 'src/app/item/item-service.service';
 export class RegisterNewItemComponent implements OnInit {
 
 
+
   constructor(private itemService: ItemServiceService) {
    }
 
@@ -29,9 +30,9 @@ export class RegisterNewItemComponent implements OnInit {
     const value = form.value;
     const newItem = new Item(value.id,value.itemName,value.brandName,value.description,value.itemImage,value.brandImage,value.quantity,value.unitPrice,value.state);
     console.log(newItem);
-
+    this.itemService.itemSelected.emit(newItem);
     this.itemService.addNewItem(newItem);
-
+    // console.log(this.itemService.getItem);
   }
 
  

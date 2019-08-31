@@ -1,4 +1,13 @@
 <div class="row">
-    <app-new-stock-elemet class="element" *ngFor="let stockEl of stocks; let i = index" [stock]="stockEl" [i]='i'></app-new-stock-elemet>
+    <div class="col-md-9">
+        <app-retailer-to-select-stocks></app-retailer-to-select-stocks>
+    </div>
+    <div class="col-md-3">
+        <app-retailer-selected-stocks></app-retailer-selected-stocks>
+        
+
+    <ng-template #infoText>
+        <h3>Your new Stocks here</h3>
+    </ng-template>
+    </div>
 </div>
-    

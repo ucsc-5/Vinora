@@ -29,13 +29,17 @@ import { RegisteredStockComponent } from './retailer/registered-stock/registered
 import { StockComponent } from './stock/stock.component';
 import { StockService } from './stock/stock.service';
 import { RegisteredStockElementComponent } from './retailer/registered-stock/registered-stock-element/registered-stock-element.component';
-import { NewStockElemetComponent } from './retailer/new-stock/new-stock-elemet/new-stock-elemet.component';
 import { NewItemElementComponent } from './retailer/new-items/items-to-select/new-item-element/new-item-element.component';
 import { RegisteredItemElementComponent } from './retailer/registered-item/registered-item-element/registered-item-element.component';
 import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
 import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
 import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
 import { RetailerItemsComponent } from './retailer/retailer-items/retailer-items.component';
+import { RetailerStockComponent } from './retailer/retailer-stock/retailer-stock.component';
+import { RetailerToSelectStocksComponent } from './retailer/new-stock/retailer-to-select-stocks/retailer-to-select-stocks.component';
+import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-selected-stocks/retailer-selected-stocks.component';
+import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-select-stocks/to-select-stock-element/to-select-stock-element.component';
+import { StockElementComponent } from './retailer/new-stock/retailer-selected-stocks/stock-element/stock-element.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,17 +60,21 @@ import { RetailerItemsComponent } from './retailer/retailer-items/retailer-items
     ManagerNavComponent,
     RegisterNewItemComponent,
     ItemStockOrgComponent,
-    NewStockComponent,
     RegisteredStockComponent,
-    StockComponent,
+    StockElementComponent,
+    NewStockComponent,
     RegisteredStockElementComponent,
-    NewStockElemetComponent,
     NewItemElementComponent,
     RegisteredItemElementComponent,
     ItemsToSelectComponent,
     ItemsSelectedComponent,
     NewItemElementSelectedComponent,
-    RetailerItemsComponent
+    RetailerItemsComponent,
+    RetailerStockComponent,
+    RetailerToSelectStocksComponent,
+    RetailerSelectedStocksComponent,
+    ToSelectStockElementComponent,
+    NewStockComponent
   ],
   imports: [
     BrowserModule,

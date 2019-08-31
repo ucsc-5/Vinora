@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { RetailerStockService } from '../retailer-stock/retailer-stock.service';
 import { Stock } from 'src/app/stock/stock.model';
-import { Manager } from 'src/app/manager/manager.model';
 
 @Component({
   selector: 'app-new-stock',
   templateUrl: './new-stock.component.html',
-  styleUrls: ['./new-stock.component.css']
+  styleUrls: ['./new-stock.component.css'],
+  providers: [RetailerStockService]
 })
 export class NewStockComponent implements OnInit {
 
   
-  stocks: Stock[]=[new Stock(1,'royal vintage','id','rangala' ,'royalvintage@gmail.com','colombo 05','0119876567','https://ofdollarsanddata.com/wp-content/uploads/2019/12/markets_trading.jpg')]
-  
-  constructor() {
+  selectedStock: Stock
 
-    console.log(this.stocks[0]);
+  constructor(private retailerStockService: RetailerStockService) {
    }
 
   ngOnInit() {
+    this.retailerStockService.stockSelected.subscribe(
+      (stock:Stock)=>{
+        this.selectedStock=stock;
+      }
+    )
   }
 
 }

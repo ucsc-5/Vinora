@@ -2,8 +2,6 @@ import { Manager } from '../manager/manager.model';
 
 export class Stock extends Manager{
 
-    
-
     stockId: number;
     stockName: string;
     email: string;
