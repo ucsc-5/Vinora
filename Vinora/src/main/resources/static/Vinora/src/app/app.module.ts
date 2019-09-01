@@ -40,6 +40,7 @@ import { RetailerToSelectStocksComponent } from './retailer/new-stock/retailer-t
 import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-selected-stocks/retailer-selected-stocks.component';
 import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-select-stocks/to-select-stock-element/to-select-stock-element.component';
 import { StockElementComponent } from './retailer/new-stock/retailer-selected-stocks/stock-element/stock-element.component';
+import { RetailerItemService } from './retailer/retailer-items/retailer-item.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +84,7 @@ import { StockElementComponent } from './retailer/new-stock/retailer-selected-st
     MatModule,
     HttpClientModule
   ],
-  providers: [ItemServiceService,DataStorageService],
+  providers: [ItemServiceService,DataStorageService,RetailerItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

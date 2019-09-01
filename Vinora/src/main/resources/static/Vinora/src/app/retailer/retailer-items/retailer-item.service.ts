@@ -31,4 +31,8 @@ export class RetailerItemService {
     this.selectedItems.push(item);
   }
 
+  getRetailerSelectedItem(){
+    return this.itemSelected.subscribe((item:Item)=>{ return item});
+  }
+
 }

@@ -5,17 +5,18 @@ import { Item } from '../item/item.model';
 
 import { Response } from 'selenium-webdriver/http';
 import { Observable } from 'rxjs';
+import { RetailerItemService } from '../retailer/retailer-items/retailer-item.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService {
 
-  constructor(private http: HttpClient,private itemService: ItemServiceService) { }
+  constructor(private http: HttpClient,private itemService: ItemServiceService,private retailerItemService: RetailerItemService) { }
 
   
-  storeNewItem(item:Item){
-    return this.http.post('https://vinora-dc8a2.firebaseio.com/items.json',item);
+  retailerAddNewItem(item:Item){
+    return this.http.post('https://vinora-dc8a2.firebaseio.com/Retailer/Selected-Items.json',item);
   }
   
   getItems():Observable<Item[]>{
