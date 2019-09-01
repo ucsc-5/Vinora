@@ -5,6 +5,7 @@ import { Input, OnInit, Component } from '@angular/core';
 import { RetailerItemService } from 'src/app/retailer/retailer-items/retailer-item.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 
+
 @Component({
   selector: 'app-new-item-element',
   templateUrl: './new-item-element.component.html',
@@ -15,8 +16,10 @@ export class NewItemElementComponent implements OnInit {
 
   @Input() item : Item;
 
-  constructor(private itemService:RetailerItemService,private dataStore: DataStorageService) {
-   }
+
+  constructor(private itemService:RetailerItemService) {
+    
+  }
 
   ngOnInit() {
   }
@@ -24,7 +27,6 @@ export class NewItemElementComponent implements OnInit {
   onAdded(){
     this.itemService.itemSelected.emit(this.item);
     this.itemService.addSelectedItems(this.item);
-    this.dataStore.retailerAddNewItem(this.item).subscribe((response:Response)=>{console.log(response)})
   }
 
 }

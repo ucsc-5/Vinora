@@ -41,6 +41,10 @@ import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-s
 import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-select-stocks/to-select-stock-element/to-select-stock-element.component';
 import { StockElementComponent } from './retailer/new-stock/retailer-selected-stocks/stock-element/stock-element.component';
 import { RetailerItemService } from './retailer/retailer-items/retailer-item.service';
+import { AngularFireModule } from '@angular/fire'; 
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +86,9 @@ import { RetailerItemService } from './retailer/retailer-items/retailer-item.ser
     AppRoutingModule,
     BrowserAnimationsModule,
     MatModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [ItemServiceService,DataStorageService,RetailerItemService],
   bootstrap: [AppComponent]

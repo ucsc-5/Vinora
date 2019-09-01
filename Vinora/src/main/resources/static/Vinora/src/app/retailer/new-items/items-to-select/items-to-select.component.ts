@@ -22,7 +22,7 @@ export class ItemsToSelectComponent implements OnInit {
 
   ngOnInit() {
     this.items=this.itemService.getItem();
-    console.log(this.items);
+    // console.log(this.items);
   }
 
 }
