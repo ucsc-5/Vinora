@@ -1,0 +1,25 @@
+mat-sidenav-container{
+    height: 900px;
+  }
+  
+  mat-sidenav-content{
+    padding: 16px;
+    height: 100%;
+  }
+  
+  mat-sidenav{
+    background-color: #424242;
+    width: 200px;
+    height: 900px;
+  }
+  
+  .transparent{
+    background: none;
+    border: none;
+    color:darkgray;
+  }
+  
+  .sideBtn{
+    width: 90%;
+  }
+  

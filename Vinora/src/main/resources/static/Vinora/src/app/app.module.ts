@@ -44,6 +44,13 @@ import { RetailerItemService } from './retailer/retailer-items/retailer-item.ser
 import { AngularFireModule } from '@angular/fire'; 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+import { AdminComponent } from './admin/admin.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { AdminRegisterStocksComponent } from './admin/admin-register-stocks/admin-register-stocks.component';
+import { CurrentStocksComponent } from './admin/current-stocks/current-stocks.component';
+import { ReportsComponent } from './admin/reports/reports.component';
+import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
+import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +86,14 @@ import { environment } from '../environments/environment';
     RetailerToSelectStocksComponent,
     RetailerSelectedStocksComponent,
     ToSelectStockElementComponent,
-    NewStockComponent
+    NewStockComponent,
+    AdminComponent,
+    AdminNavComponent,
+    AdminRegisterStocksComponent,
+    CurrentStocksComponent,
+    ReportsComponent,
+    AdminSurrentStocksComponent,
+    AdminReportsComponent
   ],
   imports: [
     BrowserModule,

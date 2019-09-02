@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Item } from 'src/app/item/item.model';
 import { ItemServiceService } from 'src/app/item/item-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-new-item',
@@ -12,7 +13,7 @@ export class RegisterNewItemComponent implements OnInit {
 
 
 
-  constructor(private itemService: ItemServiceService) {
+  constructor(private itemService: ItemServiceService,private route: Router) {
    }
 
   ngOnInit() {
@@ -33,6 +34,10 @@ export class RegisterNewItemComponent implements OnInit {
     this.itemService.itemSelected.emit(newItem);
     this.itemService.addNewItem(newItem);
     // console.log(this.itemService.getItem);
+  }
+
+  toItems(){
+    // this.route.navigate([/retailer/newItems]);
   }
 
  
