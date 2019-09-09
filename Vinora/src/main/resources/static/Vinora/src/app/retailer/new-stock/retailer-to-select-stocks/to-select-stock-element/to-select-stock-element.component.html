@@ -8,19 +8,17 @@
           <mat-card-subtitle>{{stock.contactNumber}}</mat-card-subtitle>
 
         </mat-card-header>
-        <img mat-card-image src="{{stock.imagePath}}" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="{{stock.imagePath}}" alt="Photo of a Shiba Inu" >
         
         <mat-card-content>
           
-              <h4>Manager</h4>
           <p>
+              <b>Manager</b><br>
               {{stock.managerName}}
       
           </p>
         </mat-card-content>
         <mat-card-actions>  
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
           <button mat-raised-button color="primary" (click)="onAdded()">Add</button>
         </mat-card-actions>
       </mat-card>          

@@ -1,46 +1,49 @@
-<!-- <div class="container">
+<div class="container-fluid">
     <div class="row">
+        <div class="col">
         
-            <form class="example-form" (ngSubmit)="signUp(f)" #f="ngForm">
+                <form class="example-form" (ngSubmit)="signUp(f)" #f="ngForm">
 
-             <div class="col form-group-lg" style="padding-top:20%; padding-left: 25%;"> 
-                    <div class="example-container" style="width: 50%">
-                                <mat-form-field>
+                    <div class="col form-group-lg" style="padding-top:20%; padding-left: 25%;"> 
+                            
+                            <div class="example-container">
+                                <mat-form-field class="example-full-width">
                                     <input matInput placeholder="Enter your email"   name="email" ngModel required>
                                     <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
-                         
-
-                            <mat-form-field>
-                                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"  name="password" ngModel>
+                                
+                                
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"  name="password" ngModel>
                                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </button>
-                            </mat-form-field>
-
-                            <div class="example-button-row">
-                                <button mat-stroked-button>Login</button>
-                            </div>
+                                </mat-form-field>
+                                
+                                <div class="example-button-row">
+                                    <button mat-stroked-button (click)="signUp()">Login</button>
+                                </div>
                     </div>
-            </div>
-        </form>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-        -->
+       
 
 <!-- <div class="container">
-        <div *ngIf="afAuth.user | async as user; else showLogin">
-                <h1>Hello {{ user.displayName }}!</h1>
+    <div *ngIf="afAuth.user | async as user; else showLogin">
+        <h1>Hello {{ user.displayName }}!</h1>
                 <button (click)="logout()">Logout</button>
-              </div>
-              <ng-template #showLogin>
+            </div>
+            <ng-template #showLogin>
                 <p>Please login.</p>
                 <button (click)="login()">Login with Google</button>
               </ng-template>
-
+              
 </div>
         -->
-
+<!-- 
         <div class="container">
             <div class="row">
                     <div class="container pt-3">
@@ -67,4 +70,4 @@
                             </div>
                           </div>
             </div>
-        </div>
+        </div> -->

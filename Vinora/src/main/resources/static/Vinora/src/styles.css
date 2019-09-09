@@ -11,3 +11,10 @@
     border: none;
     color:darkgray;
   }
+
+  .bc{
+    background-image:url('https://www.barraques.cat/pngfile/big/10-103322_white-background-wallpaper-hd-1080p-top-10-difficult.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
