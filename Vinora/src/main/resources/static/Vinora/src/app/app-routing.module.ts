@@ -17,6 +17,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminRegisterStocksComponent } from './admin/admin-register-stocks/admin-register-stocks.component';
 import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
+import { StockManagerComponent } from './stock-manager/stock-manager.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -24,7 +25,7 @@ const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterRetailerComponent} 
     ]},
-  {path: 'retailer',component: RetailerComponent, children:[
+  {path: 'retailer/:id',component: RetailerComponent, children:[
     {path: 'currentOrders', component: CurrentOrdersComponent},
     {path: 'newOrder', component: NewOrderComponent},
     {path: 'registeredItems', component: RegisteredItemComponent},
@@ -33,6 +34,8 @@ const routes: Routes = [
     {path: 'registeredStocks', component: RegisteredStockComponent},
     {path: 'newStock', component: NewStockComponent}
   ]},
+
+  {path: 'stockManager/:id' , component: StockManagerComponent},
 
   {path: 'manager/:id', component: ManagerComponent, children:[
     {path: 'registerNewItem', component: RegisterNewItemComponent}

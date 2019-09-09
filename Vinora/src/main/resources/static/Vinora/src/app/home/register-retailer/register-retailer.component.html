@@ -1,28 +1,27 @@
 <div class="container">
     <div class="row">
-        <div class="col-8" style="padding-top: 20%; padding-left: 25%">
+        <div class="col-8" style="padding-top: 5%; padding-left: 25%">
             <h3>Register with us</h3>
             <div class="example-container">
 
-                              
+             
                   <form class="example-form" (ngSubmit)="register(f)" #f="ngForm">
-
-
                             <br>
-                              <mat-form-field>
-                                <input matInput placeholder="Shop Name" required name="Id" ngModel>
+
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Shop Name" required name="shopName" ngModel>
                               </mat-form-field>
 
-                              <mat-form-field>
+                              <mat-form-field class="example-full-width">
                                       <input matInput placeholder="Enter your email"  name="email" ngModel required>
                                       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                               </mat-form-field>
 
-                              <mat-form-field>
+                              <mat-form-field class="example-full-width">
                                   <input matInput placeholder="Password" required name="password" ngModel>
                               </mat-form-field>
                             
-                              <mat-form-field>
+                              <mat-form-field class="example-full-width">
                                 <textarea matInput placeholder="Your Address"  name="address" ngModel required></textarea>
                               </mat-form-field>
                             

@@ -51,6 +51,8 @@ import { AppComponent } from './app.component';
 import { RetailerItemService } from './retailer/retailer-items/retailer-item.service';
 import { ItemServiceService } from './item/item-service.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { StockManagerComponent } from './stock-manager/stock-manager.component';
+import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stock-manager-nav.component';
 
 
 
@@ -95,6 +97,8 @@ import { DataStorageService } from './shared/data-storage.service';
     AdminRegisterStocksComponent,
     AdminSurrentStocksComponent,
     AdminReportsComponent,
+    StockManagerComponent,
+    StockManagerNavComponent,
    
   ],  
   imports: [

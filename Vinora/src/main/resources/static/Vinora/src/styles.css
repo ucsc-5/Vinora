@@ -4,3 +4,10 @@
     margin:3px;
     padding: 3px;
 }
+
+.transparent{
+    text-align: left;
+    background: none;
+    border: none;
+    color:darkgray;
+  }
