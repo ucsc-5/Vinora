@@ -9,12 +9,128 @@
                      
                    
                  <div class="list-group" id="list-tab" role="tablist">
+                     <a class="list-group-item list-group-item-action transparent" id="list-home-list" routerLink="" >Main Stock</a>
                      <a class="list-group-item list-group-item-action transparent" id="list-home-list" routerLink="registerNewItem" >Register New Item</a>
-                     <a class="list-group-item list-group-item-action transparent" id="list-profile-list"  routerLink="newOrder" >New Orders</a>
-                     <a class="list-group-item list-group-item-action transparent" id="list-messages-list"  routerLink="registerItems" >Register Items</a>
-                     <a class="list-group-item list-group-item-action transparent" id="list-settings-list"  routerLink="newItems" >New Items</a>
-                     <a class="list-group-item list-group-item-action transparent" id="list-settings-list"  routerLink="previousOrder" >Previous Orders</a>
+                     <a class="list-group-item list-group-item-action transparent" id="list-messages-list"  routerLink="registerItems" >Registered Items</a>
+                     <a class="list-group-item list-group-item-action transparent" id="list-profile-list"  routerLink="" >New Retailers</a> 
+                     <a class="list-group-item list-group-item-action transparent" id="list-profile-list"  routerLink="" >Registered Retailers</a> 
+      
+
+                     
+                     <button class="transparent" mat-button [matMenuTriggerFor]="staff">Staff <span class="sr-only">Toggle Dropright</span></button>
+                     
+                     <mat-menu  class="transparent" #staff="matMenu">
+                       <button mat-menu-item [matMenuTriggerFor]="stokManager">Stock Managers</button>
+                       <button mat-menu-item [matMenuTriggerFor]="salesRef">Sales Representatives</button>
+                     </mat-menu>
+
+                       <mat-menu class="transparent" #stokManager="matMenu">
+                         <button mat-menu-item>New Registration</button>
+                         <button mat-menu-item>Registered</button>
+                         <button mat-menu-item>Fired</button>
+                       </mat-menu>
+                       
+                       <mat-menu #salesRef="matMenu">
+                         <button mat-menu-item>New Registration</button>
+                         <button mat-menu-item>Registered</button>
+                         <button mat-menu-item>Fired</button>
+                       </mat-menu>
+
+
+
+
+                       
+                     <button class="transparent" mat-button [matMenuTriggerFor]="orders">Orders <span class="sr-only">Toggle Dropright</span></button>
+                       
+                     <mat-menu  class="transparent" #orders="matMenu">
+                       <button mat-menu-item >Requested Orders</button>
+                       <button mat-menu-item >Delivered Orders</button>
+                     </mat-menu>
+
+
+
+
+
+
+                     <button  class="transparent" mat-button [matMenuTriggerFor]="reports">Reports</button>
+
+                        <mat-menu #reports="matMenu">
+                          <button mat-menu-item [matMenuTriggerFor]="stock">Stock</button>
+                          <button mat-menu-item [matMenuTriggerFor]="staff">Staff</button>
+                          <button mat-menu-item [matMenuTriggerFor]="orders">Orders</button>
+                          <button mat-menu-item [matMenuTriggerFor]="items">Items</button>
+                        </mat-menu>
+
+                        <mat-menu #stock="matMenu">
+                            <button mat-menu-item >Full Stock</button>
+                            <button mat-menu-item >Re Orderings</button>
+                        </mat-menu>
+
+                        <mat-menu #items="matMenu">
+                            <button mat-menu-item >Registered</button>
+                            <button mat-menu-item >Removed</button>
+                        </mat-menu>
+
+                        <mat-menu #orders="matMenu">
+                            <button mat-menu-item >Requested </button>
+                            <button mat-menu-item >Delivered</button>
+                        </mat-menu>
+                          
+
+                        <mat-menu #staff="matMenu">
+                          <button mat-menu-item [matMenuTriggerFor]="stockManager">Stock Managers</button>
+                          <button mat-menu-item [matMenuTriggerFor]="salesRef">Sales Representatives</button>
+                        </mat-menu>
+                        
+                        <mat-menu #stockManager="matMenu">
+                          <button mat-menu-item>Registered</button>
+                          <button mat-menu-item>Logged now</button>
+                          <button mat-menu-item>Fired</button>
+                        </mat-menu>
+
+                        <mat-menu #salesRef="matMenu">
+                            <button mat-menu-item>Registered</button>
+                            <button mat-menu-item>Logged now</button>
+                            <button mat-menu-item>Fired</button>
+                        </mat-menu>
+                        
+
+
+                        <button class="transparent" mat-button [matMenuTriggerFor]="vehicals">Vehicals <span class="sr-only">Toggle Dropright</span></button>
+                     
+                        <mat-menu  class="transparent" #vehicals="matMenu">
+                          <button mat-menu-item >New Registrations</button>
+                          <button mat-menu-item >Registered</button>
+                        </mat-menu>
+
+
+                                 
+
+                       
                    </div>
+                     
+                     
+                    
+                     <!-- <div class="btn-group  dropright transparent" role="group">
+                       <button id="btnGroupDrop2" type="button" class="btn list-group-item list-group-item-action transparent  btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Staff
+                        </button>
+                        <div class="dropdown-menu " aria-labelledby="btnGroupDrop2">
+                          <a class="dropdown-item transparent" href="#">Stock Managers</a>
+                          <a class="dropdown-item transparent" href="#">Seals Representatives</a>
+                        </div>
+                      </div> -->
+                      
+                      <!-- <div class="btn-group dropright transparent" role="group">
+                         <button id="btnGroupDrop1" type="button" class="btn list-group-item list-group-item-action transparent  btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Orders
+                         </button>
+                         <div class="dropdown-menu transparent" aria-labelledby="btnGroupDrop1">
+                           <a class="dropdown-item transparent" href="#">Requested Orders</a>
+                           <a class="dropdown-item transparent" href="#">Previous Orders</a>
+                         </div>
+                       </div> -->
+                     
              </div>  
         </div>
      </div>

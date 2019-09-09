@@ -34,7 +34,7 @@ const routes: Routes = [
     {path: 'newStock', component: NewStockComponent}
   ]},
 
-  {path: 'manager', component: ManagerComponent, children:[
+  {path: 'manager/:id', component: ManagerComponent, children:[
     {path: 'registerNewItem', component: RegisterNewItemComponent}
   ]},
 
