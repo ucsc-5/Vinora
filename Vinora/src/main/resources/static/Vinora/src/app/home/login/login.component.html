@@ -1,17 +1,18 @@
 <div class="container">
     <div class="row">
         
+            <form class="example-form" (ngSubmit)="signUp(f)" #f="ngForm">
 
              <div class="col form-group-lg" style="padding-top:20%; padding-left: 25%;"> 
                     <div class="example-container" style="width: 50%">
                                 <mat-form-field>
-                                    <input matInput placeholder="Enter your email" [formControl]="email" required>
+                                    <input matInput placeholder="Enter your email"   name="email" ngModel required>
                                     <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                          
 
                             <mat-form-field>
-                                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"  name="password" ngModel>
                                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </button>
@@ -22,7 +23,7 @@
                             </div>
                     </div>
             </div>
-
+        </form>
     </div>
 </div>
        

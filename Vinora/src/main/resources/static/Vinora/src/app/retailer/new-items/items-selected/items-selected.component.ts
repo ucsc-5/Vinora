@@ -6,6 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-items-selected',
@@ -17,15 +18,19 @@ export class ItemsSelectedComponent implements OnInit {
 
   @Input() item : Item;
 
-  items: Observable<any[]>; 
-  itemsArray: any[];
-     
-  constructor(private http: HttpClient, private itemService:RetailerItemService,public db: AngularFireDatabase) {
-    this.items = db.list('/Retailer/Selected-Items').valueChanges();
-    console.log(this.items)
+  items: Item[];
+
+  constructor(private itemService:RetailerItemService, private http:HttpClient) {
+   
     }
 
   ngOnInit() {
-    // this.items=this.itemService.getRetailerItemsSelected();
+    this.http.get('https://vinora-dc8a2.firebaseio.com/Retailer/Selected-Items.json').subscribe(
+      (reponse: Response) =>{
+        const newItems : any = reponse.json;
+        console.log(newItems);
+        this.items= newItems;
+      }
+    )
 }
 }

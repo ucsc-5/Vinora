@@ -22,6 +22,7 @@ export class NewItemsComponent implements OnInit {
     this.itemService.itemSelected.subscribe(
       (item:Item) =>{
         this.selectedItem = item;
+        this.itemService.addSelectedItems(item);
       }
     )
   }

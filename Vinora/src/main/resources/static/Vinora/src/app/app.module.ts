@@ -26,8 +26,6 @@ import { DataStorageService } from './shared/data-storage.service';
 import { ItemStockOrgComponent } from './item-stock-org/item-stock-org.component';
 import { NewStockComponent } from './retailer/new-stock/new-stock.component';
 import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
-import { StockComponent } from './stock/stock.component';
-import { StockService } from './stock/stock.service';
 import { RegisteredStockElementComponent } from './retailer/registered-stock/registered-stock-element/registered-stock-element.component';
 import { NewItemElementComponent } from './retailer/new-items/items-to-select/new-item-element/new-item-element.component';
 import { RegisteredItemElementComponent } from './retailer/registered-item/registered-item-element/registered-item-element.component';
@@ -41,16 +39,20 @@ import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-s
 import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-select-stocks/to-select-stock-element/to-select-stock-element.component';
 import { StockElementComponent } from './retailer/new-stock/retailer-selected-stocks/stock-element/stock-element.component';
 import { RetailerItemService } from './retailer/retailer-items/retailer-item.service';
-import { AngularFireModule } from '@angular/fire'; 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { AdminComponent } from './admin/admin.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { AdminRegisterStocksComponent } from './admin/admin-register-stocks/admin-register-stocks.component';
-import { CurrentStocksComponent } from './admin/current-stocks/current-stocks.component';
-import { ReportsComponent } from './admin/reports/reports.component';
 import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
 
 @NgModule({
   declarations: [
@@ -90,19 +92,21 @@ import { AdminReportsComponent } from './admin/admin-reports/admin-reports.compo
     AdminComponent,
     AdminNavComponent,
     AdminRegisterStocksComponent,
-    CurrentStocksComponent,
-    ReportsComponent,
     AdminSurrentStocksComponent,
-    AdminReportsComponent
-  ],
+    AdminReportsComponent,
+   
+  ],  
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireModule.initializeApp(environment),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [ItemServiceService,DataStorageService,RetailerItemService],
   bootstrap: [AppComponent]
