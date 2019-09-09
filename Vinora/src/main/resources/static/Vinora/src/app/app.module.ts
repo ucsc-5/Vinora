@@ -1,11 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { environment } from '../environments/environment';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterRetailerComponent } from './home/register-retailer/register-retailer.component';
 import { RetailerComponent } from './retailer/retailer.component';
@@ -21,8 +26,6 @@ import { PreviousOrdersComponent } from './retailer/previous-orders/previous-ord
 import { ManagerComponent } from './manager/manager.component';
 import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
-import { ItemServiceService } from './item/item-service.service';
-import { DataStorageService } from './shared/data-storage.service';
 import { ItemStockOrgComponent } from './item-stock-org/item-stock-org.component';
 import { NewStockComponent } from './retailer/new-stock/new-stock.component';
 import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
@@ -38,19 +41,17 @@ import { RetailerToSelectStocksComponent } from './retailer/new-stock/retailer-t
 import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-selected-stocks/retailer-selected-stocks.component';
 import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-select-stocks/to-select-stock-element/to-select-stock-element.component';
 import { StockElementComponent } from './retailer/new-stock/retailer-selected-stocks/stock-element/stock-element.component';
-import { RetailerItemService } from './retailer/retailer-items/retailer-item.service';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { environment } from '../environments/environment';
 import { AdminComponent } from './admin/admin.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { AdminRegisterStocksComponent } from './admin/admin-register-stocks/admin-register-stocks.component';
 import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
+import { AppComponent } from './app.component';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { RetailerItemService } from './retailer/retailer-items/retailer-item.service';
+import { ItemServiceService } from './item/item-service.service';
+import { DataStorageService } from './shared/data-storage.service';
+
 
 
 
@@ -102,11 +103,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     BrowserAnimationsModule,
     MatModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment),
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFireStorageModule
   ],
   providers: [ItemServiceService,DataStorageService,RetailerItemService],
   bootstrap: [AppComponent]

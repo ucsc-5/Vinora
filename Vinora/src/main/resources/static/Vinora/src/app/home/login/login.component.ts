@@ -1,10 +1,9 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 
 import {FormControl, Validators, NgForm} from '@angular/forms';
-import { FirebaseAuth, FirebaseApp, AngularFireModule } from '@angular/fire';
-import { HttpClient } from '@angular/common/http';
-import { from } from 'rxjs';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 
 @Injectable()
@@ -22,22 +21,26 @@ export class LoginComponent implements OnInit {
 
 
   hide = true;
-  constructor() {
+  constructor(public afAuth: AngularFireAuth, private authService : AuthenticationService) {
+  }
 
-   }
+
+
+
+  signUp(form: NgForm) {
+    // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
+    const value = form.value;
+    this.authService.login(value.email,value.password);    
+  }
+
+  logout() {
+    // this.afAuth.auth.signOut(); sign out with gmail
+    this.authService.logout();
+  }
+
 
    
   ngOnInit() {
-  }
-
-  signUp(form: NgForm){
-
-    const value = form.value;
-    const email = value.email;
-    const password = value.password;
-    console.log("email"+email+"\n"+"password"+password);
-   
-    // this.auth.createUserWithEmailAndPassword()
   }
 
   getErrorMessage() {

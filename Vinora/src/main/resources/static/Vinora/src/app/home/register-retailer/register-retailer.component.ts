@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 
 @Component({
@@ -9,9 +13,20 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class RegisterRetailerComponent implements OnInit {
 
-  constructor() { }
+  
+  constructor(public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService) {
+  }
 
   ngOnInit() {
+  }
+
+
+
+  register(form: NgForm){
+    const value =form.value ;
+    console.log(value);
+    this.authService.register(value.email,value.password);
+    
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -21,5 +36,6 @@ export class RegisterRetailerComponent implements OnInit {
         this.email.hasError('email') ? 'Not a valid email' :
             '';
   }
+
 
 }

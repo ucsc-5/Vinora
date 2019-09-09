@@ -4,35 +4,49 @@
             <h3>Register with us</h3>
             <div class="example-container">
 
-                  <br>
-                    <mat-form-field>
-                      <input matInput placeholder="Shop Name" required>
-                    </mat-form-field>
+                              
+                  <form class="example-form" (ngSubmit)="register(f)" #f="ngForm">
 
-                    <mat-form-field>
-                            <input matInput placeholder="Enter your email" [formControl]="email" required>
-                            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                    </mat-form-field>
-                  
-                    <mat-form-field>
-                      <textarea matInput placeholder="Your Address" required></textarea>
-                    </mat-form-field>
-                  
-                    <mat-form-field class="example-full-width">
-                        <span matPrefix>+94 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Telephone" required>
-                        <mat-icon matSuffix>mode_edit</mat-icon>
-                    </mat-form-field>
-                    
-                    <div class="example-button-row">
-                        <button mat-raised-button color="primary" routerLink="itemList">Items</button>
-                    </div>
-                   
-                        <!-- <div class="example-button-row">
-                          <button mat-raised-button color="primary">Register</button>
-                          <button mat-raised-button color="primary">Reset</button>
-                        </div> -->
-                      
+
+                            <br>
+                              <mat-form-field>
+                                <input matInput placeholder="Shop Name" required name="Id" ngModel>
+                              </mat-form-field>
+
+                              <mat-form-field>
+                                      <input matInput placeholder="Enter your email"  name="email" ngModel required>
+                                      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field>
+                                  <input matInput placeholder="Password" required name="password" ngModel>
+                              </mat-form-field>
+                            
+                              <mat-form-field>
+                                <textarea matInput placeholder="Your Address"  name="address" ngModel required></textarea>
+                              </mat-form-field>
+                            
+                              <mat-form-field class="example-full-width">
+                                  <span matPrefix>+94 &nbsp;</span>
+                                  <input type="tel" matInput placeholder="Telephone"  name="tel" ngModel required>
+                                  <mat-icon matSuffix>mode_edit</mat-icon>
+                              </mat-form-field>
+                              
+
+                              <div class="example-button-row">
+                                  <button mat-raised-button color="primary" (click)="register()" >Register</button>
+                              </div>
+                            
+                                  <!-- <div class="example-button-row">
+                                    <button mat-raised-button color="primary">Register</button>
+                                    <button mat-raised-button color="primary">Reset</button>
+                                  </div> -->
+                                
+                    </form>
+
+
+
+
               </div>
         </div>
     </div>
