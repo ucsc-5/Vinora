@@ -53,6 +53,8 @@ import { ItemServiceService } from './item/item-service.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stock-manager-nav.component';
+import { VehicleComponent } from './manager/vehicle/vehicle.component';
+
 
 
 
@@ -99,6 +101,8 @@ import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stoc
     AdminReportsComponent,
     StockManagerComponent,
     StockManagerNavComponent,
+    VehicleComponent,
+
    
   ],  
   imports: [
