@@ -5,11 +5,11 @@ export class Item {
     public quantity: number;
     public unitPrice: number;
     public state: string;
-    public imagePath: string;
+    public imagePath: File;
     public brandImagePath: string;
     public description: string;
 
-    public constructor(id:number,itemName:string,brand:string,description: string,imagePath:string,brandImagePath:string,quantity:number,unitPrice:number,state:string){
+    public constructor(id:number,itemName:string,brand:string,description: string,imagePath:File,brandImagePath:string,quantity:number,unitPrice:number,state:string){
         this.id=id; 
         this.itemName = itemName;
         this.brand = brand;
@@ -21,7 +21,7 @@ export class Item {
         this.state = state;
     }
     
-    public newItem(id:number,itemName:string,brand:string,description: string,imagePath:string,brandImagePath:string,quantity:number,unitPrice:number,state:string){
+    public newItem(id:number,itemName:string,brand:string,description: string,imagePath:File,brandImagePath:string,quantity:number,unitPrice:number,state:string){
         this.id=id; 
         this.itemName = itemName;
         this.brand = brand;
