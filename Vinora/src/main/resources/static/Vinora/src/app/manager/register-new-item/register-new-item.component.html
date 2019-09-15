@@ -1,4 +1,4 @@
-<div class="row" >
+<div class="row">
     <div class="col" style="margin-left: 30%;">
             
         <form class="example-form" (ngSubmit)="onAddItem(f)" #f="ngForm">
@@ -16,7 +16,7 @@
                                 <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                         </div>
                         <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon01">
                                 <label class="custom-file-label" for="inputGroupFile01">Item image</label>
                         </div>
                 </div>
@@ -45,6 +45,16 @@
                 <mat-form-field class="example-full-width">
                         <input matInput placeholder="Description"    name="description" ngModel >
                 </mat-form-field>
+
+                
+   
+                        <input  placeholder="Description"  type="hidden"  name="quantity" ngModel  value="0">
+      
+
+
+              
+                        <input  placeholder="Description"  type="hidden"  name="state" ngModel  value="new">
+         
 
 
 
