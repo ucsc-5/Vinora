@@ -14,7 +14,11 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 export class RegisterRetailerComponent implements OnInit {
 
   
+  // errorMessage = this.authService.errorMessage;
+  //  errorMessage :boolean = false;
+
   constructor(public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService) {
+    
   }
 
   ngOnInit() {

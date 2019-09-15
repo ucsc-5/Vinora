@@ -9,27 +9,25 @@ export class Item {
     public brandImagePath: string;
     public description: string;
 
-    public constructor(id:number,itemName:string,brand:string,description: string,imagePath:File,brandImagePath:string,quantity:number,unitPrice:number,state:string){
+    public constructor(id:number,itemName:string,brand:string,description: string,quantity:number,unitPrice:number,state:string){
         this.id=id; 
         this.itemName = itemName;
         this.brand = brand;
         this.description = description;
-        this.imagePath = imagePath;
-        this.brandImagePath = brandImagePath;
         this.quantity = quantity;
         this.unitPrice = unitPrice; 
         this.state = state;
     }
     
-    public newItem(id:number,itemName:string,brand:string,description: string,imagePath:File,brandImagePath:string,quantity:number,unitPrice:number,state:string){
-        this.id=id; 
-        this.itemName = itemName;
-        this.brand = brand;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.brandImagePath = brandImagePath;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice; 
-        this.state = state;
-    }
+    // public newItem(id:number,itemName:string,brand:string,description: string,imagePath:File,brandImagePath:string,quantity:number,unitPrice:number,state:string){
+    //     this.id=id; 
+    //     this.itemName = itemName;
+    //     this.brand = brand;
+    //     this.description = description;
+    //     this.imagePath = imagePath;
+    //     this.brandImagePath = brandImagePath;
+    //     this.quantity = quantity;
+    //     this.unitPrice = unitPrice; 
+    //     this.state = state;
+    // }
 }    

@@ -55,7 +55,8 @@ import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stock-manager-nav.component';
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
 
-
+import {StorageBucket} from '@angular/fire/storage';
+import { AuthenticationService } from './service/authentication.service';
 
 
 
@@ -101,7 +102,7 @@ import { VehicleComponent } from './manager/vehicle/vehicle.component';
     AdminReportsComponent,
     StockManagerComponent,
     StockManagerNavComponent,
-    VehicleComponent,
+    VehicleComponent
 
    
   ],  
@@ -116,7 +117,12 @@ import { VehicleComponent } from './manager/vehicle/vehicle.component';
     AngularFireAuthModule,
     AngularFireStorageModule
   ],
-  providers: [ItemServiceService,DataStorageService,RetailerItemService],
+  providers: [
+    AuthenticationService,
+    ItemServiceService,
+    DataStorageService,
+    RetailerItemService,
+    { provide: StorageBucket, useValue: 'my-bucket-name' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

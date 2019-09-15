@@ -1,1 +1,33 @@
-<p>admin-register-stocks works!</p>
+<form class="example-form" (ngSubmit)="register(f)" #f="ngForm">
+    <br>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Stock company" required name="stockName" ngModel>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+              <input matInput placeholder="email"  name="email" ngModel required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" required name="password" ngModel>
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Your Address"  name="address" ngModel required></textarea>
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+          <span matPrefix>+94 &nbsp;</span>
+          <input type="tel" matInput placeholder="Telephone"  name="tel" ngModel required>
+          <mat-icon matSuffix>call</mat-icon>
+      </mat-form-field>
+      
+
+      <div class="example-button-row">
+          <button mat-raised-button color="primary" (click)="register()" >Register</button>
+      </div>
+    
+ 
+</form>

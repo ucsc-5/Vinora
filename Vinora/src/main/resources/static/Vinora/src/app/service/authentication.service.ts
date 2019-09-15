@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
   user:  User;
+
   constructor(public  afAuth:  AngularFireAuth, public  router:  Router) {
     this.afAuth.authState.subscribe(user => {
       if (user){
@@ -23,22 +24,30 @@ export class AuthenticationService {
 
   async login(email: string, password: string) {
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      this.router.navigate(['/retailer']);
+      this.router.navigate(['/retailer/1']);
   }
 
 
   async register(email: string, password: string) {
     console.log(email,password);
+     errorCode: String
+     errorMessage: String
+   
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
+      this.errorCode=error.errorCode;
 
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then();{
-      console.log("wede hari");
-    }
-    this.sendEmailVerification();
+      
+    });
+
+
+
+   
+    // this.sendEmailVerification();
   }
 
 async sendEmailVerification() {
   await this.afAuth.auth.currentUser.sendEmailVerification()
-  this.router.navigate(['/retailer']);
+  
   
 }
 

@@ -24,9 +24,8 @@ export class ItemServiceService {
   
   private items: Item[];
 
-  storeNewItem(item:Item,Images:File){
-    this.http.post('https://vinora-dc8a2.firebaseio.com/items.json',item);
-    return this.http.post('https://vinora-dc8a2.appspot.com',Images);
+  storeNewItem(item:Item){
+    return this.http.post('https://vinora-dc8a2.firebaseio.com/items.json',item);
   }
 
   // getItem(){

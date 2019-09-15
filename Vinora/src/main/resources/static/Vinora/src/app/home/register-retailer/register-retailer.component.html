@@ -1,9 +1,12 @@
 <div class="container">
-    <div class="row">
-        <div class="col-8" style="padding-top: 5%; padding-left: 25%">
+    <div class="row" >      
+        <div 
+          *ngIf="!errorMessage ; else infoText"
+          class="col-8" 
+          style="padding-top: 5%; padding-left: 25%"
+          >
             <h3>Register with us</h3>
             <div class="example-container">
-
              
                   <form class="example-form" (ngSubmit)="register(f)" #f="ngForm">
                             <br>
@@ -48,5 +51,14 @@
 
               </div>
         </div>
+
+
+        <ng-template #infoText>
+            <h3>Your new Items here</h3>
+        </ng-template>
+
+
+
     </div>
 </div>
+
