@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-order',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewOrderComponent implements OnInit {
 
-  constructor() { }
-
+  items: Observable<any[]>;
+ 
+  constructor(public db: AngularFireDatabase) {
+    this.items = db.list('items').valueChanges();
+  }
   ngOnInit() {
+    console.log(this.items);
   }
 
 }

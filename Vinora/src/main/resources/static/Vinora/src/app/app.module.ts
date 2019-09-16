@@ -35,7 +35,6 @@ import { RegisteredItemElementComponent } from './retailer/registered-item/regis
 import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
 import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
 import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
-import { RetailerItemsComponent } from './retailer/retailer-items/retailer-items.component';
 import { RetailerStockComponent } from './retailer/retailer-stock/retailer-stock.component';
 import { RetailerToSelectStocksComponent } from './retailer/new-stock/retailer-to-select-stocks/retailer-to-select-stocks.component';
 import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-selected-stocks/retailer-selected-stocks.component';
@@ -48,8 +47,7 @@ import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { AppComponent } from './app.component';
 
-import { RetailerItemService } from './retailer/retailer-items/retailer-item.service';
-import { ItemServiceService } from './item/item-service.service';
+
 import { DataStorageService } from './shared/data-storage.service';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stock-manager-nav.component';
@@ -57,6 +55,9 @@ import { VehicleComponent } from './manager/vehicle/vehicle.component';
 
 import {StorageBucket} from '@angular/fire/storage';
 import { AuthenticationService } from './service/authentication.service';
+import { FormsModule } from '@angular/forms';
+import { OrderItemElementComponent } from './retailer/new-order/order-item-element/order-item-element.component';
+import { ItemService } from './service/item.service';
 
 
 
@@ -89,7 +90,6 @@ import { AuthenticationService } from './service/authentication.service';
     ItemsToSelectComponent,
     ItemsSelectedComponent,
     NewItemElementSelectedComponent,
-    RetailerItemsComponent,
     RetailerStockComponent,
     RetailerToSelectStocksComponent,
     RetailerSelectedStocksComponent,
@@ -102,7 +102,8 @@ import { AuthenticationService } from './service/authentication.service';
     AdminReportsComponent,
     StockManagerComponent,
     StockManagerNavComponent,
-    VehicleComponent
+    VehicleComponent,
+    OrderItemElementComponent
 
    
   ],  
@@ -111,17 +112,18 @@ import { AuthenticationService } from './service/authentication.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatModule,
+    FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase,'vinora'),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
     AuthenticationService,
-    ItemServiceService,
+    ItemService,
     DataStorageService,
-    RetailerItemService,
     { provide: StorageBucket, useValue: 'my-bucket-name' }],
   bootstrap: [AppComponent]
 })

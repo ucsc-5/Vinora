@@ -10,8 +10,7 @@ export class Item {
     public description: string;
     public category: string;
 
-    public constructor(id:number,itemName:string,brand:string,description: string,quantity:number,unitPrice:number,state:string){
-        this.id=id; 
+    public constructor(itemName:string,brand:string,description: string,quantity:number,unitPrice:number,state:string){ 
         this.itemName = itemName;
         this.brand = brand;
         this.description = description;

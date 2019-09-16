@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-register-stocks',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminRegisterStocksComponent implements OnInit {
 
-  constructor() { }
+  title = 'Angular8Firebase';
+  description = 'Angular-Fire-Demo';
+ 
+  itemValue = '';
+  items: Observable<any[]>;
+ 
+  constructor(public db: AngularFireDatabase) {
+    this.items = db.list('items').valueChanges();
+  }
+ 
+  onSubmit() {
+    this.db.list('items').push({ content: this.itemValue});
+    this.itemValue = '';
+  }
 
-  ngOnInit() {
+  ngOnInit(){
+
   }
 
 }

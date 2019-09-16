@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Item } from 'src/app/item/item.model';
-import { ItemServiceService } from 'src/app/item/item-service.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ItemService } from 'src/app/service/item.service';
 @Component({
   selector: 'app-register-new-item',
   templateUrl: './register-new-item.component.html',
@@ -15,12 +15,11 @@ export class RegisterNewItemComponent implements OnInit {
   selectedItemImage:File = null;
 
  
-  constructor(private storage: AngularFireStorage,private itemService: ItemServiceService,private route: Router) {
+  constructor(private itemService:ItemService,private route: Router) {
    }
 
    onFileSelected(event){
     this.selectedItemImage= <File>event.target.files[0];
-   
   }
    
 
@@ -30,20 +29,7 @@ export class RegisterNewItemComponent implements OnInit {
 
   onAddItem(form: NgForm){
       const value = form.value;
-      const item = new Item(1,value.itemName,value.brandName,value.descriptio,value.quantity,value.unitPrice,value.state );
-      this.itemService.storeNewItem(item).subscribe(
-        (response)=> console.log(response),
-        (error) => console.log(error)
-      )  
- 
-          
+      const item = new Item(value.itemName,value.brandName,value.description,value.quantity,value.unitPrice,value.state);
+      this.itemService.createItem(item);
     }
-    
-    // const value = form.value;
-    // const newItem = new Item(value.id,value.itemName,value.brandName,value.description,value.itemImage,value.brandImage,value.quantity,value.unitPrice,value.state);
-    // console.log(newItem);
-    // this.itemService.itemSelected.emit(newItem);
-    // this.itemService.addNewItem(newItem);
-    // // console.log(this.itemService.getItem);
-
 }

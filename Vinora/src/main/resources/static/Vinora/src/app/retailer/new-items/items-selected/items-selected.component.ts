@@ -21,16 +21,7 @@ export class ItemsSelectedComponent implements OnInit {
 
   ngOnInit(){
 
-    this.http.get('https://vinora-dc8a2.firebaseio.com/items.json').subscribe(
-    (reponse:Response) =>{
-      const newItems : any = reponse;
-      // console.log(newItems);
-      this.selectedItem=newItems;
-      console.log(this.selectedItem);
-      // console.log(newItems);
-      // this.item= newItems;
-    }
-  )
+   
 
   }
 
