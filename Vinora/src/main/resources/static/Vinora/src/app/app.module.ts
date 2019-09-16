@@ -20,7 +20,6 @@ import { HomeComponent } from './home/home.component';
 import { HomeNavComponent } from './home/home-nav/home-nav.component';
 import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';import { ItemComponent } from './item/item.component';
 import { NewOrderComponent } from './retailer/new-order/new-order.component';
-import { RegisteredItemComponent } from './retailer/registered-item/registered-item.component';
 import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 import { ManagerComponent } from './manager/manager.component';
@@ -31,7 +30,6 @@ import { NewStockComponent } from './retailer/new-stock/new-stock.component';
 import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
 import { RegisteredStockElementComponent } from './retailer/registered-stock/registered-stock-element/registered-stock-element.component';
 import { NewItemElementComponent } from './retailer/new-items/items-to-select/new-item-element/new-item-element.component';
-import { RegisteredItemElementComponent } from './retailer/registered-item/registered-item-element/registered-item-element.component';
 import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
 import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
 import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
@@ -76,7 +74,6 @@ import { RegItemElementComponent } from './manager/registered-items/reg-item-ele
     CurrentOrdersComponent,
     ItemComponent,
     NewOrderComponent,
-    RegisteredItemComponent,
     NewItemsComponent,
     PreviousOrdersComponent,
     ManagerComponent,
@@ -88,7 +85,6 @@ import { RegItemElementComponent } from './manager/registered-items/reg-item-ele
     NewStockComponent,
     RegisteredStockElementComponent,
     NewItemElementComponent,
-    RegisteredItemElementComponent,
     ItemsToSelectComponent,
     ItemsSelectedComponent,
     NewItemElementSelectedComponent,
@@ -108,8 +104,6 @@ import { RegItemElementComponent } from './manager/registered-items/reg-item-ele
     OrderItemElementComponent,
     RegisteredItemsComponent,
     RegItemElementComponent
-
-   
   ],  
   imports: [
     BrowserModule,

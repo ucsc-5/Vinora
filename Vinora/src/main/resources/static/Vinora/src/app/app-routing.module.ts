@@ -6,7 +6,6 @@ import { RetailerComponent } from './retailer/retailer.component';
 import { HomeComponent } from './home/home.component';
 import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';
 import { NewOrderComponent } from './retailer/new-order/new-order.component';
-import { RegisteredItemComponent } from './retailer/registered-item/registered-item.component';
 import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 import { ManagerComponent } from './manager/manager.component';
@@ -30,7 +29,6 @@ const routes: Routes = [
   {path: 'retailer/:id',component: RetailerComponent, children:[
     {path: 'currentOrders', component: CurrentOrdersComponent},
     {path: 'newOrder', component: NewOrderComponent},
-    {path: 'registeredItems', component: RegisteredItemComponent},
     {path: 'newItems', component: NewItemsComponent},
     {path: 'previousOrder', component: PreviousOrdersComponent},
     {path: 'registeredStocks', component: RegisteredStockComponent},
