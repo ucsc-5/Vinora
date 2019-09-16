@@ -1,12 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/app/item/item.model';
-import { ItemServiceService } from 'src/app/item/item-service.service';
-import { RetailerItemService } from '../../retailer-items/retailer-item.service';
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-items-selected',
@@ -18,19 +13,25 @@ export class ItemsSelectedComponent implements OnInit {
 
   @Input() item : Item;
 
-  items: Item[];
+  selectedItem: Item[];
 
-  constructor(private itemService:RetailerItemService, private http:HttpClient) {
-   
+  constructor(private http:HttpClient){
+    
+  }
+
+  ngOnInit(){
+
+    this.http.get('https://vinora-dc8a2.firebaseio.com/items.json').subscribe(
+    (reponse:Response) =>{
+      const newItems : any = reponse;
+      // console.log(newItems);
+      this.selectedItem=newItems;
+      console.log(this.selectedItem);
+      // console.log(newItems);
+      // this.item= newItems;
     }
+  )
 
-  ngOnInit() {
-    this.http.get('https://vinora-dc8a2.firebaseio.com/Retailer/Selected-Items.json').subscribe(
-      (reponse: Response) =>{
-        const newItems : any = reponse.json;
-        console.log(newItems);
-        this.items= newItems;
-      }
-    )
-}
+  }
+
 }

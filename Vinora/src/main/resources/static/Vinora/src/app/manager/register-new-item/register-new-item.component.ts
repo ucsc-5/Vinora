@@ -29,21 +29,13 @@ export class RegisterNewItemComponent implements OnInit {
   }
 
   onAddItem(form: NgForm){
-    const filePath = 'my-bucket-name';
-    const ref = this.storage.ref(filePath);
-    const task = ref.put(this.selectedItemImage);
-    console.log(this.selectedItemImage);
-    
-    if(task){
       const value = form.value;
       const item = new Item(1,value.itemName,value.brandName,value.descriptio,value.quantity,value.unitPrice,value.state );
       this.itemService.storeNewItem(item).subscribe(
         (response)=> console.log(response),
         (error) => console.log(error)
       )  
-    }else{
-      console.log('not done');
-    }
+ 
           
     }
     

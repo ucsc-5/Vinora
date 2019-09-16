@@ -112,7 +112,7 @@ import { AuthenticationService } from './service/authentication.service';
     BrowserAnimationsModule,
     MatModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase,'vinora'),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule
