@@ -16,7 +16,7 @@ export class ItemsSelectedComponent implements OnInit {
   selectedItem: Item[];
 
   constructor(private http:HttpClient){
-    
+
   }
 
   ngOnInit(){
