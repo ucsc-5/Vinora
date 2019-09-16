@@ -8,6 +8,7 @@ export class Item {
     public imagePath: File;
     public brandImagePath: string;
     public description: string;
+    public category: string;
 
     public constructor(id:number,itemName:string,brand:string,description: string,quantity:number,unitPrice:number,state:string){
         this.id=id; 

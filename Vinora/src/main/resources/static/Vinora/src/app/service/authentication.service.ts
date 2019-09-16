@@ -3,6 +3,7 @@ import { auth } from  'firebase/app';
 import { AngularFireAuth } from  "@angular/fire/auth";
 import { User } from  'firebase';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class AuthenticationService {
   async login(email: string, password: string) {
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password)
       this.router.navigate(['/retailer/1']);
+      console.log(this.user);
   }
 
 
@@ -33,11 +35,9 @@ export class AuthenticationService {
      errorCode: String
      errorMessage: String
    
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-      this.errorCode=error.errorCode;
-
-      
-    });
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(
+        error=> console.log(error)
+      );
 
 
 

@@ -29,8 +29,9 @@ export class LoginComponent implements OnInit {
 
   signUp(form: NgForm) {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
-    const value = form.value;
-    this.authService.login(value.email,value.password);    
+    const email = form.value.email;
+    const password = form.value.password;
+    this.authService.login(email,password);    
   }
 
   logout() {

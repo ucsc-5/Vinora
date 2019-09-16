@@ -5,8 +5,8 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
-import { RetailerService } from 'src/app/retailer/retailer/retailer.service';
-import { PendigRetailer } from 'src/app/retailer/retailer/pendingRetailer.model';
+import { RetailerService } from 'src/app/retailer/retailer.service';
+import { PendigRetailer } from 'src/app/retailer/pendingRetailer.model';
 ;
 
 

@@ -16,4 +16,6 @@ export class RetailerService {
     return this.http.post('https://vinora-dc8a2.firebaseio.com/Retailers.json',retailer);
   }
 
+
+
 }

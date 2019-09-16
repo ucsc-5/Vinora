@@ -8,13 +8,13 @@
                             
                             <div class="example-container">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Enter your email"   name="email" ngModel required>
+                                    <input matInput placeholder="Enter your email" value=""  name="email" ngModel required>
                                     <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                                 
                                 
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"  name="password" ngModel>
+                                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"  value="" name="password" ngModel>
                                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </button>
