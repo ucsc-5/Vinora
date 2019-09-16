@@ -17,9 +17,6 @@ export class OrderItemElementComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDelete(item:Item){
-    const itemRef = this.db.object('item');
-    itemRef.remove();
-  }
+ 
 
 }

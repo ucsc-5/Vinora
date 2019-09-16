@@ -1,10 +1,32 @@
-<mat-card class="example-card">
+
+    <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>{{item.itemName}}</mat-card-title>
-          <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
+            <mat-card-title>{{item.itemName}}</mat-card-title>
+            <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
         </mat-card-header>
+        <mat-card-content>
+            <p>{{item.description}}<br>
+                Unit Price: <b>{{item.unitPrice}}</b><br>
+                Available:  <b></b>{{item.quantity}}<br>                
+            </p>
+
+        </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="warn" (click)="onDelete(item)">Remove</button>
+            <form>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td><mat-form-field class="example-full-width">
+                                <input matInput type="number" placeholder="Quantity" name="quantity">
+                            </mat-form-field></td>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Kg</span>
+                            </div>
+                        </tr>
+                    </table>
+                    <button mat-raised-button color="primary" type="reset">Reset</button>
+                    <button mat-raised-button color="primary">Add</button>
+            </form>
         </mat-card-actions>
-</mat-card>
+    </mat-card>
+
  

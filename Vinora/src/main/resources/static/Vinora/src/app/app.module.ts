@@ -58,6 +58,8 @@ import { AuthenticationService } from './service/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { OrderItemElementComponent } from './retailer/new-order/order-item-element/order-item-element.component';
 import { ItemService } from './service/item.service';
+import { RegisteredItemsComponent } from './manager/registered-items/registered-items.component';
+import { RegItemElementComponent } from './manager/registered-items/reg-item-element/reg-item-element.component';
 
 
 
@@ -103,7 +105,9 @@ import { ItemService } from './service/item.service';
     StockManagerComponent,
     StockManagerNavComponent,
     VehicleComponent,
-    OrderItemElementComponent
+    OrderItemElementComponent,
+    RegisteredItemsComponent,
+    RegItemElementComponent
 
    
   ],  

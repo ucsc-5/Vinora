@@ -19,6 +19,7 @@ import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
+import { RegisteredItemsComponent } from './manager/registered-items/registered-items.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -40,7 +41,8 @@ const routes: Routes = [
 
   {path: 'manager/:id', component: ManagerComponent, children:[
     {path: 'registerNewItem', component: RegisterNewItemComponent},
-    {path: 'vehicleRegister', component: VehicleComponent}
+    {path: 'vehicleRegister', component: VehicleComponent},
+    {path: 'registeredItems', component: RegisteredItemsComponent},
   ]},
 
   {path: 'admin', component: AdminComponent, children:[
