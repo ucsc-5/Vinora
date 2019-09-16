@@ -5,6 +5,10 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
+import { RetailerService } from 'src/app/retailer/retailer/retailer.service';
+import { PendigRetailer } from 'src/app/retailer/retailer/pendingRetailer.model';
+;
+
 
 @Component({
   selector: 'app-register-retailer',
@@ -17,7 +21,7 @@ export class RegisterRetailerComponent implements OnInit {
   // errorMessage = this.authService.errorMessage;
   //  errorMessage :boolean = false;
 
-  constructor(public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService) {
+  constructor(public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService,private retailerService:RetailerService) {
     
   }
 
@@ -30,7 +34,12 @@ export class RegisterRetailerComponent implements OnInit {
     const value =form.value ;
     console.log(value);
     this.authService.register(value.email,value.password);
-    
+    const retailer = new PendigRetailer(value.shopname,value.email,value.address,value.tel,value.state);
+    this.retailerService.storeNewRetailer(retailer).subscribe(
+      (response)=>{
+        console.log(response);
+      }
+    );    
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
