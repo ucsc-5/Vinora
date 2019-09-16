@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Stock } from 'src/app/stock/stock.model';
-import { RetailerStockService } from 'src/app/retailer/retailer-stock/retailer-stock.service';
+import { Stock } from 'src/app/service/stock.model';
+
 
 @Component({
   selector: 'app-to-select-stock-element',
@@ -12,14 +12,13 @@ export class ToSelectStockElementComponent implements OnInit {
   @Input()
   stock: Stock;
 
-  constructor(private retailerStockService:RetailerStockService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   onAdded(){
-    this.retailerStockService.stockSelected.emit(this.stock);
-    this.retailerStockService.addSelectedStock(this.stock);
+
   }
 
 }

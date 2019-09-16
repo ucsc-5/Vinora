@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Stock } from 'src/app/stock/stock.model';
-import { Manager } from 'src/app/manager/manager.model';
+import { Stock } from 'src/app/service/stock.model';
 
 @Component({
   selector: 'app-registered-stock',

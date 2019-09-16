@@ -33,7 +33,6 @@ import { NewItemElementComponent } from './retailer/new-items/items-to-select/ne
 import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
 import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
 import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
-import { RetailerStockComponent } from './retailer/retailer-stock/retailer-stock.component';
 import { RetailerToSelectStocksComponent } from './retailer/new-stock/retailer-to-select-stocks/retailer-to-select-stocks.component';
 import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-selected-stocks/retailer-selected-stocks.component';
 import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-select-stocks/to-select-stock-element/to-select-stock-element.component';
@@ -58,6 +57,7 @@ import { OrderItemElementComponent } from './retailer/new-order/order-item-eleme
 import { ItemService } from './service/item.service';
 import { RegisteredItemsComponent } from './manager/registered-items/registered-items.component';
 import { RegItemElementComponent } from './manager/registered-items/reg-item-element/reg-item-element.component';
+import { RegisterDCompanyComponent } from './home/register-d-company/register-d-company.component';
 
 
 
@@ -88,7 +88,6 @@ import { RegItemElementComponent } from './manager/registered-items/reg-item-ele
     ItemsToSelectComponent,
     ItemsSelectedComponent,
     NewItemElementSelectedComponent,
-    RetailerStockComponent,
     RetailerToSelectStocksComponent,
     RetailerSelectedStocksComponent,
     ToSelectStockElementComponent,
@@ -103,7 +102,8 @@ import { RegItemElementComponent } from './manager/registered-items/reg-item-ele
     VehicleComponent,
     OrderItemElementComponent,
     RegisteredItemsComponent,
-    RegItemElementComponent
+    RegItemElementComponent,
+    RegisterDCompanyComponent
   ],  
   imports: [
     BrowserModule,

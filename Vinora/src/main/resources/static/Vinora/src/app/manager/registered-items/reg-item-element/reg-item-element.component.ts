@@ -12,11 +12,11 @@ export class RegItemElementComponent implements OnInit {
   @Input() item:Item
 
   constructor(private itemService:ItemService) {
-
+    
   }
 
   ngOnInit() {
-    
+
   }
 
 }

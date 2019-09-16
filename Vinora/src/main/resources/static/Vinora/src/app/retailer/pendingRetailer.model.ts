@@ -1,4 +1,5 @@
-import { Stock } from 'src/app/stock/stock.model';
+import { Stock } from '../service/stock.model';
+
 
 export class PendigRetailer {
     shopName: String;

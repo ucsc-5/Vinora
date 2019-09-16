@@ -1,11 +1,16 @@
 
-    <mat-card class="example-card">
+    <mat-card class="example-card" class="itemcard" >
             <mat-card-header>
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
+            <div class="forimage"></div>
             <mat-card-content>
-                <p>{{item.description}}<br>
+                    
+                    
+                    
+                <p>
+                    {{item.description}}<br>
                     Unit Price: <b>{{item.unitPrice}}</b><br>
                     Available:  <b></b>{{item.quantity}}<br>                
                 </p>

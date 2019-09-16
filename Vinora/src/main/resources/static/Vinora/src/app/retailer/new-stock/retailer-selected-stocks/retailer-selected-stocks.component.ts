@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Stock } from 'src/app/stock/stock.model';
-import { RetailerStockService } from '../../retailer-stock/retailer-stock.service';
+import { Stock } from 'src/app/service/stock.model';
+
 
 @Component({
   selector: 'app-retailer-selected-stocks',
@@ -13,10 +13,10 @@ export class RetailerSelectedStocksComponent implements OnInit {
   
   retailerSelectedStocks: Stock[];
 
-  constructor(private retailerStockService: RetailerStockService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.retailerSelectedStocks= this.retailerStockService.getRetailerSelectedStocks();
+
   }
 
 }
