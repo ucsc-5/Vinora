@@ -19,12 +19,14 @@ import { AdminReportsComponent } from './admin/admin-reports/admin-reports.compo
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
 import { RegisteredItemsComponent } from './manager/registered-items/registered-items.component';
+import { RegisterDCompanyComponent } from './home/register-d-company/register-d-company.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, children: [
       {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterRetailerComponent} 
+      {path: 'register', component: RegisterRetailerComponent}, 
+      {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
   {path: 'retailer/:id',component: RetailerComponent, children:[
     {path: 'currentOrders', component: CurrentOrdersComponent},

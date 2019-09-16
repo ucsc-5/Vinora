@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Stock } from 'src/app/service/stock.model';
+import { StockService } from 'src/app/service/stock.service';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register-d-company',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterDCompanyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stockService:StockService) { }
 
   ngOnInit() {
   }
 
+  register(form: NgForm){
+    const value =form.value;
+    const stock = new Stock(value.stockName,value.managerId,value.manager,value.email,value.address,value.tel)
+    this.stockService.createStock(stock);
+  }
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter a value' :
+        this.email.hasError('email') ? 'Not a valid email' :
+            '';
+  }
 }

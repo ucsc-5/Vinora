@@ -1,1 +1,64 @@
-<p>register-d-company works!</p>
+
+<div class="container">
+        <div class="row" >      
+            <div 
+              class="col-8" 
+              style="padding-top: 5%; padding-left: 25%"
+              >
+                <h3>Register with us</h3>
+                <div class="example-container">
+                 
+                      <form class="example-form" (ngSubmit)="register(f)" #f="ngForm">
+                                <br>
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Your Company" required name="stockName" ngModel>
+                                  </mat-form-field>
+
+                                  <mat-form-field class="example-full-width">
+                                        <input matInput type="text" placeholder="Manager" required name="manager" ngModel>
+                                  </mat-form-field>
+
+                                  <mat-form-field class="example-full-width">
+                                        <input matInput type="text" placeholder="Manager NIC" required name="managerId" ngModel>
+                                  </mat-form-field>                                
+    
+                                  <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Enter your email"  name="email" ngModel required>
+                                          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                  </mat-form-field>
+    
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput type="password"  placeholder="Password" required name="password" ngModel>
+                                  </mat-form-field>
+                                
+                                  <mat-form-field class="example-full-width">
+                                    <textarea matInput placeholder="Your Address"  name="address" ngModel required></textarea>
+                                  </mat-form-field>
+                                
+                                  <mat-form-field class="example-full-width">
+                                      <span matPrefix>+94 &nbsp;</span>
+                                      <input type="tel" matInput placeholder="Telephone"  name="tel" ngModel required>
+                                      <mat-icon matSuffix>call</mat-icon>
+                                  </mat-form-field>
+    
+            
+                                  
+    
+                                  <div class="example-button-row">
+                                      <button mat-raised-button color="primary" (click)="register()" >Register</button>
+                                  </div>
+                        </form>
+                  </div>
+            </div>
+    
+    
+            <ng-template #infoText>
+                <h3>Your new Items here</h3>
+            </ng-template>
+    
+    
+    
+        </div>
+    </div>
+    
+    

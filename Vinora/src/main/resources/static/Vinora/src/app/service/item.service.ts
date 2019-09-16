@@ -13,7 +13,7 @@ export class ItemService {
   itemRef: AngularFireList<Item> = null;
  
   constructor(private db: AngularFireDatabase) {
-    this.itemRef = db.list(this.dbPath);
+    this.itemRef = this.db.list(this.dbPath);
   }
  
   createItem(item: Item): void {
