@@ -13,6 +13,7 @@ export class UpdateItemElementComponent implements OnInit {
 
   @Input() item:Item
 
+
   constructor(private itemServise:ItemService) { }
 
   ngOnInit() {
@@ -20,9 +21,10 @@ export class UpdateItemElementComponent implements OnInit {
 
   updateQuantity(form:NgForm) {
     const value=form.value;
-    console.log(value.quantity);
-    console.log(this.item.key);
-    this.itemServise.updateItem(this.item.key, {quantity: value.quantity})
+    // console.log(value.quantity);
+    // console.log(this.item.key);
+    const newQuantity= this.item.quantity+value.quantity;
+    this.itemServise.updateItem(this.item.key, {quantity: newQuantity})
       .catch(err => console.log(err+"jkdcjdscjsdbc"));
   }
 

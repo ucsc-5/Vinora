@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/app/item/item.model';
 import { ItemService } from 'src/app/service/item.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-reg-item-element',
@@ -16,6 +17,15 @@ export class RegItemElementComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  onRemove(){
+
+    // console.log(this.item.key);
+
+    this.itemService.deleteItem(this.item.key);
+
 
   }
 
