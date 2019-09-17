@@ -1,0 +1,14 @@
+.itemcard{
+
+    margin: 5px 5px 5px 5px;
+    width: 200px;
+    height: 550px;
+   
+}
+
+.forimage{
+    width: 190px;
+    margin-left: -10px;
+    height: 150px;
+    background-color: blueviolet;
+}

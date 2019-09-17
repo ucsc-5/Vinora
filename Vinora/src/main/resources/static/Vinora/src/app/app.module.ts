@@ -58,6 +58,8 @@ import { ItemService } from './service/item.service';
 import { RegisteredItemsComponent } from './manager/registered-items/registered-items.component';
 import { RegItemElementComponent } from './manager/registered-items/reg-item-element/reg-item-element.component';
 import { RegisterDCompanyComponent } from './home/register-d-company/register-d-company.component';
+import { UpdateItemsComponent } from './stock-manager/update-items/update-items.component';
+import { UpdateItemElementComponent } from './stock-manager/update-items/update-item-element/update-item-element.component';
 
 
 
@@ -103,7 +105,9 @@ import { RegisterDCompanyComponent } from './home/register-d-company/register-d-
     OrderItemElementComponent,
     RegisteredItemsComponent,
     RegItemElementComponent,
-    RegisterDCompanyComponent
+    RegisterDCompanyComponent,
+    UpdateItemsComponent,
+    UpdateItemElementComponent
   ],  
   imports: [
     BrowserModule,

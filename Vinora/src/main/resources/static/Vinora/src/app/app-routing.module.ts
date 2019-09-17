@@ -20,6 +20,7 @@ import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
 import { RegisteredItemsComponent } from './manager/registered-items/registered-items.component';
 import { RegisterDCompanyComponent } from './home/register-d-company/register-d-company.component';
+import { UpdateItemsComponent } from './stock-manager/update-items/update-items.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -37,7 +38,9 @@ const routes: Routes = [
     {path: 'newStock', component: NewStockComponent}
   ]},
 
-  {path: 'stockManager/:id' , component: StockManagerComponent},
+  {path: 'stockManager/:id' , component: StockManagerComponent, children:[
+    { path: 'updateItems', component: UpdateItemsComponent}
+  ]},
 
   {path: 'manager/:id', component: ManagerComponent, children:[
     {path: 'registerNewItem', component: RegisterNewItemComponent},
