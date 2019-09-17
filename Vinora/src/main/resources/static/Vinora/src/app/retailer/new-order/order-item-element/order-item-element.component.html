@@ -12,19 +12,19 @@
 
         </mat-card-content>
         <mat-card-actions>
-            <form>
+            <form (ngSubmit)="toCart(f)" #f="ngForm" >
                     <table class="example-full-width" cellspacing="0">
                         <tr>
                             <td><mat-form-field class="example-full-width">
-                                <input matInput type="number" placeholder="Quantity" name="quantity">
+                                <input matInput type="number" placeholder="Quantity" name="quantity" ngModel>
                             </mat-form-field></td>
                             <div class="input-group-append">
                                 <span class="input-group-text">Kg</span>
                             </div>
                         </tr>
                     </table>
-                    <button mat-raised-button color="primary" type="reset">Reset</button>
-                    <button mat-raised-button color="primary">Add</button>
+                    
+                    <button mat-raised-button color="primary" type="submit" >To Cart</button>
             </form>
         </mat-card-actions>
     </mat-card>
