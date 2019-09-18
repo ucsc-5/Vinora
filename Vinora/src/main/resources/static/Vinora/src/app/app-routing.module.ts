@@ -40,10 +40,8 @@ const routes: Routes = [
   ]},
 
   {path: 'stockManager/:id' , component: StockManagerComponent, children:[
-    { path: 'updateItems', component: UpdateItemsComponent},
-    { path: 'vehicle', component: VehicleComponent, children:[
-      {path: 'register' , component: VehicleRegisterComponent}
-      ]}
+    { path: 'updateItems', component: UpdateItemsComponent}
+    
   ]},
 
   {path: 'manager/:id', component: ManagerComponent, children:[
@@ -52,6 +50,9 @@ const routes: Routes = [
       {path: 'registerVehicle', component: VehicleRegisterComponent }
     ]},
     {path: 'registeredItems', component: RegisteredItemsComponent},
+    { path: 'vehicle', component: VehicleComponent, children:[
+      {path: 'register' , component: VehicleRegisterComponent}
+      ]}
   ]},
 
   {path: 'admin', component: AdminComponent, children:[
