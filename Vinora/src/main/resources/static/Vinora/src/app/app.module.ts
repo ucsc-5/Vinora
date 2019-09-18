@@ -61,6 +61,9 @@ import { RegisterDCompanyComponent } from './home/register-d-company/register-d-
 import { UpdateItemsComponent } from './stock-manager/update-items/update-items.component';
 import { UpdateItemElementComponent } from './stock-manager/update-items/update-item-element/update-item-element.component';
 import { VehicleRegisterComponent } from './manager/vehicle/vehicle-register/vehicle-register.component';
+import { MyCartComponent } from './retailer/my-cart/my-cart.component';
+import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/cart-item-elemet.component';
+
 
 
 
