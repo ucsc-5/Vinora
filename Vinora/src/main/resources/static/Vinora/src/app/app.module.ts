@@ -112,7 +112,9 @@ import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/car
     RegisterDCompanyComponent,
     UpdateItemsComponent,
     UpdateItemElementComponent,
-    VehicleRegisterComponent
+    VehicleRegisterComponent,
+    MyCartComponent,
+    CartItemElemetComponent
   ],  
   imports: [
     BrowserModule,
