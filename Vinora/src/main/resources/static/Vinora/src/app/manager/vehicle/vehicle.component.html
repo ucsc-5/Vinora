@@ -7,10 +7,10 @@
         </div>
         
         <div class="col-4" >
-          
             
-            <a [routerLink]="['registerVehicle']" [state]="{tracingId: 123}">Register Vehicle   </a>
-            <button class="btn btn-success">Register</button>
+            <a [routerLink]="['/register']" [state]="{tracingId: 123}">Register Vehicle   </a>
+            <!-- <button class="btn btn-success">Register</button> -->
+            <router-outlet></router-outlet>
           
             
         </div>
