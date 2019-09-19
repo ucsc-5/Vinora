@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Order } from 'src/app/service/order.model';
 import { OrderService } from 'src/app/service/order.service';
+import { Item } from 'src/app/item/item.model';
 
 
 @Component({
@@ -17,23 +18,28 @@ export class NewOrderComponent implements OnInit {
 
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
-  constructor(db: AngularFireDatabase, private orderService:OrderService) {
-    this.itemsRef = db.list('items');
-    // Use snapshotChanges().map() to store the key
+  constructor(private db: AngularFireDatabase, private orderService:OrderService) {
+    
+    let date: Date = new Date();  
+    this.currentOrder =  new Order(date); 
+    console.log(this.currentOrder);
+  }
+  ngOnInit() {
+
+    this.itemsRef = this.db.list('items');
     this.items = this.itemsRef.snapshotChanges().pipe(
       map(changes => 
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
-    let date: Date = new Date();  
-    this.currentOrder =  new Order(date);
-    console.log(this.currentOrder);
 
-    
   }
-  ngOnInit() {
-    // this.orderService.createOrder(this.currentOrder);
-    // console.log(this.itemsRef);
+
+  onItemToCart(item:Item){
+    console.log(item);
+    this.currentOrder.addItem(item);
+    // console.log("sdjcjisdcjsndjcsdc");
+    // console.log(this.currentOrder);
   }
 
 

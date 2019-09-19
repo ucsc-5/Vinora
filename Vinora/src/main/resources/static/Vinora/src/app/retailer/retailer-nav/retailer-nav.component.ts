@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from '@angular/fire';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-retailer-nav',
@@ -9,9 +10,15 @@ import { AngularFireModule } from '@angular/fire';
 })
 export class RetailerNavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  toMyCart(){
+    console.log('jhdcbjshdcbjhsdc');
+    // console.log(this.route);
+    this.router.navigate(['myCart'],{relativeTo: this.route});
   }
 
 }

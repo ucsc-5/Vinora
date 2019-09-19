@@ -1,4 +1,6 @@
 <div class="row">
-    <app-order-item-element *ngFor="let item of items | async" [item]="item" [order]="currentOrder"></app-order-item-element>
+    <app-order-item-element *ngFor="let item of items | async" [item]="item" (itemCreated)="onItemToCart($event)"></app-order-item-element>
+
+    <button btn btn-success>Item to the cart</button>
     
 </div>

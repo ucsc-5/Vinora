@@ -8,11 +8,10 @@ export class Order {
     public purchesDate : Date;
     public acceptedDate : Date;
     public deliveredDate : Date;
-
     public retailerKey: string;
     public stockmanagerKey: string;
     public salesRefKey: string;
-
+    
     public items:Item[];
     
     constructor(currentdate:Date){
@@ -20,7 +19,8 @@ export class Order {
     }
 
     public addItem(item:Item){
-        this.items.push(item);
+        console.log("from order");
+        this.items.push(item)
         console.log(this.items.length);
     }
 

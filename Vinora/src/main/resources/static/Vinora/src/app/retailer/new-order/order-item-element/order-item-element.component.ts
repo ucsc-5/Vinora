@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Item } from 'src/app/item/item.model';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ItemService } from 'src/app/service/item.service';
@@ -15,9 +15,11 @@ import { Order } from 'src/app/service/order.model';
 export class OrderItemElementComponent implements OnInit {
 
   @Input()  item :Item
-  @Input()  order:Order;
+  // @Input()  order:Order;
 
-            orderedItem : Item;
+  @Output() itemCreated = new EventEmitter<Item>();
+
+  orderedItem : Item;
 
   constructor(private db:AngularFireDatabase, private itemServise: ItemService,private orderService: OrderService) { 
   }
@@ -26,24 +28,20 @@ export class OrderItemElementComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+
   toCart(form: NgForm){
     const value = form.value;
-    console.log(value.quantity);
     if(this.item.quantity < value.quantity){
       console.log('not enough items availabale')
     }else{
-      console.log(this.item.quantity);
-      const newQuantity =  (+this.item.quantity)-(+value.quantity);
+      const newQuantity =  (this.item.quantity)-(value.quantity);
+      console.log(newQuantity);
   
-      this.itemServise.updateItem(this.item.key,{quantity : newQuantity});
-
+      // this.itemServise.updateItem(this.item.key,{quantity : newQuantity});
       this.orderedItem = new Item(this.item.itemName,this.item.brand,this.item.description,value.quantity,this.item.unitPrice,this.item.state);
-
-      this.orderService.createOrder(this.orderedItem);
-
-
-
-
+      console.log(this.orderedItem);
+      this.itemCreated.emit(this.orderedItem);
     }
 
 
