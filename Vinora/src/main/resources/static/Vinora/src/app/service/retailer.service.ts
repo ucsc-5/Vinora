@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { PendigRetailer } from './pendingRetailer.model';
+import { PendigRetailer } from '../retailer/pendingRetailer.model';
 
 @Injectable({
   providedIn: 'root'

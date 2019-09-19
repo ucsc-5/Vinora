@@ -63,6 +63,10 @@ import { UpdateItemElementComponent } from './stock-manager/update-items/update-
 import { VehicleRegisterComponent } from './manager/vehicle/vehicle-register/vehicle-register.component';
 import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/cart-item-elemet.component';
+import { UserService } from './service/user.service';
+import { OrderService } from './service/order.service';
+import { RetailerService } from './service/retailer.service';
+import { StockService } from './service/stock.service';
 
 
 
@@ -133,6 +137,10 @@ import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/car
     AuthenticationService,
     ItemService,
     DataStorageService,
+    UserService,
+    OrderService,
+    RetailerService,
+    StockService,
     { provide: StorageBucket, useValue: 'my-bucket-name' }],
   bootstrap: [AppComponent]
 })

@@ -4,14 +4,19 @@ import { AngularFireAuth } from  "@angular/fire/auth";
 import { User } from  'firebase';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from './user.service';
+import { LoginUser } from './login-user';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   user:  User;
+  loginUser: LoginUser;
 
-  constructor(public  afAuth:  AngularFireAuth, public  router:  Router) {
+  constructor(public  afAuth:  AngularFireAuth, public  router:  Router, private http:HttpClient,private userServise:UserService) {
     this.afAuth.authState.subscribe(user => {
       if (user){
         this.user = user;
@@ -24,31 +29,24 @@ export class AuthenticationService {
 
 
   async login(email: string, password: string) {
-      var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      this.router.navigate(['/retailer/1']);
+      var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       console.log(this.user);
   }
 
 
-  async register(email: string, password: string) {
+  async register(email: string, password: string,type: string) {
     console.log(email,password);
-     errorCode: String
-     errorMessage: String
-   
+    this.loginUser = new LoginUser(email,type);
+    this.userServise.createUser(this.loginUser);
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(
         error=> console.log(error)
       );
-
-
-
    
     // this.sendEmailVerification();
   }
 
 async sendEmailVerification() {
   await this.afAuth.auth.currentUser.sendEmailVerification()
-  
-  
 }
 
 async sendPasswordResetEmail(passwordResetEmail: string) {

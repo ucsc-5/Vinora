@@ -11,7 +11,7 @@ export class Order {
     public retailerKey: string;
     public stockmanagerKey: string;
     public salesRefKey: string;
-    
+
     public items:Item[];
     
     constructor(currentdate:Date){
@@ -23,7 +23,5 @@ export class Order {
         this.items.push(item)
         console.log(this.items.length);
     }
-
-
     
 }
