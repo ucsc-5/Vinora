@@ -4,9 +4,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-
 import { RetailerService } from 'src/app/service/retailer.service';
-import { PendigRetailer } from 'src/app/retailer/pendingRetailer.model';
+import { Retailer } from 'src/app/service/retailer.model';
+import { map } from 'rxjs/operators';
+
 ;
 
 
@@ -30,14 +31,24 @@ export class RegisterRetailerComponent implements OnInit {
 
 
   register(form: NgForm){
+
     const value =form.value ;
     this.authService.register(value.email,value.password,this.type);
-    const retailer = new PendigRetailer(value.shopname,value.email,value.address,value.tel,this.state);
-    this.retailerService.storeNewRetailer(retailer).subscribe(
-      (response)=>{
-        console.log(response);
-      }
-    );    
+
+    // const uid = this.afAuth.authState.pipe(
+    //   map(authState=>{
+    //     if(!authState){
+    //       return null;
+    //     }else{
+    //       return authState.uid;
+    //     }
+    //   })
+    // );
+
+    const uid=this.authService.user.uid;
+    const retailer = new Retailer(value.shopname,value.email,value.address,value.tel,uid);
+    console.log(retailer);
+    this.retailerService.createRetailer(retailer);
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);

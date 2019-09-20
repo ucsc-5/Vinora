@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { LoginUser } from './login-user';
+import { of as observableOf, Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { map, switchMap } from 'rxjs/operators';
 // import { item } from './items';
 
 
@@ -11,15 +14,36 @@ import { LoginUser } from './login-user';
 export class UserService {
  
   private dbPath = '/users';
+
+  uid = this.afAuth.authState.pipe(
+      map(authState => {
+          if(!authState.uid){
+            return null;
+          }else{
+            return authState.uid
+          }
+        }),
+  );
+  // isAdmin:Observable<boolean> = this.uid.pipe(
+  //   switchMap(uid => {
+  //     if(!uid){
+  //       return observableOf(false);
+  //     }else{
+  //       return this.db.object<boolean>('/users/'+uid).valueChanges();
+  //     }
+  //   })
+    
+  // );
  
-  userRef: AngularFireList<LoginUser> = null;
+  userRef: AngularFireList<any> = null;
  
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
     this.userRef = this.db.list(this.dbPath);
   }
  
-  createUser(user: LoginUser): void {
-    this.userRef.push(user);
+  createUser(user:LoginUser): void {
+      
+      this.userRef.push(user);
   }
  
   updateUser(key: string, value: any): Promise<void> {
@@ -30,7 +54,7 @@ export class UserService {
     return this.userRef.remove(key);
   }
  
-  getUsersList(): AngularFireList<LoginUser> {
+  getUsersList(): AngularFireList<any> {
     return this.userRef;
   }
  

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireModule } from '@angular/fire';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
+import { LoginUser } from 'src/app/service/login-user';
+// import { LoginUser } from 'src/app/service/login-user';
 
 @Component({
   selector: 'app-retailer-nav',
@@ -10,7 +13,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RetailerNavComponent implements OnInit {
 
-  constructor(private router:Router, private route:ActivatedRoute) { }
+  user : LoginUser  
+  userId: any
+
+  constructor(private router:Router, private route:ActivatedRoute, private userService: UserService) {
+   }
 
   ngOnInit() {
   }

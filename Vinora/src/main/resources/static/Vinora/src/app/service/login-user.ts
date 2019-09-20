@@ -1,12 +1,14 @@
 export class LoginUser {
     key : string
+    userId: string
     email : string
     type: string
-    registerState: number
+    registerState: boolean
 
-    constructor(email:string,type:string){
+    constructor(type:string,uid:string,email:string){
         this.email=email;
+        this.key=uid;
         this.type=type;
-        this.registerState=0;
+        this.registerState = false;
     }
 }

@@ -67,6 +67,7 @@ import { UserService } from './service/user.service';
 import { OrderService } from './service/order.service';
 import { RetailerService } from './service/retailer.service';
 import { StockService } from './service/stock.service';
+import { AngularFireAuthGuard } from './auth-guard';
 
 
 
@@ -141,6 +142,7 @@ import { StockService } from './service/stock.service';
     OrderService,
     RetailerService,
     StockService,
+    AngularFireAuthGuard,
     { provide: StorageBucket, useValue: 'my-bucket-name' }],
   bootstrap: [AppComponent]
 })

@@ -1,21 +1,37 @@
 import { Injectable } from '@angular/core';
-
-import { HttpClient } from '@angular/common/http';
-
-import { PendigRetailer } from '../retailer/pendingRetailer.model';
-
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Retailer } from './retailer.model';
+ 
 @Injectable({
   providedIn: 'root'
 })
 export class RetailerService {
-
-  constructor(private http: HttpClient) { }
-  
-  //pending retailers
-  storeNewRetailer(retailer:PendigRetailer){
-    return this.http.post('https://vinora-dc8a2.firebaseio.com/Retailers.json',retailer);
+ 
+  private dbPath = '/retailers';
+ 
+  retailerRef: AngularFireList<Retailer> = null;
+ 
+  constructor(private db: AngularFireDatabase) {
+    this.retailerRef = this.db.list(this.dbPath);
   }
-
-
-
+ 
+  createRetailer(item: Retailer): void {
+    this.retailerRef.push(item);
+  }
+ 
+  updateRetailer(key: string, value: any): Promise<void> {
+    return this.retailerRef.update(key, value);
+  }
+ 
+  deleteRetailer(key: string): Promise<void> {
+    return this.retailerRef.remove(key);
+  }
+ 
+  getRetailersList(): AngularFireList<Retailer> {
+    return this.retailerRef;
+  }
+ 
+  deleteAll(): Promise<void> {
+    return this.retailerRef.remove();
+  }
 }

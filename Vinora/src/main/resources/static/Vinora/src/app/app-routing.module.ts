@@ -24,10 +24,19 @@ import { UpdateItemsComponent } from './stock-manager/update-items/update-items.
 import { VehicleRegisterComponent } from './manager/vehicle/vehicle-register/vehicle-register.component';
 import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 
+
+import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+
+
+const adminOnly = hasCustomClaim('admin');
+const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['login']);
+const redirectLoggedInToItems = redirectLoggedInTo(['items']);
+const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
+
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, children: [
-      {path: 'login', component: LoginComponent},
+      {path: 'login', component: LoginComponent ,canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems }},
       {path: 'register', component: RegisterRetailerComponent}, 
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
@@ -61,7 +70,15 @@ const routes: Routes = [
     {path: 'registerStock', component: AdminRegisterStocksComponent},
     {path: 'currentStocks', component: AdminSurrentStocksComponent},
     {path: 'reports', component: AdminReportsComponent}
-  ]}
+  ]},
+
+
+  // { path: '',      component: AppComponent },
+    // { path: 'login', component: LoginComponent,        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems }},
+    // { path: 'items', component: ItemListComponent,     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+    { path: 'admin', component: AdminComponent,        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }},
+    { path: 'accounts/:id', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: belongsToAccount }}
+
 ];
 
 @NgModule({

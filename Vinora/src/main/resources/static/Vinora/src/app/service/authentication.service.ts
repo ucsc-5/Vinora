@@ -31,14 +31,18 @@ export class AuthenticationService {
   async login(email: string, password: string) {
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       console.log(this.user);
+      // console.log(this.afAuth.user.subscribe);
+      
   }
 
 
   async register(email: string, password: string,type: string) {
     console.log(email,password);
-    this.loginUser = new LoginUser(email,type);
-    this.userServise.createUser(this.loginUser);
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(
+    this.loginUser = new LoginUser(type,this.user.uid,email);
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(()=>{
+          this.userServise.createUser(this.loginUser);
+    }
+    ).catch(
         error=> console.log(error)
       );
    
