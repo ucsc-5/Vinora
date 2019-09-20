@@ -1,1 +1,48 @@
-<p>vehicle-register works!</p>
+<form class="example-form" (ngSubmit)="onAddItem(f)" #f="ngForm">
+
+    <mat-form-field class="example-full-width">
+            <input matInput placeholder="Item Name" name="itemName" ngModel >
+    </mat-form-field>
+
+    <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01" >Upload</span>
+            </div>
+
+            <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Item image</label>
+            </div>
+    </div>
+
+    <mat-form-field class="example-full-width">
+            <input matInput placeholder="Brand" name="brandName" ngModel >
+    </mat-form-field>
+
+    <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+            </div>
+            <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile02">Brand Logo</label>
+            </div>
+    </div>
+
+    
+    <mat-form-field class="example-full-width">
+            <input matInput placeholder="Unit Price" name="unitPrice" ngModel >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+            <input matInput placeholder="Description" name="description" ngModel >
+    </mat-form-field>
+
+    
+
+    <input  placeholder="Description"  type="hidden"  name="quantity" ngModel  value="0">
+    <input  placeholder="Description"  type="hidden"  name="state" ngModel  value="new">
+
+    <button class="btn btn-success">Register</button>
+    
+</form> 
