@@ -6,10 +6,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { RetailerService } from 'src/app/service/retailer.service';
 import { Retailer } from 'src/app/service/retailer.model';
+
+import { AngularFireFunctions } from '@angular/fire/functions';
+
 import { map } from 'rxjs/operators';
+// import * as admin from 'firebase-admin';
 
-;
-
+// admin.initializeApp();
+import { from } from 'rxjs';
+import { idTokenResult } from 'src/app/auth-guard';
 
 @Component({
   selector: 'app-register-retailer',
@@ -23,24 +28,50 @@ export class RegisterRetailerComponent implements OnInit {
 
   loggined = false;
 
-  constructor(public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService,private retailerService:RetailerService) {
+
+  constructor(private fns: AngularFireFunctions,public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService,private retailerService:RetailerService) {
+   
     
+
   }
 
   ngOnInit() {
   }
 
-  register(form: NgForm){
+  async register(form: NgForm){
 
     const value =form.value ;
     this.authService.register(value.email,value.password,this.type);
 
     const uid=this.authService.user.uid;
+    const userEmail = value.email;
     // const claim = await admin.auth().get
     const retailer = new Retailer(value.shopname,value.email,value.address,value.tel,uid);
-    console.log(retailer);
+    // console.log(retailer);
     this.retailerService.createRetailer(retailer);
-    this.loggined = !this.loggined;
+    const callable = this.fns.httpsCallable('addRetailerRole');
+    callable({email:userEmail}).subscribe(
+      response=>{
+        console.log(response);
+      }
+    )
+    
+    
+    
+    // this.afAuth.auth.currentUser.getIdTokenResult().then(
+    //   (idTokenResult) =>{
+    //     if(idTokenResult.claims.retailer){
+    //       console.log(idTokenResult.claims.retailer)
+    //     }else{
+    //       console.log("non claim");
+    //     }
+    //   }
+    // ).catch((error)=>{
+    //   console.log(error);
+    // })
+ 
+    
+    // this.loggined = !this.loggined;
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);

@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 import { environment } from '../environments/environment';
 import { LoginComponent } from './home/login/login.component';
@@ -133,6 +134,7 @@ import { AngularFireAuthGuard } from './auth-guard';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFireFunctionsModule
   ],
   providers: [
     AuthenticationService,

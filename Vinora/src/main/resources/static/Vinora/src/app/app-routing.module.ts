@@ -40,7 +40,7 @@ const routes: Routes = [
       {path: 'register', component: RegisterRetailerComponent}, 
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
-  {path: 'retailer/:id',component: RetailerComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: retailerOnly }, children:[
+  {path: 'retailer/:id',component: RetailerComponent, children:[
     {path: 'currentOrders', component: CurrentOrdersComponent},
     {path: 'newOrder', component: NewOrderComponent},
     {path: 'newItems', component: NewItemsComponent},

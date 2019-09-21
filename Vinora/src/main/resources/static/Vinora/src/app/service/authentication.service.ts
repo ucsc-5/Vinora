@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { auth } from  'firebase/app';
 import { AngularFireAuth } from  "@angular/fire/auth";
 import { User } from  'firebase';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
@@ -10,6 +10,7 @@ import { LoginUser } from './login-user';
 import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { idTokenResult } from '../auth-guard';
 
 
 
@@ -23,7 +24,7 @@ export class AuthenticationService {
   
   // loginUser : Observable<LoginUser|null>;
 
-  constructor(public  afAuth:  AngularFireAuth, public  router:  Router, private http:HttpClient,private userServise:UserService, private db: AngularFireDatabase) {
+  constructor(private route: ActivatedRoute, private  afAuth:  AngularFireAuth, public  router:  Router, private http:HttpClient,private userServise:UserService, private db: AngularFireDatabase) {
     this.afAuth.authState.subscribe(user => {
       if (user){
         this.user = user;
@@ -38,8 +39,15 @@ export class AuthenticationService {
   async login(email: string, password: string) {
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       
+      this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+        if(idTokenResult.claims.retailer){
+          this.router.navigate(['/retailer/',this.user.uid]);
+        }else{
+          console.log('another uSer')
+        }
+      })
       // console.log(this.user.uid);
-      // console.log(this.afAuth.user.subscribe);
+      // console.log(  this.afAuth.user.subscribe);
       
   }
 
@@ -52,9 +60,7 @@ export class AuthenticationService {
     }
     ).catch(
         error=> console.log(error)
-      );
-   
-    // this.sendEmailVerification();
+      );  
   }
 
 async sendEmailVerification() {
