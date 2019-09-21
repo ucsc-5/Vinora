@@ -3,9 +3,10 @@
         <div 
           class="col-8" 
           style="padding-top: 5%; padding-left: 25%"
+          *ngIf=" !loggined ; else loginSuccess"
           >
             <h3>Register with us</h3>
-            <div class="example-container">
+            <div class="example-container" >
              
                   <form class="example-form" (ngSubmit)="register(f)" #f="ngForm">
                             <br>
@@ -44,8 +45,8 @@
         </div>
 
 
-        <ng-template #infoText>
-            <h3>Your new Items here</h3>
+        <ng-template #loginSuccess>
+            <h3>Registarion Successful! </h3>
         </ng-template>
 
 

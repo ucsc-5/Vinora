@@ -28,7 +28,7 @@ import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
 
-const adminOnly = hasCustomClaim('admin');
+const retailerOnly = hasCustomClaim('retailer');
 const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['login']);
 const redirectLoggedInToItems = redirectLoggedInTo(['items']);
 const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
@@ -36,11 +36,11 @@ const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, children: [
-      {path: 'login', component: LoginComponent ,canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems }},
+      {path: 'login', component: LoginComponent },
       {path: 'register', component: RegisterRetailerComponent}, 
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
-  {path: 'retailer/:id',component: RetailerComponent, children:[
+  {path: 'retailer/:id',component: RetailerComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: retailerOnly }, children:[
     {path: 'currentOrders', component: CurrentOrdersComponent},
     {path: 'newOrder', component: NewOrderComponent},
     {path: 'newItems', component: NewItemsComponent},
@@ -76,8 +76,8 @@ const routes: Routes = [
   // { path: '',      component: AppComponent },
     // { path: 'login', component: LoginComponent,        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems }},
     // { path: 'items', component: ItemListComponent,     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-    { path: 'admin', component: AdminComponent,        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }},
-    { path: 'accounts/:id', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: belongsToAccount }}
+    // { path: 'admin', component: AdminComponent,        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }},
+    // { path: 'accounts/:id', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: belongsToAccount }}
 
 ];
 

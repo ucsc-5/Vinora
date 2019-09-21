@@ -1,5 +1,5 @@
 export class LoginUser {
-    key : string
+    
     userId: string
     email : string
     type: string
@@ -7,7 +7,7 @@ export class LoginUser {
 
     constructor(type:string,uid:string,email:string){
         this.email=email;
-        this.key=uid;
+        this.userId=uid;
         this.type=type;
         this.registerState = false;
     }
