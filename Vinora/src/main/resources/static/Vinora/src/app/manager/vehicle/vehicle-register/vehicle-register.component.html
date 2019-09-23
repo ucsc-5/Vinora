@@ -1,4 +1,68 @@
-<form class="example-form" (ngSubmit)="onAddItem(f)" #f="ngForm">
+<form   (ngSubmit)="onAddVehicle(f)" #f="ngForm">
+        <input type="hidden" formControlName="$id">
+
+        <div class="form-group">
+                <label>Vehicle number</label>
+                <input name="number_plate" class="form-control" ngModel>
+        </div>
+
+        <div class="form-group">
+                <label>Vehicle model</label>
+
+                <input name="vehicle_model" class="form-control" ngModel>
+        </div>
+
+        <div class="form-group">
+                <label>Owner name</label>
+                <input name="owner_name" class="form-control" ngModel>
+        </div>
+
+        <div class="form-group">
+                <label>Owner address</label>
+                <input name="owner_address" class="form-control"ngModel>
+        </div>
+
+        <div class="form-group">
+                <label>Owner mobile</label>
+                <input name="owner_mobile" class="form-control"ngModel>
+        </div>
+
+        <div class="form-group">
+                <input type="submit" class="btn btn-secondary" value="Register">
+        </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form class="example-form" (ngSubmit)="onAddItem(f)" #f="ngForm">
 
     <mat-form-field class="example-full-width">
             Vehicle number<br>
@@ -55,4 +119,4 @@
 
     <button class="btn btn-secondary">Register</button>
     
-</form> 
+</form>  -->

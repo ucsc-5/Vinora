@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleService } from './vehicle.service';
+import { VehicleService } from '../../service/vehicle.service';
 import { Vehicle } from './vehicle.model';
 import { Router, ActivatedRoute } from '@angular/router';
 

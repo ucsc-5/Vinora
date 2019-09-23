@@ -10,6 +10,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
 import { LoginComponent } from './home/login/login.component';
@@ -69,7 +70,8 @@ import { OrderService } from './service/order.service';
 import { RetailerService } from './service/retailer.service';
 import { StockService } from './service/stock.service';
 import { AngularFireAuthGuard } from './auth-guard';
-
+import { from } from 'rxjs';
+import { VehicleService } from './service/vehicle.service';
 
 
 
@@ -134,7 +136,8 @@ import { AngularFireAuthGuard } from './auth-guard';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthenticationService,
@@ -145,6 +148,7 @@ import { AngularFireAuthGuard } from './auth-guard';
     RetailerService,
     StockService,
     AngularFireAuthGuard,
+    VehicleService,
     { provide: StorageBucket, useValue: 'my-bucket-name' }],
   bootstrap: [AppComponent]
 })
