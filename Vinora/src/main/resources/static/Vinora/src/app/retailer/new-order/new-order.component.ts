@@ -41,7 +41,4 @@ export class NewOrderComponent implements OnInit {
     // console.log("sdjcjisdcjsndjcsdc");
     // console.log(this.currentOrder);
   }
-
-
-
 }

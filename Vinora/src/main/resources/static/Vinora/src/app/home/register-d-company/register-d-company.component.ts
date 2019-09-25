@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 })
 export class RegisterDCompanyComponent implements OnInit {
 
-  type = 'retailer';
+  type = 'manager';
 
   constructor( private authService: AuthenticationService,private fns: AngularFireFunctions,private stockService:StockService) { }
 
