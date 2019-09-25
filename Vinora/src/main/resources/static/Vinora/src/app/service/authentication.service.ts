@@ -42,7 +42,10 @@ export class AuthenticationService {
       this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
         if(idTokenResult.claims.retailer){
           this.router.navigate(['/retailer/',this.user.uid]);
-        }else{
+        }else if(idTokenResult.claims.manager){
+          this.router.navigate(['/manager/',this.user.uid]);
+        }
+        else{
           console.log('another uSer')
         }
       })

@@ -42,15 +42,14 @@ export class RegisterRetailerComponent implements OnInit {
 
     const value =form.value ;
     this.authService.register(value.email,value.password,this.type);
-
     const uid=this.authService.user.uid;
     const userEmail = value.email;
     // const claim = await admin.auth().get
     const retailer = new Retailer(value.shopname,value.email,value.address,value.tel,uid);
     // console.log(retailer);
     this.retailerService.createRetailer(retailer);
-    const callable = this.fns.httpsCallable('addRetailerRole');
-    callable({email:userEmail}).subscribe(
+    const callable = this.fns.httpsCallable('addRole');
+    callable({email:userEmail,role:this.type}).subscribe(
       response=>{
         console.log(response);
       }
