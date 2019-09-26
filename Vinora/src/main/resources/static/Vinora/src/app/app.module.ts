@@ -73,6 +73,7 @@ import { AngularFireAuthGuard } from './auth-guard';
 import { from } from 'rxjs';
 import { VehicleService } from './service/vehicle.service';
 import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehicle-display.component';
+import { AdminStockElementComponent } from './admin/admin-register-stocks/admin-stock-element/admin-stock-element.component';
 
 
 
@@ -124,7 +125,8 @@ import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehic
     VehicleRegisterComponent,
     MyCartComponent,
     CartItemElemetComponent,
-    VehicleDisplayComponent
+    VehicleDisplayComponent,
+    AdminStockElementComponent
   ],  
   imports: [
     BrowserModule,

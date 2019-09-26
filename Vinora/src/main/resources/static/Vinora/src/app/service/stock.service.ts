@@ -24,7 +24,7 @@ export class StockService {
   }
  
   createStock(stock: Stock,uid:string): void {
-    const newRef = this.db.object(`stocks/${uid}`);
+    const newRef = this.db.object(`delivery_Companies/${uid}`);
     newRef.set(stock);
   }
  

@@ -66,7 +66,7 @@ const routes: Routes = [
       ]}
   ]},
 
-  {path: 'admin', component: AdminComponent, children:[
+  {path: 'admin/:id', component: AdminComponent, children:[
     {path: 'registerStock', component: AdminRegisterStocksComponent},
     {path: 'currentStocks', component: AdminSurrentStocksComponent},
     {path: 'reports', component: AdminReportsComponent}

@@ -32,9 +32,7 @@ export class RegisterDCompanyComponent implements OnInit {
     const password = value.password;
     const stock = new Stock(value.stockName,value.managerId,value.manager,value.email,value.address,value.tel)
     console.log(stock);
-
     this.authServise.register(userEmail,password,this.type);
-
     const callable = this.fns.httpsCallable('addRole');
     callable({email:userEmail,role:this.type}).subscribe(
       response=>{

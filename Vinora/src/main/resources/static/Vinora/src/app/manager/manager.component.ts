@@ -22,12 +22,11 @@ export class ManagerComponent implements OnInit {
     this.size$ = new BehaviorSubject(null);
         this.manager$ = this.size$.pipe(
           switchMap(size => 
-            this.db.list('/stocks', ref =>
+            this.db.list('/delivery_Companies', ref =>
               size ? ref.orderByKey().equalTo(size) : ref
             ).snapshotChanges()
           )
         );
-        this.size$.next('SW80OlqOMFaxad3G92nMqXGhyyn2');
   }
 
   ngOnInit() {
@@ -35,7 +34,7 @@ export class ManagerComponent implements OnInit {
             this.userId = param['id']; 
     })
     console.log(this.userId)
-    // this.size$.next('SW80OlqOMFaxad3G92nMqXGhyyn2');
+    this.size$.next(this.userId);
   }
 
   opened = false;
