@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../service/vehicle.service';
 import { Vehicle } from './vehicle.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle',
@@ -11,13 +14,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class VehicleComponent implements OnInit {
 
   myvehicle:Vehicle;
+  vehiclesRef: AngularFireList<any>;
+  vehicles: Observable<any[]>;
 
-
-  constructor(private route:ActivatedRoute, private router: Router, private vehicleService:VehicleService) {
+  constructor(private route:ActivatedRoute, private router: Router, private vehicleService:VehicleService,private db: AngularFireDatabase) {
     
    }
 
   ngOnInit() {
+    this.vehiclesRef = this.db.list('vehicles');
+    this.vehicles = this.vehiclesRef.snapshotChanges().pipe(
+      map(changes => 
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
   }
 
 

@@ -3,6 +3,7 @@
 
        <div class="col-7" >
             <h2>Available Vehicles</h2>
+            <app-vehicle-display *ngFor="let vehicle of vehicles | async" [vehicle]="vehicle" ></app-vehicle-display>
            
         </div>
         
