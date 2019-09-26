@@ -4,6 +4,14 @@
             <mat-card-title>{{vehicle.number_plate}}</mat-card-title>
             <mat-card-subtitle>{{vehicle.vehicle_model}}</mat-card-subtitle>
         </mat-card-header>
+
+        <mat-card-content>
+            <p>Owner        : <b>{{vehicle.owner_name}}</b><br>
+               Owner mobile:: <b>{{vehicle.owner_mobile}}</b><br>
+                           
+            </p>
+
+        </mat-card-content>
        
             <!-- <form (ngSubmit)="toCart(f)" #f="ngForm" >
                     <table class="example-full-width" cellspacing="0">
@@ -21,5 +29,6 @@
             </form> -->
        
     </mat-card>
+    <br>
 
  
