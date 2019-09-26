@@ -8,7 +8,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { idTokenResult } from '@angular/fire/auth-guard';
 
 @Component({
@@ -19,17 +19,6 @@ import { idTokenResult } from '@angular/fire/auth-guard';
 export class RegisterDCompanyComponent implements OnInit {
 
   type = 'manager';
-  uid : string
-      
-      // uid = this.afAuth.authState.pipe(
-      //   map(authState =>{
-      //     if(!authState){
-      //       return null;
-      //     }else{
-      //       return <string>authState.uid;
-      //     }
-      //   })
-      // );
 
   constructor(private afAuth: AngularFireAuth,private fns: AngularFireFunctions,private stockService:StockService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
     
@@ -42,14 +31,21 @@ export class RegisterDCompanyComponent implements OnInit {
     const userEmail = value.email;
     const password = value.password;
     const stock = new Stock(value.stockName,value.managerId,value.manager,value.email,value.address,value.tel)
+    console.log(stock);
+
+    this.authServise.register(userEmail,password,this.type);
+
     const callable = this.fns.httpsCallable('addRole');
     callable({email:userEmail,role:this.type}).subscribe(
       response=>{
         console.log(response);
+      },()=>{},
+      ()=>{
+        this.authServise.login(userEmail,password);
+        const uid = this.afAuth.auth.currentUser.uid;
+        this.stockService.createStock(stock,uid);
       }
-    )
-    this.authServise.register(userEmail,password,this.type);
-    this.stockService.createStock(stock);
+    )  
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);

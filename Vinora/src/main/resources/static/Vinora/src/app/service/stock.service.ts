@@ -19,13 +19,11 @@ export class StockService {
  
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService ) {
 
-    // this.stockRef = this.db.list(this.dbPath);
-    
+    this.stockRef = this.db.list(this.dbPath);
 
   }
  
-  createStock(stock: Stock): void {
-    const uid = this.afAuth.auth.currentUser.uid;
+  createStock(stock: Stock,uid:string): void {
     const newRef = this.db.object(`stocks/${uid}`);
     newRef.set(stock);
   }

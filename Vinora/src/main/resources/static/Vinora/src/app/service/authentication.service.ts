@@ -13,8 +13,6 @@ import { switchMap } from 'rxjs/operators';
 import { idTokenResult } from '../auth-guard';
 
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,10 +20,18 @@ export class AuthenticationService {
   user:  User;
   
   loginUser: LoginUser;
+
+  registerUserId: string
   
   // loginUser : Observable<LoginUser|null>;
 
-  constructor(private route: ActivatedRoute, private  afAuth:  AngularFireAuth, public  router:  Router, private http:HttpClient,private userServise:UserService, private db: AngularFireDatabase) {
+  constructor(  private route: ActivatedRoute, 
+                private  afAuth:  AngularFireAuth, 
+                public  router:  Router, 
+                private http:HttpClient,
+                private userServise:UserService, 
+                private db: AngularFireDatabase) {
+
     this.afAuth.authState.subscribe(user => {
       if (user){
         this.user = user;
@@ -55,9 +61,10 @@ export class AuthenticationService {
 
   async register(email: string, password: string,type: string) {
     console.log(email,password);
-    this.loginUser = new LoginUser(type,this.user.uid,email);
+    // this.loginUser = new LoginUser(type,this.user.uid,email);
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(()=>{
-        this.userServise.createUser(this.loginUser);
+        // this.userServise.createUser(this.loginUser);
+        
     }
     ).catch(
         error=> console.log(error)
