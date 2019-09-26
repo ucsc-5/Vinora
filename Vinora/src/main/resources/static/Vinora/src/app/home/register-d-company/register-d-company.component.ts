@@ -42,20 +42,14 @@ export class RegisterDCompanyComponent implements OnInit {
     const userEmail = value.email;
     const password = value.password;
     const stock = new Stock(value.stockName,value.managerId,value.manager,value.email,value.address,value.tel)
-
     const callable = this.fns.httpsCallable('addRole');
     callable({email:userEmail,role:this.type}).subscribe(
       response=>{
         console.log(response);
       }
     )
-    
     this.authServise.register(userEmail,password,this.type);
-    this.uid=this.afAuth.auth.currentUser.uid
-    this.stockService.createStock(stock,this.uid);
-    console.log(this.uid);
-    console.log(this.authServise.user.uid);
-
+    this.stockService.createStock(stock);
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);

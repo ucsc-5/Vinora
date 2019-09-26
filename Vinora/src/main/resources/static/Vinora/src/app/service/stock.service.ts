@@ -24,8 +24,8 @@ export class StockService {
 
   }
  
-  createStock(stock: Stock,uid:string): void {
-    console.log(uid);
+  createStock(stock: Stock): void {
+    const uid = this.afAuth.auth.currentUser.uid;
     const newRef = this.db.object(`stocks/${uid}`);
     newRef.set(stock);
   }

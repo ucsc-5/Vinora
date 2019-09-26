@@ -21,7 +21,6 @@ export class AngularFireAuthGuard implements CanActivate {
         map(canActivate => typeof canActivate == "boolean" ? canActivate : this.router.createUrlTree(canActivate))
     );
   }
-
 }
 
 export const canActivate = (pipe: AuthPipe|AuthPipeGenerator) => ({
