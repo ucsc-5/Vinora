@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../service/vehicle.service';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
+import { AngularFireAuth } from  "@angular/fire/auth";
+import { switchMap } from 'rxjs/operators';
+import { AuthenticationService } from '../service/authentication.service';
+
 
 @Component({
   selector: 'app-manager',
@@ -9,7 +15,9 @@ import { VehicleService } from '../service/vehicle.service';
 })
 export class ManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private db: AngularFireDatabase,private authService : AuthenticationService,private  afAuth:  AngularFireAuth) { 
+
+  }
 
   ngOnInit() {
   }

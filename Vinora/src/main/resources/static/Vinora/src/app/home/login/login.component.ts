@@ -33,11 +33,12 @@ export class LoginComponent implements OnInit {
         this.items$ = this.size$.pipe(
           switchMap(size => 
             this.db.list('/users', ref =>
-              size ? ref.orderByChild('userId').equalTo(size) : ref
+              size ? ref.orderByChild('type').equalTo(size) : ref
             ).snapshotChanges()
           )
         );
 
+        this.size$.next('retailer');
       
   }
 
@@ -50,8 +51,6 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     this.authService.login(email,password);
     console.log(this.authService.user.uid) 
-    this.size$.next(this.authService.user.uid);
-    // console.log(this.items$);   
   }
 
   logout() {

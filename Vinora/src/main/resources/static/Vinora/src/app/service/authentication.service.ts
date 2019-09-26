@@ -20,6 +20,7 @@ import { idTokenResult } from '../auth-guard';
 })
 export class AuthenticationService {
   user:  User;
+  
   loginUser: LoginUser;
   
   // loginUser : Observable<LoginUser|null>;
@@ -38,7 +39,6 @@ export class AuthenticationService {
 
   async login(email: string, password: string) {
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      
       this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
         if(idTokenResult.claims.retailer){
           this.router.navigate(['/retailer/',this.user.uid]);
@@ -49,8 +49,6 @@ export class AuthenticationService {
           console.log('another uSer')
         }
       })
-      // console.log(this.user.uid);
-      // console.log(  this.afAuth.user.subscribe);
       
   }
 
@@ -59,7 +57,7 @@ export class AuthenticationService {
     console.log(email,password);
     this.loginUser = new LoginUser(type,this.user.uid,email);
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(()=>{
-          this.userServise.createUser(this.loginUser);
+        this.userServise.createUser(this.loginUser);
     }
     ).catch(
         error=> console.log(error)
