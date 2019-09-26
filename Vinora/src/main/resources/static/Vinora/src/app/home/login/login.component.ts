@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           )
         );
 
-        this.size$.next('retailer');
+        this.size$.next('manager');
       
   }
 

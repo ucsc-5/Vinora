@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../service/vehicle.service';
-import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject, Subject } from 'rxjs';
 import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
-import { AngularFireAuth } from  "@angular/fire/auth";
 import { switchMap } from 'rxjs/operators';
-import { AuthenticationService } from '../service/authentication.service';
-
+import {  ActivatedRoute, Params, Router, Data } from '@angular/router';
 
 @Component({
   selector: 'app-manager',
@@ -15,11 +13,29 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class ManagerComponent implements OnInit {
 
-  constructor(private db: AngularFireDatabase,private authService : AuthenticationService,private  afAuth:  AngularFireAuth) { 
+  manager$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
+  size$: BehaviorSubject<string|null>;
+  userId: string;
 
+  constructor(private db: AngularFireDatabase,private route:ActivatedRoute) { 
+
+    this.size$ = new BehaviorSubject(null);
+        this.manager$ = this.size$.pipe(
+          switchMap(size => 
+            this.db.list('/stocks', ref =>
+              size ? ref.orderByKey().equalTo(size) : ref
+            ).snapshotChanges()
+          )
+        );
+        this.size$.next('SW80OlqOMFaxad3G92nMqXGhyyn2');
   }
 
   ngOnInit() {
+    this.route.params.subscribe((param:Params)=>{
+            this.userId = param['id']; 
+    })
+    console.log(this.userId)
+    // this.size$.next('SW80OlqOMFaxad3G92nMqXGhyyn2');
   }
 
   opened = false;
