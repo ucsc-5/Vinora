@@ -41,7 +41,6 @@ import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-
 import { StockElementComponent } from './retailer/new-stock/retailer-selected-stocks/stock-element/stock-element.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
-import { AdminRegisterStocksComponent } from './admin/admin-register-stocks/admin-register-stocks.component';
 import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { AppComponent } from './app.component';
@@ -73,8 +72,6 @@ import { AngularFireAuthGuard } from './auth-guard';
 import { from } from 'rxjs';
 import { VehicleService } from './service/vehicle.service';
 import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehicle-display.component';
-import { AdminStockElementComponent } from './admin/admin-register-stocks/admin-stock-element/admin-stock-element.component';
-import { AdminStockElementDetailsComponent } from './admin/admin-register-stocks/admin-stock-element-details/admin-stock-element-details.component';
 
 
 
@@ -111,7 +108,6 @@ import { AdminStockElementDetailsComponent } from './admin/admin-register-stocks
     NewStockComponent,
     AdminComponent,
     AdminNavComponent,
-    AdminRegisterStocksComponent,
     AdminSurrentStocksComponent,
     AdminReportsComponent,
     StockManagerComponent,
@@ -126,9 +122,7 @@ import { AdminStockElementDetailsComponent } from './admin/admin-register-stocks
     VehicleRegisterComponent,
     MyCartComponent,
     CartItemElemetComponent,
-    VehicleDisplayComponent,
-    AdminStockElementComponent,
-    AdminStockElementDetailsComponent
+    VehicleDisplayComponent
   ],  
   imports: [
     BrowserModule,

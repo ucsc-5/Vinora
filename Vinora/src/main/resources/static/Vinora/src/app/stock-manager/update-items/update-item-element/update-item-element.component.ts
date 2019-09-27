@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ItemService } from 'src/app/service/item.service';
 import { from } from 'rxjs';
 
+
 @Component({
   selector: 'app-update-item-element',
   templateUrl: './update-item-element.component.html',
@@ -12,21 +13,23 @@ import { from } from 'rxjs';
 
 export class UpdateItemElementComponent implements OnInit {
 
-  @Input() item:Item
+  @Input() item:Item;
 
 
   constructor(private itemServise:ItemService) { }
 
   ngOnInit() {
+    console.log(this.item.key);
   }
 
   updateQuantity(form:NgForm) {
     const value=form.value;
+
     // console.log(value.quantity);
     // console.log(this.item.key);
-    const newQuantity= this.item.quantity+value.quantity;
-    this.itemServise.updateItem(this.item.key, {quantity: newQuantity})
-      .catch(err => console.log(err+"jkdcjdscjsdbc"));
+    // const newQuantity= this.item.quantity+value.quantity;
+    // this.itemServise.updateItem(this.item.key, {quantity: newQuantity})
+    //   .catch(err => console.log(err+"jkdcjdscjsdbc"));
   }
 
 
