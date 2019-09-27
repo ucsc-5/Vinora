@@ -9,6 +9,7 @@ import { from } from 'rxjs';
   templateUrl: './update-item-element.component.html',
   styleUrls: ['./update-item-element.component.css']
 })
+
 export class UpdateItemElementComponent implements OnInit {
 
   @Input() item:Item

@@ -1,8 +1,8 @@
-import { Manager } from './manager.model';
 
-
-export class Stock extends Manager{
-    public key: string;
+export class Stock{
+    key: string;
+    managerName: string;
+    managerNic: string;
     stockId: number;
     stockName: string;
     email: string;
@@ -12,7 +12,8 @@ export class Stock extends Manager{
     state: string;
 
     public constructor(stockName:string,managerId:string,managerName:string,email: string, address:string, contactNumber: string){
-        super(managerId,managerName);
+        this.managerName=managerName;
+        this.managerNic=managerId;
         this.stockName=stockName;
         this.email=email;
         this.address=address;

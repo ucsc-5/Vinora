@@ -17,10 +17,10 @@ export class AdminRegisterStocksComponent implements OnInit {
 
   constructor(public db: AngularFireDatabase) {
     this.size$ = new BehaviorSubject(null);
-
-        this.stocks = this.size$.pipe(switchMap(size => 
+    this.stocks = this.size$.pipe(switchMap(size => 
             this.db.list('/delivery_Companies', ref => size ? ref.orderByChild('state').equalTo(size) : ref
-            ).snapshotChanges().pipe(
+            ).snapshotChanges()
+            .pipe(
               map(changes => 
                 changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
               )
@@ -29,13 +29,11 @@ export class AdminRegisterStocksComponent implements OnInit {
         );
 
         this.size$.next('0');
-        console.log(this.stocks);
-  
   }
  
 
   ngOnInit(){
-
+    // console.log(this.stocks)
   }
 
 }

@@ -1,4 +1,21 @@
+<div class="row">
 
-<div class="list-group">
-    <app-admin-stock-element *ngFor="let stock of stocks | async" [stock]="stock"></app-admin-stock-element>  
+    <div class="col col-6" style="background-color: red">
+            <div class="list-group">
+                <div class="accordion" id="accordionExample">
+                    <app-admin-stock-element *ngFor="let stockel of stocks | async"   [stock]="stockel" ></app-admin-stock-element>  
+                </div>
+            </div>
+    </div>
+    
+    <div class="col col-6" style="background-color: blue">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <app-admin-stock-element-details></app-admin-stock-element-details>
+                </div>
+            </div>
+    </div>
 </div>
+
+        
+        

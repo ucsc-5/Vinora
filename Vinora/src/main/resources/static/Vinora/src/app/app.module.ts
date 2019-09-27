@@ -74,6 +74,7 @@ import { from } from 'rxjs';
 import { VehicleService } from './service/vehicle.service';
 import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehicle-display.component';
 import { AdminStockElementComponent } from './admin/admin-register-stocks/admin-stock-element/admin-stock-element.component';
+import { AdminStockElementDetailsComponent } from './admin/admin-register-stocks/admin-stock-element-details/admin-stock-element-details.component';
 
 
 
@@ -126,7 +127,8 @@ import { AdminStockElementComponent } from './admin/admin-register-stocks/admin-
     MyCartComponent,
     CartItemElemetComponent,
     VehicleDisplayComponent,
-    AdminStockElementComponent
+    AdminStockElementComponent,
+    AdminStockElementDetailsComponent
   ],  
   imports: [
     BrowserModule,

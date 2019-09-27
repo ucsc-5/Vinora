@@ -19,6 +19,7 @@ export class AdminStockElementComponent implements OnInit {
   }
 
   onConfirm(){
+    // console.log(key);
   //   this.stockService.updateStock(this.stock.key, {state:"1"})
   //     .catch(err => console.log(err+"jkdcjdscjsdbc"));
 
