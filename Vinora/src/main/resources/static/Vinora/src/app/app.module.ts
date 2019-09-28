@@ -35,7 +35,6 @@ import { NewItemElementSelectedComponent } from './retailer/new-items/items-sele
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
-import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { AppComponent } from './app.component';
 
@@ -70,6 +69,9 @@ import { CompanyRequestsComponent } from './admin/company-requests/company-reque
 import { AdminComReqElementComponent } from './admin/company-requests/admin-com-req-element/admin-com-req-element.component';
 import { CompanyService } from './service/company.service';
 import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-dashboard.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { CompanyRegisteredComponent } from './admin/company-registered/company-registered.component';
+import { AdminComRegElemetComponent } from './admin/company-registered/admin-com-reg-elemet/admin-com-reg-elemet.component';
 
 
 
@@ -98,7 +100,6 @@ import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-d
     NewItemElementSelectedComponent,
     AdminComponent,
     AdminNavComponent,
-    AdminSurrentStocksComponent,
     AdminReportsComponent,
     StockManagerComponent,
     StockManagerNavComponent,
@@ -115,7 +116,10 @@ import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-d
     VehicleDisplayComponent,
     CompanyRequestsComponent,
     AdminComReqElementComponent,
-    ManagerDashboardComponent
+    ManagerDashboardComponent,
+    AdminDashboardComponent,
+    CompanyRegisteredComponent,
+    AdminComRegElemetComponent
   ],  
   imports: [
     BrowserModule,

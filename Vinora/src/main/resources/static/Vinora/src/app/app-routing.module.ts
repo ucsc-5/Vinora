@@ -11,7 +11,6 @@ import { PreviousOrdersComponent } from './retailer/previous-orders/previous-ord
 import { ManagerComponent } from './manager/manager.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
 import { AdminComponent } from './admin/admin.component';
-import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
@@ -25,6 +24,8 @@ import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { CompanyRequestsComponent } from './admin/company-requests/company-requests.component';
 import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-dashboard.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { CompanyRegisteredComponent } from './admin/company-registered/company-registered.component';
 
 
 const retailerOnly = hasCustomClaim('retailer');
@@ -67,9 +68,10 @@ const routes: Routes = [
   ]},
 
   {path: 'admin/:id', component: AdminComponent, children:[
-    {path: 'companyRequests', component: CompanyRequestsComponent},
-    {path: 'currentStocks', component: AdminSurrentStocksComponent},
-    {path: 'reports', component: AdminReportsComponent}
+    { path: '', component: AdminDashboardComponent},
+    { path: 'companyRequests', component: CompanyRequestsComponent},
+    { path: 'registeredCompanies', component:CompanyRegisteredComponent },
+    { path: 'reports', component: AdminReportsComponent}
   ]},
 
 

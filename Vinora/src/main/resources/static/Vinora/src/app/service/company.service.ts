@@ -5,7 +5,9 @@ import { map, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 import { Company } from './company.model';
 import { Observable, BehaviorSubject } from 'rxjs';
- 
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,11 +19,15 @@ export class CompanyService {
   companykRef: AngularFireList<Company> = null;
 
   company: Observable<any[]>;
+  requestCompanies$: Observable<any[]>;
+  registeredCompanies$: Observable<any[]>;
   size$: BehaviorSubject<string|null>;
   
  
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService ) {
     this.companykRef = this.db.list(this.dbPath);
+    this.getRequestCompanies();
+    this.getRegisteredCompanies();
   }
  
   createCompany(company: Company,uid:string): void {
@@ -58,7 +64,44 @@ export class CompanyService {
         this.size$.next(uid);
   }
  
+  
+  getRequestCompanies(){
+    this.size$ = new BehaviorSubject(null);
+    this.requestCompanies$ = this.size$.pipe(
+          switchMap(size => 
+            this.db.list('/delivery_Companies', ref =>
+              size ? ref.orderByChild('state').equalTo(size) : ref
+            ).snapshotChanges().pipe(
+              map(changes => 
+                changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+                )
+            )
+          )
+          );
+
+          this.size$.next("0");
+    }
+
+    getRegisteredCompanies(){
+      this.size$ = new BehaviorSubject(null);
+      this.registeredCompanies$ = this.size$.pipe(
+            switchMap(size => 
+              this.db.list('/delivery_Companies', ref =>
+                size ? ref.orderByChild('state').equalTo(size) : ref
+              ).snapshotChanges().pipe(
+                map(changes => 
+                  changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+                  )
+              )
+            )
+            );
+            this.size$.next("1");
+      }
+
+        
   deleteAll(): Promise<void> {
     return this.companykRef.remove();
   }
+
+
 }
