@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 export class AdminDashboardComponent implements OnInit {
 
   companies: Observable<any[]>;
-  length: any;
 
   constructor(private companyServise:CompanyService) { 
     
