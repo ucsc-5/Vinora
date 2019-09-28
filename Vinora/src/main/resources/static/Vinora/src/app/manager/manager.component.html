@@ -139,16 +139,6 @@
      <div class="row">
        <div class="col-10" >
          <router-outlet></router-outlet>
-                      
-                          <div *ngIf="manager$ | async; let items; else loading">
-                            <ul>
-                              <li *ngFor="let item of items">
-                                <!-- {{ item.payload.val() }} -->
-                                <code>{{ item.payload.key }}</code>
-                              </li>
-                            </ul>
-                            <div *ngIf="items.length === 0">No results, try clearing filters</div>
-                          </div>
        </div>
      </div>
    </div>

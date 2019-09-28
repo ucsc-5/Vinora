@@ -10,7 +10,6 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class CompanyRequestsComponent implements OnInit {
 
-  companyRef: AngularFireList<any>;
   companies: Observable<any[]>;
 
   size$: BehaviorSubject<string|null>;

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 import { Company } from './company.model';
+import { Observable, BehaviorSubject } from 'rxjs';
  
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class CompanyService {
 
  
   companykRef: AngularFireList<Company> = null;
+
+  company: Observable<any[]>;
+  size$: BehaviorSubject<string|null>;
   
  
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService ) {
@@ -35,6 +39,23 @@ export class CompanyService {
  
   getCompanysList(): AngularFireList<Company> {
     return this.companykRef;
+  }
+
+  getCompany(uid:string){
+    this.size$ = new BehaviorSubject(null);
+        this.company = this.size$.pipe(
+          switchMap(size => 
+            this.db.list('/delivery_Companies', ref =>
+              size ? ref.orderByKey().equalTo(size) : ref
+            ).snapshotChanges().pipe(
+              map(changes => 
+                changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+              )
+            )
+          )
+        );
+
+        this.size$.next(uid);
   }
  
   deleteAll(): Promise<void> {

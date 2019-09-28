@@ -4,6 +4,7 @@ import { Observable, Subscription, BehaviorSubject, Subject } from 'rxjs';
 import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
 import { switchMap } from 'rxjs/operators';
 import {  ActivatedRoute, Params, Router, Data } from '@angular/router';
+import { CompanyService } from '../service/company.service';
 
 @Component({
   selector: 'app-manager',
@@ -13,28 +14,20 @@ import {  ActivatedRoute, Params, Router, Data } from '@angular/router';
 })
 export class ManagerComponent implements OnInit {
 
-  manager$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
-  size$: BehaviorSubject<string|null>;
+  // manager$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
+  // size$: BehaviorSubject<string|null>;
+  
   userId: string;
 
-  constructor(private db: AngularFireDatabase,private route:ActivatedRoute) { 
-
-    this.size$ = new BehaviorSubject(null);
-        this.manager$ = this.size$.pipe(
-          switchMap(size => 
-            this.db.list('/delivery_Companies', ref =>
-              size ? ref.orderByKey().equalTo(size) : ref
-            ).snapshotChanges()
-          )
-        );
+  constructor(private db: AngularFireDatabase,private route:ActivatedRoute, private companyService:CompanyService) { 
+    
   }
 
   ngOnInit() {
     this.route.params.subscribe((param:Params)=>{
             this.userId = param['id']; 
     })
-    console.log(this.userId)
-    this.size$.next(this.userId);
+    this.companyService.getCompany(this.userId);
   }
 
   opened = false;

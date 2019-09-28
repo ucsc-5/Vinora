@@ -24,6 +24,7 @@ import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { CompanyRequestsComponent } from './admin/company-requests/company-requests.component';
+import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-dashboard.component';
 
 
 const retailerOnly = hasCustomClaim('retailer');
@@ -54,6 +55,7 @@ const routes: Routes = [
   ]},
 
   {path: 'manager/:id', component: ManagerComponent, children:[
+    {path: '' ,component :ManagerDashboardComponent},
     {path: 'registerNewItem', component: RegisterNewItemComponent},
     {path: 'vehicleRegister', component: VehicleComponent,children:[
       {path: 'registerVehicle', component: VehicleRegisterComponent }

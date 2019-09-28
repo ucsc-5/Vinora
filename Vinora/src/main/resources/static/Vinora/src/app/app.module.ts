@@ -69,6 +69,7 @@ import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehic
 import { CompanyRequestsComponent } from './admin/company-requests/company-requests.component';
 import { AdminComReqElementComponent } from './admin/company-requests/admin-com-req-element/admin-com-req-element.component';
 import { CompanyService } from './service/company.service';
+import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-dashboard.component';
 
 
 
@@ -113,7 +114,8 @@ import { CompanyService } from './service/company.service';
     CartItemElemetComponent,
     VehicleDisplayComponent,
     CompanyRequestsComponent,
-    AdminComReqElementComponent
+    AdminComReqElementComponent,
+    ManagerDashboardComponent
   ],  
   imports: [
     BrowserModule,
