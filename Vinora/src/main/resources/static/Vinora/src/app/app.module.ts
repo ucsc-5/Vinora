@@ -28,17 +28,11 @@ import { ManagerComponent } from './manager/manager.component';
 import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
 import { ItemStockOrgComponent } from './item-stock-org/item-stock-org.component';
-import { NewStockComponent } from './retailer/new-stock/new-stock.component';
-import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
-import { RegisteredStockElementComponent } from './retailer/registered-stock/registered-stock-element/registered-stock-element.component';
 import { NewItemElementComponent } from './retailer/new-items/items-to-select/new-item-element/new-item-element.component';
 import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
 import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
 import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
-import { RetailerToSelectStocksComponent } from './retailer/new-stock/retailer-to-select-stocks/retailer-to-select-stocks.component';
-import { RetailerSelectedStocksComponent } from './retailer/new-stock/retailer-selected-stocks/retailer-selected-stocks.component';
-import { ToSelectStockElementComponent } from './retailer/new-stock/retailer-to-select-stocks/to-select-stock-element/to-select-stock-element.component';
-import { StockElementComponent } from './retailer/new-stock/retailer-selected-stocks/stock-element/stock-element.component';
+
 import { AdminComponent } from './admin/admin.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
@@ -50,6 +44,7 @@ import { DataStorageService } from './shared/data-storage.service';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stock-manager-nav.component';
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
+
 
 import {StorageBucket} from '@angular/fire/storage';
 import { AuthenticationService } from './service/authentication.service';
@@ -67,11 +62,13 @@ import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/car
 import { UserService } from './service/user.service';
 import { OrderService } from './service/order.service';
 import { RetailerService } from './service/retailer.service';
-import { StockService } from './service/stock.service';
 import { AngularFireAuthGuard } from './auth-guard';
 import { from } from 'rxjs';
 import { VehicleService } from './service/vehicle.service';
 import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehicle-display.component';
+import { CompanyRequestsComponent } from './admin/company-requests/company-requests.component';
+import { AdminComReqElementComponent } from './admin/company-requests/admin-com-req-element/admin-com-req-element.component';
+import { CompanyService } from './service/company.service';
 
 
 
@@ -94,18 +91,10 @@ import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehic
     ManagerNavComponent,
     RegisterNewItemComponent,
     ItemStockOrgComponent,
-    RegisteredStockComponent,
-    StockElementComponent,
-    NewStockComponent,
-    RegisteredStockElementComponent,
     NewItemElementComponent,
     ItemsToSelectComponent,
     ItemsSelectedComponent,
     NewItemElementSelectedComponent,
-    RetailerToSelectStocksComponent,
-    RetailerSelectedStocksComponent,
-    ToSelectStockElementComponent,
-    NewStockComponent,
     AdminComponent,
     AdminNavComponent,
     AdminSurrentStocksComponent,
@@ -122,7 +111,9 @@ import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehic
     VehicleRegisterComponent,
     MyCartComponent,
     CartItemElemetComponent,
-    VehicleDisplayComponent
+    VehicleDisplayComponent,
+    CompanyRequestsComponent,
+    AdminComReqElementComponent
   ],  
   imports: [
     BrowserModule,
@@ -146,9 +137,9 @@ import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehic
     UserService,
     OrderService,
     RetailerService,
-    StockService,
     AngularFireAuthGuard,
     VehicleService,
+    CompanyService,
     { provide: StorageBucket, useValue: 'my-bucket-name' }],
   bootstrap: [AppComponent]
 })

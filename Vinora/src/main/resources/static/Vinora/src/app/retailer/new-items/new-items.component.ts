@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from 'src/app/item/item.model';
+import { Item } from 'src/app/service/item.model';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';

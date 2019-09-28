@@ -10,10 +10,7 @@ import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 import { ManagerComponent } from './manager/manager.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
-import { RegisteredStockComponent } from './retailer/registered-stock/registered-stock.component';
-import { NewStockComponent } from './retailer/new-stock/new-stock.component';
 import { AdminComponent } from './admin/admin.component';
-import { AdminRegisterStocksComponent } from './admin/admin-register-stocks/admin-register-stocks.component';
 import { AdminSurrentStocksComponent } from './admin/admin-surrent-stocks/admin-surrent-stocks.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
@@ -26,6 +23,7 @@ import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 
 
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { CompanyRequestsComponent } from './admin/company-requests/company-requests.component';
 
 
 const retailerOnly = hasCustomClaim('retailer');
@@ -45,8 +43,8 @@ const routes: Routes = [
     {path: 'newOrder', component: NewOrderComponent},
     {path: 'newItems', component: NewItemsComponent},
     {path: 'previousOrder', component: PreviousOrdersComponent},
-    {path: 'registeredStocks', component: RegisteredStockComponent},
-    {path: 'newStock', component: NewStockComponent},
+    // {path: 'registeredStocks', component: RegisteredStockComponent},
+    // {path: 'newStock', component: NewStockComponent},
     {path: 'myCart', component: MyCartComponent}
   ]},
 
@@ -67,7 +65,7 @@ const routes: Routes = [
   ]},
 
   {path: 'admin/:id', component: AdminComponent, children:[
-    {path: 'registerStock', component: AdminRegisterStocksComponent},
+    {path: 'companyRequests', component: CompanyRequestsComponent},
     {path: 'currentStocks', component: AdminSurrentStocksComponent},
     {path: 'reports', component: AdminReportsComponent}
   ]},

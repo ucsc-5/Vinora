@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from 'src/app/item/item.model';
+import { Item } from 'src/app/service/item.model';
 import { NgForm } from '@angular/forms';
 import { ItemService } from 'src/app/service/item.service';
 import { from } from 'rxjs';

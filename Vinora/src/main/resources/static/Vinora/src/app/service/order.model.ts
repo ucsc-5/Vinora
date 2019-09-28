@@ -1,4 +1,4 @@
-import { Item } from '../item/item.model';
+import { Item } from './item.model';
 
 export class Order {
 

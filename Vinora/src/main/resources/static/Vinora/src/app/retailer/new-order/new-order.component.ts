@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Order } from 'src/app/service/order.model';
 import { OrderService } from 'src/app/service/order.service';
-import { Item } from 'src/app/item/item.model';
+import { Item } from 'src/app/service/item.model';
 
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from 'src/app/item/item.model';
+import { Item } from 'src/app/service/item.model';
 import { HttpClient } from '@angular/common/http';
 
 

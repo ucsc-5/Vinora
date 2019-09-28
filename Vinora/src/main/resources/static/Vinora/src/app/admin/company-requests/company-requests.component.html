@@ -1,0 +1,9 @@
+<ul>
+    <li *ngFor="let company of companies | async">
+      <input type="text" #updatetext [value]="company.managerName" />
+      <!-- <button (click)="updateItem(item.key, updatetext.value)">Update</button>
+      <button (click)="deleteItem(item.key)">Delete</button> -->
+    </li>
+  </ul>
+
+  <app-admin-com-req-element *ngFor="let company of companies | async" [company]="company"></app-admin-com-req-element>

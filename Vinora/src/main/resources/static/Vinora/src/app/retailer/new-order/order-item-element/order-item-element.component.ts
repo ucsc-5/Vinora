@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Item } from 'src/app/item/item.model';
+import { Item } from 'src/app/service/item.model';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ItemService } from 'src/app/service/item.service';
 import { NgForm } from '@angular/forms';

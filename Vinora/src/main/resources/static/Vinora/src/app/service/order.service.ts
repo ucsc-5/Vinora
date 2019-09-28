@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Order } from './order.model';
-import { Item } from '../item/item.model';
+import { Item } from './item.model';
 // import { item } from './items';
 
  

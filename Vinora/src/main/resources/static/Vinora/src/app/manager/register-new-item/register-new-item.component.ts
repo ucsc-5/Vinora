@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Item } from 'src/app/item/item.model';
+import { Item } from 'src/app/service/item.model';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireStorage } from '@angular/fire/storage';
