@@ -22,6 +22,11 @@ export class CompanyService {
   requestCompanies$: Observable<any[]>;
   registeredCompanies$: Observable<any[]>;
   size$: BehaviorSubject<string|null>;
+
+  cpm: Company;
+
+  registeredCompaniesCount: number
+  requestCompaniesCount: number
   
  
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService ) {
@@ -34,6 +39,8 @@ export class CompanyService {
     const newRef = this.db.object(`delivery_Companies/${uid}`);
     newRef.set(company);
   }
+
+
  
   updateCompany(key: string, value: any): Promise<void> {
     return this.companykRef.update(key, value);

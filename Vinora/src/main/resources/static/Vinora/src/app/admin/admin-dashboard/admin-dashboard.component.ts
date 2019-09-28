@@ -9,14 +9,15 @@ import { Observable } from 'rxjs';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  companies: Observable<any[]>;
-
+  requstCount: number;
+  registeredCount: number;
   constructor(private companyServise:CompanyService) { 
     
   }
 
   ngOnInit() {
-   
+    this.companyServise.registeredCompanies$.subscribe(result => {this.registeredCount=result.length});
+    this.companyServise.requestCompanies$.subscribe(result => {this.requstCount=result.length});   
   }
 
 }
