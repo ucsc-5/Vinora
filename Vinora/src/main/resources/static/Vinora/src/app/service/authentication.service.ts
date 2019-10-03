@@ -83,7 +83,7 @@ async sendPasswordResetEmail(passwordResetEmail: string) {
 async logout(){
   await this.afAuth.auth.signOut();
   localStorage.removeItem('user');
-  this.router.navigate(['admin/login']);
+  this.router.navigate(['']);
 }
 
 get isLoggedIn(): boolean {

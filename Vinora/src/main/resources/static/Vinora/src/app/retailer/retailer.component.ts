@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef} from '@angular/core';
+import { RetailerService } from '../service/retailer.service';
+import { Retailer } from '../service/retailer.model';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
 ;
-import { Item } from '../service/item.model';
+
 
 
 @Component({
@@ -13,16 +16,23 @@ import { Item } from '../service/item.model';
 })
 export class RetailerComponent {
 
-  itemSelected: Item;
-
+  
+  retailerId: string;
 
   opened = false;
 
-  constructor(){
+  constructor(private retailerService:RetailerService, private route:ActivatedRoute){
 
+  
   }
 
   ngOnInit(){
+    
+    this.route.params.subscribe((param:Params)=>{
+      this.retailerId = param['retailerId'];})
+
+    this.retailerService.getRetailer(this.retailerId);
+
     
   }
  

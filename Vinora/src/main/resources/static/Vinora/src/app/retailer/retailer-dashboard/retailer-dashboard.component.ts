@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RetailerService } from 'src/app/service/retailer.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-retailer-dashboard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RetailerDashboardComponent implements OnInit {
 
-  constructor() { }
+  retailer: Observable<any>;
+
+  constructor(private retailerService:RetailerService) { 
+    
+  }
 
   ngOnInit() {
+    this.retailer= this.retailerService.retailer;
   }
 
 }

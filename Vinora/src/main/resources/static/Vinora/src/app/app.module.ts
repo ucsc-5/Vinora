@@ -22,16 +22,11 @@ import { HomeComponent } from './home/home.component';
 import { HomeNavComponent } from './home/home-nav/home-nav.component';
 import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';import { ItemComponent } from './item/item.component';
 import { NewOrderComponent } from './retailer/new-order/new-order.component';
-import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 import { ManagerComponent } from './manager/manager.component';
 import { ManagerNavComponent } from './manager/manager-nav/manager-nav.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
 import { ItemStockOrgComponent } from './item-stock-org/item-stock-org.component';
-import { NewItemElementComponent } from './retailer/new-items/items-to-select/new-item-element/new-item-element.component';
-import { ItemsToSelectComponent } from './retailer/new-items/items-to-select/items-to-select.component';
-import { ItemsSelectedComponent } from './retailer/new-items/items-selected/items-selected.component';
-import { NewItemElementSelectedComponent } from './retailer/new-items/items-selected/new-item-element-selected/new-item-element-selected.component';
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
@@ -60,7 +55,6 @@ import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/cart-item-elemet.component';
 import { UserService } from './service/user.service';
 import { OrderService } from './service/order.service';
-import { RetailerService } from './service/retailer.service';
 import { AngularFireAuthGuard } from './auth-guard';
 import { from } from 'rxjs';
 import { VehicleService } from './service/vehicle.service';
@@ -75,6 +69,8 @@ import { AdminComRegElemetComponent } from './admin/company-registered/admin-com
 import { RetailerDashboardComponent } from './retailer/retailer-dashboard/retailer-dashboard.component';
 import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-registered-companies/retailer-registered-companies.component';
 import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies/retailer-new-companies.component';
+import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-profile.component';
+import { RetailerService } from './service/retailer.service';
 
 
 
@@ -91,16 +87,11 @@ import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies
     CurrentOrdersComponent,
     ItemComponent,
     NewOrderComponent,
-    NewItemsComponent,
     PreviousOrdersComponent,
     ManagerComponent,
     ManagerNavComponent,
     RegisterNewItemComponent,
     ItemStockOrgComponent,
-    NewItemElementComponent,
-    ItemsToSelectComponent,
-    ItemsSelectedComponent,
-    NewItemElementSelectedComponent,
     AdminComponent,
     AdminNavComponent,
     AdminReportsComponent,
@@ -125,7 +116,8 @@ import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies
     AdminComRegElemetComponent,
     RetailerDashboardComponent,
     RetailerRegisteredCompaniesComponent,
-    RetailerNewCompaniesComponent
+    RetailerNewCompaniesComponent,
+    RetailerProfileComponent
   ],  
   imports: [
     BrowserModule,
@@ -148,10 +140,10 @@ import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies
     DataStorageService,
     UserService,
     OrderService,
-    RetailerService,
     AngularFireAuthGuard,
     VehicleService,
     CompanyService,
+    RetailerService,
     { provide: StorageBucket, useValue: 'my-bucket-name' }],
   bootstrap: [AppComponent]
 })

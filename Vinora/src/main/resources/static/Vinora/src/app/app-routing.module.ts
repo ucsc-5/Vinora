@@ -6,7 +6,6 @@ import { RetailerComponent } from './retailer/retailer.component';
 import { HomeComponent } from './home/home.component';
 import { CurrentOrdersComponent } from './retailer/current-orders/current-orders.component';
 import { NewOrderComponent } from './retailer/new-order/new-order.component';
-import { NewItemsComponent } from './retailer/new-items/new-items.component';
 import { PreviousOrdersComponent } from './retailer/previous-orders/previous-orders.component';
 import { ManagerComponent } from './manager/manager.component';
 import { RegisterNewItemComponent } from './manager/register-new-item/register-new-item.component';
@@ -27,6 +26,8 @@ import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-d
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { CompanyRegisteredComponent } from './admin/company-registered/company-registered.component';
 import { RetailerDashboardComponent } from './retailer/retailer-dashboard/retailer-dashboard.component';
+import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-profile.component';
+import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-registered-companies/retailer-registered-companies.component';
 
 
 const retailerOnly = hasCustomClaim('retailer');
@@ -41,15 +42,15 @@ const routes: Routes = [
       {path: 'register', component: RegisterRetailerComponent}, 
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
-  {path: 'retailer/:id',component: RetailerComponent, children:[
-    {path: '' , component: RetailerDashboardComponent},
-    {path: 'currentOrders', component: CurrentOrdersComponent},
-    {path: 'newOrder', component: NewOrderComponent},
-    {path: 'newItems', component: NewItemsComponent},
-    {path: 'previousOrder', component: PreviousOrdersComponent},
-    // {path: 'registeredStocks', component: RegisteredStockComponent},
+  { path: 'retailer/:retailerId',component: RetailerComponent, children:[
+    { path: '' , component: RetailerDashboardComponent},
+    { path: 'currentOrders', component: CurrentOrdersComponent},
+    { path: 'newOrder', component: NewOrderComponent},
+    { path: 'previousOrder', component: PreviousOrdersComponent},
+    {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
     // {path: 'newStock', component: NewStockComponent},
-    {path: 'myCart', component: MyCartComponent}
+    { path: 'myCart', component: MyCartComponent},
+    { path: 'myProfile', component: RetailerProfileComponent}
   ]},
 
   {path: 'stockManager/:id' , component: StockManagerComponent, children:[

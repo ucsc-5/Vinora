@@ -10,6 +10,8 @@ export class RetailerNewCompaniesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
+
 
 }
