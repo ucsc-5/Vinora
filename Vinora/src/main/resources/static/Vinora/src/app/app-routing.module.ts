@@ -26,6 +26,7 @@ import { CompanyRequestsComponent } from './admin/company-requests/company-reque
 import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-dashboard.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { CompanyRegisteredComponent } from './admin/company-registered/company-registered.component';
+import { RetailerDashboardComponent } from './retailer/retailer-dashboard/retailer-dashboard.component';
 
 
 const retailerOnly = hasCustomClaim('retailer');
@@ -41,6 +42,7 @@ const routes: Routes = [
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
   {path: 'retailer/:id',component: RetailerComponent, children:[
+    {path: '' , component: RetailerDashboardComponent},
     {path: 'currentOrders', component: CurrentOrdersComponent},
     {path: 'newOrder', component: NewOrderComponent},
     {path: 'newItems', component: NewItemsComponent},

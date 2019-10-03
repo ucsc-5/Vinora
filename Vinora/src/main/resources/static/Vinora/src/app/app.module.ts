@@ -72,6 +72,9 @@ import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-d
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { CompanyRegisteredComponent } from './admin/company-registered/company-registered.component';
 import { AdminComRegElemetComponent } from './admin/company-registered/admin-com-reg-elemet/admin-com-reg-elemet.component';
+import { RetailerDashboardComponent } from './retailer/retailer-dashboard/retailer-dashboard.component';
+import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-registered-companies/retailer-registered-companies.component';
+import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies/retailer-new-companies.component';
 
 
 
@@ -119,7 +122,10 @@ import { AdminComRegElemetComponent } from './admin/company-registered/admin-com
     ManagerDashboardComponent,
     AdminDashboardComponent,
     CompanyRegisteredComponent,
-    AdminComRegElemetComponent
+    AdminComRegElemetComponent,
+    RetailerDashboardComponent,
+    RetailerRegisteredCompaniesComponent,
+    RetailerNewCompaniesComponent
   ],  
   imports: [
     BrowserModule,
