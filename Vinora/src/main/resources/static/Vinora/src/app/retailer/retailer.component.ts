@@ -32,8 +32,7 @@ export class RetailerComponent {
       this.retailerId = param['retailerId'];})
 
     this.retailerService.getRetailer(this.retailerId);
-
-    
+ 
   }
  
 }
