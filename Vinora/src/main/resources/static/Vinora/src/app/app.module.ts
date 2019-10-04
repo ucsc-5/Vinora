@@ -71,6 +71,7 @@ import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-regist
 import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies/retailer-new-companies.component';
 import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-profile.component';
 import { RetailerService } from './service/retailer.service';
+import { RetRegComElementComponent } from './retailer/retailer-registered-companies/ret-reg-com-element/ret-reg-com-element.component';
 
 
 
@@ -117,7 +118,8 @@ import { RetailerService } from './service/retailer.service';
     RetailerDashboardComponent,
     RetailerRegisteredCompaniesComponent,
     RetailerNewCompaniesComponent,
-    RetailerProfileComponent
+    RetailerProfileComponent,
+    RetRegComElementComponent
   ],  
   imports: [
     BrowserModule,

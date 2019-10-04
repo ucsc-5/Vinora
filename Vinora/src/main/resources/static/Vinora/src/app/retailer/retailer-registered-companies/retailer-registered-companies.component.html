@@ -1,11 +1,12 @@
-<p>retailer-registered-companies works!</p>
+<!-- <p>retailer-registered-companies works!</p>
 <div *ngIf="company$ | async; let company; else loading">
     <ul>
-      <li *ngFor="let item of company">
-        {{ item.payload.val().email }}
-        <code>{{ item.payload.key }}</code>
+      <li *ngFor="let company of company$ | async">
+        <code>{{company.state }}</code>
       </li>
-    </ul>
-    <div *ngIf="items.length === 0">No results, try clearing filters</div>
-  </div>
-  <ng-template #loading>Loading&hellip;</ng-template>
+    </ul> -->
+    <!-- <div *ngIf="items.length === 0">No results, try clearing filters</div> -->
+  <!-- </div>
+  <ng-template #loading>Loading&hellip;</ng-template> -->
+
+  <app-ret-reg-com-element *ngFor="let company of company$ | async" [companyKey]="company"></app-ret-reg-com-element>

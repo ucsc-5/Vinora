@@ -15,27 +15,24 @@ export class RetailerRegisteredCompaniesComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
 
-    // const retailerId = this.afAuth.auth.currentUser.uid;
-    // const companyId = 
-    // this.size$ = new BehaviorSubject(null);
-    // this.company$ = this.size$.pipe(
-    //   switchMap(size => 
-    //     this.db.list('/delivery_Companies', ref =>
-    //       size ? ref.child('${companyId}/registered_Retailers').orderByKey().equalTo(size) : ref
-    //     ).snapshotChanges().pipe(
-    //       map(changes => 
-    //         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-    //         )
-    //     )
-    //   )
-    // );
-
-    // this.size$.next('jmLEedg9fMSshHJ82QcRMwya4V12');
+    const retailerId = this.afAuth.auth.currentUser.uid;
+    this.size$ = new BehaviorSubject(null);
+    this.company$ = this.size$.pipe(
+      switchMap(size => 
+        this.db.list(`retaiers/${retailerId}/registered_Companies`, ref =>
+          size ? ref.orderByKey() : ref
+        ).snapshotChanges().pipe(
+          map(changes => 
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+            )
+        )
+      )
+    );
     
    }
 
   ngOnInit() {
-
+     this.company$.subscribe(res=>{console.log(res)});
   }
 
 }
