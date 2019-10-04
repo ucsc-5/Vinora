@@ -2,7 +2,7 @@
   <div *ngIf="comapany$ | async; let companise; else loading">
     <ul>
       <li *ngFor="let company of companise">
-        {{ company.email }}
+        <b> {{ company.email }} </b>
         <code>{{ company.key }}</code>
       </li>
     </ul>
