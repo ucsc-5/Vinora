@@ -8,8 +8,6 @@ import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-
-
 @Injectable()
 
 @Component({
@@ -18,6 +16,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  showSpinner=false;
 
   items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string|null>;
@@ -42,16 +41,14 @@ export class LoginComponent implements OnInit {
       
   }
 
-
-
-
   signUp(form: NgForm) {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
     const email = form.value.email;
     const password = form.value.password;
     // this.authService.login(email,password);
+    this.showSpinner=true;
     this.authService.login('ret1@gmail.com','123123');
-
+    this.showSpinner=false;
     console.log(this.authService.user.uid) 
   }
 
@@ -59,10 +56,9 @@ export class LoginComponent implements OnInit {
     // this.afAuth.auth.signOut(); sign out with gmail
     this.authService.logout();
   }
-
-
-   
+ 
   ngOnInit() {
+    
   }
 
   getErrorMessage() {
@@ -70,6 +66,5 @@ export class LoginComponent implements OnInit {
         this.email.hasError('email') ? 'Not a valid email' :
             '';
   }
-  
 
 }
