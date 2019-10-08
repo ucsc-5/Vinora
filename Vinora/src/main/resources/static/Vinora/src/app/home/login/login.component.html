@@ -1,54 +1,38 @@
 <div class="container-fluid">
-    <div class="container">
-      <h2 style="text-align: center;padding-top: 1%;font-family: 'Patua One', cursive;height: 100px;">Login With Us</h2>
-      <div class="row">
-        <div class="col"></div>
-        <div class="col">
-          
-        </div>
-        <div class="col"></div>
-      </div>
-    </div>
     <div class="row">
         <div class="col">
-        
+            
                 <form class="example-form" (ngSubmit)="signUp(f)" #f="ngForm">
 
                     <div class="col form-group-lg" style="padding-top:5%; padding-left: 25%;"> 
                             
                             <div class="example-container">
+                                <h2 style="text-align: center;padding-top: 1%;font-family: 'Patua One', cursive;height: 100px;">Login With Us</h2>
                                 <mat-form-field class="example-full-width" appearance="outline">
                                   <mat-label>Your Email</mat-label>  
-                                  <input matInput  value=""  name="email" ngModel required>
+                                  <input matInput required value=""  name="email" ngModel required>
                                     <mat-icon matSuffix>email</mat-icon>
                                     <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                                 
                                 
-                            <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-form-field class="example-full-width" appearance="outline" >
                               <mat-label>Password</mat-label>   
-                              <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"  value="" name="password" ngModel>
+                              <input matInput placeholder="Enter your password" required [type]="hide ? 'password' : 'text'"  value="" name="password" ngModel>
                                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </button>
                                 </mat-form-field>
-                                <div class="row">
-                                  <div class="col"></div>
-                                  <div class="col">
-                                    <mat-spinner *ngIf="showSpinner"></mat-spinner>
-                                  </div>
-                                  <div class="col"></div>
-                                </div>
-                                <div class="row">
-                                  <div class="col"></div>
-                                  <div class="col">
-                                    <div class="example-button-row">
-                                      <button mat-stroked-button (click)="signUp()">Login</button>
-                                  </div>
-                                  </div>
-                                  <div class="col"></div>
-                                </div>
                                 
+                                <div class="row">
+                                    <div class="col"></div>
+                                    <div class="col">
+                                      <mat-spinner *ngIf="showSpinner"></mat-spinner>
+                                      <button style="margin: 0 auto;display: block;" mat-stroked-button (click)="signUp()">Login</button>
+                                    </div>
+                                    <div class="col"></div>
+                                  </div>
+                                           
                     </div>
                 </div>
             </form>
