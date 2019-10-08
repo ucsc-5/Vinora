@@ -1,28 +1,10 @@
-
-<div class="container-fluid" style="padding-left:-50px;">
-        <div class="row" style="padding-left: -13px;">
-          <div class="col" >
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Vinora</span>
+      <span class="example-spacer"></span>
+      <button mat-flat-button routerLink="login" color="primary">Login</button>
+      <button mat-flat-button routerLink="register"  color="primary">Register</button>
+      <button mat-flat-button routerLink="registerCompany"  color="primary">Register Company</button>
       
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark" >
-              <a class="navbar-brand" href="#">Vinora</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              
-            <div class="collapse navbar-collapse" id="navbarsExample04">
-              <ul class="navbar-nav mr-auto">
-                      <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                      </li>
-                      
-                    </ul>
-                    <div class="btn-group my-2 my-md-0" role="group" aria-label="Basic example">
-                      <a  class="transparent" mat-flat-button routerLink="login">Login</a>
-                      <a  class="transparent" mat-flat-button routerLink="register">Register</a>
-                      <a  class="transparent" mat-flat-button routerLink="registerCompany">Register company</a>
-                    </div>
-                  </div>
-                </nav>
-              </div>
-            </div>
-          </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
