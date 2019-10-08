@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -19,18 +19,33 @@ import { Company } from 'src/app/service/company.model';
 export class RegisterDCompanyComponent implements OnInit {
 
   type = 'manager';
-
-  constructor(private afAuth: AngularFireAuth,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  isEditable = false;
+  loggined = false;
+  constructor(private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
     
   }
   ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      companyName: ['', Validators.required],
+      address: ['', Validators.required],
+      password: ['', Validators.required]  
+    });
+    
+    this.secondFormGroup = this._formBuilder.group({
+      email: ['', Validators.required],
+      managerName: ['', Validators.required],
+      managerNic: ['', Validators.required],
+      tel: ['', Validators.required],
+    });
   }
 
-  register(form: NgForm){
-    const value =form.value;
-    const userEmail = value.email;
-    const password = value.password;
-    const stock = new Company(value.stockName,value.managerId,value.manager,value.email,value.address,value.tel)
+  register(){
+    
+    const userEmail = this.secondFormGroup.value['email'];
+    const password = this.firstFormGroup.value['password'];
+    const stock = new Company(this.firstFormGroup.value['companyName'],this.secondFormGroup.value['managerNic'],this.secondFormGroup.value['managerName'],this.secondFormGroup.value['email'],this.firstFormGroup.value['address'],this.secondFormGroup.value['tel'])
     console.log(stock);
     this.authServise.register(userEmail,password,this.type);
     const callable = this.fns.httpsCallable('addRole');

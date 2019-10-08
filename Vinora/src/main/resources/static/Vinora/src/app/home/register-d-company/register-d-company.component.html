@@ -1,64 +1,64 @@
 
 <div class="container">
-        <div class="row" >      
-            <div 
-              class="col-8" 
-              style="padding-top: 5%; padding-left: 25%"
-              >
-                <h3>Register with us</h3>
-                <div class="example-container">
-                 
-                      <form class="example-form" (ngSubmit)="register(f)" #f="ngForm">
-                                <br>
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Your Company" required name="stockName" ngModel>
-                                  </mat-form-field>
+    <h3 style="text-align: center;padding-top: 1%;font-family: 'Patua One', cursive;height: 100px;">Register with us</h3>
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out Company Details</ng-template>
+            <mat-form-field class="example-full-width">
+                          <input matInput type="text" placeholder="Your Company" formControlName="companyName" required name="shopName" ngModel>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <textarea formControlName="address" matInput placeholder="Your Address"  name="address" ngModel required></textarea>
+                          </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="password" matInput type="password"  placeholder="Password" required name="password" ngModel>
+                        </mat-form-field>
 
-                                  <mat-form-field class="example-full-width">
-                                        <input matInput type="text" placeholder="Manager" required name="manager" ngModel>
-                                  </mat-form-field>
-
-                                  <mat-form-field class="example-full-width">
-                                        <input matInput type="text" placeholder="Manager NIC" required name="managerId" ngModel>
-                                  </mat-form-field>                                
-    
-                                  <mat-form-field class="example-full-width">
-                                          <input matInput placeholder="Enter your email"  name="email" ngModel required>
-                                          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                                  </mat-form-field>
-    
-                                  <mat-form-field class="example-full-width">
-                                      <input matInput type="password"  placeholder="Password" required name="password" ngModel>
-                                  </mat-form-field>
-                                
-                                  <mat-form-field class="example-full-width">
-                                    <textarea matInput placeholder="Your Address"  name="address" ngModel required></textarea>
-                                  </mat-form-field>
-                                
-                                  <mat-form-field class="example-full-width">
-                                      <span matPrefix>+94 &nbsp;</span>
-                                      <input type="tel" matInput placeholder="Telephone"  name="tel" ngModel required>
-                                      <mat-icon matSuffix>call</mat-icon>
-                                  </mat-form-field>
-    
-            
-                                  
-    
-                                  <div class="example-button-row">
-                                      <button mat-raised-button color="primary" (click)="register()" >Register</button>
-                                  </div>
-                        </form>
-                  </div>
+            <div>
+              <button mat-button  matStepperNext>Next</button>
             </div>
-    
-    
-            <ng-template #infoText>
-                <h3>Your new Items here</h3>
-            </ng-template>
-    
-    
-    
-        </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out Company Manager Details</ng-template>
+            <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Manager" formControlName="managerName" required name="shopName" ngModel>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                  <input matInput type="text" placeholder="NIC" formControlName="managerNic" required name="shopName" ngModel>
+                </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input formControlName="email" matInput type="email" placeholder="Enter your email"  name="email" ngModel required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        
+        
+          <mat-form-field class="example-full-width">
+              <span matPrefix>+94 &nbsp;</span>
+              <input formControlName="tel" type="tel" matInput placeholder="Telephone"  name="contactNumber" ngModel required>
+              <mat-icon matSuffix>call</mat-icon>
+          </mat-form-field>
+            
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Save</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button (click)="register()">Register</button>
+            
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+        
     </div>
     
     
