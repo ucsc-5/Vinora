@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row">
   <div class="col-2"></div>
@@ -34,7 +33,7 @@
                   <input matInput type="text" placeholder="Manager" formControlName="managerName" required name="shopName" ngModel>
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
-                    <input matInput type="text" placeholder="NIC" formControlName="managerNic" required name="shopName" ngModel>
+                    <input matInput type="text" minlength="10" maxlength="12" placeholder="NIC" formControlName="managerNic" required name="shopName" ngModel>
                   </mat-form-field>
               <mat-form-field class="example-full-width">
                   <input formControlName="email" matInput type="email" placeholder="Enter your email"  name="email" ngModel required>
@@ -44,7 +43,7 @@
           
             <mat-form-field class="example-full-width">
                 <span matPrefix>+94 &nbsp;</span>
-                <input formControlName="tel" type="tel" matInput placeholder="Telephone"  name="contactNumber" ngModel required>
+                <input formControlName="tel" minlength="9" maxlength="9" type="tel" matInput placeholder="Telephone"  name="contactNumber" ngModel required>
                 <mat-icon matSuffix>call</mat-icon>
             </mat-form-field>
               
