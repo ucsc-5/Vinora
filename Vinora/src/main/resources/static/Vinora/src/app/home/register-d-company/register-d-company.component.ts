@@ -17,7 +17,7 @@ import { Company } from 'src/app/service/company.model';
   styleUrls: ['./register-d-company.component.css']
 })
 export class RegisterDCompanyComponent implements OnInit {
-
+  hide = true;
   type = 'manager';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
