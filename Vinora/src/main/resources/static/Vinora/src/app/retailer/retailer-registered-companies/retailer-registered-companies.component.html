@@ -9,4 +9,4 @@
   <!-- </div>
   <ng-template #loading>Loading&hellip;</ng-template> -->
 
-  <app-ret-reg-com-element *ngFor="let company of company$ | async" [companyKey]="company"></app-ret-reg-com-element>
+  <app-ret-reg-com-element *ngFor="let companyKey of companyKey$ | async" [companyKey]="companyKey"></app-ret-reg-com-element>

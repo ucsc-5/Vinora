@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RetailerService } from 'src/app/service/retailer.service';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-retailer-dashboard',
@@ -10,13 +11,17 @@ import { Observable } from 'rxjs';
 export class RetailerDashboardComponent implements OnInit {
 
   retailer: Observable<any>;
+  retailerId: string
 
-  constructor(private retailerService:RetailerService) { 
+  constructor(private retailerService:RetailerService,private afAuth: AngularFireAuth) { 
     
+    this.retailerId = this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
     this.retailer= this.retailerService.retailer;
+    // console.log(this.retailer);
+    console.log(this.retailerId);
   }
 
 }

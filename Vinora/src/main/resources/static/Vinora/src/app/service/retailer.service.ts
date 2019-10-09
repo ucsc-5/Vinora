@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Retailer } from './retailer.model';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -12,13 +12,15 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class RetailerService {
  
+  @Input() companyKeyRef
   private dbPath = '/retaiers';
   
   retailerRef: AngularFireList<Retailer> = null;
   
   retailer: Observable<any[]>;
   newCompanies$: Observable<any[]>;
-  registeredCompanies$: Observable<any[]>;
+  companyKeys$: Observable<any[]>;
+  registeredCompany$: Observable<any[]>;
   size$: BehaviorSubject<string|null>;
  
  
@@ -63,4 +65,34 @@ export class RetailerService {
   deleteAll(): Promise<void> {
     return this.retailerRef.remove();
   }
+
+
+  getRegisteredCompaniesList(uid:string){
+    this.size$ = new BehaviorSubject(null);
+    
+    this.companyKeys$ = this.size$.pipe(
+      switchMap(size => 
+        this.db.list(`retaiers/${uid}/registered_Companies`, ref =>
+          size ? ref.orderByKey(): ref
+        ).snapshotChanges().pipe(
+          map(changes => 
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val()}))
+            )
+        )
+      )
+    );
+
+    return this.companyKeys$;
+
+    // this.companyKey$.subscribe(val=>{
+    //   console.log(val[0].key);
+    //   console.log(val[1].key);
+    //   console.log(val);
+    // }
+    // )
+    
+  }
+
+
+
 }
