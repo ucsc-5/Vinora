@@ -15,7 +15,7 @@
                                 <input matInput type="text" placeholder="Shop Name" formControlName="myControl1" required name="shopName" ngModel>
                               </mat-form-field>
                               <mat-form-field class="example-full-width">
-                                  <input formControlName="myControl2" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                                  <input formControlName="myControl2" minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
                                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                   </button>
@@ -38,7 +38,7 @@
               
                 <mat-form-field class="example-full-width">
                     <span matPrefix>+94 &nbsp;</span>
-                    <input formControlName="myControl5" type="tel" matInput placeholder="Telephone"  name="contactNumber" ngModel required>
+                    <input formControlName="myControl5" minlength="9" maxlength="9" type="tel" matInput placeholder="Telephone"  name="contactNumber" ngModel required>
                     <mat-icon matSuffix>call</mat-icon>
                 </mat-form-field>
                   

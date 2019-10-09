@@ -14,7 +14,7 @@
                               <textarea formControlName="address" matInput placeholder="Your Address"  name="address" ngModel required></textarea>
                             </mat-form-field>
                           <mat-form-field class="example-full-width">
-                              <input formControlName="password" matInput placeholder="Enter your password" required [type]="hide ? 'password' : 'text'"  value="" name="password" ngModel>
+                              <input formControlName="password" minlength="6" matInput placeholder="Enter your password" required [type]="hide ? 'password' : 'text'"  value="" name="password" ngModel>
                               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                               </button>
