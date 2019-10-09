@@ -13,15 +13,17 @@ export class RetailerRegisteredCompaniesComponent implements OnInit {
 
   companyKeys$: Observable<any>;
   size$: BehaviorSubject<string|null>;
+  retailerId
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private retailerService: RetailerService) {
 
-    const retailerId = this.afAuth.auth.currentUser.uid;
-    this.companyKeys$=this.retailerService.getRegisteredCompaniesList(retailerId);
+    this.retailerId = this.afAuth.auth.currentUser.uid;
+   
     
    }
 
   ngOnInit() {
+    this.companyKeys$=this.retailerService.getRegisteredCompaniesList(this.retailerId);
      this.companyKeys$.subscribe(res=>{console.log(res)});
   }
 
