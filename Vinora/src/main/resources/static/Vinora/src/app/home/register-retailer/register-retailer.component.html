@@ -29,8 +29,9 @@
                 <form [formGroup]="secondFormGroup">
                   <ng-template matStepLabel>Fill out company contact Details</ng-template>
                   <mat-form-field class="example-full-width">
-                      <input formControlName="myControl3" matInput type="email" placeholder="Enter your email"  name="email" ngModel required>
+                      <input  formControlName="myControl3" matInput type="email" placeholder="Enter your email"  name="email" ngModel required>
                       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                      
               </mat-form-field>
               <mat-form-field class="example-full-width">
                   <textarea formControlName="myControl4" matInput placeholder="Your Address"  name="address" ngModel required></textarea>

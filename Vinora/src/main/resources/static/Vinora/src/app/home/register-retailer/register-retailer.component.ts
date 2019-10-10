@@ -40,12 +40,7 @@ export class RegisterRetailerComponent implements OnInit {
     });
     
   }
-  get fval(){
-    return this.firstFormGroup.controls;
-  }
-  get sval(){
-    return this.secondFormGroup.controls;
-  }
+  
   async register(){
     const userEmail = this.secondFormGroup.value['myControl3'];
     const password = this.firstFormGroup.value['myControl2'];
