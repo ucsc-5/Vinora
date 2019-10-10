@@ -40,7 +40,12 @@ export class RegisterDCompanyComponent implements OnInit {
       tel: ['', Validators.required],
     });
   }
-
+  get fval(){
+    return this.firstFormGroup.controls;
+  }
+  get sval(){
+    return this.secondFormGroup.controls;
+  }
   register(){
     
     const userEmail = this.secondFormGroup.value['email'];
