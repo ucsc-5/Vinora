@@ -30,11 +30,11 @@ export class RegisterDCompanyComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       companyName: ['', Validators.required],
       address: ['', Validators.required],
-      password: ['', Validators.required,Validators.minLength(6)]  
+      password: ['', [Validators.required,Validators.minLength(6)]]  
     });
     
     this.secondFormGroup = this._formBuilder.group({
-      email: ['', Validators.required,Validators.email],
+      email: ['', [Validators.required,Validators.email]],
       managerName: ['', Validators.required],
       managerNic: ['', Validators.required],
       tel: ['', Validators.required],

@@ -30,13 +30,13 @@ export class RegisterRetailerComponent implements OnInit {
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       myControl1: ['', Validators.required],
-      myControl2: ['', Validators.required,Validators.minLength(6)]  
+      myControl2: ['', [Validators.required,Validators.minLength(6)]]  
     });
     
     this.secondFormGroup = this._formBuilder.group({
-      myControl3: ['', Validators.required,Validators.email],
+      myControl3: ['', [Validators.required,Validators.email]],
       myControl4: ['', Validators.required],
-      myControl5: ['', Validators.required,Validators.minLength(9),Validators.maxLength(9)]
+      myControl5: ['', [Validators.required,Validators.minLength(9),Validators.maxLength(9)]]
     });
     
   }
