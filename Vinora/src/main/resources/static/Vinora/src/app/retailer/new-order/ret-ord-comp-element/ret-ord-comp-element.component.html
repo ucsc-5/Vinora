@@ -1,0 +1,20 @@
+
+  <div *ngIf="comapany$ | async; let companise; else loading">
+        <ul>
+          <li *ngFor="let company of companise">
+            <b> {{ company.email }} </b>
+            
+            <code>{{ company.key }}</code>
+            <button style="margin: 0 auto;display: block;" mat-stroked-button>New Order</button>
+          </li>
+        </ul>
+
+        <div class="row">
+
+            <app-new-order-item-elemet *ngFor="let item of items | async"  [item]="item"></app-new-order-item-elemet>
+        </div>
+
+        <div *ngIf="!companise">No results, try clearing filters</div>
+      </div>
+      <ng-template #loading>Loading&hellip;</ng-template>
+      <div>

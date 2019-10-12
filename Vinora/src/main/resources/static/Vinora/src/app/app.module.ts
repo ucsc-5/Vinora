@@ -43,7 +43,6 @@ import { VehicleComponent } from './manager/vehicle/vehicle.component';
 import {StorageBucket} from '@angular/fire/storage';
 import { AuthenticationService } from './service/authentication.service';
 import { FormsModule } from '@angular/forms';
-import { OrderItemElementComponent } from './retailer/new-order/order-item-element/order-item-element.component';
 import { ItemService } from './service/item.service';
 import { RegisteredItemsComponent } from './manager/registered-items/registered-items.component';
 import { RegItemElementComponent } from './manager/registered-items/reg-item-element/reg-item-element.component';
@@ -72,6 +71,9 @@ import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies
 import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-profile.component';
 import { RetailerService } from './service/retailer.service';
 import { RetRegComElementComponent } from './retailer/retailer-registered-companies/ret-reg-com-element/ret-reg-com-element.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RetOrdCompElementComponent } from './retailer/new-order/ret-ord-comp-element/ret-ord-comp-element.component';
+import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-element/new-order-item-elemet/new-order-item-elemet.component';
 
 
 
@@ -99,7 +101,6 @@ import { RetRegComElementComponent } from './retailer/retailer-registered-compan
     StockManagerComponent,
     StockManagerNavComponent,
     VehicleComponent,
-    OrderItemElementComponent,
     RegisteredItemsComponent,
     RegItemElementComponent,
     RegisterDCompanyComponent,
@@ -119,7 +120,10 @@ import { RetRegComElementComponent } from './retailer/retailer-registered-compan
     RetailerRegisteredCompaniesComponent,
     RetailerNewCompaniesComponent,
     RetailerProfileComponent,
-    RetRegComElementComponent
+    RetRegComElementComponent,
+    PageNotFoundComponent,
+    RetOrdCompElementComponent,
+    NewOrderItemElemetComponent
   ],  
   imports: [
     BrowserModule,

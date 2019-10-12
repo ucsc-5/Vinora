@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Order } from 'src/app/service/order.model';
 import { OrderService } from 'src/app/service/order.service';
 import { Item } from 'src/app/service/item.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { RetailerService } from 'src/app/service/retailer.service';
 
 
 @Component({
@@ -14,31 +16,18 @@ import { Item } from 'src/app/service/item.model';
 })
 export class NewOrderComponent implements OnInit {
 
-  currentOrder: Order;
 
-  itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
-  constructor(private db: AngularFireDatabase, private orderService:OrderService) {
-    
-    let date: Date = new Date();  
-    this.currentOrder =  new Order(date); 
-    console.log(this.currentOrder);
+  companyKeys$: Observable<any>;
+  retailerId
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private retailerService:RetailerService) {
+    this.retailerId = this.afAuth.auth.currentUser.uid;
   }
   ngOnInit() {
-
-    this.itemsRef = this.db.list('items');
-    this.items = this.itemsRef.snapshotChanges().pipe(
-      map(changes => 
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
-
+    this.companyKeys$=this.retailerService.getRegisteredCompaniesList(this.retailerId);
   }
-
+  
   onItemToCart(item:Item){
     console.log(item);
-    this.currentOrder.addItem(item);
-    // console.log("sdjcjisdcjsndjcsdc");
-    // console.log(this.currentOrder);
   }
+
 }

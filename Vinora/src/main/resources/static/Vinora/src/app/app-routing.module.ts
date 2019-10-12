@@ -28,6 +28,7 @@ import { CompanyRegisteredComponent } from './admin/company-registered/company-r
 import { RetailerDashboardComponent } from './retailer/retailer-dashboard/retailer-dashboard.component';
 import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-profile.component';
 import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-registered-companies/retailer-registered-companies.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const retailerOnly = hasCustomClaim('retailer');
@@ -76,6 +77,9 @@ const routes: Routes = [
     { path: 'registeredCompanies', component:CompanyRegisteredComponent },
     { path: 'reports', component: AdminReportsComponent}
   ]},
+
+  { path: 'not-found', component: PageNotFoundComponent},
+  { path: '**', redirectTo: '/not-found'}
 
 
   // { path: '',      component: AppComponent },

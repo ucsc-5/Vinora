@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CompanyService } from 'src/app/service/company.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-registered-items',
@@ -12,17 +14,13 @@ export class RegisteredItemsComponent implements OnInit {
 
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
-  constructor(db: AngularFireDatabase) {
-    this.itemsRef = db.list('items');
-    // Use snapshotChanges().map() to store the key
-    this.items = this.itemsRef.snapshotChanges().pipe(
-      map(changes => 
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
+  managerId;
+  constructor(private companyService:CompanyService,private afAuth: AngularFireAuth) {
+    this.managerId= this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
+    this.items=this.companyService.getCompanyItems(this.managerId);
   }
 
 }

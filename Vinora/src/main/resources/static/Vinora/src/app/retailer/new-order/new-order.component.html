@@ -1,5 +1,5 @@
 <div class="row">
-    <app-order-item-element *ngFor="let item of items | async" [item]="item" (itemCreated)="onItemToCart($event)"></app-order-item-element>
-
-    <button btn btn-success>Item to the cart</button> 
+    <app-ret-ord-comp-element *ngFor="let companyKey of companyKeys$ | async" [companyKey]="companyKey" ></app-ret-ord-comp-element>
 </div>
+
+

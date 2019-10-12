@@ -16,9 +16,7 @@ export class ItemService {
     this.itemRef = this.db.list(this.dbPath);
   }
  
-  createItem(item: Item): void {
-    this.itemRef.push(item);
-  }
+ 
  
   updateItem(key: string, value: any): Promise<void> {
     return this.itemRef.update(key, value);
