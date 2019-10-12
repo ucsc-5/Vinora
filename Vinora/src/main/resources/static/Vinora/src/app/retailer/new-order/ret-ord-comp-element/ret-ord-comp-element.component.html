@@ -1,20 +1,28 @@
-
-  <div *ngIf="comapany$ | async; let companise; else loading">
-        <ul>
-          <li *ngFor="let company of companise">
-            <b> {{ company.email }} </b>
+<div class="row">
+    <div class="col">
             
-            <code>{{ company.key }}</code>
-            <button style="margin: 0 auto;display: block;" mat-stroked-button>New Order</button>
-          </li>
-        </ul>
+            <div *ngIf="comapany$ | async; let companise; else loading">
+            <ul>
+                <li *ngFor="let company of companise">
+                <b> {{ company.companyName }} </b> <br>
+                <b> {{ company.managerName }} </b> <br>
+                <b> {{ company.email }} </b> <br>
+                <b> {{ company.address }} </b> <br>
+                <b> {{ company.contactNumber }} </b> <br>
+        
+                <code>{{ company.key }}</code>
+            </li>
+            </ul>
 
-        <div class="row">
-
-            <app-new-order-item-elemet *ngFor="let item of items | async"  [item]="item"></app-new-order-item-elemet>
+            <div class="row">
+                
+                <app-new-order-item-elemet *ngFor="let item of items | async"  [item]="item"></app-new-order-item-elemet>
+            </div>
+            
+            <div *ngIf="!companise">No results, try clearing filters</div>
         </div>
+        <ng-template #loading>Loading&hellip;</ng-template>
 
-        <div *ngIf="!companise">No results, try clearing filters</div>
-      </div>
-      <ng-template #loading>Loading&hellip;</ng-template>
-      <div>
+        <div>
+    </div>
+</div>
