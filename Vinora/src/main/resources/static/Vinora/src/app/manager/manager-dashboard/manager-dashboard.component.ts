@@ -24,13 +24,13 @@ export class ManagerDashboardComponent implements OnInit {
 
 
     this.company = this.companyService.company;
-    this.company.subscribe(response=>{
-      response.forEach(element=>{
-        // this.items=element.items;
-        element.items
+    // this.company.subscribe(response=>{
+    //   response.forEach(element=>{
+    //     // this.items=element.items;
+    //     element.items
 
-      })
-    })
+    //   })
+    // })
 
   }
     // this.company.subscribe((item) => {

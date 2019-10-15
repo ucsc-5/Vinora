@@ -10,6 +10,7 @@ import { Observable, from } from 'rxjs';
 import { idTokenResult } from '@angular/fire/auth-guard';
 import { CompanyService } from 'src/app/service/company.service';
 import { Company } from 'src/app/service/company.model';
+import { RetailerService } from 'src/app/service/retailer.service';
 
 @Component({
   selector: 'app-register-d-company',
@@ -23,7 +24,7 @@ export class RegisterDCompanyComponent implements OnInit {
   secondFormGroup: FormGroup;
   isEditable = false;
   loggined = false;
-  constructor(private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
+  constructor(private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
     
   }
   ngOnInit() {
@@ -62,8 +63,10 @@ export class RegisterDCompanyComponent implements OnInit {
         this.authServise.login(userEmail,password);
         const uid = this.afAuth.auth.currentUser.uid;
         this.companyService.createCompany(stock,uid);
+        this.retailerService.setNotRegisteredCompanies(uid);
       }
     )  
+
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
