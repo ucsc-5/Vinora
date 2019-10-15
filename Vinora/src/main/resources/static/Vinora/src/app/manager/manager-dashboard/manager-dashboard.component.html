@@ -14,10 +14,26 @@
                               <b>Address: </b>{{company.address}}<br>
                               <b>Contact: </b>{{company.contactNumber}}<br>
                               <b>Key: </b>{{company.key}}<br>
+                              <b>Key: </b>{{company.items[0]}}<br>
                           </p>
+
+                          <p>jfvifdvcuidfbv</p>
+                          <div *ngFor="let item of items | async">
+                            <p>{{item.brand}}</p>
+                          </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              
+</div>
+<div class="row">
+  <div class="col">
+      <p>dkhjvbkdfhvkduvgkudf</p>
+    <div class="card mb-3" style="max-width: 540px;"  *ngFor="let item of items | async">
+      <p>{{item.brand}}</p>
+    </div>
+  </div>
 </div>
 

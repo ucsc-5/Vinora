@@ -52,7 +52,10 @@ export class AuthenticationService {
           this.router.navigate(['/manager/',this.user.uid]);
         }else if(idTokenResult.claims.admin){
           this.router.navigate(['/admin/',this.user.uid]);
-        }else{
+        }else if(idTokenResult.claims.stockManager){
+          this.router.navigate(['/stockManager/',this.user.uid]);
+        }
+        else{
           console.log('another uSer')
         }
       })

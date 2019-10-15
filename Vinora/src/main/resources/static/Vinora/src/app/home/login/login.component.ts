@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     // this.authService.login(email,password);
     this.showSpinner=true;
-    // this.authService.login('com2@gmail.com','123123'); //for manager
-    this.authService.login('ret1@gmail.com','123123'); //for retailer
+    this.authService.login('com2@gmail.com','123123'); //for manager
+    // this.authService.login('ret1@gmail.com','123123'); //for retailer
     this.showSpinner=false;
     console.log(this.authService.user.uid) 
   }
