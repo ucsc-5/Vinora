@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
-
+import { FormControl,FormGroup } from "@angular/forms";
 
 
 @Component({

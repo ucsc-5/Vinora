@@ -3,6 +3,7 @@ import { VehicleService } from '../../../service/vehicle.service';
 import { NgForm } from '@angular/forms';
 import { Vehicle } from '../vehicle.model';
 import { FileUpload } from 'src/app/uploads/shared/file-upload';
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-vehicle-register',
@@ -15,6 +16,16 @@ export class VehicleRegisterComponent implements OnInit {
   currentFileUpload: FileUpload;
   percentage: number;
 
+
+  vehicleProfileForm = new FormGroup({
+    $id: new FormControl(""),
+    number_plate: new FormControl(""),
+    vehicle_model: new FormControl(""),
+    owner_name: new FormControl(""),
+    owner_address: new FormControl(""),
+    owner_mobile: new FormControl("")
+    
+  });
 
   constructor(private vehicleService:VehicleService) { }
 

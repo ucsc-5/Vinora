@@ -1,34 +1,44 @@
-<form   (ngSubmit)="onAddVehicle(f)" #f="ngForm">
+<form  [formGroup]="vehicleProfileForm" (ngSubmit)="onAddVehicle(f)" #f="ngForm">
         <input type="hidden" formControlName="$id">
 
-        <div class="form-group">
-                <label>Vehicle number</label>
-                <input name="number_plate" class="form-control" ngModel>
-        </div>
+       
+                <label>Vehicle number
+                        <input formControlName="number_plate"  ngModel>
+                </label>
+               
+        
 
-        <div class="form-group">
-                <label>Vehicle model</label>
+       
+                <label>Vehicle model
+                        <input formControlName="vehicle_model"  ngModel>
+                </label>
 
-                <input name="vehicle_model" class="form-control" ngModel>
-        </div>
+               
+       
 
-        <div class="form-group">
-                <label>Owner name</label>
-                <input name="owner_name" class="form-control" ngModel>
-        </div>
+       
+                <label>Owner name
+                        <input formControlName="owner_name"  ngModel>
+                </label>
+               
+       
 
-        <div class="form-group">
-                <label>Owner address</label>
-                <input name="owner_address" class="form-control"ngModel>
-        </div>
 
-        <div class="form-group">
-                <label>Owner mobile</label>
-                <input name="owner_mobile" class="form-control"ngModel>
-        </div>
+                <label>Owner address
+                        <input formControlName="owner_address" ngModel>
+                </label>
+               
+        
 
-        <div clas="form-group">
-                        <div class="input-group mb-3">
+
+                <label>Owner mobile
+                        <input formControlName="owner_mobile" ngModel>
+                </label>
+               
+        
+
+      
+                        <!-- <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroupFileAddon01" >Upload</span>
                                         </div>
@@ -38,15 +48,15 @@
                                                 <label class="custom-file-label" for="inputGroupFile01">Vehicle image</label>
                                         </div>
                                 </div>
+                        </div> -->
+      
 
-        </div>
-
-        <div *ngIf="currentUpload">
+        <!-- <div *ngIf="currentUpload">
                 <div class="progress">
-                  <!-- <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div> -->
-                </div>
-                {{percentage}}% 
-        </div>
+                   <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div> 
+                 </div>
+        
+        </div> -->
               
                   <label>
                      <input type="file" (change)="selectFile($event)">
@@ -60,11 +70,61 @@
                   </button>
               
 
-        <div class="form-group">
+       
                 <input type="submit" class="btn btn-secondary" value="Register">
-        </div>
+       
 </form>
+<!-- <form   (ngSubmit)="onAddVehicle(f)" #f="ngForm">
+<div class="example-container">
 
+                <input type="hidden" name="$id">
+
+        <mat-form-field>
+          <input matInput placeholder="Vehicle number" name="number_plate">
+        </mat-form-field>
+        <br>
+      
+        <mat-form-field>
+          <textarea matInput placeholder="Vehicle model " name="vehicle_model"></textarea>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <textarea matInput placeholder="Owner name" name="owner_name"></textarea>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+         <textarea matInput placeholder="Owner address" name="owner_address"></textarea>
+       </mat-form-field>
+
+       <br>
+
+
+         <mat-form-field>
+         <textarea matInput placeholder="Owner mobile"></textarea>
+        </mat-form-field>
+
+        <br>
+
+
+        <input type="submit"  value="Register">
+
+
+        
+
+              
+      
+        <!-- <mat-form-field>
+          <mat-select placeholder="Select">
+            <mat-option value="option">Option</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+      <!-- </div>
+
+</form>   -->
 
        
       
@@ -99,61 +159,3 @@
 
 
 
-<!-- <form class="example-form" (ngSubmit)="onAddItem(f)" #f="ngForm">
-
-    <mat-form-field class="example-full-width">
-            Vehicle number<br>
-            <input matInput placeholder="Vehicle number " name="plateNumber" ngModel >
-    </mat-form-field>
-    <br>
-
-    <mat-form-field class="example-full-width">
-            Vehicle model<br>
-            <input matInput placeholder="Vehicle model " name="vehicleModel" ngModel >
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-            Owner name<br>
-            <input matInput placeholder="Owner name" name="ownerName" ngModel >
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-            Owner mobile number<br>
-            <input matInput placeholder="Owner mobile number" name="ownerMobile" ngModel >
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-            Owner address<br>
-            <input matInput placeholder="Owner address" name="ownerAddress" ngModel >
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-            Driver name<br>
-            <input matInput placeholder="Driver name" name="driverName" ngModel >
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-            Driver mobile number<br>
-            <input matInput placeholder="Driver mobile" name="driverMobile" ngModel >
-    </mat-form-field>
-    <br>
-    <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01" >Upload</span>
-            </div>
-
-            <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Vehicle image</label>
-            </div>
-    </div>
-
-   
-
- 
-
-    <input  placeholder="Description"  type="hidden"  name="state" ngModel  value="new">
-
-    <button class="btn btn-secondary">Register</button>
-    
-</form>  -->
