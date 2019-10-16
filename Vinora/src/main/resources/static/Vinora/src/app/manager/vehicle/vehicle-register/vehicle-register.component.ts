@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../../service/vehicle.service';
 import { NgForm } from '@angular/forms';
 import { Vehicle } from '../vehicle.model';
-import { Upload } from 'src/app/uploads/shared/upload';
+import { FileUpload } from 'src/app/uploads/shared/file-upload';
 
 @Component({
   selector: 'app-vehicle-register',
@@ -12,7 +12,8 @@ import { Upload } from 'src/app/uploads/shared/upload';
 export class VehicleRegisterComponent implements OnInit {
 
   selectedFiles: FileList;
-  currentUpload: Upload;
+  currentFileUpload: FileUpload;
+  percentage: number;
 
 
   constructor(private vehicleService:VehicleService) { }
@@ -25,12 +26,23 @@ export class VehicleRegisterComponent implements OnInit {
     this.vehicleService.createVehicle(vehicle);
   }
 
-  detectFiles(event) {
+  selectFile(event) {
     this.selectedFiles = event.target.files;
 }
-uploadSingle() {
-  let file = this.selectedFiles.item(0)
-  this.currentUpload = new Upload(file);
-  this.vehicleService.pushUpload(this.currentUpload)
+upload() {
+  const file = this.selectedFiles.item(0);
+  this.selectedFiles = undefined;
+
+  this.currentFileUpload = new FileUpload(file);
+  this.vehicleService.pushFileToStorage(this.currentFileUpload).subscribe(
+    percentage => {
+      this.percentage = Math.round(percentage);
+    },
+    error => {
+      console.log(error);
+    }
+  );
 }
 }
+
+
