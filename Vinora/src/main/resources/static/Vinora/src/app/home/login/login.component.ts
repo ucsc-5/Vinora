@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.items$ = this.size$.pipe(
           switchMap(size => 
             this.db.list('/users', ref =>
-              size ? ref.orderByChild('type').equalTo(size) : ref
+              size ? ref.orderByKey() : ref
             ).snapshotChanges()
           )
         );

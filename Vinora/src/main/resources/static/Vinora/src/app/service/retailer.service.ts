@@ -95,11 +95,9 @@ export class RetailerService {
 
 
   setNotRegisteredCompanies(uid:string){
-    // const newRef = this.db.object(`/retaiers`).orderByKey()
+    this.db.list('/retailers', ref => ref.orderByChild('size').equalTo('large'))
     // newRef.set({company_id: uid});
     
   }
-
-
 
 }
