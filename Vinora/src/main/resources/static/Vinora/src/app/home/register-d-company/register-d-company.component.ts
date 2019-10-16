@@ -55,6 +55,7 @@ export class RegisterDCompanyComponent implements OnInit {
     console.log(stock);
     this.authServise.register(userEmail,password,this.type);
     const callable = this.fns.httpsCallable('addRole');
+    
     callable({email:userEmail,role:this.type}).subscribe(
       response=>{
         console.log(response);
