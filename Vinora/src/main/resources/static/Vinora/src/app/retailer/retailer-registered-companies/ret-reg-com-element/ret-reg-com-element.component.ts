@@ -28,7 +28,8 @@ export class RetRegComElementComponent implements OnInit {
     this.companyServise.getCompany(this.key);
     this.comapany$=this.companyServise.company;
 
-   this.retailerService.isRegisteredWithCompany(this.key,this.retailerId);
+    this.retailerService.isRegisteredWithCompany(this.key,this.retailerId);
+     
     // console.log(this.registerWithCompany);
   }
 

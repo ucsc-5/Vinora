@@ -88,20 +88,22 @@ export class RetailerService {
     );
     this.size$.next(uid);
 
-    this.registeredCompanies$.subscribe(data=>{
+   this.registerWithCompany = this.registeredCompanies$.subscribe(data=>{
       if(data){
         data.forEach(element=>{
           if(element.key==uid){
-            this.registerWithCompany = true;
+            console.log(element.key);
+            return true;
           }else{
-            this.registerWithCompany = false;
+            return false;
           }
         })
-
       }else{
-          this.registerWithCompany = false;
+          return false;
       }
     })
+
+   console.log(this.registerWithCompany);
 }
 
 
