@@ -18,9 +18,16 @@ export class RetailerService {
   
   retailer: Observable<any[]>;
   newCompanies$: Observable<any[]>;
-  companyKeys$: Observable<any[]>;
-  registeredCompany$: Observable<any[]>;
+  registeredCompanies$: Observable<any[]>;
   size$: BehaviorSubject<string|null>;
+
+  companyKeys$: Observable<any[]>;
+  keyBehavior$: BehaviorSubject<string|null>;
+  registerWithCompany
+
+
+
+  
  
  
   constructor(private db: AngularFireDatabase,private fns: AngularFireFunctions) {
@@ -66,31 +73,36 @@ export class RetailerService {
   }
 
 
-  getRegisteredCompaniesList(uid:string){
-    this.size$ = new BehaviorSubject(null);
-    
-    this.companyKeys$ = this.size$.pipe(
+  isRegisteredWithCompany(key:string,uid:string){
+
+    this.registeredCompanies$ = this.size$.pipe(
       switchMap(size => 
-        this.db.list(`retailers/${uid}/registered_Companies`, ref =>
-          size ? ref.orderByKey(): ref
+        this.db.list(`/delivery_Companies/${key}`, ref =>
+          size ? ref.child("registered_Retailers").orderByKey().equalTo(size) : ref
         ).snapshotChanges().pipe(
           map(changes => 
-            changes.map(c => ({ key: c.payload.key, ...c.payload.val()}))
-            )
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          )
         )
       )
     );
+    this.size$.next(uid);
 
-    return this.companyKeys$;
+    this.registeredCompanies$.subscribe(data=>{
+      if(data){
+        data.forEach(element=>{
+          if(element.key==uid){
+            this.registerWithCompany = true;
+          }else{
+            this.registerWithCompany = false;
+          }
+        })
 
-    // this.companyKey$.subscribe(val=>{
-    //   console.log(val[0].key);
-    //   console.log(val[1].key);
-    //   console.log(val);
-    // }
-    // )
-    
-  }
+      }else{
+          this.registerWithCompany = false;
+      }
+    })
+}
 
 
   setNotRegisteredCompanies(uid:string){

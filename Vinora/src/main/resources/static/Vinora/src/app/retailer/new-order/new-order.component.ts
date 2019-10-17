@@ -23,7 +23,7 @@ export class NewOrderComponent implements OnInit {
     this.retailerId = this.afAuth.auth.currentUser.uid;
   }
   ngOnInit() {
-    this.companyKeys$=this.retailerService.getRegisteredCompaniesList(this.retailerId);
+    // this.companyKeys$=this.retailerService.getRegisteredCompaniesList(this.retailerId);
   }
   
   onItemToCart(item:Item){

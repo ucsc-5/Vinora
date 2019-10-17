@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompanyService } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
+import { RetailerService } from 'src/app/service/retailer.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-ret-reg-com-element',
@@ -13,14 +15,21 @@ export class RetRegComElementComponent implements OnInit {
 
   key: any;
   comapany$: Observable<any>;
-  constructor(private companyServise: CompanyService) { }
+  registerWithCompany : boolean;
+  retailerId: string;
+
+  constructor(private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
+
+    this.retailerId=this.afAuth.auth.currentUser.uid;
+  }
 
   ngOnInit() {
     this.key= this.companyKey.key;
-    console.log(this.key);
     this.companyServise.getCompany(this.key);
     this.comapany$=this.companyServise.company;
-    // console.log(this.comapany);
+
+   this.retailerService.isRegisteredWithCompany(this.key,this.retailerId);
+    // console.log(this.registerWithCompany);
   }
 
 }

@@ -103,6 +103,7 @@ export class CompanyService {
             )
             );
             this.size$.next("1");
+            return this.registeredCompanies$;
       }
 
         
