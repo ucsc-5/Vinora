@@ -77,6 +77,7 @@ import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-e
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -149,8 +150,7 @@ import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-e
     AngularFireAuthGuard,
     VehicleService,
     CompanyService,
-    RetailerService,
-    { provide: StorageBucket, useValue: 'my-bucket-name' }],
+    RetailerService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

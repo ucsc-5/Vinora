@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {FormControl,FormGroup} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Vehicle } from '../manager/vehicle/vehicle.model';
-import * as firebase from 'firebase/app';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../uploads/shared/file-upload';
@@ -15,20 +13,15 @@ import { FileUpload } from '../uploads/shared/file-upload';
 export class VehicleService {
 
   private dbPath = '/vehicles';
-  private basePath = '/uploads';
-  // uploads: AngularFireList<Upload[]>;
+  private basePath = '/vehicles';
 
-  vehicleRef: AngularFireList<Vehicle> = null;
 
 
   constructor(private db: AngularFireDatabase,private storage: AngularFireStorage) { 
-    this.vehicleRef = this.db.list(this.dbPath);
+    
   }
 
-  createVehicle(vehicle: Vehicle): void {
-    this.vehicleRef.push(vehicle);
-  }
-
+  
   pushFileToStorage(fileUpload: FileUpload): Observable<any> {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
@@ -39,7 +32,6 @@ export class VehicleService {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           console.log('File available at', downloadURL);
           fileUpload.url = downloadURL;
-          fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
         });
       })
@@ -88,13 +80,7 @@ export class VehicleService {
   }
 
 
-  deleteFileUpload(fileUpload: FileUpload) {
-    this.deleteFileDatabase(fileUpload.key)
-      .then(() => {
-        this.deleteFileStorage(fileUpload.name);
-      })
-      .catch(error => console.log(error));
-  }
+  
   
   private deleteFileDatabase(key: string) {
     return this.db.list(this.basePath).remove(key);

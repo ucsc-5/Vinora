@@ -31,6 +31,7 @@ import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-regist
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
+
 const retailerOnly = hasCustomClaim('retailer');
 const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['login']);
 const redirectLoggedInToItems = redirectLoggedInTo(['items']);

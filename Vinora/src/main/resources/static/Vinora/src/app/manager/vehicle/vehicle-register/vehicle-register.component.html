@@ -2,160 +2,40 @@
         <input type="hidden" formControlName="$id">
 
                  <mat-form-field class="example-full-width">
-                         <input matInput placeholder="Vehicle number" formControlName="number_plate">
+                         <input matInput placeholder="Vehicle number" formControlName="number_plate" required>
                  </mat-form-field>
-             
-
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Vehicle model" formControlName="vehicle_model">
+                        <input matInput placeholder="Vehicle model" formControlName="vehicle_model" required>
                       </mat-form-field>     
-       
-              
-
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Owner name" formControlName="owner_name">
+                        <input matInput placeholder="Owner name" formControlName="owner_name" required>
                       </mat-form-field>   
-       
-
-       
-             
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Owner address" formControlName="owner_address">
+                        <input matInput placeholder="Owner address" formControlName="owner_address" required>
                       </mat-form-field>  
 
                
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Owner mobile" formControlName="owner_mobile">
+                        <input matInput placeholder="Owner address" formControlName="owner_address" required>
+                        <input matInput placeholder="Owner mobile" formControlName="owner_mobile" >
                       </mat-form-field> 
-
-               
-        
-      
-                        <!-- <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroupFileAddon01" >Upload</span>
-                                        </div>
-                            
-                                        <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon01">
-                                                <label class="custom-file-label" for="inputGroupFile01">Vehicle image</label>
-                                        </div>
-                                </div>
-                        </div> -->
-      
-
-        <!-- <div *ngIf="currentUpload">
-                <div class="progress">
-                   <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div> 
-                 </div>
-        
-        </div> -->
-       
-               
-             
-
-              
                   <label>
                      <input type="file" (change)="selectFile($event)">
                   </label>
-              
-                  <button
-                          [disabled]="!selectedFiles"
-                          (click)="upload()">
-              
-                    Upload Single
-                  </button>
-            
-                
+                  <div class="row" style="margin-left: 5px;" *ngIf="percentage!=0">
+                  <mat-progress-bar mode="determinate" value="{{percentage}}"></mat-progress-bar>
+                  
+                         <label >Uploading : {{percentage}} %</label> 
+                  </div>
+                   
                 <label>
-                        <input type="submit" class="btn btn-secondary" value="Register">
+                                <button type="reset" mat-raised-button color="basic" style="margin-right: 25px;">Reset</button>
+                                <button type="submit"  mat-raised-button color="primary">Register</button>
+                                
+                        
                 </label>
-                
-        
-       
+      
 </form>
-<!-- <form   (ngSubmit)="onAddVehicle(f)" #f="ngForm">
-<div class="example-container">
-
-                <input type="hidden" name="$id">
-
-        <mat-form-field>
-          <input matInput placeholder="Vehicle number" name="number_plate">
-        </mat-form-field>
-        <br>
-      
-        <mat-form-field>
-          <textarea matInput placeholder="Vehicle model " name="vehicle_model"></textarea>
-        </mat-form-field>
-
-        <br>
-
-        <mat-form-field>
-          <textarea matInput placeholder="Owner name" name="owner_name"></textarea>
-        </mat-form-field>
-
-        <br>
-
-        <mat-form-field>
-         <textarea matInput placeholder="Owner address" name="owner_address"></textarea>
-       </mat-form-field>
-
-       <br>
-
-
-         <mat-form-field>
-         <textarea matInput placeholder="Owner mobile"></textarea>
-        </mat-form-field>
-
-        <br>
-
-
-        <input type="submit"  value="Register">
-
-
-        
-
-              
-      
-        <!-- <mat-form-field>
-          <mat-select placeholder="Select">
-            <mat-option value="option">Option</mat-option>
-          </mat-select>
-        </mat-form-field> -->
-      <!-- </div>
-
-</form>   -->
-
-       
-      
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

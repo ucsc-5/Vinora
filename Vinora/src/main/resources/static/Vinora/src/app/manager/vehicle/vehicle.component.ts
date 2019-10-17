@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../service/vehicle.service';
-import { Vehicle } from './vehicle.model';
+import { FileUpload  } from '../../uploads/shared/file-upload';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class VehicleComponent implements OnInit {
 
-  myvehicle:Vehicle;
+  myvehicle:FileUpload;
   vehiclesRef: AngularFireList<any>;
   vehicles: Observable<any[]>;
 

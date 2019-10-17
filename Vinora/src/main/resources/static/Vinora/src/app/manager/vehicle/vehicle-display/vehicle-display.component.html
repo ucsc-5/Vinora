@@ -4,14 +4,17 @@
             <mat-card-title>{{vehicle.number_plate}}</mat-card-title>
             <mat-card-subtitle>{{vehicle.vehicle_model}}</mat-card-subtitle>
         </mat-card-header>
-
+        <img mat-card-image src="{{vehicle.url}}" alt="Photo of the Vehicle">
         <mat-card-content>
             <p>Owner        : <b>{{vehicle.owner_name}}</b><br>
-               Owner mobile:: <b>{{vehicle.owner_mobile}}</b><br>
+               Owner mobile: <b>{{vehicle.owner_mobile}}</b><br>
                            
             </p>
-            <button mat-raised-button color="primary" type="submit"style="margin-right: 280px" >Allocate Job</button>
-            <button mat-raised-button color="warn" type="submit" >Remove</button>
+            <mat-card-actions>
+                    <button mat-raised-button color="primary" type="submit" >Allocate Job</button>
+                    <button mat-raised-button color="warn" type="submit" >Remove</button>
+                  </mat-card-actions>
+            
            
 
         </mat-card-content>

@@ -17,7 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
     imports: [
       MatButtonModule,
@@ -39,7 +39,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
       MatAutocompleteModule,
       ReactiveFormsModule,
       FormsModule,
-      MatGridListModule
+      MatGridListModule,
+      MatProgressBarModule
     ],
     exports:[
       MatButtonModule,
@@ -61,7 +62,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
       MatAutocompleteModule,
       ReactiveFormsModule,
       FormsModule,
-      MatGridListModule
+      MatGridListModule,
+      MatProgressBarModule
     ]
   })
 export class MatModule{ }
