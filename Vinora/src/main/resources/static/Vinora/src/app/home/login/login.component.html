@@ -27,6 +27,7 @@
                                 <div class="row">
                                     <div class="col"></div>
                                     <div class="col">
+                                       
                                       <mat-spinner style="margin: 0 auto;display: block;" *ngIf="showSpinner"></mat-spinner>
                                       <button style="margin: 0 auto;display: block;" mat-stroked-button (click)="signUp()">Login</button>
                                     </div>
@@ -36,7 +37,17 @@
                     </div>
                 </div>
             </form>
-
+            <div class="container">
+                
+            <div class="row">
+                <div class="col-3" ></div>
+                <div class="col-6">
+                    <button style="float: right;" mat-button (click)="openDialog()">Forgot Password ?</button>
+                </div>
+                <div class="col-3"></div>
+              </div>
+            </div>
+            
 
             <!-- <div *ngIf="items$ | async; let items; else loading">
               <ul>

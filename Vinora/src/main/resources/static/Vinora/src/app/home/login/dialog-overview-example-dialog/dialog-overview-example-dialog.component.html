@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Vinora </h1>
+<div mat-dialog-content>
+  <p>Enter Your Email ?</p>
+  <mat-form-field>
+    <input [formControl]="email" matInput  >
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="sendEmail()"  cdkFocusInitial>Ok</button>
+</div>
+

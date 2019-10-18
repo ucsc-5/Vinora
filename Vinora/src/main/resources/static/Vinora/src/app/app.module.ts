@@ -74,9 +74,7 @@ import { RetRegComElementComponent } from './retailer/retailer-registered-compan
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RetOrdCompElementComponent } from './retailer/new-order/ret-ord-comp-element/ret-ord-comp-element.component';
 import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-element/new-order-item-elemet/new-order-item-elemet.component';
-
-
-
+import { DialogOverviewExampleDialogComponent } from './home/login/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 
 @NgModule({
   declarations: [
@@ -124,8 +122,12 @@ import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-e
     RetRegComElementComponent,
     PageNotFoundComponent,
     RetOrdCompElementComponent,
-    NewOrderItemElemetComponent
-  ],  
+    NewOrderItemElemetComponent,
+    DialogOverviewExampleDialogComponent
+  ], 
+  entryComponents:[
+    DialogOverviewExampleDialogComponent
+  ], 
   imports: [
     BrowserModule,
     AppRoutingModule,

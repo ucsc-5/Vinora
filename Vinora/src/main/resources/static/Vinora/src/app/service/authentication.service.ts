@@ -61,8 +61,6 @@ export class AuthenticationService {
       })
       
   }
-
-
   async register(email: string, password: string,type: string) {
     console.log(email,password);
     // this.loginUser = new LoginUser(type,this.user.uid,email);

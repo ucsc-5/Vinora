@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
     imports: [
       MatButtonModule,
@@ -40,7 +41,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
       ReactiveFormsModule,
       FormsModule,
       MatGridListModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      MatDialogModule
     ],
     exports:[
       MatButtonModule,
@@ -63,7 +65,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
       ReactiveFormsModule,
       FormsModule,
       MatGridListModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      MatDialogModule
     ]
   })
 export class MatModule{ }

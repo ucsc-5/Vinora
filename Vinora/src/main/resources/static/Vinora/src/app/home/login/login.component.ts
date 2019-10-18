@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable,Inject } from '@angular/core';
 
 import {FormControl, Validators, NgForm} from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -7,8 +7,11 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogOverviewExampleDialogComponent } from './dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 
 @Injectable()
+
 
 @Component({
   selector: 'app-login',
@@ -16,6 +19,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+ 
   showSpinner=false;
 
   items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
@@ -26,8 +30,8 @@ export class LoginComponent implements OnInit {
 
 
   hide = true;
-  constructor(public afAuth: AngularFireAuth, private authService : AuthenticationService,private db: AngularFireDatabase) {
-
+  constructor(public dialog: MatDialog,public afAuth: AngularFireAuth, private authService : AuthenticationService,private db: AngularFireDatabase) {
+    
     this.size$ = new BehaviorSubject(null);
         this.items$ = this.size$.pipe(
           switchMap(size => 
@@ -40,7 +44,9 @@ export class LoginComponent implements OnInit {
         this.size$.next('manager');
       
   }
-
+  openDialog(): void {
+     this.dialog.open(DialogOverviewExampleDialogComponent);
+  }
   signUp(form: NgForm) {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
     const email = form.value.email;
@@ -66,6 +72,8 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('required') ? 'You must enter a value' :
         this.email.hasError('email') ? 'Not a valid email' :
             '';
-  }
-
+  } 
 }
+
+
+

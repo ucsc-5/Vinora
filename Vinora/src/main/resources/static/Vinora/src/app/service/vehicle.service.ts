@@ -23,7 +23,7 @@ export class VehicleService {
 
   
   pushFileToStorage(fileUpload: FileUpload): Observable<any> {
-    const filePath = `${this.basePath}/${fileUpload.file.name}`;
+    const filePath = `${this.basePath}/${fileUpload.file.name}${new Date()}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
 
