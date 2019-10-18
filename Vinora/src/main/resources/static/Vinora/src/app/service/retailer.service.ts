@@ -14,7 +14,7 @@ export class RetailerService {
  
   @Input() companyKeyRef
   private dbPath = '/retailers';
-  
+  companyRegistered:boolean=false;
   retailerRef: AngularFireList<Retailer> = null;
   
   retailer: Observable<any[]>;
@@ -24,13 +24,8 @@ export class RetailerService {
 
   companyKeys$: Observable<any[]>;
   keyBehavior$: BehaviorSubject<string|null>;
-  registerWithCompany;
+  register ;
 
-
-
-  
- 
- 
   constructor(private db: AngularFireDatabase,private fns: AngularFireFunctions) {
     this.retailerRef = this.db.list(this.dbPath);
   }
@@ -91,20 +86,29 @@ export class RetailerService {
     this.size$.next(uid);
 
     this.registeredCompanies$.subscribe(data=>{
-      if(data){
-        console.log(data[0].key);
-        this.registerWithCompany=data[0].key;
+      if(data.length!=0){
+        //console.log(data[0]["key"]);
+        this.register=data[0]["key"];
+        this.getId(this.register)
+        //console.log(this.register)
       }
-    })
+    }
+      );
     
     
-    setTimeout(function(){console.log(this.registerWithCompany+" From New");}, 5000);
     // this.registerWithCompany
     
     // return this.registeredCompanies$;
     // console.log(this.registerWithCompany+" from th new key");
 }
-
+getId(id){
+  if(id){
+    this.companyRegistered=true;
+    
+  }
+  console.log(this.companyRegistered);
+  
+}
 
   setNotRegisteredCompanies(uid:string){
     // const newRef=this.db.list('/retailers', ref => ref.orderByKey())
