@@ -4,6 +4,7 @@ import { Retailer } from './retailer.model';
 import { map, switchMap,first } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { element } from 'protractor';
 
  
 @Injectable({
@@ -23,7 +24,7 @@ export class RetailerService {
 
   companyKeys$: Observable<any[]>;
   keyBehavior$: BehaviorSubject<string|null>;
-  registerWithCompany
+  registerWithCompany;
 
 
 
@@ -73,9 +74,9 @@ export class RetailerService {
   }
 
 
-  isRegisteredWithCompany(key:string,uid:string){
+  async isRegisteredWithCompany(key:string,uid:string){
 
-    this.registeredCompanies$ = this.size$.pipe(
+    this.registeredCompanies$ = await this.size$.pipe(
       switchMap(size => 
         this.db.list(`/delivery_Companies/${key}`, ref =>
           size ? ref.child("registered_Retailers").orderByKey().equalTo(size) : ref
@@ -88,22 +89,19 @@ export class RetailerService {
     );
     this.size$.next(uid);
 
-   this.registerWithCompany = this.registeredCompanies$.subscribe(data=>{
+    this.registeredCompanies$.subscribe(data=>{
       if(data){
-        data.forEach(element=>{
-          if(element.key==uid){
-            console.log(element.key);
-            return true;
-          }else{
-            return false;
-          }
-        })
-      }else{
-          return false;
+        console.log(data[0].key);
+        this.registerWithCompany=data[0].key;
       }
     })
-
-   console.log(this.registerWithCompany);
+    
+    
+    setTimeout(function(){console.log(this.registerWithCompany+" From New");}, 5000);
+    // this.registerWithCompany
+    
+    // return this.registeredCompanies$;
+    // console.log(this.registerWithCompany+" from th new key");
 }
 
 
@@ -123,4 +121,6 @@ export class RetailerService {
 
   }
 
+
+ 
 }

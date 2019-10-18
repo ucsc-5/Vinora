@@ -15,8 +15,10 @@ export class RetRegComElementComponent implements OnInit {
 
   key: any;
   comapany$: Observable<any>;
-  registerWithCompany : boolean;
+  registerWithCompany$ : Observable<any>;
   retailerId: string;
+
+  tempRetailer;
 
   constructor(private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
 
@@ -29,8 +31,6 @@ export class RetRegComElementComponent implements OnInit {
     this.comapany$=this.companyServise.company;
 
     this.retailerService.isRegisteredWithCompany(this.key,this.retailerId);
-     
-    // console.log(this.registerWithCompany);
   }
 
 }
