@@ -63,6 +63,7 @@ export class RetailerService {
           )
         );
         this.size$.next(uid);
+        
   }
  
   getRetailersList(): AngularFireList<Retailer> {
