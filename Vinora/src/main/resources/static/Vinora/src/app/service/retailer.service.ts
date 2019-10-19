@@ -26,7 +26,7 @@ export class RetailerService {
 
   companyKeys$: Observable<any[]>;
   keyBehavior$: BehaviorSubject<string|null>;
-  register ;
+  isRegistered: boolean;
 
   constructor(private db: AngularFireDatabase,private fns: AngularFireFunctions,private storage: AngularFireStorage) {
     this.retailerRef = this.db.list(this.dbPath);
@@ -87,30 +87,31 @@ export class RetailerService {
       )
     );
     this.size$.next(uid);
-<<<<<<< HEAD
-    var numbers = new Array(); 
+
+    var registerKey = new Array<string>(); 
     this.registeredCompanies$.subscribe(data=>{
       if(data.length!=0){
         //console.log(data[0]["key"]);
-        this.register=data[0]["key"];
-        
-        numbers.push(1)
+        // this.register=data[0]["key"];
+        registerKey.push(data[0]["key"]);
         //console.log(this.register)
       }else{
-        numbers.push(0)
+        registerKey.push("null");
       }
     }
       );
-      console.log(numbers);
-    
-    // this.registerWithCompany
-    
-    // return this.registeredCompanies$;
-    // console.log(this.registerWithCompany+" from th new key");
-}
-=======
 
+      console.log(registerKey[0]);
+
+      if(registerKey[0]){
+        console.log(registerKey[0]+" the key from service");
+        this.isRegistered = true;
+        console.log(this.isRegistered+" this is th servise flag");
+      }else{
+        this.isRegistered = false;
+      }
 }
+
 
 createRetailer(retailer:Retailer,uid:string) {
   console.log(uid+" from the service here");
@@ -133,14 +134,10 @@ createRetailer(retailer:Retailer,uid:string) {
       });
     })
   ).subscribe();
-
-
-
   return uploadTask.percentageChanges();
 }
 
 
->>>>>>> 96788eb44f3bae6b5099f537d99127f8dec74a8e
   setNotRegisteredCompanies(uid:string){
     // const newRef=this.db.list('/retailers', ref => ref.orderByKey())
 
