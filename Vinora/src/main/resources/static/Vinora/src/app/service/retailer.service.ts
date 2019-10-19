@@ -32,10 +32,11 @@ export class RetailerService {
     this.retailerRef = this.db.list(this.dbPath);
   }
  
-  setRetailerData(retailer: Retailer, uid:string): void {
-    const newRef = this.db.object(`/retailers/${uid}`);
-    newRef.set(retailer);
-  }
+  // setRetailerData(retailer: Retailer, uid:string): void {
+  //   const newRef = this.db.object(`/retailers/${uid}`);
+  //   newRef.set(retailer);
+  //   console.log(retailer);
+  // }
  
   updateRetailer(key: string, value: any): Promise<void> {
     return this.retailerRef.update(key, value);
@@ -89,11 +90,9 @@ export class RetailerService {
 
 }
 
-createRetailer(retailer:Retailer, uid:string) {
+createRetailer(retailer:Retailer,uid:string) {
+  console.log(uid+" from the service here");
   const basePath = this.dbPath
-  console.log(retailer.file.name);
-  console.log(retailer);
-  
   const filePath = `${basePath}/${retailer.file.name}${new Date()}`;
   const storageRef = this.storage.ref(filePath);
   const uploadTask = this.storage.upload(filePath,retailer.file);
@@ -103,10 +102,17 @@ createRetailer(retailer:Retailer, uid:string) {
       storageRef.getDownloadURL().subscribe(downloadURL => {
         console.log('File available at', downloadURL);
         retailer.setUrl(downloadURL);
-        this.setRetailerData(retailer,uid);
+        const newRef = this.db.object(`/retailers/${uid}`);
+        newRef.set(retailer).then(response=>{
+          console.log(response+" this is from the seting the data");
+        })
+        console.log(retailer);
+
       });
     })
   ).subscribe();
+
+
 
   return uploadTask.percentageChanges();
 }

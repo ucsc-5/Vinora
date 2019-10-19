@@ -20,6 +20,7 @@
                                   <input type="file" (change)="selectFile($event)">
                               </label>
 
+
                               <mat-form-field class="example-full-width">
                                   <input formControlName="myControl2" minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
                                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">

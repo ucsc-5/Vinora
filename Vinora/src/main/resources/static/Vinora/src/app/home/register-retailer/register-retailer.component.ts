@@ -48,25 +48,41 @@ export class RegisterRetailerComponent implements OnInit {
     const userEmail = this.secondFormGroup.value['myControl3'];
     const password = this.firstFormGroup.value['myControl2'];
     const file = this.selectedFiles.item(0);
-    this.retailer = new Retailer(this.firstFormGroup.value['myControl1'],this.secondFormGroup.value['myControl3'],this.secondFormGroup.value['myControl4'],this.secondFormGroup.value['myControl5'],this.retailerUid);
-    await this.authService.register(userEmail,password,this.type);
+    this.authService.register(userEmail,password,this.type);
+
     const callable = await this.fns.httpsCallable('addRole');
-    await this.authService.login(userEmail,password);
-    this.retailerUid = this.afAuth.auth.currentUser.uid;
-    this.retailer.setFile(file);
-    this.retailerService.createRetailer(this.retailer,this.retailerUid);
 
-
-
-     await callable({email:userEmail,role:this.type}).subscribe(
-      response=>{
-        console.log(response);
-      },()=>{},
+    callable({email:userEmail,role:this.type}).subscribe(
+      (response)=>{
+           console.log(response);
+      },
+      ()=>{},
       ()=>{
-      }
-      )
+        console.log("success here");
+        this.authService.login(userEmail,password).then(()=>{
+          this.retailerUid = this.afAuth.auth.currentUser.uid;
+          this.retailer = new Retailer(this.firstFormGroup.value['myControl1'],this.secondFormGroup.value['myControl3'],this.secondFormGroup.value['myControl4'],this.secondFormGroup.value['myControl5'],this.retailerUid);
+          console.log(this.retailerUid);
+          this.retailer.setFile(file);
+          this.retailerService.createRetailer(this.retailer,this.retailerUid).subscribe(
+            // res=>{
+            //   console.log(res.);
+            // }
+          ) 
+        }
+        )
+
       
-  }
+      }
+    )
+   
+    }
+
+
+
+
+ 
+  
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
