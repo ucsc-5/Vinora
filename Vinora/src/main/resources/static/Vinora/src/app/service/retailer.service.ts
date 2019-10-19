@@ -84,32 +84,26 @@ export class RetailerService {
       )
     );
     this.size$.next(uid);
-
+    var numbers = new Array(); 
     this.registeredCompanies$.subscribe(data=>{
       if(data.length!=0){
         //console.log(data[0]["key"]);
         this.register=data[0]["key"];
-        this.getId(this.register)
+        
+        numbers.push(1)
         //console.log(this.register)
+      }else{
+        numbers.push(0)
       }
     }
       );
-    
+      console.log(numbers);
     
     // this.registerWithCompany
     
     // return this.registeredCompanies$;
     // console.log(this.registerWithCompany+" from th new key");
 }
-getId(id){
-  if(id){
-    this.companyRegistered=true;
-    
-  }
-  console.log(this.companyRegistered);
-  
-}
-
   setNotRegisteredCompanies(uid:string){
     // const newRef=this.db.list('/retailers', ref => ref.orderByKey())
 
