@@ -59,6 +59,9 @@ export class AuthenticationService {
           console.log('another uSer')
         }
       })
+
+      console.log(result.additionalUserInfo);
+      console.log(this.user);
       
   }
   async register(email: string, password: string,type: string) {

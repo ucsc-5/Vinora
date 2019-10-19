@@ -11,9 +11,15 @@
               <mat-step [stepControl]="firstFormGroup">
                 <form [formGroup]="firstFormGroup">
                   <ng-template matStepLabel>Fill out Company Name</ng-template>
-                  <mat-form-field class="example-full-width">
+                              <mat-form-field class="example-full-width">
                                 <input matInput type="text" placeholder="Shop Name" formControlName="myControl1" required name="shopName" ngModel>
                               </mat-form-field>
+
+                              
+                              <label>
+                                  <input type="file" (change)="selectFile($event)">
+                              </label>
+
                               <mat-form-field class="example-full-width">
                                   <input formControlName="myControl2" minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
                                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">

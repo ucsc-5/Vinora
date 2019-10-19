@@ -17,12 +17,15 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 })
 export class RegisterRetailerComponent implements OnInit {
 
+  selectedFiles: FileList;
   state = 'new';
   type = 'retailer';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
   loggined = false;
+  retailer :Retailer;
+  retailerUid: string;
   constructor(private fns: AngularFireFunctions,private _formBuilder: FormBuilder,public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService,private retailerService:RetailerService) {
    
   }
@@ -44,19 +47,25 @@ export class RegisterRetailerComponent implements OnInit {
   async register(){
     const userEmail = this.secondFormGroup.value['myControl3'];
     const password = this.firstFormGroup.value['myControl2'];
-    this.authService.register(userEmail,password,this.type);
-    const callable = this.fns.httpsCallable('addRole');
-     callable({email:userEmail,role:this.type}).subscribe(
+    const file = this.selectedFiles.item(0);
+    this.retailer = new Retailer(this.firstFormGroup.value['myControl1'],this.secondFormGroup.value['myControl3'],this.secondFormGroup.value['myControl4'],this.secondFormGroup.value['myControl5'],this.retailerUid);
+    await this.authService.register(userEmail,password,this.type);
+    const callable = await this.fns.httpsCallable('addRole');
+    await this.authService.login(userEmail,password);
+    this.retailerUid = this.afAuth.auth.currentUser.uid;
+    this.retailer.setFile(file);
+    this.retailerService.createRetailer(this.retailer,this.retailerUid);
+
+
+
+     await callable({email:userEmail,role:this.type}).subscribe(
       response=>{
         console.log(response);
       },()=>{},
       ()=>{
-        this.authService.login(userEmail,password);
-        const uid = this.afAuth.auth.currentUser.uid;
-        const retailer = new Retailer(this.firstFormGroup.value['myControl1'],this.secondFormGroup.value['myControl3'],this.secondFormGroup.value['myControl4'],this.secondFormGroup.value['myControl5'],uid)
-        this.retailerService.createRetailer(retailer,uid);
       }
-    )
+      )
+      
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -66,6 +75,10 @@ export class RegisterRetailerComponent implements OnInit {
         this.email.hasError('email') ? 'Not a valid email' :
             '';
   }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+}
 
 
 }

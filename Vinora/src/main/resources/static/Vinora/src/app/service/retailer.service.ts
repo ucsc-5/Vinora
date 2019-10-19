@@ -4,7 +4,9 @@ import { Retailer } from './retailer.model';
 import { map, switchMap,first } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { element } from 'protractor';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
+
 
  
 @Injectable({
@@ -26,11 +28,11 @@ export class RetailerService {
   keyBehavior$: BehaviorSubject<string|null>;
   register ;
 
-  constructor(private db: AngularFireDatabase,private fns: AngularFireFunctions) {
+  constructor(private db: AngularFireDatabase,private fns: AngularFireFunctions,private storage: AngularFireStorage) {
     this.retailerRef = this.db.list(this.dbPath);
   }
  
-  createRetailer(retailer: Retailer, uid:string): void {
+  setRetailerData(retailer: Retailer, uid:string): void {
     const newRef = this.db.object(`/retailers/${uid}`);
     newRef.set(retailer);
   }
@@ -85,30 +87,30 @@ export class RetailerService {
     );
     this.size$.next(uid);
 
-    this.registeredCompanies$.subscribe(data=>{
-      if(data.length!=0){
-        //console.log(data[0]["key"]);
-        this.register=data[0]["key"];
-        this.getId(this.register)
-        //console.log(this.register)
-      }
-    }
-      );
-    
-    
-    // this.registerWithCompany
-    
-    // return this.registeredCompanies$;
-    // console.log(this.registerWithCompany+" from th new key");
 }
-getId(id){
-  if(id){
-    this.companyRegistered=true;
-    
-  }
-  console.log(this.companyRegistered);
+
+createRetailer(retailer:Retailer, uid:string) {
+  const basePath = this.dbPath
+  console.log(retailer.file.name);
+  console.log(retailer);
   
+  const filePath = `${basePath}/${retailer.file.name}${new Date()}`;
+  const storageRef = this.storage.ref(filePath);
+  const uploadTask = this.storage.upload(filePath,retailer.file);
+
+  uploadTask.snapshotChanges().pipe(
+    finalize(() => {
+      storageRef.getDownloadURL().subscribe(downloadURL => {
+        console.log('File available at', downloadURL);
+        retailer.setUrl(downloadURL);
+        this.setRetailerData(retailer,uid);
+      });
+    })
+  ).subscribe();
+
+  return uploadTask.percentageChanges();
 }
+
 
   setNotRegisteredCompanies(uid:string){
     // const newRef=this.db.list('/retailers', ref => ref.orderByKey())

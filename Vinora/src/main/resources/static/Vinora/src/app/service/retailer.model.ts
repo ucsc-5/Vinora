@@ -9,6 +9,10 @@ export class Retailer {
     state: string;
     userId: string;
 
+    key: string;
+    url:string;
+    file:File;
+
     orders: Order[];
     
     constructor(shopname:string,email:string,address:string,contactNumber:string,uid:string){
@@ -20,8 +24,12 @@ export class Retailer {
         this.userId=uid;
     }
 
-    setOrder(order:Order){
-        this.orders.push(order);
+    setUrl(url:string){
+        this.url=url;
+    }
+
+    setFile(file:File){
+        this.file= file;
     }
 
 }

@@ -30,6 +30,7 @@ export class VehicleRegisterComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   onAddVehicle(form: NgForm){
     const value = form.value;
     const file = this.selectedFiles.item(0);
