@@ -42,7 +42,6 @@ export class AuthenticationService {
     })
    }
 
-
   async login(email: string, password: string) {
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
@@ -58,8 +57,7 @@ export class AuthenticationService {
         else{
           console.log('another uSer')
         }
-      })
-      
+      })      
   }
   async register(email: string, password: string,type: string) {
     console.log(email,password);
