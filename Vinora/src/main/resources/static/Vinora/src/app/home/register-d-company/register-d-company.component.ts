@@ -37,7 +37,7 @@ export class RegisterDCompanyComponent implements OnInit {
   loggined = false;
  
   constructor(private readonly afs: AngularFirestore,private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
-    this.companyCollection = afs.collection<Company>('company');
+    this.companyCollection = afs.collection<Company>('companies');
     // .valueChanges() is simple. It just returns the 
     // JSON data without metadata. If you need the 
     // doc.id() in the value you must persist it your self
@@ -80,11 +80,7 @@ export class RegisterDCompanyComponent implements OnInit {
         console.log(response);
       },()=>{},
       ()=>{
-        
-        // this.retailerService.setNotRegisteredCompanies(uid);
-      }
-    )
-    this.authServise.login(userEmail,password);
+        this.authServise.login(userEmail,password);
         const uid = this.afAuth.auth.currentUser.uid;
         const id = this.afs.createId();
         const address:string=this.firstFormGroup.value['address'];
@@ -97,6 +93,10 @@ export class RegisterDCompanyComponent implements OnInit {
         const company1:Company={id,address,companyName,contactNumber,email,managerName,managerNic,state}
         this.companyCollection.add(company1);
         console.log("Success")
+        // this.retailerService.setNotRegisteredCompanies(uid);
+      }
+    )
+        
     /*const stock = new Company(this.firstFormGroup.value['companyName'],this.secondFormGroup.value['managerNic'],this.secondFormGroup.value['managerName'],this.secondFormGroup.value['email'],this.firstFormGroup.value['address'],this.secondFormGroup.value['tel'])
     console.log(stock);
     this.authServise.register(userEmail,password,this.type);

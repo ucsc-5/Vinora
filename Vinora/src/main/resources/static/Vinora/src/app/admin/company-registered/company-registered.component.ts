@@ -12,7 +12,7 @@ export class CompanyRegisteredComponent implements OnInit {
   companies$: Observable<any[]>;
   
   constructor(private companyService:CompanyService) {
-    this.companies$ = this.companyService.registeredCompanies$; 
+    // this.companies$ = this.companyService.registeredCompanies$; 
    }
 
   ngOnInit() {

@@ -1,10 +1,11 @@
 import { Injectable, Input } from '@angular/core';
 import { AngularFireList } from '@angular/fire/database';
 import { Retailer } from './retailer.model';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { finalize, switchMap, map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 export interface Reatiler { shopName: string;
@@ -14,9 +15,7 @@ export interface Reatiler { shopName: string;
                             state: string;
                             userId: string;
                             key: string;
-                            url: string;
-
-                          
+                            url: string;                         
 }
 
  
@@ -28,18 +27,17 @@ export class RetailerService {
 
 
   dbPath = 'retailers'
+  // currentRetailerId;
   
   retailer: Observable<Reatiler[]>;
+
   private retailerCollection: AngularFirestoreCollection<Reatiler>;
 
 
-  constructor(private storage: AngularFireStorage,private readonly afs: AngularFirestore) {
+  constructor(private storage: AngularFireStorage,private readonly afs: AngularFirestore,private afAuth: AngularFireAuth) {
     
     this.retailerCollection = afs.collection<Reatiler>('retailers');
-    
-    this.retailer = this.retailerCollection.valueChanges();
-
-    
+    //  this.currentRetailerId = this.afAuth.auth.currentUser.uid;
   }
  
 
@@ -70,5 +68,16 @@ export class RetailerService {
 //   return uploadTask.percentageChanges();
 // }
 
- 
+getRetailer(uid:string){
+  
+  this.retailer =this.afs.collection(this.dbPath , ref => ref.where('id', '==',uid)).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Reatiler;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return this.retailer;
+}
+  
 }

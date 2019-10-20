@@ -3,6 +3,7 @@ import { CompanyService } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
 import { Item } from 'src/app/service/item.model';
 import { element } from 'protractor';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -13,34 +14,18 @@ export class ManagerDashboardComponent implements OnInit {
 
  
 
+  currentCompannyId;
+
   company: Observable<any[]>;
 
-  constructor(private companyService: CompanyService) {
-
+  constructor(private companyService: CompanyService,private afAuth: AngularFireAuth) {
+    this.currentCompannyId= this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
 
-
-    this.company = this.companyService.company;
-    // this.company.subscribe(response=>{
-    //   response.forEach(element=>{
-    //     // this.items=element.items;
-    //     element.items
-
-    //   })
-    // })
+    this.company = this.companyService.getCompany(this.currentCompannyId);
 
   }
-    // this.company.subscribe((item) => {
-    //   item.forEach(element => {
-    //     console.log(element.items);
 
-    //     this.items=element.items.map(c => ({ key: c.payload.key, ...c.payload.val() }))})
-    // this.company.subscribe((item) => {
-    //   console.log(item[0].items['-Lr-cJmnm9uhn1_3SLsB'].brand);
-    // });
-  
-// }
-//   }
 }

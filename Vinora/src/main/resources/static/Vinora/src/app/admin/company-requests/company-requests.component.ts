@@ -15,7 +15,7 @@ export class CompanyRequestsComponent implements OnInit {
   length: any;
 
   constructor(private companyService:CompanyService) {
-    this.companies$ = this.companyService.requestCompanies$; 
+    // this.companies$ = this.companyService.requestCompanies$; 
   }
 
   ngOnInit() {

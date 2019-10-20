@@ -14,12 +14,11 @@ export class RetailerDashboardComponent implements OnInit {
   retailerId: string
 
   constructor(private retailerService:RetailerService,private afAuth: AngularFireAuth) { 
-    
     this.retailerId = this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
-    this.retailer= this.retailerService.retailer;
+    this.retailer= this.retailerService.getRetailer(this.retailerId);
   }
 
 }

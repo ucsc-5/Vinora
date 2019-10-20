@@ -22,7 +22,7 @@ export class RetailerRegisteredCompaniesComponent implements OnInit {
    }
 
   ngOnInit() {
-     this.companies$=this.companyService.getRegisteredCompanies();
+    //  this.companies$=this.companyService.getRegisteredCompanies();
      this.companies$.subscribe(response=>{
          response.forEach(element => {
             // console.log(element);

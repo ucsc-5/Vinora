@@ -16,8 +16,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.companyServise.registeredCompanies$.subscribe(result => {this.registeredCount=result.length});
-    this.companyServise.requestCompanies$.subscribe(result => {this.requstCount=result.length});   
+    // this.companyServise.registeredCompanies$.subscribe(result => {this.registeredCount=result.length});
+    // this.companyServise.requestCompanies$.subscribe(result => {this.requstCount=result.length});   
   }
 
 }

@@ -19,7 +19,7 @@ export class RetOrdCompElementComponent implements OnInit {
   ngOnInit() {
     this.key=this.company.key;
     console.log(this.key);
-    this.items$=this.companyServise.getCompanyItems(this.key);
+    // this.items$=this.companyServise.getCompanyItems(this.key);
     this.items$.forEach(x=>{
       console.log(x);
     })  

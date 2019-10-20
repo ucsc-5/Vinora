@@ -24,7 +24,7 @@ export class NewOrderComponent implements OnInit {
     this.retailerId = this.afAuth.auth.currentUser.uid;
   }
   ngOnInit() {
-    this.registeredCompanies$=this.companyService.getRegisteredCompanies();
+    // this.registeredCompanies$=this.companyService.getRegisteredCompanies();
   }
 
 }

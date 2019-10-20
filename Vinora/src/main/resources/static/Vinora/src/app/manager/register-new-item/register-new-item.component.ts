@@ -33,7 +33,7 @@ export class RegisterNewItemComponent implements OnInit {
       const itemImage = this.itemImage.item(0);
       const brandImage = this.brandImage.item(0);
       item.setFile(itemImage,brandImage);      
-      this.companyService.createItem(item,this.managerId);
+      // this.companyService.createItem(item,this.managerId);
     }
 
     selectItemImage(event) {

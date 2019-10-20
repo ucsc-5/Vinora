@@ -20,8 +20,8 @@ export class AdminComReqElementComponent implements OnInit {
 
     
     onConfirm(){
-      this.companyService.updateCompany(this.company.key, {state:"1"})
-      .catch(err => console.log(err));
+      // this.companyService.updateCompany(this.company.key, {state:"1"})
+      // .catch(err => console.log(err));
     }
 
 
