@@ -6,7 +6,7 @@ export class Item {
     public unitPrice: number;
     public state: string;
     public itemImage: File;
-    public itemimagePath: string;
+    public itemImagePath: string;
     public brandImage: File;
     public brandImagePath: string;
     public description: string;
@@ -27,7 +27,7 @@ export class Item {
     }
 
     setUrlForItemImage(url:string){
-        this.itemimagePath=url;
+        this.itemImagePath=url;
     }
 
     setUrlForItemBrand(url:string){

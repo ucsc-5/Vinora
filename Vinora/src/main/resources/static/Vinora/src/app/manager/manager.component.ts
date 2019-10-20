@@ -17,6 +17,8 @@ export class ManagerComponent implements OnInit {
   // manager$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   // size$: BehaviorSubject<string|null>;
   
+  opened = true;
+  
   userId: string;
 
   constructor(private db: AngularFireDatabase,private route:ActivatedRoute, private companyService:CompanyService) { 
@@ -30,7 +32,7 @@ export class ManagerComponent implements OnInit {
     this.companyService.getCompany(this.userId);
   }
 
-  opened = false;
+ 
 
   log(state){
     console.log(state)

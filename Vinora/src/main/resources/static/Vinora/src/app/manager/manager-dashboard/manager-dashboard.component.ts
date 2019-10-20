@@ -14,7 +14,6 @@ export class ManagerDashboardComponent implements OnInit {
  
 
   company: Observable<any[]>;
-  items: Item[];
 
   constructor(private companyService: CompanyService) {
 

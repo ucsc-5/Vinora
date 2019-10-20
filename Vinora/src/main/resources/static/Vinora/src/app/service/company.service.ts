@@ -113,48 +113,43 @@ export class CompanyService {
   }
 
 
-  async setImages(item: Item,managerId: string){
+   setImages(item: Item,managerId: string){
     const basePath = this.dbPath
+
     const itemImagePath = `${basePath}/"items"/${item.itemImage.name}${new Date()}`;
     const itemStorageRef = this.storage.ref(itemImagePath);
     const uploadItemImage = this.storage.upload(itemImagePath,item.itemImage);
 
-    const itemBrandPath = `${basePath}/"itemsBrands"/${item.itemImage.name}${new Date()}`;
-    const itemBrandStorageRef = this.storage.ref(itemBrandPath);
-    const uploadItemBrand = this.storage.upload(itemBrandPath,item.brandImage)
-  
-    const upItem = await uploadItemImage.snapshotChanges().pipe(
+    const upItem = uploadItemImage.snapshotChanges().pipe(
       finalize(() => {
         itemStorageRef.getDownloadURL().subscribe(downloadURL => {
           console.log('File available at', downloadURL);
           item.setUrlForItemImage(downloadURL);
         });
       })
-    ).subscribe(
-      res=>{
-        console.log(res+"from the item")
-      }
-    );
+    )
+    const itemBrandPath = `${basePath}/"itemsBrands"/${item.brandImage.name}${new Date()}`;
+    const itemBrandStorageRef = this.storage.ref(itemBrandPath);
+    const uploadItemBrand = this.storage.upload(itemBrandPath,item.brandImage)
 
-    const upBrand = await uploadItemBrand.snapshotChanges().pipe(
+
+    const upBrand = uploadItemBrand.snapshotChanges().pipe(
       finalize(() => {
         itemBrandStorageRef.getDownloadURL().subscribe(downloadURL => {
-          console.log('File available at', downloadURL);
+          console.log('File brand at', downloadURL);
           item.setUrlForItemBrand(downloadURL);
         });
       })
-    ).subscribe(
-      res=>{
-        console.log(res+"from the Brand")
-      }
-    );
-    return item;
+    )
+
+    const itemsRef = this.db.list(`/delivery_Companies/${managerId}/items`).push(item);
+ 
   }
 
+
   createItem(item: Item,managerId: string){
-    const setItem = this.setImages(item,managerId);
-    console.log(setItem+"hjjhgvjvjgyg");
-    const itemsRef = this.db.list(`/delivery_Companies/${managerId}/items`).push(setItem);
+    this.setImages(item,managerId);
+    // const itemsRef = this.db.list(`/delivery_Companies/${managerId}/items`).push(setItem);
   }
 
 
