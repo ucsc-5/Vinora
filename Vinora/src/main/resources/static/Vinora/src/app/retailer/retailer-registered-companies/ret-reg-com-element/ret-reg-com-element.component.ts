@@ -4,6 +4,12 @@ import { Observable } from 'rxjs';
 import { RetailerService } from 'src/app/service/retailer.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+
+interface MyKey{
+  key: string
+}
+
+
 @Component({
   selector: 'app-ret-reg-com-element',
   templateUrl: './ret-reg-com-element.component.html',
@@ -13,11 +19,11 @@ export class RetRegComElementComponent implements OnInit {
 
   @Input() companyKey;
 
+  myKey: Observable<MyKey>
   key: any;
   comapany$: Observable<any>;
-  registerWithCompany$ : Observable<any>;
   retailerId: string;
-  isRegistered:Promise<Observable<any>>;
+  isRegistered$:Observable<any>;
 
   constructor(private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
 
@@ -28,11 +34,17 @@ export class RetRegComElementComponent implements OnInit {
     this.key= this.companyKey.key;
     this.companyServise.getCompany(this.key);
     this.comapany$=this.companyServise.company;
-    this.isRegistered= this.retailerService.isRegisteredWithCompany(this.key,this.retailerId);
-    
-    // this.isRegistered=this.retailerService.isRegistered;
-    
-    //console.log(this.retailerService.registeredCompanies$+"sdfdfd")
+    this.isRegistered$=this.retailerService.isRegisteredWithCompany(this.key,this.retailerId);
+    // this.isRegistered$ = this.retailerService.registeredCompanies$;
+
+    this.isRegistered$.subscribe(res=>{
+      res.forEach(x=>{
+        this.myKey=x.key;
+        console.log(this.myKey+" the keys");
+      })
+    })
+
+    console.log(this.myKey+" fromthe out sidwedwed")
   }
 
 }

@@ -21,7 +21,7 @@ export class RetailerService {
   
   retailer: Observable<any[]>;
   newCompanies$: Observable<any[]>;
-  registeredCompanies$: Observable<any[]>;
+  registeredCompanies$: Observable<any>;
   size$: BehaviorSubject<string|null>;
 
   companyKeys$: Observable<any[]>;
@@ -73,9 +73,9 @@ export class RetailerService {
   }
 
 
-  async isRegisteredWithCompany(key:string,uid:string){
+  isRegisteredWithCompany(key:string,uid:string){
 
-    this.registeredCompanies$ = await this.size$.pipe(
+    this.registeredCompanies$ = this.size$.pipe(
       switchMap(size => 
         this.db.list(`/delivery_Companies/${key}`, ref =>
           size ? ref.child("registered_Retailers").orderByKey().equalTo(size) : ref
@@ -87,8 +87,8 @@ export class RetailerService {
       )
     );
     this.size$.next(uid);
-   return this.registeredCompanies$
-   
+
+    return this.registeredCompanies$;
 }
 
 

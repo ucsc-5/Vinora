@@ -16,18 +16,26 @@
   </div>
 
   <ng-template #loading>Loading&hellip;</ng-template>
-  <div *ngIf="comapany$ | async; let companise; else loading">
-    <ul>
-      <li *ngFor="let company of companise">
-        <b>{{ company.companyName }}</b> <br>
-        <b> {{ company.email }} </b> <br>
-        <b> {{ company.address }} </b> <br>
-        <b> {{ registerWithCompany }} </b> <br>
-        <code> {{ company.key }} </code>
-        <button style="margin: 0 auto;display: block;" mat-stroked-button >New Order</button>
-      </li>
-    </ul>
 
-    <hr>
-    <div *ngIf="!companise">No results, try clearing filters</div>
-  </div>
+
+
+
+
+
+
+  
+
+  <div *ngIf="isRegistered$ | async; let isRegistered; else loading2">
+      <ul>
+        <li *ngFor="let x of isRegistered">
+          <b>{{ x.key }}</b> <br>
+          
+          <button style="margin: 0 auto;display: block;" mat-stroked-button >New Order</button>
+        </li>
+      </ul>
+  
+      <hr>
+      <div *ngIf="!isRegistered">No results, try clearing filters</div>
+    </div>
+  
+    <ng-template #loading2>Loading&hellip;</ng-template>
