@@ -113,7 +113,7 @@ export class CompanyService {
   }
 
 
-  async createItem(item: Item,managerId: string){
+  async setImages(item: Item,managerId: string){
     const basePath = this.dbPath
     const itemImagePath = `${basePath}/"items"/${item.itemImage.name}${new Date()}`;
     const itemStorageRef = this.storage.ref(itemImagePath);
@@ -121,7 +121,7 @@ export class CompanyService {
 
     const itemBrandPath = `${basePath}/"itemsBrands"/${item.itemImage.name}${new Date()}`;
     const itemBrandStorageRef = this.storage.ref(itemBrandPath);
-    const uploadItemBrand = this.storage.upload(itemBrandPath,item.brandImage.name)
+    const uploadItemBrand = this.storage.upload(itemBrandPath,item.brandImage)
   
     const upItem = await uploadItemImage.snapshotChanges().pipe(
       finalize(() => {
@@ -136,8 +136,6 @@ export class CompanyService {
       }
     );
 
-    
-    
     const upBrand = await uploadItemBrand.snapshotChanges().pipe(
       finalize(() => {
         itemBrandStorageRef.getDownloadURL().subscribe(downloadURL => {
@@ -150,18 +148,16 @@ export class CompanyService {
         console.log(res+"from the Brand")
       }
     );
-
-    console.log(item);
-
-
-    // const newRef = this.db.object(`/delivery_Companies/${managerId}/items`);
-    //       newRef.set(item).then(response=>{
-    //         console.log(response+" this is from the seting the data");
-    // })
-
-    return uploadItemImage.percentageChanges(); 
-    
+    return item;
   }
+
+  createItem(item: Item,managerId: string){
+    const setItem = this.setImages(item,managerId);
+    console.log(setItem+"hjjhgvjvjgyg");
+    const itemsRef = this.db.list(`/delivery_Companies/${managerId}/items`).push(setItem);
+  }
+
+
 
   getCompanyItems(managerId: string){
     this.itemsRef = this.db.list(`/delivery_Companies/${managerId}/items`);
