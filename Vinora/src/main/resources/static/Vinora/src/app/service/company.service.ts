@@ -136,6 +136,8 @@ export class CompanyService {
       }
     );
 
+    
+    
     const upBrand = await uploadItemBrand.snapshotChanges().pipe(
       finalize(() => {
         itemBrandStorageRef.getDownloadURL().subscribe(downloadURL => {
