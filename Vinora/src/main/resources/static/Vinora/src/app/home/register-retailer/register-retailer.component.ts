@@ -94,7 +94,7 @@ export class RegisterRetailerComponent implements OnInit {
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
-}
+  }  
 
 
 }

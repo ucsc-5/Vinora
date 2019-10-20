@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, finalize } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 import { Company } from './company.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Item } from './item.model';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 
@@ -29,7 +30,7 @@ export class CompanyService {
 
   
  
-  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService ) {
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService,private storage: AngularFireStorage) {
     this.companykRef = this.db.list(this.dbPath);
     this.getRequestCompanies();
     this.getRegisteredCompanies();
@@ -112,11 +113,52 @@ export class CompanyService {
   }
 
 
-  createItem(item: Item,managerId: string): void {
+  async createItem(item: Item,managerId: string){
+    const basePath = this.dbPath
+    const itemImagePath = `${basePath}/"items"/${item.itemImage.name}${new Date()}`;
+    const itemStorageRef = this.storage.ref(itemImagePath);
+    const uploadItemImage = this.storage.upload(itemImagePath,item.itemImage);
+
+    const itemBrandPath = `${basePath}/"itemsBrands"/${item.itemImage.name}${new Date()}`;
+    const itemBrandStorageRef = this.storage.ref(itemBrandPath);
+    const uploadItemBrand = this.storage.upload(itemBrandPath,item.brandImage.name)
+  
+    const upItem = await uploadItemImage.snapshotChanges().pipe(
+      finalize(() => {
+        itemStorageRef.getDownloadURL().subscribe(downloadURL => {
+          console.log('File available at', downloadURL);
+          item.setUrlForItemImage(downloadURL);
+        });
+      })
+    ).subscribe(
+      res=>{
+        console.log(res+"from the item")
+      }
+    );
+
+    const upBrand = await uploadItemBrand.snapshotChanges().pipe(
+      finalize(() => {
+        itemBrandStorageRef.getDownloadURL().subscribe(downloadURL => {
+          console.log('File available at', downloadURL);
+          item.setUrlForItemBrand(downloadURL);
+        });
+      })
+    ).subscribe(
+      res=>{
+        console.log(res+"from the Brand")
+      }
+    );
+
+    console.log(item);
+
+
     // const newRef = this.db.object(`/delivery_Companies/${managerId}/items`);
-    // newRef.push(item);
-    this.db.list(`/delivery_Companies/${managerId}/items`).push(item);
-    // this.itemRef.push(item);
+    //       newRef.set(item).then(response=>{
+    //         console.log(response+" this is from the seting the data");
+    // })
+
+    return uploadItemImage.percentageChanges(); 
+    
   }
 
   getCompanyItems(managerId: string){

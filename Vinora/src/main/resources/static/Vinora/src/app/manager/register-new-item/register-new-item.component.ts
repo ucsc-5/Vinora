@@ -14,17 +14,14 @@ import { CompanyService } from 'src/app/service/company.service';
 })
 export class RegisterNewItemComponent implements OnInit {
 
-  selectedItemImage:File = null;
+  itemImage: FileList;
+  brandImage: FileList;
+
   managerId;
  
   constructor(private itemService:ItemService,private route: Router,private afAuth: AngularFireAuth,private companyService:CompanyService) {
     this.managerId= this.afAuth.auth.currentUser.uid;
    }
-
-   onFileSelected(event){
-    this.selectedItemImage= <File>event.target.files[0];
-  }
-   
 
   ngOnInit() {
     
@@ -33,7 +30,18 @@ export class RegisterNewItemComponent implements OnInit {
   onAddItem(form: NgForm){
       const value = form.value;
       const item = new Item(value.itemName,value.brandName,value.description,value.quantity,value.unitPrice,value.state);
+      const itemImage = this.itemImage.item(0);
+      const brandImage = this.brandImage.item(0);
+      item.setFile(itemImage,brandImage);      
       this.companyService.createItem(item,this.managerId);
     }
+
+    selectItemImage(event) {
+      this.itemImage = event.target.files;
+    }
+
+    selectBrandImage(event) {
+      this.brandImage = event.target.files;
+    }   
 
 }

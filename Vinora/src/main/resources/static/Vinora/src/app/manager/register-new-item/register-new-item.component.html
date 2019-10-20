@@ -7,30 +7,20 @@
                         <input matInput placeholder="Item Name" name="itemName" ngModel >
                 </mat-form-field>
 
-                <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01" >Upload</span>
-                        </div>
-
-                        <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon01">
-                                <label class="custom-file-label" for="inputGroupFile01">Item image</label>
-                        </div>
-                </div>
-
+                <!-- for the item image -->
+                <label>
+                        <input type="file" (change)="selectItemImage($event)">
+                </label>
+                
                 <mat-form-field class="example-full-width">
                         <input matInput placeholder="Brand" name="brandName" ngModel >
                 </mat-form-field>
 
-                <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
-                        </div>
-                        <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon01">
-                                <label class="custom-file-label" for="inputGroupFile02">Brand Logo</label>
-                        </div>
-                </div>
+                <!-- for the item brand -->
+
+                <label>
+                        <input type="file" (change)="selectBrandImage($event)">
+                </label>
 
                 
                 <mat-form-field class="example-full-width">

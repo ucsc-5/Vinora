@@ -2,12 +2,12 @@
   <div *ngIf="comapany$ | async; let companise; else loading">
     <ul>
       <li *ngFor="let company of companise">
-        <b>{{company.companyName}}</b> <br>
+        <b>{{ company.companyName }}</b> <br>
         <b> {{ company.email }} </b> <br>
         <b> {{ company.address }} </b> <br>
         <b> {{ registerWithCompany }} </b> <br>
-        <code>{{ company.key }}</code>
-        <button style="margin: 0 auto;display: block;" mat-stroked-button (click)="">New Order</button>
+        <code> {{ company.key }} </code>
+        <button style="margin: 0 auto;display: block;" mat-stroked-button >New Order</button>
       </li>
     </ul>
 

@@ -5,7 +5,9 @@ export class Item {
     public quantity: number;
     public unitPrice: number;
     public state: string;
-    public imagePath: File;
+    public itemImage: File;
+    public itemimagePath: string;
+    public brandImage: File;
     public brandImagePath: string;
     public description: string;
     public category: string;
@@ -17,6 +19,19 @@ export class Item {
         this.quantity = quantity;
         this.unitPrice = unitPrice; 
         this.state = state;
+    }
+
+    setFile(itemimagePath:File,brandImagePath:File){
+        this.itemImage = itemimagePath;
+        this.brandImage = brandImagePath;
+    }
+
+    setUrlForItemImage(url:string){
+        this.itemimagePath=url;
+    }
+
+    setUrlForItemBrand(url:string){
+        this.brandImagePath=url;
     }
     
     // public newItem(id:number,itemName:string,brand:string,description: string,imagePath:File,brandImagePath:string,quantity:number,unitPrice:number,state:string){
