@@ -7,6 +7,7 @@ import { OrderService } from 'src/app/service/order.service';
 import { Item } from 'src/app/service/item.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { RetailerService } from 'src/app/service/retailer.service';
+import { CompanyService } from 'src/app/service/company.service';
 
 
 @Component({
@@ -17,17 +18,13 @@ import { RetailerService } from 'src/app/service/retailer.service';
 export class NewOrderComponent implements OnInit {
 
 
-  companyKeys$: Observable<any>;
+  registeredCompanies$: Observable<any>;
   retailerId
-  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private retailerService:RetailerService) {
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private companyService: CompanyService) {
     this.retailerId = this.afAuth.auth.currentUser.uid;
   }
   ngOnInit() {
-    // this.companyKeys$=this.retailerService.getRegisteredCompaniesList(this.retailerId);
-  }
-  
-  onItemToCart(item:Item){
-    console.log(item);
+    this.registeredCompanies$=this.companyService.getRegisteredCompanies();
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CompanyService } from 'src/app/service/company.service';
+import { Company } from 'src/app/service/company.model';
 
 @Component({
   selector: 'app-ret-ord-comp-element',
@@ -9,23 +10,20 @@ import { CompanyService } from 'src/app/service/company.service';
 })
 export class RetOrdCompElementComponent implements OnInit {
 
-  @Input() companyKey;
+  @Input() company:Company;
 
-  key: any;
-  comapany$: Observable<any>;
-
-  items: Observable<any[]>;     // for getting items
-
+  items$: Observable<any>;
+  key;
   constructor(private companyServise: CompanyService) { }
 
   ngOnInit() {
-    this.key= this.companyKey.key;
+    this.key=this.company.key;
     console.log(this.key);
-    this.companyServise.getCompany(this.key);
-    this.comapany$=this.companyServise.company;
-    this.items= this.companyServise.getCompanyItems(this.key);
-    console.log(this.items);
-    // console.log(this.comapany);
+    this.items$=this.companyServise.getCompanyItems(this.key);
+    this.items$.forEach(x=>{
+      console.log(x);
+    })  
   }
+
 
 }

@@ -17,6 +17,9 @@ export class NewOrderItemElemetComponent implements OnInit {
   constructor(private itemServise: ItemService) { }
 
   ngOnInit() {
+
+    console.log("form the item elements");
+
   }
 
   toCart(form: NgForm){

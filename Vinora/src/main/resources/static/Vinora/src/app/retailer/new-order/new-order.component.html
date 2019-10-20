@@ -1,5 +1,6 @@
-<div class="row">
-    <app-ret-ord-comp-element *ngFor="let companyKey of companyKeys$ | async" [companyKey]="companyKey" ></app-ret-ord-comp-element>
-</div>
 
+        <div class="col">
+            <app-ret-ord-comp-element *ngFor="let company of registeredCompanies$ | async" [company]="company" ></app-ret-ord-comp-element>
+        </div> 
+   
 
