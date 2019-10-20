@@ -20,8 +20,6 @@ export class RetailerDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.retailer= this.retailerService.retailer;
-    // console.log(this.retailer);
-    console.log(this.retailerId);
   }
 
 }

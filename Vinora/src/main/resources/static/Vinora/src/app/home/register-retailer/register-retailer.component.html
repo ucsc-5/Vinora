@@ -12,17 +12,17 @@
                 <form [formGroup]="firstFormGroup">
                   <ng-template matStepLabel>Fill out Company Name</ng-template>
                               <mat-form-field class="example-full-width">
-                                <input matInput type="text" placeholder="Shop Name" formControlName="myControl1" required name="shopName" ngModel>
+                                <input matInput type="text" placeholder="Shop Name" formControlName="shopName" name="shopName"  required >
                               </mat-form-field>
 
                               
-                              <label>
+                              <!-- <label>
                                   <input type="file" (change)="selectFile($event)">
-                              </label>
+                              </label> -->
 
 
                               <mat-form-field class="example-full-width">
-                                  <input formControlName="myControl2" minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                                  <input formControlName="password" name="password"   minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" > 
                                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                   </button>
@@ -36,17 +36,17 @@
                 <form [formGroup]="secondFormGroup">
                   <ng-template matStepLabel>Fill out company contact Details</ng-template>
                   <mat-form-field class="example-full-width">
-                      <input  formControlName="myControl3" matInput type="email" placeholder="Enter your email"  name="email" ngModel required>
+                      <input  formControlName="email" matInput type="email" placeholder="Enter your email"  name="email" required >
                       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                       
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                  <textarea formControlName="myControl4" matInput placeholder="Your Address"  name="address" ngModel required></textarea>
+                  <textarea formControlName="address" matInput placeholder="Your Address" name="address" required  ></textarea>
                 </mat-form-field>
               
                 <mat-form-field class="example-full-width">
                     <span matPrefix>+94 &nbsp;</span>
-                    <input formControlName="myControl5" minlength="9" maxlength="9" type="tel" matInput placeholder="Telephone"  name="contactNumber" ngModel required>
+                    <input formControlName="contactNumber" minlength="9" maxlength="9" type="tel" matInput placeholder="Telephone" name="contactNumber" required >
                     <mat-icon matSuffix>call</mat-icon>
                 </mat-form-field>
                   

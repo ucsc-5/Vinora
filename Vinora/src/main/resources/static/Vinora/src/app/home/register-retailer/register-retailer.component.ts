@@ -1,13 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl} from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { RetailerService } from 'src/app/service/retailer.service';
-import { Retailer } from 'src/app/service/retailer.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
+
+export interface Retailer { 
+              id: string;
+              shopName: string;
+              email: string;
+              address: string;
+              contactNumber: string;
+              state: string;
+              url:string; 
+            
+            }
 
 
 @Component({
@@ -24,63 +39,80 @@ export class RegisterRetailerComponent implements OnInit {
   secondFormGroup: FormGroup;
   isEditable = false;
   loggined = false;
-  retailer :Retailer;
-  retailerUid: string;
-  constructor(private fns: AngularFireFunctions,private _formBuilder: FormBuilder,public afAuth: AngularFireAuth,private router: Router,private route:ActivatedRoute, private authService: AuthenticationService,private retailerService:RetailerService) {
+  // retailerUid: string;
+
+  retailer : Observable<Retailer[]>;
+  private retailerCollection: AngularFirestoreCollection<Retailer>;
+
+  constructor(
+                private fns: AngularFireFunctions,
+                private _formBuilder: FormBuilder,
+                public afAuth: AngularFireAuth,
+                private router: Router,
+                private route:ActivatedRoute, 
+                private authService: AuthenticationService,
+                private retailerService:RetailerService,
+                private readonly afs: AngularFirestore,
+                private storage: AngularFireStorage) {
+
+                  this.retailerCollection = afs.collection<Retailer>('retailers');
    
   }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      myControl1: ['', Validators.required],
-      myControl2: ['', [Validators.required,Validators.minLength(6)]]  
+      shopName: ['', Validators.required],
+      password: ['', [Validators.required,Validators.minLength(6)]]  
     });
     
     this.secondFormGroup = this._formBuilder.group({
-      myControl3: ['', [Validators.required,Validators.email]],
-      myControl4: ['', Validators.required],
-      myControl5: ['', [Validators.required,Validators.minLength(9),Validators.maxLength(9)]]
+      email: ['', [Validators.required,Validators.email]],
+      address: ['', Validators.required],
+      contactNumber: ['', [Validators.required,Validators.minLength(9),Validators.maxLength(9)]]
     });
     
   }
   
   async register(){
-    const userEmail = this.secondFormGroup.value['myControl3'];
-    const password = this.firstFormGroup.value['myControl2'];
-    const file = this.selectedFiles.item(0);
-    this.authService.register(userEmail,password,this.type);
+    const email : string = this.secondFormGroup.value['email'];
+    const password = this.firstFormGroup.value['password'];
+
+    const shopName = this.firstFormGroup.value['shopName'];
+    const address = this.secondFormGroup.value['address'];
+    const contactNumber = this.secondFormGroup.value['contactNumber'];
+    const state = "0";
+    const url ="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
+
+    this.authService.register(email,password,this.type);
 
     const callable = await this.fns.httpsCallable('addRole');
 
-    callable({email:userEmail,role:this.type}).subscribe(
+    callable({email:email,role:this.type}).subscribe(
       (response)=>{
            console.log(response);
       },
       ()=>{},
       ()=>{
-        console.log("success here");
-        this.authService.login(userEmail,password).then(()=>{
-          this.retailerUid = this.afAuth.auth.currentUser.uid;
-          this.retailer = new Retailer(this.firstFormGroup.value['myControl1'],this.secondFormGroup.value['myControl3'],this.secondFormGroup.value['myControl4'],this.secondFormGroup.value['myControl5'],this.retailerUid);
-          console.log(this.retailerUid);
-          this.retailer.setFile(file);
-          
-          this.retailerService.createRetailer(this.retailer,this.retailerUid).subscribe(
-            res=>{
-              console.log(res);
-            }
-          ) 
-        }
-        )
-
-      
+        this.authService.login(email,password).then(()=>{
+        const id = this.afAuth.auth.currentUser.uid;
+        const retailer: Retailer = {id,shopName,email,address,contactNumber,state,url};
+        // this.retailerCollection.doc(id). set(retailer);
+        this.retailerCollection.add(retailer).then(
+          res=>{
+            console.log(" Here is the response "+res);
+          }
+        ).catch(error=>{
+          console.log("Error "+ error);
+        });
       }
     )
-   
-    }
-
-
-
+   }
+  )
+}
+      
+      
+      
+      // return uploadTask.percentageChanges();
 
  
   

@@ -7,15 +7,16 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 
-export interface Reatiler10 { shopName: string;
+export interface Reatiler { shopName: string;
                             email: string;
                             address: string;
                             contactNumber: string;
                             state: string;
                             userId: string;
                             key: string;
-                            url:string;
-                           
+                            url: string;
+
+                          
 }
 
  
@@ -28,45 +29,46 @@ export class RetailerService {
 
   dbPath = 'retailers'
   
-  retailer: Observable<Reatiler10[]>;
-  private retailerCollection: AngularFirestoreCollection<Reatiler10>;
+  retailer: Observable<Reatiler[]>;
+  private retailerCollection: AngularFirestoreCollection<Reatiler>;
 
 
   constructor(private storage: AngularFireStorage,private readonly afs: AngularFirestore) {
     
-    this.retailerCollection = afs.collection<Reatiler10>('retailers');
+    this.retailerCollection = afs.collection<Reatiler>('retailers');
     
-    //this.retailer = this.retailerCollection.valueChanges();
+    this.retailer = this.retailerCollection.valueChanges();
+
+    
   }
  
 
-createRetailer(retailer2:Retailer,uid:string) {
-  console.log(uid+" from the service here");
-  const basePath = this.dbPath
-  const filePath = `${basePath}/${retailer2.file.name}${new Date()}`;
-  const storageRef = this.storage.ref(filePath);
-  const uploadTask = this.storage.upload(filePath,retailer2.file);
+// createRetailer(retailer2:Retailer,uid:string) {
+//   console.log(uid+" from the service here");
+//   const basePath = this.dbPath
+//   const filePath = `${basePath}/${retailer2.file.name}${new Date()}`;
+//   const storageRef = this.storage.ref(filePath);
+//   const uploadTask = this.storage.upload(filePath,retailer2.file);
 
-  uploadTask.snapshotChanges().pipe(
-    finalize(() => {
-      storageRef.getDownloadURL().subscribe(downloadURL => {
-        console.log('File available at', downloadURL);
-        retailer2.setUrl(downloadURL);
-        console.log(retailer2);         
-          // this.retailerCollection.add(retailer);
+//   uploadTask.snapshotChanges().pipe(
+//     finalize(() => {
+//       storageRef.getDownloadURL().subscribe(downloadURL => {
+//         console.log('File available at', downloadURL);
+          
+//           // this.retailerCollection.add(retailer);
         
 
-      });
-    })
-  ).subscribe();
+//       });
+//     })
+//   ).subscribe();
 
-         const shopname11: string = retailer2.shopName
-          const id = this.afs.createId();
-          // const retailer1: Reatiler10 = {shopname11,shopname11,shopname11,shopname11};
-          //this.retailerCollection.doc(id).set(retailer1);
+//          const shopname11: string = retailer2.shopName
+//           const id = this.afs.createId();
+//           // const retailer1: Reatiler10 = {shopname11,shopname11,shopname11,shopname11};
+//           //this.retailerCollection.doc(id).set(retailer1);
 
-  return uploadTask.percentageChanges();
-}
+//   return uploadTask.percentageChanges();
+// }
 
  
 }
