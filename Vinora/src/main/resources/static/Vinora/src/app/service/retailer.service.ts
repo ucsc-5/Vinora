@@ -87,29 +87,8 @@ export class RetailerService {
       )
     );
     this.size$.next(uid);
-
-    var registerKey = new Array<string>(); 
-    this.registeredCompanies$.subscribe(data=>{
-      if(data.length!=0){
-        //console.log(data[0]["key"]);
-        // this.register=data[0]["key"];
-        registerKey.push(data[0]["key"]);
-        //console.log(this.register)
-      }else{
-        registerKey.push("null");
-      }
-    }
-      );
-
-      console.log(registerKey[0]);
-
-      if(registerKey[0]){
-        console.log(registerKey[0]+" the key from service");
-        this.isRegistered = true;
-        console.log(this.isRegistered+" this is th servise flag");
-      }else{
-        this.isRegistered = false;
-      }
+   return this.registeredCompanies$
+   
 }
 
 
