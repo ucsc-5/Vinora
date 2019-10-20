@@ -31,7 +31,7 @@ export class RetailerComponent {
     this.route.params.subscribe((param:Params)=>{
       this.retailerId = param['retailerId'];})
 
-    this.retailerService.getRetailer(this.retailerId);
+    // this.retailerService.getRetailer(this.retailerId);
  
   }
  

@@ -64,7 +64,7 @@ export class RegisterDCompanyComponent implements OnInit {
         this.authServise.login(userEmail,password);
         const uid = this.afAuth.auth.currentUser.uid;
         this.companyService.createCompany(stock,uid);
-        this.retailerService.setNotRegisteredCompanies(uid);
+        // this.retailerService.setNotRegisteredCompanies(uid);
       }
     )  
 

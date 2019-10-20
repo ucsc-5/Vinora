@@ -64,10 +64,11 @@ export class RegisterRetailerComponent implements OnInit {
           this.retailer = new Retailer(this.firstFormGroup.value['myControl1'],this.secondFormGroup.value['myControl3'],this.secondFormGroup.value['myControl4'],this.secondFormGroup.value['myControl5'],this.retailerUid);
           console.log(this.retailerUid);
           this.retailer.setFile(file);
+          
           this.retailerService.createRetailer(this.retailer,this.retailerUid).subscribe(
-            // res=>{
-            //   console.log(res.);
-            // }
+            res=>{
+              console.log(res);
+            }
           ) 
         }
         )

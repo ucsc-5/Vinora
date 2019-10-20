@@ -6,7 +6,6 @@ import { MatModule } from './material.theme';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
@@ -40,7 +39,7 @@ import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stoc
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
 
 
-import {StorageBucket} from '@angular/fire/storage';
+
 import { AuthenticationService } from './service/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { ItemService } from './service/item.service';
@@ -75,6 +74,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RetOrdCompElementComponent } from './retailer/new-order/ret-ord-comp-element/ret-ord-comp-element.component';
 import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-element/new-order-item-elemet/new-order-item-elemet.component';
 import { DialogOverviewExampleDialogComponent } from './home/login/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -136,12 +136,12 @@ import { DialogOverviewExampleDialogComponent } from './home/login/dialog-overvi
     FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase,'vinora'),
-    AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFirestoreModule
   ],
   providers: [
     AuthenticationService,

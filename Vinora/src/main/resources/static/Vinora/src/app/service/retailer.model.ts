@@ -8,12 +8,10 @@ export class Retailer {
     contactNumber: string;
     state: string;
     userId: string;
-
     key: string;
     url:string;
     file:File;
-
-    orders: Order[];
+    
     
     constructor(shopname:string,email:string,address:string,contactNumber:string,uid:string){
         this.shopName=shopname;
