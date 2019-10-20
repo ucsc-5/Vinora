@@ -9,23 +9,42 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, from } from 'rxjs';
 import { idTokenResult } from '@angular/fire/auth-guard';
 import { CompanyService } from 'src/app/service/company.service';
-import { Company } from 'src/app/service/company.model';
 import { RetailerService } from 'src/app/service/retailer.service';
-
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+export interface Company{
+  id:string;
+  address:string;
+  companyName:string;
+  contactNumber:string;
+  email:string;
+  managerName:string;
+  managerNic:string;
+  state:string;
+}
 @Component({
   selector: 'app-register-d-company',
   templateUrl: './register-d-company.component.html',
   styleUrls: ['./register-d-company.component.css']
 })
 export class RegisterDCompanyComponent implements OnInit {
+  private companyCollection: AngularFirestoreCollection<Company>;
+  companies: Observable<Company[]>;
   hide = true;
   type = 'manager';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
   loggined = false;
-  constructor(private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
-    
+ 
+  constructor(private readonly afs: AngularFirestore,private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
+    this.companyCollection = afs.collection<Company>('company');
+    // .valueChanges() is simple. It just returns the 
+    // JSON data without metadata. If you need the 
+    // doc.id() in the value you must persist it your self
+    // or use .snapshotChanges() instead. See the addItem()
+    // method below for how to persist the id with
+    // valueChanges()
+    this.companies = this.companyCollection.valueChanges();
   }
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -40,6 +59,8 @@ export class RegisterDCompanyComponent implements OnInit {
       managerNic: ['', Validators.required],
       tel: ['', Validators.required],
     });
+
+   
   }
   get fval(){
     return this.firstFormGroup.controls;
@@ -51,7 +72,32 @@ export class RegisterDCompanyComponent implements OnInit {
     
     const userEmail = this.secondFormGroup.value['email'];
     const password = this.firstFormGroup.value['password'];
-    const stock = new Company(this.firstFormGroup.value['companyName'],this.secondFormGroup.value['managerNic'],this.secondFormGroup.value['managerName'],this.secondFormGroup.value['email'],this.firstFormGroup.value['address'],this.secondFormGroup.value['tel'])
+    this.authServise.register(userEmail,password,this.type);
+    const callable = this.fns.httpsCallable('addRole');
+    
+    callable({email:userEmail,role:this.type}).subscribe(
+      response=>{
+        console.log(response);
+      },()=>{},
+      ()=>{
+        
+        // this.retailerService.setNotRegisteredCompanies(uid);
+      }
+    )
+    this.authServise.login(userEmail,password);
+        const uid = this.afAuth.auth.currentUser.uid;
+        const id = this.afs.createId();
+        const address:string=this.firstFormGroup.value['address'];
+        const companyName:string=this.firstFormGroup.value['companyName'];
+        const contactNumber:string=this.secondFormGroup.value['tel'];
+        const email:string=this.secondFormGroup.value['email'];
+        const managerName:string=this.secondFormGroup.value['managerName'];
+        const managerNic:string=this.secondFormGroup.value['managerNic'];
+        const state:string="0";
+        const company1:Company={id,address,companyName,contactNumber,email,managerName,managerNic,state}
+        this.companyCollection.add(company1);
+        console.log("Success")
+    /*const stock = new Company(this.firstFormGroup.value['companyName'],this.secondFormGroup.value['managerNic'],this.secondFormGroup.value['managerName'],this.secondFormGroup.value['email'],this.firstFormGroup.value['address'],this.secondFormGroup.value['tel'])
     console.log(stock);
     this.authServise.register(userEmail,password,this.type);
     const callable = this.fns.httpsCallable('addRole');
@@ -66,7 +112,8 @@ export class RegisterDCompanyComponent implements OnInit {
         this.companyService.createCompany(stock,uid);
         // this.retailerService.setNotRegisteredCompanies(uid);
       }
-    )  
+    )  */
+
 
   }
 
