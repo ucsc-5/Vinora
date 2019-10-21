@@ -35,7 +35,7 @@ export class VehicleService {
           this.saveFileData(fileUpload);
         });
       })
-    ).subscribe();
+    );
 
     return uploadTask.percentageChanges();
   }
