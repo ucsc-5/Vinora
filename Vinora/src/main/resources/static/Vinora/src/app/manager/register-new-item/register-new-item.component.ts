@@ -31,7 +31,7 @@ export interface Item{
 export class RegisterNewItemComponent implements OnInit {
 
   itemImage: FileList;
-  brandImage: FileList;
+
 
   private itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<Item[]>;
@@ -40,7 +40,7 @@ export class RegisterNewItemComponent implements OnInit {
  
   constructor(private afs: AngularFirestore,private itemService:ItemService,private route: Router,private afAuth: AngularFireAuth,private companyService:CompanyService,private storage: AngularFireStorage) {
     this.managerId= this.afAuth.auth.currentUser.uid;
-    this.itemsCollection = afs.collection<Item>('items');
+    this.itemsCollection = afs.collection<Item>(`companies/${this.managerId}/items`);
   }
 
 
@@ -52,17 +52,16 @@ export class RegisterNewItemComponent implements OnInit {
       const value = form.value;
       // const item = new Item(value.itemName,value.brandName,value.description,value.quantity,value.unitPrice,value.state);
 
-      const itemName = value.item
-      const brand = value.brand
+      const itemName = value.itemName;
+      const brand = value.brandName;
       const quantity = value.quantity;
       const unitPrice = value.unitPrice;
       // const itemImagePath = value.itemImagePath
       // const brandImagePath: string;
       const description = value.description;
-      const category = value.category;
+      const category = "category";
       const state = value.state;
       const itemImage = this.itemImage.item(0);                
-      const brandImage = this.brandImage.item(0);
       
       const basePath ="items"
       const filePath = `${basePath}/${itemImage.name}${new Date()}`;
@@ -72,9 +71,9 @@ export class RegisterNewItemComponent implements OnInit {
       uploadTask.snapshotChanges().pipe(
         finalize(() => {
           storageRef.getDownloadURL().subscribe(downloadURL => {
-            console.log(downloadURL)
+            console.log(downloadURL);
              const itemImagePath= downloadURL;
-             const id = this.managerId 
+             const id = this.afs.createId();
              const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state};
              console.log(item);
              this.itemsCollection.doc(id).set(item);
@@ -91,8 +90,8 @@ export class RegisterNewItemComponent implements OnInit {
       this.itemImage = event.target.files;
     }
 
-    selectBrandImage(event) {
-      this.brandImage = event.target.files;
-    }   
+    // selectBrandImage(event) {
+    //   this.brandImage = event.target.files;
+    // }   
 
 }

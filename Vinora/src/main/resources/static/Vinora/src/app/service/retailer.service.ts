@@ -77,6 +77,7 @@ getRetailer(uid:string){
       return { id, ...data };
     }))
   );
+
   return this.retailer;
 }
   
