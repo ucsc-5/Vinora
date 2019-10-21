@@ -79,19 +79,21 @@ export class RegisterDCompanyComponent implements OnInit {
           console.log(response);
         },()=>{},
         ()=>{
-          this.authServise.login(userEmail,password);
-          const uid = this.afAuth.auth.currentUser.uid;
-          const address:string=this.firstFormGroup.value['address'];
-          const companyName:string=this.firstFormGroup.value['companyName'];
-          const contactNumber:string=this.secondFormGroup.value['tel'];
-          const email:string=this.secondFormGroup.value['email'];
-          const managerName:string=this.secondFormGroup.value['managerName'];
-          const managerNic:string=this.secondFormGroup.value['managerNic'];
-          const state:string="0";
-          const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state}
-          this.companyCollection.doc(uid).set(company1);
-          
-          // this.retailerService.setNotRegisteredCompanies(uid);
+          this.authServise.login(userEmail,password).then(()=>{
+            const uid = this.afAuth.auth.currentUser.uid;
+            const address:string=this.firstFormGroup.value['address'];
+            const companyName:string=this.firstFormGroup.value['companyName'];
+            const contactNumber:string=this.secondFormGroup.value['tel'];
+            const email:string=this.secondFormGroup.value['email'];
+            const managerName:string=this.secondFormGroup.value['managerName'];
+            const managerNic:string=this.secondFormGroup.value['managerNic'];
+            const state:string="0";
+            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state}
+            this.companyCollection.doc(uid).set(company1);
+          }).catch((error)=>{
+            console.log(error+" The error from register then login ");
+          })
+          ;          // this.retailerService.setNotRegisteredCompanies(uid);
         }
       )
     });
