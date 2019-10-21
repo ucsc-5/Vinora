@@ -97,7 +97,8 @@ export class RegisterRetailerComponent implements OnInit {
         const id = this.afAuth.auth.currentUser.uid;
         const retailer: Retailer = {id,shopName,email,address,contactNumber,state,url};
         // this.retailerCollection.doc(id). set(retailer);
-        this.retailerCollection.add(retailer).then(
+        // this.companyCollection.doc(uid).set(company1);
+        this.retailerCollection.doc(id).set(retailer).then(
           res=>{
             console.log(" Here is the response "+res);
           }

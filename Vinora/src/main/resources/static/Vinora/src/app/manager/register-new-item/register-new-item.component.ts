@@ -1,12 +1,28 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Item } from 'src/app/service/item.model';
+
 import { Router } from '@angular/router';
-import * as firebase from 'firebase/app';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { ItemService } from 'src/app/service/item.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CompanyService } from 'src/app/service/company.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+export interface Item{
+
+  itemName: string;
+  brand: string;
+  quantity: number;
+  unitPrice: number;
+  itemImagePath: string;
+  description: string;
+  category: string;
+  state: string;
+}
+
+
 @Component({
   selector: 'app-register-new-item',
   templateUrl: './register-new-item.component.html',
@@ -17,11 +33,16 @@ export class RegisterNewItemComponent implements OnInit {
   itemImage: FileList;
   brandImage: FileList;
 
+  private itemsCollection: AngularFirestoreCollection<Item>;
+  items: Observable<Item[]>;
+
   managerId;
  
-  constructor(private itemService:ItemService,private route: Router,private afAuth: AngularFireAuth,private companyService:CompanyService) {
+  constructor(private afs: AngularFirestore,private itemService:ItemService,private route: Router,private afAuth: AngularFireAuth,private companyService:CompanyService,private storage: AngularFireStorage) {
     this.managerId= this.afAuth.auth.currentUser.uid;
-   }
+    this.itemsCollection = afs.collection<Item>('items');
+  }
+
 
   ngOnInit() {
     
@@ -29,11 +50,41 @@ export class RegisterNewItemComponent implements OnInit {
 
   onAddItem(form: NgForm){
       const value = form.value;
-      const item = new Item(value.itemName,value.brandName,value.description,value.quantity,value.unitPrice,value.state);
-      const itemImage = this.itemImage.item(0);
+      // const item = new Item(value.itemName,value.brandName,value.description,value.quantity,value.unitPrice,value.state);
+
+      const itemName = value.item
+      const brand = value.brand
+      const quantity = value.quantity;
+      const unitPrice = value.unitPrice;
+      // const itemImagePath = value.itemImagePath
+      // const brandImagePath: string;
+      const description = value.description;
+      const category = value.category;
+      const state = value.state;
+      const itemImage = this.itemImage.item(0);                
       const brandImage = this.brandImage.item(0);
-      item.setFile(itemImage,brandImage);      
-      // this.companyService.createItem(item,this.managerId);
+      
+      const basePath ="items"
+      const filePath = `${basePath}/${itemImage.name}${new Date()}`;
+      const storageRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath,itemImage);
+
+      uploadTask.snapshotChanges().pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe(downloadURL => {
+            console.log(downloadURL)
+             const itemImagePath= downloadURL;
+             const id = this.managerId 
+             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state};
+             console.log(item);
+             this.itemsCollection.doc(id).set(item);
+          });
+        })
+        ).subscribe(
+          res=>{
+            console.log(res)
+          }
+        )
     }
 
     selectItemImage(event) {

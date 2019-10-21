@@ -29,6 +29,7 @@ import { RetailerDashboardComponent } from './retailer/retailer-dashboard/retail
 import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-profile.component';
 import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-registered-companies/retailer-registered-companies.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 
 
@@ -40,6 +41,7 @@ const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, children: [
+      {path: '', component: WelcomeComponent },
       {path: 'login', component: LoginComponent },
       {path: 'register', component: RegisterRetailerComponent}, 
       {path: 'registerCompany', component: RegisterDCompanyComponent} 

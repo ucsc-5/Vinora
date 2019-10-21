@@ -75,6 +75,7 @@ import { RetOrdCompElementComponent } from './retailer/new-order/ret-ord-comp-el
 import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-element/new-order-item-elemet/new-order-item-elemet.component';
 import { DialogOverviewExampleDialogComponent } from './home/login/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     PageNotFoundComponent,
     RetOrdCompElementComponent,
     NewOrderItemElemetComponent,
-    DialogOverviewExampleDialogComponent
+    DialogOverviewExampleDialogComponent,
+    WelcomeComponent
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent
