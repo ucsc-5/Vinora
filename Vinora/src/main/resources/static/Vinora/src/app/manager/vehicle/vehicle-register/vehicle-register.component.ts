@@ -67,6 +67,17 @@ export class VehicleRegisterComponent implements OnInit {
     const ownerAddress:string=value.owner_address;
     const ownerMobile:string=value.owner_mobile;
     uploadTask.snapshotChanges().pipe(
+      finalize(() => 
+      storageRef.getDownloadURL().subscribe(durl=>{
+        const photo_url:string=durl;
+        const vehicle1:VehicleInterface={number,model,ownerName,ownerAddress,ownerMobile,photo_url};
+          this.vehicleCollection.add(vehicle1);
+          
+      })
+       )
+   )
+  .subscribe()
+    /*uploadTask.snapshotChanges().pipe(
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           console.log("DURL"+downloadURL);
@@ -77,7 +88,7 @@ export class VehicleRegisterComponent implements OnInit {
           console.log("Success")
         });
       })
-    )
+    )*/
 
     uploadTask.percentageChanges().subscribe(percentage=>{
       this.percentage=Math.round(percentage);
