@@ -42,12 +42,6 @@ export class VehicleRegisterComponent implements OnInit {
   constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private vehicleService:VehicleService,private storage: AngularFireStorage) {
     const uid=this.afAuth.auth.currentUser.uid;
     this.vehicleCollection = afs.collection<VehicleInterface>(`companies/${uid}/vehicles`);
-    // .valueChanges() is simple. It just returns the 
-    // JSON data without metadata. If you need the 
-    // doc.id() in the value you must persist it your self
-    // or use .snapshotChanges() instead. See the addItem()
-    // method below for how to persist the id with
-    // valueChanges()
     this.companies = this.vehicleCollection.valueChanges();
    }
 
@@ -77,18 +71,7 @@ export class VehicleRegisterComponent implements OnInit {
        )
    )
   .subscribe()
-    /*uploadTask.snapshotChanges().pipe(
-      finalize(() => {
-        storageRef.getDownloadURL().subscribe(downloadURL => {
-          console.log("DURL"+downloadURL);
-          
-          const photo_url:string=downloadURL;
-          const vehicle1:VehicleInterface={number,model,ownerName,ownerAddress,ownerMobile,photo_url};
-          this.vehicleCollection.add(vehicle1);
-          console.log("Success")
-        });
-      })
-    )*/
+    
 
     uploadTask.percentageChanges().subscribe(percentage=>{
       this.percentage=Math.round(percentage);
