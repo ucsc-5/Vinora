@@ -12,17 +12,11 @@ export class RetOrdCompElementComponent implements OnInit {
 
   @Input() company:Company;
 
-  items$: Observable<any>;
-  key;
+
   constructor(private companyServise: CompanyService) { }
 
   ngOnInit() {
-    this.key=this.company.key;
-    console.log(this.key);
-    // this.items$=this.companyServise.getCompanyItems(this.key);
-    this.items$.forEach(x=>{
-      console.log(x);
-    })  
+   
   }
 
 

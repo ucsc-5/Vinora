@@ -33,7 +33,7 @@ export interface Item{
   category: string;
   state: string;
 }
-export interface itemsId extends Item { id: string; }
+export interface ItemsId extends Item { id: string; }
 
 export interface Vehicle{
   number:string;
@@ -60,7 +60,7 @@ export class CompanyService {
   company: Observable<any[]>;
 
   private itemCollection: AngularFirestoreCollection<Item>;
-  items: Observable<itemsId[]>;
+  items: Observable<ItemsId[]>;
 
   private vehicleCollection: AngularFirestoreCollection<Vehicle>;
   vehicles: Observable<VehicleId[]>;
@@ -112,5 +112,15 @@ export class CompanyService {
       }))
     );
     return this.items;
+  }
+
+  deleteItem(companyKey:string,itemId: string){
+    const message = this.afs.doc(`${this.dbPath}/${companyKey}/items/${itemId}`).delete().then(response=>{
+      return response;
+    }).catch(error=>{
+      return error
+    });
+
+    return message;
   }
 }

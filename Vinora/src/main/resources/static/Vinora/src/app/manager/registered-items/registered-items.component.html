@@ -1,3 +1,11 @@
 <div class="row">
-    <app-reg-item-element class="col-3" *ngFor="let item of items | async" [item]="item"></app-reg-item-element>
+    <div class="col-8">
+        <div class="row">
+            <app-reg-item-element class="col-4" *ngFor="let item of items | async" [item]="item"></app-reg-item-element>
+        </div>
+    </div>
+    <div class="col-4">
+        <app-register-new-item></app-register-new-item>
+    </div>
+    
 </div>

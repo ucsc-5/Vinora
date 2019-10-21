@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from 'src/app/service/item.model';
-import { ItemService } from 'src/app/service/item.service';
-import { NgForm } from '@angular/forms';
-import { AngularFireFunctions } from '@angular/fire/functions';
-import { first } from 'rxjs/operators';
+import { ItemsId, CompanyService } from 'src/app/service/company.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-reg-item-element',
@@ -12,10 +9,12 @@ import { first } from 'rxjs/operators';
 })
 export class RegItemElementComponent implements OnInit {
 
-  @Input() item:Item
+  @Input() item:ItemsId
 
-  constructor(private itemService:ItemService,private fns: AngularFireFunctions) {
-    
+  companyKey
+
+  constructor(private companyService:CompanyService, private afAuth: AngularFireAuth) {
+    this.companyKey= this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
@@ -23,21 +22,11 @@ export class RegItemElementComponent implements OnInit {
   }
 
   onRemove(){
-
-      this.fns.httpsCallable('add2')({ text: 'Some',pay:'pay data ' })
-      .pipe(first())
-      .subscribe(resp => {
-        console.log({ resp });
-      }, err => {
-        console.error({ err });
-      })
-
-      // callable({email:userEmail,role:this.type}).subscribe(
-
-  
-    // this.itemService.deleteItem(this.item.key);
-
-
+    this.companyService.deleteItem(this.companyKey,this.item.id).then(x=>{
+      console.log(x+" deleted");
+    }).catch(error=>{
+      console.log(error+" error in deletiong");
+    });
   }
 
 }
