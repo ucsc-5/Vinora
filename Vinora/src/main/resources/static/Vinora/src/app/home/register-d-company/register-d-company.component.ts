@@ -12,7 +12,6 @@ import { CompanyService } from 'src/app/service/company.service';
 import { RetailerService } from 'src/app/service/retailer.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 export interface Company{
-  id:string;
   address:string;
   companyName:string;
   contactNumber:string;
@@ -72,30 +71,33 @@ export class RegisterDCompanyComponent implements OnInit {
     
     const userEmail = this.secondFormGroup.value['email'];
     const password = this.firstFormGroup.value['password'];
-    this.authServise.register(userEmail,password,this.type);
-    const callable = this.fns.httpsCallable('addRole');
+    this.authServise.register(userEmail,password,this.type).then(()=>{
+      const callable = this.fns.httpsCallable('addRole');
     
-    callable({email:userEmail,role:this.type}).subscribe(
-      response=>{
-        console.log(response);
-      },()=>{},
-      ()=>{
-        this.authServise.login(userEmail,password);
-        const uid = this.afAuth.auth.currentUser.uid;
-        const id = this.afs.createId();
-        const address:string=this.firstFormGroup.value['address'];
-        const companyName:string=this.firstFormGroup.value['companyName'];
-        const contactNumber:string=this.secondFormGroup.value['tel'];
-        const email:string=this.secondFormGroup.value['email'];
-        const managerName:string=this.secondFormGroup.value['managerName'];
-        const managerNic:string=this.secondFormGroup.value['managerNic'];
-        const state:string="0";
-        const company1:Company={id,address,companyName,contactNumber,email,managerName,managerNic,state}
-        this.companyCollection.add(company1);
-        console.log("Success")
-        // this.retailerService.setNotRegisteredCompanies(uid);
-      }
-    )
+      callable({email:userEmail,role:this.type}).subscribe(
+        response=>{
+          console.log(response);
+        },()=>{},
+        ()=>{
+          this.authServise.login(userEmail,password);
+          const uid = this.afAuth.auth.currentUser.uid;
+          const address:string=this.firstFormGroup.value['address'];
+          const companyName:string=this.firstFormGroup.value['companyName'];
+          const contactNumber:string=this.secondFormGroup.value['tel'];
+          const email:string=this.secondFormGroup.value['email'];
+          const managerName:string=this.secondFormGroup.value['managerName'];
+          const managerNic:string=this.secondFormGroup.value['managerNic'];
+          const state:string="0";
+          const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state}
+          this.companyCollection.doc(uid).set(company1);
+          
+          // this.retailerService.setNotRegisteredCompanies(uid);
+        }
+      )
+    });
+      
+    
+   
         
     /*const stock = new Company(this.firstFormGroup.value['companyName'],this.secondFormGroup.value['managerNic'],this.secondFormGroup.value['managerName'],this.secondFormGroup.value['email'],this.firstFormGroup.value['address'],this.secondFormGroup.value['tel'])
     console.log(stock);

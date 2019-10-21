@@ -43,21 +43,28 @@ export class AuthenticationService {
    }
 
   async login(email: string, password: string) {
-      var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
-        if(idTokenResult.claims.retailer){
-          this.router.navigate(['/retailer/',this.user.uid]);
-        }else if(idTokenResult.claims.manager){
-          this.router.navigate(['/manager/',this.user.uid]);
-        }else if(idTokenResult.claims.admin){
-          this.router.navigate(['/admin/',this.user.uid]);
-        }else if(idTokenResult.claims.stockManager){
-          this.router.navigate(['/stockManager/',this.user.uid]);
-        }
-        else{
-          console.log('another uSer')
-        }
-      })      
+    await this.afAuth.auth.signOut();
+      var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password).then(()=>{
+        this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+          if(idTokenResult.claims.retailer){
+            this.router.navigate(['/retailer/',this.user.uid]);
+          }else if(idTokenResult.claims.manager){
+            this.router.navigate(['/manager/',this.user.uid]);
+          }else if(idTokenResult.claims.admin){
+            this.router.navigate(['/admin/',this.user.uid]);
+          }else if(idTokenResult.claims.stockManager){
+            this.router.navigate(['/stockManager/',this.user.uid]);
+          }
+          else{
+            console.log('another uSer')
+          }
+        })   
+      }).catch(function(error){
+        var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log("Eroor Msg"  + errorMessage);
+      });
+         
   }
   async register(email: string, password: string,type: string) {
     console.log(email,password);
