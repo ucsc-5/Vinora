@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CompanyService } from 'src/app/service/company.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-vehicle',
@@ -14,20 +16,17 @@ import { Observable } from 'rxjs';
 export class VehicleComponent implements OnInit {
 
   myvehicle:FileUpload;
-  vehiclesRef: AngularFireList<any>;
+
   vehicles: Observable<any[]>;
 
-  constructor(private route:ActivatedRoute, private router: Router, private vehicleService:VehicleService,private db: AngularFireDatabase) {
-    
+  companyId
+
+  constructor(private afAuth: AngularFireAuth,private route:ActivatedRoute, private router: Router, private companyServise:CompanyService,private db: AngularFireDatabase) {
+    this.companyId= this.afAuth.auth.currentUser.uid;
    }
 
   ngOnInit() {
-    this.vehiclesRef = this.db.list('vehicles');
-    this.vehicles = this.vehiclesRef.snapshotChanges().pipe(
-      map(changes => 
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
+    this.vehicles = this.companyServise.getVehicle(this.companyId);
   }
 
 

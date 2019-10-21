@@ -20,7 +20,7 @@ export class RegisteredItemsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.items=this.companyService.getCompanyItems(this.managerId);
+    this.items= this.companyService.getItems(this.managerId);
   }
 
 }

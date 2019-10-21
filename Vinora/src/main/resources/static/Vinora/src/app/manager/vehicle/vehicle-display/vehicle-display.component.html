@@ -1,13 +1,14 @@
 
     <mat-card class="example-card">
         <mat-card-header>
-            <mat-card-title>{{vehicle.number_plate}}</mat-card-title>
-            <mat-card-subtitle>{{vehicle.vehicle_model}}</mat-card-subtitle>
+            <mat-card-title>{{vehicle.number}}</mat-card-title>
+            <mat-card-subtitle>{{vehicle.model}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="{{vehicle.url}}" alt="Photo of the Vehicle">
+        <img mat-card-image src="{{vehicle.photo_url}}" alt="Photo of the Vehicle">
         <mat-card-content>
-            <p>Owner        : <b>{{vehicle.owner_name}}</b><br>
-               Owner mobile: <b>{{vehicle.owner_mobile}}</b><br>
+            <p>Owner        : <b>{{vehicle.ownerName}}</b><br>
+               Owner mobile: <b>{{vehicle.ownerMobile}}</b><br>
+               Owner address: <b>{{vehicle.ownerAddress}}</b><br>
                            
             </p>
             <mat-card-actions>
