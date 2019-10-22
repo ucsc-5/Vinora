@@ -26,10 +26,10 @@ export class ManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((param:Params)=>{
-            this.userId = param['id']; 
-    })
-    this.companyService.getCompany(this.userId);
+    // this.route.params.subscribe((param:Params)=>{
+    //         this.userId = param['id']; 
+    // })
+    // this.companyService.getCompany(this.userId);
   }
 
  

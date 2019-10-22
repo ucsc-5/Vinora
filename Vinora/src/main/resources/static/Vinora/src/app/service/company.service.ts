@@ -9,17 +9,18 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { getMatFormFieldMissingControlError } from '@angular/material';
 
 export interface Company{
- key: string;
- managerName: string;
- managerNic: string;
- companyId: number;
- companyName: string;
- email: string;
- address: string;
- contactNumber: string;
- imagePath: string;
- state: string;
+  managerName: string;
+  managerNic: string;
+  companyId: number;
+  companyName: string;
+  email: string;
+  address: string;
+  contactNumber: string;
+  imagePath: string;
+  state: string;
 }
+
+export interface CompanyId extends Company{ id: string}
 
 
 
@@ -59,7 +60,7 @@ export class CompanyService {
   private dbPath = 'companies';
 
  
-  companyCollection: AngularFirestoreDocument<Company> = null;
+  privatecompanyCollection: AngularFirestoreDocument<Company> = null;
   company: Observable<Company[]>;
 
   private itemCollection: AngularFirestoreCollection<Item>;
@@ -67,15 +68,26 @@ export class CompanyService {
 
   private vehicleCollection: AngularFirestoreCollection<Vehicle>;
   vehicles: Observable<VehicleId[]>;
+
+  private allCompanyCollection: AngularFirestoreDocument<Company> = null
+  companies: Observable<CompanyId[]>
+
  
   constructor(private readonly afs: AngularFirestore,private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService,private storage: AngularFireStorage) {
     
   }
 
-  getCompany(uid:string){
-    // this.companyCollection = this.afs.doc<Company>('companies/'+uid);
-    // this.company= this.companyCollection.valueChanges();
-    // return this.company;
+  getAllCompany(){
+    this.companies = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Company;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  
+    return this.companies;
+    
   }
 
   getCompanyByEmail(email:string){

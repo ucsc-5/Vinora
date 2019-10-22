@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CompanyService, Company } from 'src/app/service/company.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-retailer-new-companies',
@@ -7,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RetailerNewCompaniesComponent implements OnInit {
 
-  constructor() { }
+ 
+  companies: Observable<Company[]>;
+  constructor(private companyServise: CompanyService) { 
+
+  }
 
   ngOnInit() {
-    
+    // this.companies= this.companyServise.getAllCompany();
   }
 
 }

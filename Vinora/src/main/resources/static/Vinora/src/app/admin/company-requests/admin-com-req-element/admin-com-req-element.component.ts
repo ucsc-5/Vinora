@@ -15,7 +15,7 @@ export class AdminComReqElementComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.company.key);
+    // console.log(this.company.key);
   }
 
     

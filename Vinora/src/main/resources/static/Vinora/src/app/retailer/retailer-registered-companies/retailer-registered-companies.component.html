@@ -8,7 +8,10 @@
     <!-- <div *ngIf="items.length === 0">No results, try clearing filters</div> -->
   <!-- </div>
   <ng-template #loading>Loading&hellip;</ng-template> -->
-
-  <app-ret-reg-com-element *ngFor="let company of companies$ | async" [companyKey]="company"></app-ret-reg-com-element>
-
+<div class="row">
+  <div class="col col-lg-4">
+    <app-ret-reg-com-element *ngFor="let company of companies | async" [company]="company" ></app-ret-reg-com-element>
+  </div>
+</div>
+ 
   <p>sjdncjsdncljsdncjnsdlcnjsdlkcj</p>

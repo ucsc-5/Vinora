@@ -1,41 +1,25 @@
+<mat-card class="example-card">
+      <mat-card-header>
+          <mat-card-title>{{company.companyName}}</mat-card-title>
+          <mat-card-subtitle>{{ company.email }} </mat-card-subtitle>
+      </mat-card-header>
+      <!-- <img mat-card-image src="{{item.itemImagePath}}" alt="Photo of the Vehicle"> -->
+      <mat-card-content>
+              
+          <p>
+            {{ company.address }}<br>
+              Available:  <b></b>{{ company.id }}<br>                
+          </p>
 
-  <div *ngIf="comapany$ | async; let companise; else loading">
-    <ul>
-      <li *ngFor="let company of companise">
-        <b>{{ company.companyName }}</b> <br>
-        <b> {{ company.email }} </b> <br>
-        <b> {{ company.address }} </b> <br>
-        <b> {{ registerWithCompany }} </b> <br>
-        <code> {{ company.key }} </code>
-        <button style="margin: 0 auto;display: block;" mat-stroked-button >New Order</button>
-      </li>
-    </ul>
+      </mat-card-content>
 
-    <hr>
-    <div *ngIf="!companise">No results, try clearing filters</div>
-  </div>
-
-  <ng-template #loading>Loading&hellip;</ng-template>
-
-
-
+      <mat-card-actions>   
+                  <button mat-raised-button color="warn" type="submit" (click)="onRegister($event)" >Register</button>
+      </mat-card-actions>
+</mat-card>
 
 
 
 
-  
 
-  <div *ngIf="isRegistered$ | async; let isRegistered; else loading2">
-      <ul>
-        <li *ngFor="let x of isRegistered">
-          <b>{{ x.key }}</b> <br>
-          
-          <button style="margin: 0 auto;display: block;" mat-stroked-button >New Order</button>
-        </li>
-      </ul>
-  
-      <hr>
-      <div *ngIf="!isRegistered">No results, try clearing filters</div>
-    </div>
-  
-    <ng-template #loading2>Loading&hellip;</ng-template>
+

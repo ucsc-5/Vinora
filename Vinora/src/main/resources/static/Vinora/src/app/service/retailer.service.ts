@@ -6,7 +6,7 @@ import { finalize, switchMap, map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreCollectionGroup } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Company } from './company.service';
+import { Company, CompanyId } from './company.service';
 
 
 export interface Reatiler { shopName: string;
@@ -33,17 +33,18 @@ export class RetailerService {
   private retailerCollection: AngularFirestoreCollection<Reatiler>;
   retailer: Observable<Reatiler[]>;
 
-  private companyCollection: AngularFirestoreCollection<Company>
-  companies: Observable<Company[]>
-
+ 
   constructor(private storage: AngularFireStorage,private readonly afs: AngularFirestore,private afAuth: AngularFireAuth) {
     this.retailerCollection = afs.collection<Reatiler>('retailers');
-    this.companyCollection = afs.collection<Company>('companies');
   }
 
  
 getAllCompanies(){
 
+}0
+
+registerRetailer(company: CompanyId){
+  console.log(company.id);
 }
 
 
