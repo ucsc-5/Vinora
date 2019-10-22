@@ -3,6 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 export interface StockManager{
   fullName:string;
@@ -26,9 +27,9 @@ export class RegisterStockManagerComponent implements OnInit {
   mobile=new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]);
   private stockManagerCollection: AngularFirestoreCollection<StockManager>;
   stockManagers: Observable<StockManager[]>;
-  constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore) { 
+  type = 'stockManager';
+  constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions) { 
     const uid=this.afAuth.auth.currentUser.uid;
-    console.log("before uid"+uid);
     this.stockManagerCollection = afs.collection<StockManager>(`companies/${uid}/stockManagers`);
     this.stockManagers= this.stockManagerCollection.valueChanges();
   }
@@ -40,7 +41,7 @@ export class RegisterStockManagerComponent implements OnInit {
         this.email.hasError('email') ? 'Not a valid email' :
             '';
   }
-  register(){
+  async register(){
     const fullName:string=this.fullName.value;
     const address:string=this.address.value;
     const nic:string=this.nic.value;
@@ -48,10 +49,20 @@ export class RegisterStockManagerComponent implements OnInit {
     const mobile:string=this.mobile.value;
     const state:string="1";
     const stockManager1:StockManager={fullName,address,nic,email,mobile,state}
-    this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value).then( (data)=>{
-      console.log("UID"+data.user.uid)
-      this.stockManagerCollection.doc(data.user.uid).set(stockManager1);
-    });
+    const callable = await this.fns.httpsCallable('addRole');
+    var createUser=this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value);
+    callable({email:email,role:this.type}).subscribe(
+      (response)=>{
+           console.log(response);
+      },
+      ()=>{},
+      ()=>{
+        createUser.then( (data)=>{
+          this.stockManagerCollection.doc(data.user.uid).set(stockManager1);
+        });
+   }
+  )
+    
     
     
   }
