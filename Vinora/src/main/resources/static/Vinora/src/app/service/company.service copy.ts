@@ -3,7 +3,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, switchMap, finalize } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
-import { Company } from './company.model';
+// import { Company } from './company.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Item } from './item.model';
 import { AngularFireStorage } from '@angular/fire/storage';

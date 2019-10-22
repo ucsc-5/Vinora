@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Company } from 'src/app/service/company.model';
-import { CompanyService } from 'src/app/service/company.service';
+
+import { CompanyService, Company } from 'src/app/service/company.service';
 
 @Component({
   selector: 'app-admin-com-req-element',

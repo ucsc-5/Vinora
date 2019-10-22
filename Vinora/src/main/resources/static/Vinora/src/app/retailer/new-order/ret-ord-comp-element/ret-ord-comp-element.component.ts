@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CompanyService } from 'src/app/service/company.service';
-import { Company } from 'src/app/service/company.model';
+import { CompanyService, Company } from 'src/app/service/company.service';
 
 @Component({
   selector: 'app-ret-ord-comp-element',

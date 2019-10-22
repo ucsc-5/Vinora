@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Company } from 'src/app/service/company.model';
+import { Company } from 'src/app/service/company.service';
+
 
 @Component({
   selector: 'app-admin-com-reg-elemet',

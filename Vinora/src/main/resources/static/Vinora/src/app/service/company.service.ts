@@ -3,22 +3,25 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, switchMap, finalize } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
-import { Company } from './company.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { getMatFormFieldMissingControlError } from '@angular/material';
 
 export interface Company{
-  id:string;
-  address:string;
-  companyName:string;
-  contactNumber:string;
-  email:string;
-  managerName:string;
-  managerNic:string;
-  state:string;
+ key: string;
+ managerName: string;
+ managerNic: string;
+ companyId: number;
+ companyName: string;
+ email: string;
+ address: string;
+ contactNumber: string;
+ imagePath: string;
+ state: string;
 }
+
+
 
 
 
@@ -56,31 +59,34 @@ export class CompanyService {
   private dbPath = 'companies';
 
  
-  companykRef: AngularFireList<Company> = null;
-  company: Observable<any[]>;
+  companyCollection: AngularFirestoreDocument<Company> = null;
+  company: Observable<Company[]>;
 
   private itemCollection: AngularFirestoreCollection<Item>;
   items: Observable<ItemsId[]>;
 
   private vehicleCollection: AngularFirestoreCollection<Vehicle>;
   vehicles: Observable<VehicleId[]>;
-
-
-
  
   constructor(private readonly afs: AngularFirestore,private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService,private storage: AngularFireStorage) {
     
   }
 
   getCompany(uid:string){
+    // this.companyCollection = this.afs.doc<Company>('companies/'+uid);
+    // this.company= this.companyCollection.valueChanges();
+    // return this.company;
+  }
 
-    this.company =this.afs.collection(this.dbPath , ref => ref.where('id', '==',uid)).snapshotChanges().pipe(
+  getCompanyByEmail(email:string){
+    this.company =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
+  
     return this.company;
   }
 
