@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-5 example-container">
+            <mat-form-field>
+                <input matInput placeholder="Full Name" [formControl]="fullName" required>
+            </mat-form-field>
+            <mat-form-field>
+                <textarea [formControl]="address" matInput placeholder="Address"></textarea>
+              </mat-form-field>
+              <mat-form-field>
+                <input [formControl]="nic" matInput placeholder="NIC" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input [formControl]="mobile" matInput placeholder="Mobile Number" required>
+            </mat-form-field>
+            <div class="row">
+                <div class="col">
+                    <button type="reset" mat-raised-button>Reset</button> 
+                </div>
+                <div class="col">
+                    <button (click)="register()" mat-raised-button color="primary">Register</button>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>

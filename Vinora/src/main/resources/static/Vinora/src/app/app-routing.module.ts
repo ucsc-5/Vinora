@@ -30,6 +30,7 @@ import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-p
 import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-registered-companies/retailer-registered-companies.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
+import { RegisterStockManagerComponent } from './manager/register-stock-manager/register-stock-manager.component';
 
 
 
@@ -64,6 +65,7 @@ const routes: Routes = [
 
   {path: 'manager/:id', component: ManagerComponent, children:[
     {path: '' ,component :ManagerDashboardComponent},
+    {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
     {path: 'registerNewItem', component: RegisterNewItemComponent},
     {path: 'vehicleRegister', component: VehicleComponent,children:[
       {path: 'registerVehicle', component: VehicleRegisterComponent }
