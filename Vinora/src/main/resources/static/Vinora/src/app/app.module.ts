@@ -79,6 +79,7 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
 import { RegisterStockManagerComponent } from './manager/register-stock-manager/register-stock-manager.component';
 import { SalesRepresentativeComponent } from './manager/sales-representative/sales-representative.component';
 import { RegisterSalesRepresentativeComponent } from './manager/sales-representative/register-sales-representative/register-sales-representative.component';
+import { DisplaySalesRepresentativeComponent } from './manager/sales-representative/display-sales-representative/display-sales-representative.component';
 
 
 @NgModule({
@@ -133,6 +134,7 @@ import { RegisterSalesRepresentativeComponent } from './manager/sales-representa
     RegisterStockManagerComponent,
     SalesRepresentativeComponent,
     RegisterSalesRepresentativeComponent,
+    DisplaySalesRepresentativeComponent,
   
   ], 
   entryComponents:[

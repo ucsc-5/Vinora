@@ -68,7 +68,9 @@ const routes: Routes = [
   {path: 'manager/:id', component: ManagerComponent, children:[
     {path: '' ,component :ManagerDashboardComponent},
     {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
-    {path: 'registerSalesRepresentative' ,component :SalesRepresentativeComponent},
+    {path: 'SalesRepresentative' ,component :SalesRepresentativeComponent,children:[
+      {path:'registerSalesRepresentative',component:RegisterSalesRepresentativeComponent}
+    ]},
     {path: 'registerNewItem', component: RegisterNewItemComponent},
     {path: 'vehicleRegister', component: VehicleComponent,children:[
       {path: 'registerVehicle', component: VehicleRegisterComponent }
