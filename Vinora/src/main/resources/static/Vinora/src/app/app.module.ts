@@ -77,6 +77,8 @@ import { DialogOverviewExampleDialogComponent } from './home/login/dialog-overvi
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 import { RegisterStockManagerComponent } from './manager/register-stock-manager/register-stock-manager.component';
+import { SalesRepresentativeNavComponent } from './manager/sales-representative/sales-representative-nav/sales-representative-nav.component';
+import { SalesRepresentativeComponent } from './manager/sales-representative/sales-representative/sales-representative.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +129,9 @@ import { RegisterStockManagerComponent } from './manager/register-stock-manager/
     NewOrderItemElemetComponent,
     DialogOverviewExampleDialogComponent,
     WelcomeComponent,
-    RegisterStockManagerComponent
+    RegisterStockManagerComponent,
+    SalesRepresentativeNavComponent,
+    SalesRepresentativeComponent
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent
