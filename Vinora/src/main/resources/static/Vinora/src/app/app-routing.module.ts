@@ -31,6 +31,8 @@ import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-regist
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 import { RegisterStockManagerComponent } from './manager/register-stock-manager/register-stock-manager.component';
+import { RegisterSalesRepresentativeComponent } from './manager/sales-representative/register-sales-representative/register-sales-representative.component';
+import { SalesRepresentativeComponent } from './manager/sales-representative/sales-representative.component';
 
 
 
@@ -66,6 +68,7 @@ const routes: Routes = [
   {path: 'manager/:id', component: ManagerComponent, children:[
     {path: '' ,component :ManagerDashboardComponent},
     {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
+    {path: 'registerSalesRepresentative' ,component :SalesRepresentativeComponent},
     {path: 'registerNewItem', component: RegisterNewItemComponent},
     {path: 'vehicleRegister', component: VehicleComponent,children:[
       {path: 'registerVehicle', component: VehicleRegisterComponent }
