@@ -33,6 +33,7 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
 import { RegisterStockManagerComponent } from './manager/register-stock-manager/register-stock-manager.component';
 import { RegisterSalesRepresentativeComponent } from './manager/sales-representative/register-sales-representative/register-sales-representative.component';
 import { SalesRepresentativeComponent } from './manager/sales-representative/sales-representative.component';
+import { CompanyRetailersComponent } from './manager/company-retailers/company-retailers.component';
 
 
 
@@ -71,7 +72,8 @@ const routes: Routes = [
     {path: 'SalesRepresentative' ,component :SalesRepresentativeComponent,children:[
       {path:'registerSalesRepresentative',component:RegisterSalesRepresentativeComponent}
     ]},
-    {path: 'registerNewItem', component: RegisterNewItemComponent},
+      {path: 'newRetailers', component: CompanyRetailersComponent},
+      {path: 'registerNewItem', component: RegisterNewItemComponent},
     {path: 'vehicleRegister', component: VehicleComponent,children:[
       {path: 'registerVehicle', component: VehicleRegisterComponent }
     ]},
