@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Item } from '../service/item.model';
 
 
 
@@ -11,7 +10,6 @@ import { Item } from '../service/item.model';
 })
 export class DataStorageService {
 
-  items: Item[]; 
 
   constructor(private http: HttpClient) {
 

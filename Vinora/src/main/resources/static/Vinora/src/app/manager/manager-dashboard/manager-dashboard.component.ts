@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompanyService, Company } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
-import { Item } from 'src/app/service/item.model';
+
 import { element } from 'protractor';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
