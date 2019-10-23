@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { RetailerService } from 'src/app/service/retailer.service';
+import { RetailerService, RetailerId, Retailer } from 'src/app/service/retailer.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -12,17 +12,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-
-export interface Retailer { 
-              id: string;
-              shopName: string;
-              email: string;
-              address: string;
-              contactNumber: string;
-              state: string;
-              url:string; 
-            
-            }
 
 
 @Component({
@@ -41,8 +30,8 @@ export class RegisterRetailerComponent implements OnInit {
   loggined = false;
   // retailerUid: string;
 
-  retailer : Observable<Retailer[]>;
-  private retailerCollection: AngularFirestoreCollection<Retailer>;
+  retailer : Observable<RetailerId[]>;
+  private retailerCollection: AngularFirestoreCollection<RetailerId>;
 
   constructor(
                 private fns: AngularFireFunctions,
@@ -55,7 +44,7 @@ export class RegisterRetailerComponent implements OnInit {
                 private readonly afs: AngularFirestore,
                 private storage: AngularFireStorage) {
 
-                  this.retailerCollection = afs.collection<Retailer>('retailers');
+                  this.retailerCollection = afs.collection<RetailerId>('retailers');
    
   }
 
@@ -95,7 +84,7 @@ export class RegisterRetailerComponent implements OnInit {
       ()=>{
         this.authService.login(email,password).then(()=>{
         const id = this.afAuth.auth.currentUser.uid;
-        const retailer: Retailer = {id,shopName,email,address,contactNumber,state,url};
+        const retailer: Retailer= {shopName,email,address,contactNumber,state,url};
         // this.retailerCollection.doc(id). set(retailer);
         // this.companyCollection.doc(uid).set(company1);
         this.retailerCollection.doc(id).set(retailer).then(

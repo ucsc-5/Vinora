@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import {ChangeDetectorRef} from '@angular/core';
 import { RetailerService } from '../service/retailer.service';
-import { Retailer } from '../service/retailer.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 ;
