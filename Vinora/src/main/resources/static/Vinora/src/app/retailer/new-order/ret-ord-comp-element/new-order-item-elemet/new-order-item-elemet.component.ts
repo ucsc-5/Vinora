@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from 'src/app/service/item.model';
 import { NgForm } from '@angular/forms';
 import { ItemService } from 'src/app/service/item.service';
 
@@ -10,9 +9,6 @@ import { ItemService } from 'src/app/service/item.service';
 })
 export class NewOrderItemElemetComponent implements OnInit {
 
-  @Input() item:Item
-
-  orderedItem : Item;
 
   constructor(private itemServise: ItemService) { }
 

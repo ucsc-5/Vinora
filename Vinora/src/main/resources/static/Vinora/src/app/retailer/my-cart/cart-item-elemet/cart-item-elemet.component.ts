@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from 'src/app/service/item.model';
 
 @Component({
   selector: 'app-cart-item-elemet',
@@ -8,7 +7,6 @@ import { Item } from 'src/app/service/item.model';
 })
 export class CartItemElemetComponent implements OnInit {
 
-  @Input() item:Item
   
   constructor() { }
 
