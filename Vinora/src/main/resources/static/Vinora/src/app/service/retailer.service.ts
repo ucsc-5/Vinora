@@ -18,21 +18,21 @@ export interface Retailer { shopName: string;
 
 export interface RetailerId extends Retailer{id: string}
 
-export interface RetailerIdToken{
-                retailerId: string;
+export interface RetailerEmailToken{
+                retailerEmail: string;
                 registerState: string;              
 }
 
-export interface RetailerIdTokenId extends RetailerIdToken{
+export interface RetailerEmailTokenId extends RetailerEmailToken{
                 id: string;
 }
 
-export interface CompanyIdToken{
-                companyId: string;
+export interface CompanyEmailToken{
+                companyEmail: string;
                 registerState: string
 }
 
-export interface CompanyIdTokenId extends CompanyIdToken{
+export interface CompanyEmailTokenId extends CompanyEmailToken{
                 id: string;
 }
 
@@ -48,7 +48,7 @@ export class RetailerService {
   dbPath = 'retailers'
  
   retailer: Observable<RetailerId[]>;
-  registerCompanyIds: Observable<CompanyIdTokenId[]>;
+  registerCompanyIds: Observable<CompanyEmailTokenId[]>;
 
  
   constructor(private storage: AngularFireStorage,private readonly afs: AngularFirestore,private afAuth: AngularFireAuth) {
@@ -60,17 +60,13 @@ getAllCompanies(){
 
 }
 
-registerRetailer(retailerUid:string,companyUid:string ){
-  const retailerId = retailerUid;
-  const companyId = companyUid;
+registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,companyEmail:string){
+
   const registerState= "0"
   console.log(retailerUid+"From the service"+companyUid);
-  const companyCollection =  this.afs.collection<RetailerIdToken>(`companies/${companyUid}/retailerRegistrations`);
+  const companyCollection =  this.afs.collection<RetailerEmailToken>(`companies/${companyUid}/retailerRegistrations`);
   const id1 = this.afs.createId();
-            //  const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state};
-            //  console.log(item);
-            //  this.itemsCollection.doc(id).set(item);
-  const retailerRegisterOnCompany : RetailerIdToken={retailerId,registerState}
+  const retailerRegisterOnCompany : RetailerEmailToken={retailerEmail,registerState}
   companyCollection.doc(id1).set(retailerRegisterOnCompany).then(res=>{
     console.log(res);
   }).catch(error=>{
@@ -78,12 +74,9 @@ registerRetailer(retailerUid:string,companyUid:string ){
   });
 
 
-  const retailerCollection =  this.afs.collection<RetailerIdToken>(`retailers/${retailerUid}/companyRegistrations`);
+  const retailerCollection =  this.afs.collection<CompanyEmailToken>(`retailers/${retailerUid}/companyRegistrations`);
   const id2 = this.afs.createId();
-            //  const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state};
-            //  console.log(item);
-            //  this.itemsCollection.doc(id).set(item);
-  const companyRegisterOnRetailer : CompanyIdToken ={companyId,registerState}
+  const companyRegisterOnRetailer : CompanyEmailToken ={companyEmail,registerState}
   retailerCollection.doc(id2).set(companyRegisterOnRetailer).then(
     x=>{console.log(x)}
   ).catch(error=>{
@@ -111,7 +104,7 @@ getRegisteredCompanies(retailerUid:string){
 
   this.registerCompanyIds =this.afs.collection(`${this.dbPath}/${retailerUid}/companyRegistrations`, ref => ref.where('registerState', '==',"0")).snapshotChanges().pipe(
     map(actions => actions.map(a => {
-      const data = a.payload.doc.data() as CompanyIdTokenId;
+      const data = a.payload.doc.data() as CompanyEmailTokenId;
       const id = a.payload.doc.id;
       return { id, ...data };
     }))

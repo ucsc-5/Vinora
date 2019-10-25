@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RetailerIdTokenId } from 'src/app/service/retailer.service';
+import { RetailerEmailTokenId } from 'src/app/service/retailer.service';
 import { Observable } from 'rxjs';
 import { CompanyService } from 'src/app/service/company.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -11,7 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class CompanyRetailersComponent implements OnInit {
 
-  registeredRetailersKey: Observable<RetailerIdTokenId[]>
+  registeredRetailersKey: Observable<RetailerEmailTokenId[]>
   companyId;
   constructor(private companyService:CompanyService,private afAuth: AngularFireAuth) { 
     this.companyId= this.afAuth.auth.currentUser.uid;
@@ -20,7 +20,7 @@ export class CompanyRetailersComponent implements OnInit {
   ngOnInit() {
     this.registeredRetailersKey= this.companyService.getRegisteredRetailers(this.companyId);
   }
-
+  
 }
 
 

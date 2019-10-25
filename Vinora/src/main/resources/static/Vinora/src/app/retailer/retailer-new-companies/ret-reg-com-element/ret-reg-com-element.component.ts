@@ -12,22 +12,27 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class RetRegComElementComponent implements OnInit {
 
-  @Input() company:Observable<CompanyId>;
+  @Input() company:CompanyId;
+
+  retailerEmail: string;
+  retailerUid: string;
+  companyEmail: string;
+  comapanyUid: string;
   
 
-  // backCompany = new EventEmitter<Company>();
 
  
   constructor(private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
-
+    this.retailerEmail= this.afAuth.auth.currentUser.email;
+    this.retailerUid = this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
-    // this.company=this.companyServise.getCompanyByEmail(this.companyId.email)
+
   }
 
   onRegister(){
-        
+    this.retailerService.registerRetailer(this.retailerEmail,this.retailerUid,this.company.id,this.company.email)
   }
 
 }

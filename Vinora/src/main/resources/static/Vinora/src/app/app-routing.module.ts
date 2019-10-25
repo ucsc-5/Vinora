@@ -34,6 +34,7 @@ import { RegisterStockManagerComponent } from './manager/register-stock-manager/
 import { RegisterSalesRepresentativeComponent } from './manager/sales-representative/register-sales-representative/register-sales-representative.component';
 import { SalesRepresentativeComponent } from './manager/sales-representative/sales-representative.component';
 import { CompanyRetailersComponent } from './manager/company-retailers/company-retailers.component';
+import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies/retailer-new-companies.component';
 
 
 
@@ -50,6 +51,7 @@ const routes: Routes = [
       {path: 'register', component: RegisterRetailerComponent}, 
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
+
   { path: 'retailer/:retailerId',component: RetailerComponent, children:[
     { path: '' , component: RetailerDashboardComponent},
     { path: 'currentOrders', component: CurrentOrdersComponent},
@@ -57,6 +59,7 @@ const routes: Routes = [
     { path: 'previousOrder', component: PreviousOrdersComponent},
     {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
     // {path: 'newStock', component: NewStockComponent},
+    { path: 'allCompanies', component: RetailerNewCompaniesComponent},
     { path: 'myCart', component: MyCartComponent},
     { path: 'myProfile', component: RetailerProfileComponent}
   ]},
