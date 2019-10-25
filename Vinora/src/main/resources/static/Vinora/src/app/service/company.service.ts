@@ -7,7 +7,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { getMatFormFieldMissingControlError } from '@angular/material';
-import { RetailerRegisterToken, RetailerRegisterTokenId } from './retailer.service';
+import { RetailerIdTokenId, RetailerIdToken } from './retailer.service';
 
 export interface Company{
   managerName: string;
@@ -73,8 +73,8 @@ export class CompanyService {
   private allCompanyCollection: AngularFirestoreDocument<Company> = null
   companies: Observable<CompanyId[]>
 
-  private registeredRetailersCollection: AngularFirestoreCollection<RetailerRegisterToken>;
-  registeredRetailersKey: Observable<RetailerRegisterTokenId[]>
+  private registeredRetailersCollection: AngularFirestoreCollection<RetailerIdTokenId>;
+  registeredRetailersKey: Observable<RetailerIdTokenId[]>
 
  
   constructor(private readonly afs: AngularFirestore,private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService,private storage: AngularFireStorage) {
@@ -140,11 +140,11 @@ export class CompanyService {
 
   getRegisteredRetailers(uid:string){
 
-    this.registeredRetailersCollection = this.afs.collection<RetailerRegisterToken>(`companies/${uid}/retailerRegistrations`);
+    this.registeredRetailersCollection = this.afs.collection<RetailerIdTokenId>(`companies/${uid}/retailerRegistrations`);
     
     this.registeredRetailersKey = this.registeredRetailersCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as RetailerRegisterToken;
+        const data = a.payload.doc.data() as RetailerIdToken;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))

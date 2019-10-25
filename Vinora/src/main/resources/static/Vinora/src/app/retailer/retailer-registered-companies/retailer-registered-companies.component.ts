@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
 import { switchMap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { RetailerService } from 'src/app/service/retailer.service';
+import { RetailerService, CompanyIdTokenId } from 'src/app/service/retailer.service';
 import { CompanyService, CompanyId } from 'src/app/service/company.service';
 @Component({
   selector: 'app-retailer-registered-companies',
@@ -12,17 +12,20 @@ import { CompanyService, CompanyId } from 'src/app/service/company.service';
 })
 export class RetailerRegisteredCompaniesComponent implements OnInit {
 
-  companies: Observable<CompanyId[]>;
-  retailerId
 
-  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private companyService:CompanyService) {
+  companyIds: Observable<CompanyIdTokenId[]>
+  retailerId: string;
 
-    this.retailerId = this.afAuth.auth.currentUser.uid;
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private retailerService:RetailerService) {
+
+    this.retailerId= this.afAuth.auth.currentUser.uid;
    
    }
 
   ngOnInit() {
-    this.companies= this.companyService.getAllCompany();
-    this.companies.forEach(x=>{console.log(x)})
+    this.companyIds=this.retailerService.getRegisteredCompanies(this.retailerId);
   }
+
+
+  
 }

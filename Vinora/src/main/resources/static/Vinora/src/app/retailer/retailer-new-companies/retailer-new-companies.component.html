@@ -1,1 +1,6 @@
-<p>retailer-new-companies works!</p>
+
+<div class="row">
+    <div class="col col-lg-4">
+      <app-ret-reg-com-element *ngFor="let company of companies | async" [company]="company" ></app-ret-reg-com-element>
+    </div>
+  </div>

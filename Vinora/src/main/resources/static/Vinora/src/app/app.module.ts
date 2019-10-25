@@ -69,7 +69,7 @@ import { RetailerRegisteredCompaniesComponent } from './retailer/retailer-regist
 import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies/retailer-new-companies.component';
 import { RetailerProfileComponent } from './retailer/retailer-profile/retailer-profile.component';
 import { RetailerService } from './service/retailer.service';
-import { RetRegComElementComponent } from './retailer/retailer-registered-companies/ret-reg-com-element/ret-reg-com-element.component';
+import { RetRegComElementComponent } from './retailer/retailer-new-companies/ret-reg-com-element/ret-reg-com-element.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RetOrdCompElementComponent } from './retailer/new-order/ret-ord-comp-element/ret-ord-comp-element.component';
 import { NewOrderItemElemetComponent } from './retailer/new-order/ret-ord-comp-element/new-order-item-elemet/new-order-item-elemet.component';
