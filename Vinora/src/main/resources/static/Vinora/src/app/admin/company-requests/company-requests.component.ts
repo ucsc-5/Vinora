@@ -15,11 +15,12 @@ export class CompanyRequestsComponent implements OnInit {
   length: any;
 
   constructor(private companyService:CompanyService) {
-    this.companies = this.companyService.requestededCompanies; 
   }
 
   ngOnInit() {
-       
+    this.companies = this.companyService.getRequestedCompanies();
+    this.companies.subscribe(x=>{
+      console.log(x);
+    })
   }
-
 }

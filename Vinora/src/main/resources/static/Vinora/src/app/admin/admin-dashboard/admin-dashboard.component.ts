@@ -10,12 +10,18 @@ import { Observable } from 'rxjs';
 export class AdminDashboardComponent implements OnInit {
 
   company: Observable<any[]>
-  requstCount: number;
+  requestCount: number;
   registeredCount: number;
   constructor(private companyServise:CompanyService) { 
   }
 
   ngOnInit() {
+    this.companyServise.getRequestedCompanies();
+    this.requestCount = this.companyServise.requestededCompanies.subscribe.length;
+    console.log(this.requestCount+" request Count");
+    this.companyServise.getRegisteredCompanies();
+    this.registeredCount = this.companyServise.registeredCompanies.subscribe.length;
+    console.log(this.registeredCount+" registered Count");
   }
   
 }

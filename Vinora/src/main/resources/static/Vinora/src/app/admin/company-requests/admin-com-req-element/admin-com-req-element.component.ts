@@ -16,13 +16,9 @@ export class AdminComReqElementComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.company.key);
-  }
-
-    
+  }    
     onConfirm(){
       // this.companyService.updateCompany(this.company.key, {state:"1"})
       // .catch(err => console.log(err));
     }
-
-
 }

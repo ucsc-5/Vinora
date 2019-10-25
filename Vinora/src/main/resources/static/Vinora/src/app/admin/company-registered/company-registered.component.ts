@@ -12,10 +12,13 @@ export class CompanyRegisteredComponent implements OnInit {
   companies: Observable<CompanyId[]>;
   
   constructor(private companyService:CompanyService) {
-    this.companies = this.companyService.registeredCompanies; 
+   
    }
 
   ngOnInit() {
+    this.companies= this.companyService.getRegisteredCompanies();
+    this.companies.subscribe(s=>{
+      console.log(s);
+    })
   }
-
 }

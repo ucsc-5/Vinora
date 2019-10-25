@@ -81,7 +81,7 @@ export class CompanyService {
   }
 
   // for use of admin  retailer
-  getRegisteredCompany(){
+  getRegisteredCompanies(){
     this.registeredCompanies = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
