@@ -15,6 +15,7 @@ export class RetailerRegisteredCompaniesComponent implements OnInit {
 
   companyIds: Observable<CompanyIdTokenId[]>
   retailerId: string;
+  
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private retailerService:RetailerService) {
 
@@ -22,7 +23,7 @@ export class RetailerRegisteredCompaniesComponent implements OnInit {
    
    }
 
-   
+
   ngOnInit() {
     this.companyIds=this.retailerService.getRegisteredCompanies(this.retailerId);
   }
