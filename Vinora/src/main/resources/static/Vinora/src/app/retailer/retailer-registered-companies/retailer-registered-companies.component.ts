@@ -22,10 +22,11 @@ export class RetailerRegisteredCompaniesComponent implements OnInit {
    
    }
 
+   
   ngOnInit() {
     this.companyIds=this.retailerService.getRegisteredCompanies(this.retailerId);
   }
 
 
-  
+
 }
