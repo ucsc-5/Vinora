@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Company } from 'src/app/service/company.service';
+import { Company, CompanyId } from 'src/app/service/company.service';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { Company } from 'src/app/service/company.service';
 })
 export class AdminComRegElemetComponent implements OnInit {
 
-  @Input() company: Company
+  @Input() company: CompanyId
 
   constructor() { }
 

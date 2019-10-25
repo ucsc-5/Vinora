@@ -20,7 +20,7 @@ export class RetailerNewCompaniesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.companies= this.companyServise.getAllCompany();
+    this.companies= this.companyServise.getRegisteredCompany();
   }
 
 }

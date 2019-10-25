@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { CompanyService } from 'src/app/service/company.service';
+import { CompanyService, CompanyId } from 'src/app/service/company.service';
 
 @Component({
   selector: 'app-company-requests',
@@ -11,11 +11,11 @@ import { CompanyService } from 'src/app/service/company.service';
 })
 export class CompanyRequestsComponent implements OnInit {
 
-  companies$: Observable<any[]>;
+  companies: Observable<CompanyId[]>;
   length: any;
 
   constructor(private companyService:CompanyService) {
-    // this.companies$ = this.companyService.requestCompanies$; 
+    this.companies = this.companyService.requestededCompanies; 
   }
 
   ngOnInit() {

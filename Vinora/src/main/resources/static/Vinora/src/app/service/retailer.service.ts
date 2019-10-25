@@ -100,7 +100,7 @@ getRetailer(email:string){
 }
 
 
-getRegisteredCompanies(retailerUid:string){
+getRegisteredAllCompanies(retailerUid:string){
 
   this.registerCompanyIds =this.afs.collection(`${this.dbPath}/${retailerUid}/companyRegistrations`, ref => ref.where('registerState', '==',"0")).snapshotChanges().pipe(
     map(actions => actions.map(a => {
@@ -109,7 +109,6 @@ getRegisteredCompanies(retailerUid:string){
       return { id, ...data };
     }))
   );
-
   return this.registerCompanyIds;
   
 }

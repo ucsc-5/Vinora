@@ -23,10 +23,6 @@ export interface Company{
 
 export interface CompanyId extends Company{ id: string}
 
-
-
-
-
 export interface Item{
 
   itemName: string;
@@ -71,8 +67,11 @@ export class CompanyService {
   vehicles: Observable<VehicleId[]>;
 
   private allCompanyCollection: AngularFirestoreDocument<Company> = null
-  companies: Observable<CompanyId[]>
-
+  registeredCompanies: Observable<CompanyId[]>
+  
+  
+  requestededCompanies: Observable<CompanyId[]>
+  
   private registeredRetailersCollection: AngularFirestoreCollection<RetailerEmailTokenId>;
   registeredRetailersKey: Observable<RetailerEmailTokenId[]>
 
@@ -81,8 +80,22 @@ export class CompanyService {
     
   }
 
-  getAllCompany(){
-    this.companies = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(
+  // for use of admin  retailer
+  getRegisteredCompany(){
+    this.registeredCompanies = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Company;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+
+    return this.registeredCompanies;
+  }
+
+  //for use of admin
+  getRequestedCompanies(){
+    this.requestededCompanies =this.afs.collection(this.dbPath , ref => ref.where('state', '==',"0")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;
@@ -90,10 +103,12 @@ export class CompanyService {
       }))
     );
   
-    return this.companies;
-    
+    return this.requestededCompanies;
   }
 
+
+
+  // for the comapany dashboard and retailer 
   getCompanyByEmail(email:string){
     this.company =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -105,6 +120,7 @@ export class CompanyService {
   
     return this.company;
   }
+
 
 
   getVehicle(uid:string){
@@ -137,7 +153,7 @@ export class CompanyService {
   }
 
 
-
+// for find retailers of an each company
   getRegisteredRetailers(uid:string){
 
     this.registeredRetailersCollection = this.afs.collection<RetailerEmailTokenId>(`companies/${uid}/retailerRegistrations`);

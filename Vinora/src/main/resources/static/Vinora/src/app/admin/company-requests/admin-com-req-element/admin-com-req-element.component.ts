@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { CompanyService, Company } from 'src/app/service/company.service';
+import { CompanyService, Company, CompanyId } from 'src/app/service/company.service';
 
 @Component({
   selector: 'app-admin-com-req-element',
@@ -9,7 +9,7 @@ import { CompanyService, Company } from 'src/app/service/company.service';
 })
 export class AdminComReqElementComponent implements OnInit {
 
-  @Input() company : Company;
+  @Input() company : CompanyId;
 
   constructor(private companyService: CompanyService) { 
   }
