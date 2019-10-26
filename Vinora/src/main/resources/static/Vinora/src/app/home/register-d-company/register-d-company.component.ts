@@ -8,18 +8,10 @@ import { map } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, from } from 'rxjs';
 import { idTokenResult } from '@angular/fire/auth-guard';
-import { CompanyService } from 'src/app/service/company.service';
+import { CompanyService, Company } from 'src/app/service/company.service';
 import { RetailerService } from 'src/app/service/retailer.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-export interface Company{
-  address:string;
-  companyName:string;
-  contactNumber:string;
-  email:string;
-  managerName:string;
-  managerNic:string;
-  state:string;
-}
+
 @Component({
   selector: 'app-register-d-company',
   templateUrl: './register-d-company.component.html',
@@ -88,7 +80,8 @@ export class RegisterDCompanyComponent implements OnInit {
             const managerName:string=this.secondFormGroup.value['managerName'];
             const managerNic:string=this.secondFormGroup.value['managerNic'];
             const state:string="0";
-            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state}
+            const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
+            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath}
             this.companyCollection.doc(uid).set(company1);
           }).catch((error)=>{
             console.log(error+" The error from register then login ");

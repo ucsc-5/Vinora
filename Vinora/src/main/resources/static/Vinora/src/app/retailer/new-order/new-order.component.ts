@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import { Order } from 'src/app/service/order.model';
 import { OrderService } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { RetailerService } from 'src/app/service/retailer.service';
-import { CompanyService } from 'src/app/service/company.service';
+import { RetailerService, CompanyEmailTokenId } from 'src/app/service/retailer.service';
+import { CompanyService, CompanyId } from 'src/app/service/company.service';
 
 
 @Component({
@@ -16,14 +16,18 @@ import { CompanyService } from 'src/app/service/company.service';
 })
 export class NewOrderComponent implements OnInit {
 
-
-  registeredCompanies$: Observable<any>;
+  registeredCompaniesEmails: Observable<CompanyEmailTokenId[]>
   retailerId
-  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private companyService: CompanyService) {
+
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private companyService: CompanyService, private retailerService:RetailerService) {
     this.retailerId = this.afAuth.auth.currentUser.uid;
   }
+
+
   ngOnInit() {
-    // this.registeredCompanies$=this.companyService.getRegisteredCompanies();
+    this.registeredCompaniesEmails = this.retailerService.getRegisteredAllCompanies(this.retailerId);  
   }
+
+
 
 }

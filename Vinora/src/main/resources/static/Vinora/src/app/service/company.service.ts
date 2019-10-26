@@ -12,7 +12,6 @@ import { RetailerEmailTokenId, RetailerEmailToken } from './retailer.service';
 export interface Company{
   managerName: string;
   managerNic: string;
-  companyId: number;
   companyName: string;
   email: string;
   address: string;
