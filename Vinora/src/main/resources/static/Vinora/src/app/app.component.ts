@@ -16,9 +16,11 @@ export class AppComponent {
  
   itemValue = '';
   items: Observable<any[]>;
+  salesrepresentatives: Observable<any[]>;
   vehicles: Observable<any[]>;
   constructor(public db: AngularFireDatabase) {
     this.items = db.list('items').valueChanges();
+    this.salesrepresentatives = db.list('salesrepresenatives').valueChanges();
     this.vehicles = db.list('vehicles').valueChanges();
   }
  

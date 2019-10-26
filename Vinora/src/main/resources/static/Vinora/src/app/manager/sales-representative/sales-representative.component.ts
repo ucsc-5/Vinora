@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CompanyService } from 'src/app/service/company.service';
+import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sales-representative',
@@ -8,9 +11,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SalesRepresentativeComponent implements OnInit {
 
-  constructor( private router: Router,private route:ActivatedRoute) { }
+  salesrepresentatives: Observable<any[]>;
+  managerId;
+
+  constructor( private router: Router,private route:ActivatedRoute,private companyService:CompanyService,private afAuth: AngularFireAuth) {
+    this.managerId= this.afAuth.auth.currentUser.uid;
+   }
 
   ngOnInit() {
+    this.salesrepresentatives= this.companyService.getSalesRep(this.managerId);
   }
 
   onRegister(){

@@ -2,7 +2,7 @@
 
     <div class="col-7">
         <h2>Registered sales representatives</h2>
-        <!-- <app-display-sales-representative *ngFor="let salesrep of salesreps | async" [salesrep]="salesrep" ></app-display-sales-representative> -->
+        <app-display-sales-representative *ngFor="let salesrepresentative of salesrepresentatives | async" [salesrepresentative]="salesrepresentative"></app-display-sales-representative>
     </div>
 
     <div class="col-5">
@@ -10,3 +10,5 @@
         <router-outlet></router-outlet>
     </div>
 </div>
+
+

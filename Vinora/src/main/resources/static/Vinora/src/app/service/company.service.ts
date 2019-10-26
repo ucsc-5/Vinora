@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { getMatFormFieldMissingControlError } from '@angular/material';
 import { RetailerEmailTokenId, RetailerEmailToken } from './retailer.service';
+import { SalesRepresentative } from '../manager/sales-representative/register-sales-representative/register-sales-representative.component';
 
 export interface Company{
   managerName: string;
@@ -36,6 +37,17 @@ export interface Item{
 }
 export interface ItemsId extends Item { id: string; }
 
+export interface SalesRepresentative{
+
+  fullName: string;
+  address: string;
+  email: string;
+  mobile: number;
+ 
+
+}
+export interface SalesRepresentativeId extends SalesRepresentative { id: string; }
+
 export interface Vehicle{
   number:string;
   model:string;
@@ -62,6 +74,9 @@ export class CompanyService {
 
   private itemCollection: AngularFirestoreCollection<Item>;
   items: Observable<ItemsId[]>;
+
+  private salesRepresentativeCollection: AngularFirestoreCollection<SalesRepresentative>;
+  salesrepresentatives: Observable<SalesRepresentativeId[]>;
 
   private vehicleCollection: AngularFirestoreCollection<Vehicle>;
   vehicles: Observable<VehicleId[]>;
@@ -150,6 +165,20 @@ export class CompanyService {
       }))
     );
     return this.items;
+  }
+
+  getSalesRep(uid:string){
+
+    this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${uid}/salesrepresentatives`);
+    
+    this.salesrepresentatives = this.salesRepresentativeCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as SalesRepresentative;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return this.salesrepresentatives;
   }
 
 
