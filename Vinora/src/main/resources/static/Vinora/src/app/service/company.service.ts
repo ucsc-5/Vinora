@@ -75,7 +75,7 @@ export class CompanyService {
   items: Observable<ItemsId[]>;
 
   private salesRepresentativeCollection: AngularFirestoreCollection<SalesRepresentative>;
-  salesrepresentatives: Observable<SalesRepresentativeId[]>;
+  salesrepresentative: Observable<SalesRepresentativeId[]>;
 
   private vehicleCollection: AngularFirestoreCollection<Vehicle>;
   vehicles: Observable<VehicleId[]>;
@@ -152,32 +152,46 @@ export class CompanyService {
   }
 
 
-  getItems(uid:string){
+  getItems(email:string){
 
-    this.itemCollection = this.afs.collection<Item>(`companies/${uid}/items`);
+    // this.itemCollection = this.afs.collection<Item>(`companies/${uid}/items`);
     
-    this.items = this.itemCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Item;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-    return this.items;
-  }
+    // this.items = this.itemCollection.snapshotChanges().pipe(
+    //   map(actions => actions.map(a => {
+    //     const data = a.payload.doc.data() as Item;
+    //     const id = a.payload.doc.id;
+    //     return { id, ...data };
+    //   }))
+    // );
+    // return this.items;
 
-  getSalesRep(uid:string){
 
-    this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${uid}/salesrepresentatives`);
-    
-    this.salesrepresentatives = this.salesRepresentativeCollection.snapshotChanges().pipe(
+
+
+
+    this.salesrepresentative =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as SalesRepresentative;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-    return this.salesrepresentatives;
+  
+    return this.salesrepresentative;
+  }
+
+  getSalesRep(email:string){
+
+    this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${email}/salesrepresentatives`);
+    
+    this.salesrepresentative = this.salesRepresentativeCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as SalesRepresentative;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return this.salesrepresentative;
   }
 
 
