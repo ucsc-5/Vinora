@@ -13,7 +13,6 @@ import { SalesRepresentative } from '../manager/sales-representative/register-sa
 export interface Company{
   managerName: string;
   managerNic: string;
-  companyId: number;
   companyName: string;
   email: string;
   address: string;

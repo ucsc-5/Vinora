@@ -1,6 +1,5 @@
-
-        <div class="col">
-            
-        </div> 
-   
-
+<div class="row">
+        <div class="col col-lg-4">
+          <app-ret-ord-comp-element *ngFor="let companyEmail of registeredCompaniesEmails | async" [companyEmail]="companyEmail" ></app-ret-ord-comp-element>
+        </div>
+</div>
