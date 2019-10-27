@@ -1,30 +1,52 @@
  <div class="col-5 example-container">
-            <mat-form-field>
-                <input matInput placeholder="Full Name" [formControl]="fullName" required>
+
+        <form class="example-form" (ngSubmit)="onAddSalesrepresentative(f)" #f="ngForm">
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder=" Name" name="fullName" ngModel >
+                </mat-form-field>
+   
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Address" name="address" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Email" name="email" ngModel >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Mobile" name="mobile" ngModel >
             </mat-form-field>
-            <mat-form-field>
-                <textarea [formControl]="address" matInput placeholder="Address"></textarea>
-              </mat-form-field>
-              <mat-form-field>
-                <input [formControl]="nic" matInput placeholder="NIC" required>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Email" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <input [formControl]="mobile" matInput placeholder="Mobile Number" required>
-            </mat-form-field>
-            <div class="row">
-                <div class="col">
-                    <button type="reset" mat-raised-button>Reset</button> 
-                </div>
-                <div class="col">
-                    <button (click)="register()" mat-raised-button color="primary">Register</button>
-                </div>
+
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="NIC" name="nic" ngModel >
+        </mat-form-field>
+
+
+        <label>
+                <input type="file" (change)="selectItemImage($event)">
+        </label>
+        
                 
-            </div>
+        <input  placeholder="Description"  type="hidden"  name="state" ngModel  value="new">
+            
+
+                <button class="btn btn-success">Register</button>
+                
+        </form>     
+         
         </div>
         <div class="col-4"></div>
+
+
+
+
+        
+
+            
+     
+
+
     
 

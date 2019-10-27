@@ -42,6 +42,7 @@ export interface SalesRepresentative{
   address: string;
   email: string;
   mobile: number;
+  nic:number;
  
 
 }
@@ -75,7 +76,7 @@ export class CompanyService {
   items: Observable<ItemsId[]>;
 
   private salesRepresentativeCollection: AngularFirestoreCollection<SalesRepresentative>;
-  salesrepresentative: Observable<SalesRepresentativeId[]>;
+  salesrepresentatives: Observable<SalesRepresentativeId[]>;
 
   private vehicleCollection: AngularFirestoreCollection<Vehicle>;
   vehicles: Observable<VehicleId[]>;
@@ -175,14 +176,14 @@ export class CompanyService {
 
     this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${uid}/salesrepresentatives`);
     
-    this.salesrepresentative = this.salesRepresentativeCollection.snapshotChanges().pipe(
+    this.salesrepresentatives = this.salesRepresentativeCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as SalesRepresentative;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-    return this.salesrepresentative;
+    return this.salesrepresentatives;
 
     
     // this.salesrepresentative =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email)).snapshotChanges().pipe(

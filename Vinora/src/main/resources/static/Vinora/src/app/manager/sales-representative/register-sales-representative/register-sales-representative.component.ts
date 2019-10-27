@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, NgForm } from '@angular/forms';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 export interface SalesRepresentative{
   fullName:string;
   address:string;
-  nic:string;
   email:string;
-  mobile:string;
-  state:string;
+  mobile:number;
+  itemImagePath: string;
+  nic:string;
+  state: string;
+
 }
 
 @Component({
@@ -21,53 +25,66 @@ export interface SalesRepresentative{
 })
 export class RegisterSalesRepresentativeComponent implements OnInit {
 
-  fullName=new FormControl('', [Validators.required]);
-  address=new FormControl('', [Validators.required]);
-  nic=new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  mobile=new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]);
+  itemImage: FileList;
+
   private salesRepresentativeCollection: AngularFirestoreCollection<SalesRepresentative>;
   salesRepresentatives: Observable<SalesRepresentative[]>;
-  type = 'salesRepresentative';
+  managerId;
 
-  constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions) {
 
-    const uid=this.afAuth.auth.currentUser.uid;
-    this.salesRepresentativeCollection = afs.collection<SalesRepresentative>(`companies/${uid}/salesRepresentatives`);
-    this.salesRepresentatives= this.salesRepresentativeCollection.valueChanges();
+  constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions,private storage: AngularFireStorage) {
+    this.managerId= this.afAuth.auth.currentUser.uid;
+    this.salesRepresentativeCollection = afs.collection<SalesRepresentative>(`companies/${this.managerId}/salesRepresentatives`);
+
   }
 
   ngOnInit() {
   }
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
+
+
+
+  onAddSalesrepresentative(form: NgForm){
+    const value = form.value;
+    const fullName = value.fullName;
+    const address = value.address;
+    const email = value.email;
+    const mobile = value.mobile;
+    const nic = value.nic;
+    const itemImage = this.itemImage.item(0); 
+
+    const state = value.state;
+   
+    const basePath ="salesRepresentatives"
+
+    const filePath = `${basePath}/${itemImage.name}${new Date()}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath,itemImage);
+   
+   
+
+
+
+
+      uploadTask.snapshotChanges().pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe(downloadURL => {
+            console.log(downloadURL);
+             const itemImagePath= downloadURL;
+             const id = this.afs.createId();
+             const salesrepresentative:SalesRepresentative = {fullName,address,email,mobile,nic,itemImagePath,state};
+             console.log(salesrepresentative);
+             this.salesRepresentativeCollection.doc(id).set(salesrepresentative);
+          });
+        })
+        ).subscribe(
+          res=>{
+            console.log(res)
+          }
+        )
   }
-  async register(){
-    const fullName:string=this.fullName.value;
-    const address:string=this.address.value;
-    const nic:string=this.nic.value;
-    const email:string=this.email.value;
-    const mobile:string=this.mobile.value;
-    const state:string="1";
-    const salesRepresentative1:SalesRepresentative={fullName,address,nic,email,mobile,state}
-    const callable = await this.fns.httpsCallable('addRole');
-    var createUser=this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value);
-    callable({email:email,role:this.type}).subscribe(
-      (response)=>{
-           console.log(response);
-      },
-      ()=>{},
-      ()=>{
-        createUser.then( (data)=>{
-          this.salesRepresentativeCollection.doc(data.user.uid).set(salesRepresentative1);
-        });
-   }
-  )
-    
-    
-    
+
+  selectItemImage(event) {
+    this.itemImage = event.target.files;
   }
 
 }
