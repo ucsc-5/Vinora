@@ -43,6 +43,8 @@ export interface SalesRepresentative{
   email: string;
   mobile: number;
   nic:number;
+  itemImagePath: string;
+  state: string;
  
 
 }
@@ -174,7 +176,7 @@ export class CompanyService {
 
   getSalesRep(uid:string){
 
-    this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${uid}/salesrepresentatives`);
+    this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${uid}/salesRepresentatives`);
     
     this.salesrepresentatives = this.salesRepresentativeCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
