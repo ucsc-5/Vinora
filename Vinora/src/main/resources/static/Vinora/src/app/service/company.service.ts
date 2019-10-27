@@ -152,37 +152,28 @@ export class CompanyService {
   }
 
 
-  getItems(email:string){
+  getItems(uid:string){
 
-    // this.itemCollection = this.afs.collection<Item>(`companies/${uid}/items`);
+    this.itemCollection = this.afs.collection<Item>(`companies/${uid}/items`);
     
-    // this.items = this.itemCollection.snapshotChanges().pipe(
-    //   map(actions => actions.map(a => {
-    //     const data = a.payload.doc.data() as Item;
-    //     const id = a.payload.doc.id;
-    //     return { id, ...data };
-    //   }))
-    // );
-    // return this.items;
-
-
-
-
-
-    this.salesrepresentative =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email)).snapshotChanges().pipe(
+    this.items = this.itemCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as SalesRepresentative;
+        const data = a.payload.doc.data() as Item;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-  
-    return this.salesrepresentative;
+    return this.items;
+
+
+
+
+
   }
 
-  getSalesRep(email:string){
+  getSalesRep(uid:string){
 
-    this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${email}/salesrepresentatives`);
+    this.salesRepresentativeCollection = this.afs.collection<SalesRepresentative>(`companies/${uid}/salesrepresentatives`);
     
     this.salesrepresentative = this.salesRepresentativeCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -192,6 +183,17 @@ export class CompanyService {
       }))
     );
     return this.salesrepresentative;
+
+    
+    // this.salesrepresentative =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email)).snapshotChanges().pipe(
+    //   map(actions => actions.map(a => {
+    //     const data = a.payload.doc.data() as SalesRepresentative;
+    //     const id = a.payload.doc.id;
+    //     return { id, ...data };
+    //   }))
+    // );
+  
+    // return this.salesrepresentative;
   }
 
 
