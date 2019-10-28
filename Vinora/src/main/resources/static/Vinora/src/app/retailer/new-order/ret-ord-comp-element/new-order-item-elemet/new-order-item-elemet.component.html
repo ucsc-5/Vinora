@@ -1,21 +1,22 @@
-    <div class="col">
 
-        <mat-card class="example-card">
-            <mat-card-header>
+    <mat-card class="example-card" *ngFor="let item of items | async">
+        <mat-card-header>
                 <mat-card-title>{{item.itemName}}</mat-card-title>
-                <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
+                <!-- <mat-card-subtitle>{{item.brand}}</mat-card-subtitle> -->
             </mat-card-header>
             <mat-card-content>
-                <p>{{item.description}}<br>
-                    Unit Price: <b>{{item.unitPrice}}</b><br>
-                    Available:  <b></b>{{item.quantity}}<br>                
-                </p>
-                
-            </mat-card-content>
-            <mat-card-actions>
-                <form (ngSubmit)="toCart(f)" #f="ngForm" >
-                    <table class="example-full-width" cellspacing="0">
-                        <tr>
+                <img mat-card-image src="{{item.itemImagePath}}"  alt="Photo of the Retailer">
+                <p>
+                    <!-- {{item.description}}<br>
+                        Unit Price: <b>{{item.unitPrice}}</b><br> -->
+                        Available:  <b></b>{{item.quantity}}<br>                
+                    </p>
+                    
+                </mat-card-content>
+                <!-- <mat-card-actions>
+                    <form (ngSubmit)="toCart(f)" #f="ngForm" >
+                        <table class="example-full-width" cellspacing="0">
+                            <tr>
                             <td><mat-form-field class="example-full-width">
                                 <input matInput type="number" placeholder="Quantity" name="quantity" ngModel>
                             </mat-form-field></td>
@@ -27,7 +28,5 @@
                     
                     <button mat-raised-button color="primary" type="submit" >To Cart</button>
                 </form>
-            </mat-card-actions>
-        </mat-card>
-        
-    </div>
+            </mat-card-actions> -->
+        </mat-card>     

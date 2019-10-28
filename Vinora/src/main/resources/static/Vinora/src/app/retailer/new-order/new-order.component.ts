@@ -6,7 +6,7 @@ import { Order } from 'src/app/service/order.model';
 import { OrderService } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { RetailerService, CompanyEmailTokenId } from 'src/app/service/retailer.service';
-import { CompanyService, CompanyId } from 'src/app/service/company.service';
+import { CompanyService, CompanyId, Company } from 'src/app/service/company.service';
 
 
 @Component({
@@ -17,6 +17,7 @@ import { CompanyService, CompanyId } from 'src/app/service/company.service';
 export class NewOrderComponent implements OnInit {
 
   registeredCompaniesEmails: Observable<CompanyEmailTokenId[]>
+  companies: Observable<CompanyId[]>
   retailerId
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private companyService: CompanyService, private retailerService:RetailerService) {
@@ -25,7 +26,7 @@ export class NewOrderComponent implements OnInit {
 
 
   ngOnInit() {
-    this.registeredCompaniesEmails = this.retailerService.getRegisteredAllCompanies(this.retailerId);  
+    this.registeredCompaniesEmails = this.retailerService.getRegisteredAllCompanies(this.retailerId);
   }
 
 

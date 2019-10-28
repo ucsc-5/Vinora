@@ -20,6 +20,7 @@ export interface Item{
   description: string;
   category: string;
   state: string;
+  companyUid: string;
 }
 
 
@@ -56,6 +57,7 @@ export class RegisterNewItemComponent implements OnInit {
       const brand = value.brandName;
       const quantity = value.quantity;
       const unitPrice = value.unitPrice;
+      const companyUid =  this.managerId;
       // const itemImagePath = value.itemImagePath
       // const brandImagePath: string;
       const description = value.description;
@@ -74,7 +76,7 @@ export class RegisterNewItemComponent implements OnInit {
             console.log(downloadURL);
              const itemImagePath= downloadURL;
              const id = this.afs.createId();
-             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state};
+             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyUid};
              console.log(item);
              this.itemsCollection.doc(id).set(item);
           });

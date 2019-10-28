@@ -1,24 +1,26 @@
-<div class="row">
-    <div class="card mb-3" style="max-width: 540px;"  *ngFor="let company of company | async">
+<div class="col" style="background-color: royalblue;" *ngFor="let company of company | async">
+    <div class="card">
         <div class="row no-gutters">
           <div class="col-md-4">
-            <img src="..." class="card-img" alt="...">
+            <img src="{{company.imagePath}}" class="card-img" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">{{company.companyName}}</h5>
-              <p class="card-text">
-                  <p> 
+              <h5 class="card-title">{{company.companyName}}</h5>                    
+                    <p class="card-text">
                       <!-- <b>State: </b>{{company.state}}<br> -->
                       <b>email: </b>{{company.email}}<br>
                       <!-- <b>Address: </b>{{company.address}}<br> -->
-                      <b>Contact: </b>{{company.contactNumber}}<br>
+                      <b>Contact: </b>{{company.id}}<br>
                       <!-- <b>Key: </b>{{company.id}}<br> -->
                   </p>
             </div>
           </div>
         </div>
-      </div>         
+    </div> 
+
+          <app-new-order-item-elemet [companyUid]="company.id" style="background-color: red;" class="col-3"></app-new-order-item-elemet>
+   
 </div>
 
 

@@ -18,7 +18,7 @@ export class RetailerComponent {
   
   retailerId: string;
 
-  opened = false;
+  opened = true;
 
   constructor(private retailerService:RetailerService, private route:ActivatedRoute){
 
