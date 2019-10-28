@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
 import { ItemService } from 'src/app/service/item.service';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { CompanyId, CompanyService } from 'src/app/service/company.service';
+import { StockManager } from 'src/app/manager/register-stock-manager/register-stock-manager.component';
 
 export interface Items{
   barnd:string;
@@ -23,19 +25,31 @@ export interface Items{
 export class UpdateItemsComponent implements OnInit {
   private itemDoc: AngularFirestoreDocument<Items>;
   items: Observable<Items>;
-  
-  constructor(db: AngularFireDatabase,private afs: AngularFirestore,private afAuth: AngularFireAuth) {
+  stockManager:Observable<StockManager[]>
+  constructor(db: AngularFireDatabase,private afs: AngularFirestore,private afAuth: AngularFireAuth,private companyService: CompanyService) {
 
     
   }
-  ngAfterViewInit(){
-    var email= this.afAuth.auth.currentUser.email;
-    this.afs.collectionGroup('salesRepresentatives');
-     console.log(this.afs.collectionGroup('salesRepresentatives',ref=>ref.where('email','==',email)).get);
-   // console.log(this.itemDoc.collection<SalesRepresentative>('salesRepresentatives').valueChanges());
-     
-   }
+ 
   ngOnInit() {
+    const email:string= this.afAuth.auth.currentUser.email;
+
+    this.companyService.getCompanyByEmail("chamodlakmal97@gmail.com").subscribe(x=>{
+      //console.log(x[0]["id"])
+    })
+                  this.afs.collectionGroup('stockManagers',ref=>ref.where('email', '==', email)).snapshotChanges()  
+                      this.stockManager =this.afs.collectionGroup('stockManagers',ref=>ref.where('email', '==', email)).snapshotChanges().pipe(
+                        map(actions => actions.map(a => {
+                          const data = a.payload.doc.data() as StockManager;
+                          const id = a.payload.doc.id;
+                          return { id, ...data };
+                        }))
+                      );
+                      this.stockManager.subscribe(x=>{
+                        console.log(x)
+                      })                
+    
+    
   }
 
   

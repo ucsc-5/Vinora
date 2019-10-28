@@ -12,6 +12,7 @@ export interface StockManager{
   email:string;
   mobile:string;
   state:string;
+  companyId:string;
 }
 
 @Component({
@@ -29,8 +30,8 @@ export class RegisterStockManagerComponent implements OnInit {
   stockManagers: Observable<StockManager[]>;
   type = 'stockManager';
   constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions) { 
-    const uid=this.afAuth.auth.currentUser.uid;
-    this.stockManagerCollection = afs.collection<StockManager>(`companies/${uid}/stockManagers`);
+    const companyId=this.afAuth.auth.currentUser.uid;
+    this.stockManagerCollection = afs.collection<StockManager>(`companies/${companyId}/stockManagers`);
     this.stockManagers= this.stockManagerCollection.valueChanges();
   }
 
@@ -42,13 +43,14 @@ export class RegisterStockManagerComponent implements OnInit {
             '';
   }
   async register(){
+    const companyId=this.afAuth.auth.currentUser.uid;
     const fullName:string=this.fullName.value;
     const address:string=this.address.value;
     const nic:string=this.nic.value;
     const email:string=this.email.value;
     const mobile:string=this.mobile.value;
     const state:string="1";
-    const stockManager1:StockManager={fullName,address,nic,email,mobile,state}
+    const stockManager1:StockManager={fullName,address,nic,email,mobile,state,companyId}
     const callable = await this.fns.httpsCallable('addRole');
     var createUser=this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value);
     callable({email:email,role:this.type}).subscribe(

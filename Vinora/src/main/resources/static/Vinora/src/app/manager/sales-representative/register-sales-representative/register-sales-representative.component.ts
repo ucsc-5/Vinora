@@ -15,7 +15,7 @@ export interface SalesRepresentative{
   itemImagePath: string;
   nic:string;
   state: string;
-
+  
 }
 
 @Component({
