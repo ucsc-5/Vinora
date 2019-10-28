@@ -8,7 +8,7 @@ export interface StockManager{
   address:string;
   nic:string;
   email:string;
-  mobile:string;
+  contactNumber:string;
   state:string;
   companyId:string;
   imagePath: string;

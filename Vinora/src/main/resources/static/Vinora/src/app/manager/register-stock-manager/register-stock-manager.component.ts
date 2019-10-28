@@ -17,7 +17,7 @@ export class RegisterStockManagerComponent implements OnInit {
   address=new FormControl('', [Validators.required]);
   nic=new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
-  mobile=new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]);
+  contactNumber=new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]);
   private stockManagerCollection: AngularFirestoreCollection<StockManager>;
   stockManagers: Observable<StockManagerId[]>;
   type = 'stockManager';
@@ -70,10 +70,10 @@ export class RegisterStockManagerComponent implements OnInit {
     const address:string=this.address.value;
     const nic:string=this.nic.value;
     const email:string=this.email.value;
-    const mobile:string=this.mobile.value;
+    const contactNumber:string=this.contactNumber.value;
     const state:string="1";
     const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
-    const stockManager1:StockManager={fullName,address,nic,email,mobile,state,companyId,imagePath}
+    const stockManager1:StockManager={fullName,address,nic,email,contactNumber,state,companyId,imagePath}
     const callable = await this.fns.httpsCallable('addRole');
     var createUser=this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value);
     callable({email:email,role:this.type}).subscribe(

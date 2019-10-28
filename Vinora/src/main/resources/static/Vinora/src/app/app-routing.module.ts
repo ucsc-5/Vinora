@@ -88,11 +88,10 @@ const routes: Routes = [
   ]},
 
   {path: 'stockManger/:id', component: StockManagerComponent, children:[
-    { path: '' , component: StockMangerDashboardComponent},
-    { path: 'updateItems', component: UpdateItemsComponent}
+    { path:'',component : StockMangerDashboardComponent},
+    { path:'updateItems', component: UpdateItemsComponent}
   ]},
 
-  
   {path: 'admin/:id', component: AdminComponent, children:[
     { path: '', component: AdminDashboardComponent},
     { path: 'companyRequests', component: CompanyRequestsComponent},
