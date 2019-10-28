@@ -1,0 +1,24 @@
+<p>Stock manager dashbpkjsnckjsc</p>
+
+<div class="row">
+        <mat-card class="example-card" *ngFor="let stockManager of stockManager | async">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                  <img mat-card-image src="{{stockManager.url}}" alt="Photo of the Retailer">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{stockManager.fullName}}</h5>
+                  <p class="card-text">
+                      <p> 
+                          <b>State: </b>{{stockManager.state}}<br>
+                          <b>email: </b>{{stockManager.email}}<br>
+                          <b>Address: </b>{{stockManager.address}}<br>
+                          <b>Contact: </b>{{stockManager.contactNumber}}<br>
+                          <b>Key: </b>{{stockManager.key}}<br> 
+                      </p>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+    </div>

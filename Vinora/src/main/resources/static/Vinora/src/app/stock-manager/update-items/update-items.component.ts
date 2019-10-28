@@ -5,26 +5,20 @@ import { map, switchMap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { CompanyId, CompanyService } from 'src/app/service/company.service';
-import { StockManager } from 'src/app/manager/register-stock-manager/register-stock-manager.component';
+import { CompanyId, CompanyService, Item, ItemsId } from 'src/app/service/company.service';
+import { StockManager } from 'src/app/service/stock-manager.service';
 
-export interface Items{
-  barnd:string;
-  itemName:string;
-  category:string;
-  quantity:string;
-  url:string;
-  unitPrice:string;
-  state:string;
-}
+
+
+
 @Component({
   selector: 'app-update-items',
   templateUrl: './update-items.component.html',
   styleUrls: ['./update-items.component.css']
 })
 export class UpdateItemsComponent implements OnInit {
-  private itemDoc: AngularFirestoreDocument<Items>;
-  items: Observable<Items>;
+  private itemDoc: AngularFirestoreDocument<Item>;
+  items: Observable<ItemsId[]>;
   stockManager:Observable<StockManager[]>
   constructor(db: AngularFireDatabase,private afs: AngularFirestore,private afAuth: AngularFireAuth,private companyService: CompanyService) {
 

@@ -14,7 +14,7 @@ export class StockManagerComponent implements OnInit {
 
 
   
-  opened = false;
+  opened = true;
 
   log(state){
     console.log(state)

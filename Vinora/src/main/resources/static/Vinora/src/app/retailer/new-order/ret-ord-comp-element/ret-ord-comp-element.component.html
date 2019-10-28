@@ -1,4 +1,4 @@
-<div class="col" style="background-color: royalblue;" *ngFor="let company of company | async">
+<div class="col"*ngFor="let company of company | async">
     <div class="card">
         <div class="row no-gutters">
           <div class="col-md-4">
@@ -14,14 +14,12 @@
                       <b>Contact: </b>{{company.id}}<br>
                       <!-- <b>Key: </b>{{company.id}}<br> -->
                   </p>
+                  <div class="row">
+                    <app-new-order-item-elemet [companyUid]="company.id" ></app-new-order-item-elemet>
+                  </div>
             </div>
           </div>
         </div>
     </div> 
-
-          <app-new-order-item-elemet [companyUid]="company.id" style="background-color: red;" class="col-3"></app-new-order-item-elemet>
-   
-</div>
-
-
+  </div>
 

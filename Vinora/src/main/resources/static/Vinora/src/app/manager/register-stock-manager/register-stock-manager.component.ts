@@ -4,16 +4,8 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { StockManagerId, StockManager } from 'src/app/service/stock-manager.service';
 
-export interface StockManager{
-  fullName:string;
-  address:string;
-  nic:string;
-  email:string;
-  mobile:string;
-  state:string;
-  companyId:string;
-}
 
 @Component({
   selector: 'app-register-stock-manager',
@@ -27,12 +19,14 @@ export class RegisterStockManagerComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   mobile=new FormControl('', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]);
   private stockManagerCollection: AngularFirestoreCollection<StockManager>;
-  stockManagers: Observable<StockManager[]>;
+  stockManagers: Observable<StockManagerId[]>;
   type = 'stockManager';
+
   constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions) { 
     const companyId=this.afAuth.auth.currentUser.uid;
-    this.stockManagerCollection = afs.collection<StockManager>(`companies/${companyId}/stockManagers`);
-    this.stockManagers= this.stockManagerCollection.valueChanges();
+    // this.stockManagerCollection = afs.collection<StockManager>(`companies/${companyId}/stockManagers`);  // for the chamods code
+    this.stockManagerCollection = afs.collection<StockManager>('stockManagers');
+    // this.stockManagers= this.stockManagerCollection.valueChanges();
   }
 
   ngOnInit() {
@@ -42,7 +36,35 @@ export class RegisterStockManagerComponent implements OnInit {
         this.email.hasError('email') ? 'Not a valid email' :
             '';
   }
-  async register(){
+
+  // chamod implementations for registrations
+  // async register(){
+  //   const companyId=this.afAuth.auth.currentUser.uid;
+  //   const fullName:string=this.fullName.value;
+  //   const address:string=this.address.value;
+  //   const nic:string=this.nic.value;
+  //   const email:string=this.email.value;
+  //   const mobile:string=this.mobile.value;
+  //   const state:string="1";
+  //   const stockManager1:StockManager={fullName,address,nic,email,mobile,state,companyId}
+  //   const callable = await this.fns.httpsCallable('addRole');
+  //   var createUser=this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value);
+  //   callable({email:email,role:this.type}).subscribe(
+  //     (response)=>{
+  //          console.log(response);
+  //     },
+  //     ()=>{},
+  //     ()=>{
+  //       createUser.then( (data)=>{
+  //         this.stockManagerCollection.doc(data.user.uid).set(stockManager1);
+  //       });
+  //  }
+  // ) 
+    
+  // }
+
+    async register(){
+
     const companyId=this.afAuth.auth.currentUser.uid;
     const fullName:string=this.fullName.value;
     const address:string=this.address.value;
@@ -50,7 +72,8 @@ export class RegisterStockManagerComponent implements OnInit {
     const email:string=this.email.value;
     const mobile:string=this.mobile.value;
     const state:string="1";
-    const stockManager1:StockManager={fullName,address,nic,email,mobile,state,companyId}
+    const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
+    const stockManager1:StockManager={fullName,address,nic,email,mobile,state,companyId,imagePath}
     const callable = await this.fns.httpsCallable('addRole');
     var createUser=this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value);
     callable({email:email,role:this.type}).subscribe(
@@ -63,9 +86,7 @@ export class RegisterStockManagerComponent implements OnInit {
           this.stockManagerCollection.doc(data.user.uid).set(stockManager1);
         });
    }
-  )
-    
-    
+  ) 
     
   }
 
