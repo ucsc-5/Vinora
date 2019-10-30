@@ -8,8 +8,7 @@
     <!-- <div *ngIf="items.length === 0">No results, try clearing filters</div> -->
   <!-- </div>
   <ng-template #loading>Loading&hellip;</ng-template> -->
-<div class="row">
-  <div class="col col-lg-4">
+
+
     <app-ret-reg-company-element *ngFor="let companyEmail of companyEmails | async" [companyEmail]="companyEmail" ></app-ret-reg-company-element>
-  </div>
-</div>
+
