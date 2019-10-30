@@ -20,7 +20,7 @@ export class SalesRepresentativeComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.salesrepresentatives= this.salesRefService.getSalesRepByEmail(this.managerId);
+    // this.salesrepresentatives= this.salesRefService.getSalesRepByCompanyId(this.managerId);
   }
 
   onRegister(){

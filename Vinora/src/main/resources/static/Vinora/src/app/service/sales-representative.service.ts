@@ -43,4 +43,8 @@ export class SalesRepresentativeService {
   
     return this.salesrepresentatives;
   }
+
+  getSalesRepByCompanyId(companyId:string){
+
+  }
 }
