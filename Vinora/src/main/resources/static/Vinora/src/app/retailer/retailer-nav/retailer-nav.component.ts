@@ -25,7 +25,7 @@ export class RetailerNavComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.retailer= this.retailerService.getRetailer(this.retailerId);
+    this.retailer= this.retailerService.getRetailerByEmail(this.retailerId);
   }
 
   toMyCart(){

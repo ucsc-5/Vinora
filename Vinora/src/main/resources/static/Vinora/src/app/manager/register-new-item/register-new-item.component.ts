@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { ItemService } from 'src/app/service/item.service';
+import { ItemService, Item, ItemId } from 'src/app/service/item.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CompanyService } from 'src/app/service/company.service';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -10,18 +10,7 @@ import { finalize } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-export interface Item{
 
-  itemName: string;
-  brand: string;
-  quantity: number;
-  unitPrice: number;
-  itemImagePath: string;
-  description: string;
-  category: string;
-  state: string;
-  companyUid: string;
-}
 
 
 @Component({
@@ -35,13 +24,13 @@ export class RegisterNewItemComponent implements OnInit {
 
 
   private itemsCollection: AngularFirestoreCollection<Item>;
-  items: Observable<Item[]>;
+  items: Observable<ItemId[]>;
 
   managerId;
  
   constructor(private afs: AngularFirestore,private itemService:ItemService,private route: Router,private afAuth: AngularFireAuth,private companyService:CompanyService,private storage: AngularFireStorage) {
     this.managerId= this.afAuth.auth.currentUser.uid;
-    this.itemsCollection = afs.collection<Item>(`companies/${this.managerId}/items`);
+    this.itemsCollection = afs.collection<Item>(`items`);
   }
 
 
@@ -57,7 +46,7 @@ export class RegisterNewItemComponent implements OnInit {
       const brand = value.brandName;
       const quantity = value.quantity;
       const unitPrice = value.unitPrice;
-      const companyUid =  this.managerId;
+      const companyId =  this.managerId;
       // const itemImagePath = value.itemImagePath
       // const brandImagePath: string;
       const description = value.description;
@@ -76,7 +65,7 @@ export class RegisterNewItemComponent implements OnInit {
             console.log(downloadURL);
              const itemImagePath= downloadURL;
              const id = this.afs.createId();
-             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyUid};
+             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId};
              console.log(item);
              this.itemsCollection.doc(id).set(item);
           });

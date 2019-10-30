@@ -84,6 +84,7 @@ import { CompanyRetailersComponent } from './manager/company-retailers/company-r
 import { RetRegCompanyElementComponent } from './retailer/retailer-registered-companies/ret-reg-company-element/ret-reg-company-element.component';
 import { StockManagerService } from './service/stock-manager.service';
 import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
+import { StockManagerProfileComponent } from './stock-manager/stock-manager-profile/stock-manager-profile.component';
 
 
 @NgModule({
@@ -141,7 +142,8 @@ import { StockManagerDashboardComponent } from './stock-manager/stock-manager-da
     DisplaySalesRepresentativeComponent,
     CompanyRetailersComponent,
     RetRegCompanyElementComponent,
-    StockManagerDashboardComponent
+    StockManagerDashboardComponent,
+    StockManagerProfileComponent
   
   ], 
   entryComponents:[

@@ -34,7 +34,7 @@ export class StockManagerService {
 
 
   getStockManagerByEmail(email:string){
-    this.stockManager = this.afs.collection(this.dbPath , ref => ref.where('email','==',email)).snapshotChanges().pipe(
+    this.stockManager = this.afs.collection(this.dbPath , ref => ref.where('email','==',email).limit(1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as StockManager;
         const id = a.payload.doc.id;

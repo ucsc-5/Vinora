@@ -36,6 +36,7 @@ import { SalesRepresentativeComponent } from './manager/sales-representative/sal
 import { CompanyRetailersComponent } from './manager/company-retailers/company-retailers.component';
 import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies/retailer-new-companies.component';
 import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
+import { StockManagerProfileComponent } from './stock-manager/stock-manager-profile/stock-manager-profile.component';
 
 
 
@@ -68,7 +69,8 @@ const routes: Routes = [
 
   {path: 'stockManager/:id' , component: StockManagerComponent, children:[
     { path: '', component: StockManagerDashboardComponent},
-    { path: 'updateItems', component: UpdateItemsComponent}
+    { path: 'updateItems', component: UpdateItemsComponent},
+    { path: 'myProfile', component: StockManagerProfileComponent}
     
   ]},
 

@@ -19,7 +19,7 @@ export class RetailerDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.retailer = this.retailerService.getRetailer(this.retailerEmail);
+     this.retailer = this.retailerService.getRetailerByEmail(this.retailerEmail);
   }
 
 }

@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { CompanyService } from 'src/app/service/company.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ItemService } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-registered-items',
@@ -15,12 +16,12 @@ export class RegisteredItemsComponent implements OnInit {
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
   managerId;
-  constructor(private companyService:CompanyService,private afAuth: AngularFireAuth) {
+  constructor(private itemServvise:ItemService,private afAuth: AngularFireAuth) {
     this.managerId= this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
-    this.items= this.companyService.getItems(this.managerId);
+    this.items= this.itemServvise.getItemsByCompanyId(this.managerId);
   }
 
 }
