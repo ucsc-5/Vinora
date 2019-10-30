@@ -67,6 +67,7 @@ const routes: Routes = [
   ]},
 
   {path: 'stockManager/:id' , component: StockManagerComponent, children:[
+    { path: '', component: StockManagerDashboardComponent},
     { path: 'updateItems', component: UpdateItemsComponent}
     
   ]},
@@ -88,11 +89,13 @@ const routes: Routes = [
       ]}
   ]},
 
-  {path: 'stockManger/:id', component: StockManagerComponent, children:[
-    { path: '', component: StockManagerDashboardComponent},
-    { path:'updateItems', component: StockManagerDashboardComponent}
-    // { path:'updateItems', component: UpdateItemsComponent}
-  ]},
+  // {path: 'stockManger/:id', component: StockManagerComponent, children:[
+   
+  //   { path:'updateItems', component: StockManagerDashboardComponent},
+  //   { path:'mainStock', component: StockManagerDashboardComponent}
+  // ]
+
+  // },
 
   {path: 'admin/:id', component: AdminComponent, children:[
     { path: '', component: AdminDashboardComponent},

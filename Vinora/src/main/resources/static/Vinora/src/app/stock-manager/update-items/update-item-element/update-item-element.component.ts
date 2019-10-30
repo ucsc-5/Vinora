@@ -4,7 +4,6 @@ import { ItemService } from 'src/app/service/item.service';
 import { from, Observable } from 'rxjs';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { SalesRepresentative } from 'src/app/manager/sales-representative/register-sales-representative/register-sales-representative.component';
 
 export interface Items{
   barnd:string;

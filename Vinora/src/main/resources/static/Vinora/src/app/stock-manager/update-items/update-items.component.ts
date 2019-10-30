@@ -31,17 +31,17 @@ export class UpdateItemsComponent implements OnInit {
     this.companyService.getCompanyByEmail("chamodlakmal97@gmail.com").subscribe(x=>{
       //console.log(x[0]["id"])
     })
-                  this.afs.collectionGroup('stockManagers',ref=>ref.where('email', '==', email)).snapshotChanges()  
-                      this.stockManager =this.afs.collectionGroup('stockManagers',ref=>ref.where('email', '==', email)).snapshotChanges().pipe(
-                        map(actions => actions.map(a => {
-                          const data = a.payload.doc.data() as StockManager;
-                          const id = a.payload.doc.id;
-                          return { id, ...data };
-                        }))
-                      );
-                      this.stockManager.subscribe(x=>{
-                        console.log(x)
-                      })                
+                  // this.afs.collectionGroup('stockManagers',ref=>ref.where('email', '==', email)).snapshotChanges()  
+                  //     this.stockManager =this.afs.collectionGroup('stockManagers',ref=>ref.where('email', '==', email)).snapshotChanges().pipe(
+                  //       map(actions => actions.map(a => {
+                  //         const data = a.payload.doc.data() as StockManager;
+                  //         const id = a.payload.doc.id;
+                  //         return { id, ...data };
+                  //       }))
+                  //     );
+                  //     this.stockManager.subscribe(x=>{
+                  //       console.log(x)
+                  //     })                
     
     
   }

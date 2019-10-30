@@ -6,17 +6,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { SalesRepresentative, SalesRepresentativeId } from 'src/app/service/sales-representative.service';
 
-export interface SalesRepresentative{
-  fullName:string;
-  address:string;
-  email:string;
-  mobile:number;
-  itemImagePath: string;
-  nic:string;
-  state: string;
-  
-}
+
+
 
 @Component({
   selector: 'app-register-sales-representative',
@@ -26,61 +19,62 @@ export interface SalesRepresentative{
 export class RegisterSalesRepresentativeComponent implements OnInit {
 
   itemImage: FileList;
+  type="salesRef";
 
   private salesRepresentativeCollection: AngularFirestoreCollection<SalesRepresentative>;
-  salesRepresentatives: Observable<SalesRepresentative[]>;
-  managerId;
+  salesRepresentatives: Observable<SalesRepresentativeId[]>;
+  companyId:string;
 
 
   constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions,private storage: AngularFireStorage) {
-    this.managerId= this.afAuth.auth.currentUser.uid;
-    this.salesRepresentativeCollection = afs.collection<SalesRepresentative>(`companies/${this.managerId}/salesRepresentatives`);
+    this.companyId= this.afAuth.auth.currentUser.uid;
+
+    this.salesRepresentativeCollection = afs.collection<SalesRepresentative>(`salesRepresentatives`);
 
   }
 
   ngOnInit() {
+
   }
 
 
 
-  onAddSalesrepresentative(form: NgForm){
+  async onAddSalesrepresentative(form: NgForm){
     const value = form.value;
     const fullName = value.fullName;
     const address = value.address;
     const email = value.email;
-    const mobile = value.mobile;
+    const contactNumber = value.contactNumber;
     const nic = value.nic;
-    const itemImage = this.itemImage.item(0); 
-
+    const companyId = this.companyId;
+    const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
     const state = value.state;
    
-    const basePath ="salesRepresentatives"
+    const id = this.afs.createId();
 
-    const filePath = `${basePath}/${itemImage.name}${new Date()}`;
-    const storageRef = this.storage.ref(filePath);
-    const uploadTask = this.storage.upload(filePath,itemImage);
+    const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,imagePath,state,companyId};
+    
+    console.log(salesrepresentative);
+    
+    
+    const callable = await this.fns.httpsCallable('addRole');
+    var createUser=this.afAuth.auth.createUserWithEmailAndPassword(email.value,nic.value);
+    callable({email:email,role:this.type}).subscribe(
+      (response)=>{
+           console.log(response);
+      },
+      ()=>{},
+      ()=>{
+        createUser.then( (data)=>{
+          this.salesRepresentativeCollection.doc(id).set(salesrepresentative);
+        });
+   }
+  ) 
+
+
    
-   
+             
 
-
-
-
-      uploadTask.snapshotChanges().pipe(
-        finalize(() => {
-          storageRef.getDownloadURL().subscribe(downloadURL => {
-            console.log(downloadURL);
-             const itemImagePath= downloadURL;
-             const id = this.afs.createId();
-             const salesrepresentative:SalesRepresentative = {fullName,address,email,mobile,nic,itemImagePath,state};
-             console.log(salesrepresentative);
-             this.salesRepresentativeCollection.doc(id).set(salesrepresentative);
-          });
-        })
-        ).subscribe(
-          res=>{
-            console.log(res)
-          }
-        )
   }
 
   selectItemImage(event) {
