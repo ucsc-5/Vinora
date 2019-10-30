@@ -4,6 +4,7 @@ import { ItemService, Item, ItemId } from 'src/app/service/item.service';
 import { from, Observable } from 'rxjs';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { StockManager } from 'src/app/service/stock-manager.service';
 
 @Component({
   selector: 'app-update-item-element',
@@ -12,11 +13,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 
 export class UpdateItemElementComponent implements OnInit {
-
   @Input() item: ItemId;
 
+  message: any;
 
-  constructor(private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { }
+  constructor(private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
+   }
 
   ngOnInit() {
   }
@@ -24,10 +26,20 @@ export class UpdateItemElementComponent implements OnInit {
   updateQuantity(form:NgForm) {
     const value=form.value;
 
-    // console.log(value.quantity);
-    // console.log(this.item.key);
-    // const newQuantity= this.item.quantity+value.quantity;
-    // this.itemServise.updateItem(this.item.key, {quantity: newQuantity})
+    console.log(value.quantity+"skjdbcjsdbc");
+    console.log(this.item.id);
+    const newQuantity= this.item.quantity+value.quantity;
+    console.log(newQuantity+" the new Item");
+    
+    this.message = this.itemServise.updateItem(this.item.id,{quantity: newQuantity}).then(
+      x=>{
+        return "done";
+      }
+    ).catch(
+      error=>{error}
+    )
+
+    console.log(this.message);
     //   .catch(err => console.log(err+"jkdcjdscjsdbc"));
   }
 

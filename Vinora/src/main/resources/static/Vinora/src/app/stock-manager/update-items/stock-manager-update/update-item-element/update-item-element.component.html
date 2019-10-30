@@ -1,24 +1,23 @@
-
-    <mat-card class="example-card itemcard">
+        <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
-            <div class="forimage"></div>
+            <img mat-card-image class="forimage" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
             <mat-card-content>
                 <p>{{item.description}}<br>
                     Unit Price: <b>{{item.unitPrice}}</b><br>
                     Available:  <b></b>{{item.quantity}}<br>                
                 </p>
-    
+                
             </mat-card-content>
             <mat-card-actions>
                 <form (ngSubmit)="updateQuantity(f)" #f="ngForm">
                         <table class="" style="width: 159px" cellspacing="0">
-                            <tr>
+                                <tr>
                                 <td>
                                     <mat-form-field class="" style="width: 70%">
-                                        <input matInput type="number" placeholder="Quantity" name="quantity" ngModel>
+                                            <input matInput type="number" placeholder="Quantity" name="quantity" ngModel>
                                     </mat-form-field>
 
                                     <div class="input-group-append">
@@ -27,11 +26,11 @@
                                 </td>
                             </tr>
 
-                            <tr>
+                            <!-- <tr>
                                     <td><mat-form-field class="" style="width: 70%">
-                                        <input matInput type="number"  placeholder="Unit Price"   name="unitPrice" ngModel  >
+                                            <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel  >
                                     </mat-form-field></td>
-                            </tr>
+                            </tr> -->
                            
 
                         </table>
@@ -40,5 +39,3 @@
                 </form>
             </mat-card-actions>
         </mat-card>
-    
-     

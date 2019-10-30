@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
 import { LoginUser } from 'src/app/service/login-user';
 import { Observable } from 'rxjs';
-import { RetailerService } from 'src/app/service/retailer.service';
+import { RetailerService, RetailerId } from 'src/app/service/retailer.service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 // import { LoginUser } from 'src/app/service/login-user';
@@ -17,15 +17,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class RetailerNavComponent implements OnInit {
 
-  retailer: Observable<any>
-  retailerId;
+  retailer: Observable<RetailerId[]>
+  retailerEmail:string;
 
   constructor(private afAuth: AngularFireAuth,private autheService:AuthenticationService, private router:Router, private route:ActivatedRoute, private retailerService:RetailerService) {
-    this.retailerId= afAuth.auth.currentUser.uid;
+    this.retailerEmail= afAuth.auth.currentUser.email;
    }
 
   ngOnInit() {
-    this.retailer= this.retailerService.getRetailerByEmail(this.retailerId);
+    this.retailer= this.retailerService.getRetailerByEmail(this.retailerEmail);
   }
 
   toMyCart(){

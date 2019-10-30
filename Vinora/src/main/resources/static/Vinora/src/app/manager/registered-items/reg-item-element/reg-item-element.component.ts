@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ItemsId, CompanyService } from 'src/app/service/company.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { NgForm } from '@angular/forms';
+import { ItemService } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-reg-item-element',
@@ -11,10 +13,10 @@ export class RegItemElementComponent implements OnInit {
 
   @Input() item:ItemsId
 
-  companyKey
+  message: any;
 
-  constructor(private companyService:CompanyService, private afAuth: AngularFireAuth) {
-    this.companyKey= this.afAuth.auth.currentUser.uid;
+  constructor(private itemService:ItemService, private afAuth: AngularFireAuth) {
+ 
   }
 
   ngOnInit() {
@@ -22,12 +24,36 @@ export class RegItemElementComponent implements OnInit {
   }
 
   onRemove(){
-    this.companyService.deleteItem(this.companyKey,this.item.id).then(x=>{
-      console.log(x+" deleted");
-    }).catch(error=>{
-      console.log(error+" error in deletiong");
-    });
+      
+    this.message = this.itemService.updateItem(this.item.id,{state: "deleted"}).then(
+      x=>{
+        return "done";
+      }
+    ).catch(
+      error=>{error}
+    )
+
+    console.log(this.message);
+
   }
+
+  OnUpdateUnitPrice(form:NgForm) {
+      const value=form.value;
+      console.log(value.unitPrice+"skjdbcjsdbc");
+      console.log(this.item.id);
+      
+      this.message = this.itemService.updateItem(this.item.id,{unitPrice: value.unitPrice}).then(
+        x=>{
+          return "done";
+        }
+      ).catch(
+        error=>{error}
+      )
+  
+      console.log(this.message);
+      //   .catch(err => console.log(err+"jkdcjdscjsdbc"));
+    }
+  
 
   
 

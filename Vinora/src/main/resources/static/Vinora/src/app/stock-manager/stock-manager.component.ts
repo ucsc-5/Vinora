@@ -19,8 +19,6 @@ export class StockManagerComponent implements OnInit {
   ngOnInit() {
     this.stockManager= this.StockManagerService.getStockManagerByEmail(this.stockManagerEmail);
   }
-
-
   
   opened = true;
 

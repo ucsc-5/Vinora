@@ -47,7 +47,7 @@ import { RegisteredItemsComponent } from './manager/registered-items/registered-
 import { RegItemElementComponent } from './manager/registered-items/reg-item-element/reg-item-element.component';
 import { RegisterDCompanyComponent } from './home/register-d-company/register-d-company.component';
 import { UpdateItemsComponent } from './stock-manager/update-items/update-items.component';
-import { UpdateItemElementComponent } from './stock-manager/update-items/update-item-element/update-item-element.component';
+import { UpdateItemElementComponent } from './stock-manager/update-items/stock-manager-update/update-item-element/update-item-element.component';
 import { VehicleRegisterComponent } from './manager/vehicle/vehicle-register/vehicle-register.component';
 import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/cart-item-elemet.component';
@@ -85,6 +85,7 @@ import { RetRegCompanyElementComponent } from './retailer/retailer-registered-co
 import { StockManagerService } from './service/stock-manager.service';
 import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
 import { StockManagerProfileComponent } from './stock-manager/stock-manager-profile/stock-manager-profile.component';
+import { StockManagerUpdateComponent } from './stock-manager/update-items/stock-manager-update/stock-manager-update.component';
 
 
 @NgModule({
@@ -143,7 +144,8 @@ import { StockManagerProfileComponent } from './stock-manager/stock-manager-prof
     CompanyRetailersComponent,
     RetRegCompanyElementComponent,
     StockManagerDashboardComponent,
-    StockManagerProfileComponent
+    StockManagerProfileComponent,
+    StockManagerUpdateComponent
   
   ], 
   entryComponents:[

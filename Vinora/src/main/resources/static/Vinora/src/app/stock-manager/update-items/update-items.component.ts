@@ -20,14 +20,14 @@ import { database } from 'firebase';
 })
 export class UpdateItemsComponent implements OnInit {
   
-  companyId:string;
-  items: Observable<ItemsId[]>;
+  stockManager: Observable<StockManagerId[]>;
+  stockMangerEmail:string;
   constructor(private StockManagerService:StockManagerService,private afAuth: AngularFireAuth,private itemService:ItemService){
-    this.companyId= this.afAuth.auth.currentUser.uid
+    this.stockMangerEmail= this.afAuth.auth.currentUser.email;
   }
  
   ngOnInit() {
-   this.items=this.itemService.getItemsByCompanyId(this.companyId);
+   this.stockManager=this.StockManagerService.getStockManagerByEmail(this.stockMangerEmail)
   }
 }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 // import { item } from './items';
  
@@ -30,6 +30,7 @@ export class ItemService {
   private dbPath = 'items';
 
   items:Observable<ItemId[]>;
+  private itemCollection : AngularFirestoreCollection<Item>;
 
  
  
@@ -39,7 +40,7 @@ export class ItemService {
 
 
   getItemsByCompanyId(companyId: string){
-    this.items = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId)).snapshotChanges().pipe(
+    this.items = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"active")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Item;
         const id = a.payload.doc.id;
@@ -47,6 +48,10 @@ export class ItemService {
       }))
     );
     return this.items;
+  }
+
+  updateItem(key: string, value: any): Promise<void> {
+    return this.afs.collection('items').doc(key).update(value);
   }
  
  

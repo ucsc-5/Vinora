@@ -44,7 +44,7 @@ export class RegisterNewItemComponent implements OnInit {
 
       const itemName = value.itemName;
       const brand = value.brandName;
-      const quantity = value.quantity;
+      const quantity = 0;
       const unitPrice = value.unitPrice;
       const companyId =  this.managerId;
       // const itemImagePath = value.itemImagePath

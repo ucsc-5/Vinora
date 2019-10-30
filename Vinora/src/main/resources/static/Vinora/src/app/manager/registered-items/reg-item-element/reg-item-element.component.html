@@ -15,8 +15,25 @@
     
             </mat-card-content>
 
-            <mat-card-actions>   
-                        <button mat-raised-button color="warn" type="submit" (click)="onRemove()" >Remove</button>
+            <mat-card-actions>  
+                
+                    <form (ngSubmit)="OnUpdateUnitPrice(f)" #f="ngForm">
+                            <table class="" style="width: 159px" cellspacing="0">    
+                                <tr>
+                                    <td>
+                                            <mat-form-field class="" style="width: 70%">
+                                                <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel >
+                                            </mat-form-field>
+                                            <span>
+                                                <button mat-raised-button color="primary" type="submit" (click)="OnUpdateUnitPrice()" >Update</button>
+                                                <button mat-raised-button color="primary" type="reset">Reset</button>
+                                            </span>
+                                    </td>
+                                </tr>    
+                            </table>
+                            <br>
+                            <button mat-raised-button color="warn" (click)="onRemove()" >Remove</button>
+                    </form>
             </mat-card-actions>
 </mat-card>
     
