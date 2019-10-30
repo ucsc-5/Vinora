@@ -29,4 +29,6 @@ export class RegItemElementComponent implements OnInit {
     });
   }
 
+  
+
 }
