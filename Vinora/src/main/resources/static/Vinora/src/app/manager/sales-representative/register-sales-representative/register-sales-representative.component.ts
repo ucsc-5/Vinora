@@ -48,7 +48,7 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
     const nic = value.nic;
     const companyId = this.companyId;
     const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
-    const state = value.state;
+    const state = "0";
    
     const id = this.afs.createId();
 
@@ -58,7 +58,7 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
     
     
     const callable = await this.fns.httpsCallable('addRole');
-    var createUser=this.afAuth.auth.createUserWithEmailAndPassword(email.value,nic.value);
+    var createUser=this.afAuth.auth.createUserWithEmailAndPassword(email,nic);
     callable({email:email,role:this.type}).subscribe(
       (response)=>{
            console.log(response);

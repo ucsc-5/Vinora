@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     // this.authService.login(email,password);
     this.showSpinner=true;
-     //this.authService.login('chamod999@gmail.com','0714954149'); //for manager
+    //  this.authService.login('chamod999@gmail.com','0714954149'); //for stock manager
     // this.authService.login('ret1@gmail.com','123123'); //for retailer
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
-    // this.authService.login('company11@gmail.com','123123'); //for retailer
-    this.authService.login('udu@gmail.com','972372560v'); //for stockManger
+    this.authService.login('company11@gmail.com','123123'); //for Manager
+    // this.authService.login('udu@gmail.com','972372560v'); //for stockManger
     
 
     this.showSpinner=false;
