@@ -1,4 +1,4 @@
-<!-- *ngFor="let companyEmail of companyEmails | async" [companyEmail]="companyEmail" -->
+<!-- *ngFor="let companyEmail of companyEmails | async" [companyEmail]="companyEmail"
 <mat-card class="example-card" >
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
@@ -17,5 +17,7 @@
           <button mat-button>LIKE</button>
           <button mat-button>SHARE</button>
         </mat-card-actions>
-      </mat-card>
-      <app-update-item-element *ngFor="let companyEmail of companyEmails | async" [companyEmail]="companyEmail"></app-update-item-element>
+      </mat-card> -->
+
+      
+      <app-update-item-element *ngFor="let item of items | async" [item]="item"></app-update-item-element>

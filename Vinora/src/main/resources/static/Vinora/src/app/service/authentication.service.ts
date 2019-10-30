@@ -55,7 +55,7 @@ export class AuthenticationService {
           }else if(idTokenResult.claims.stockManager){
             this.router.navigate(['/stockManager/',this.user.uid]);
           }else if(idTokenResult.claims.salesRef){
-            this.router.navigate(['/stockManager/',this.user.uid]);
+            this.router.navigate(['/salesRepresntative/',this.user.uid]);
           }
           else{
             console.log('another uSer')

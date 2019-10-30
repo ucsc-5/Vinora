@@ -1,19 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ItemService } from 'src/app/service/item.service';
+import { ItemService, Item, ItemId } from 'src/app/service/item.service';
 import { from, Observable } from 'rxjs';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-export interface Items{
-  barnd:string;
-  itemName:string;
-  category:string;
-  quantity:string;
-  url:string;
-  unitPrice:string;
-  state:string;
-}
 @Component({
   selector: 'app-update-item-element',
   templateUrl: './update-item-element.component.html',
@@ -21,19 +12,11 @@ export interface Items{
 })
 
 export class UpdateItemElementComponent implements OnInit {
-  private itemDoc: AngularFirestoreDocument<Items>;
-  items: Observable<Items>;
+
+  @Input() item: ItemId;
 
 
   constructor(private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { }
-
-  ngAfterViewInit(){
-   var userId= this.afAuth.auth.currentUser.uid;
-
-    console.log(this.afs.collection('salesRepresentatives'));
-  // console.log(this.itemDoc.collection<SalesRepresentative>('salesRepresentatives').valueChanges());
-    
-  }
 
   ngOnInit() {
   }
