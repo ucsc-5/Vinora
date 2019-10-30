@@ -18,8 +18,4 @@
           <button mat-button>SHARE</button>
         </mat-card-actions>
       </mat-card>
-
-<!-- <div *ngFor="let stockManager of stockManager | async" [stockManager]="stockManager">
-
-
-</div> -->
+      <app-update-item-element *ngFor="let companyEmail of companyEmails | async" [companyEmail]="companyEmail"></app-update-item-element>

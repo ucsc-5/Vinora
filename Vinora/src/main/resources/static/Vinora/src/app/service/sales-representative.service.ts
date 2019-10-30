@@ -25,6 +25,7 @@ export interface SalesRepresentativeId extends SalesRepresentative{
 })
 export class SalesRepresentativeService {
   salesrepresentatives: Observable<SalesRepresentativeId[]>;
+  salesrepresentative: Observable<SalesRepresentativeId[]>;
 
   dbPath="salesRepresentatives";
 
@@ -32,7 +33,7 @@ export class SalesRepresentativeService {
 
   getSalesRepByEmail(email:string){
 
-    this.salesrepresentatives = this.afs.collection(this.dbPath , ref => ref.where('email','==',email).limit(1)).snapshotChanges().pipe(
+    this.salesrepresentative = this.afs.collection(this.dbPath , ref => ref.where('email','==',email).limit(1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as SalesRepresentative;
         const id = a.payload.doc.id;
@@ -40,8 +41,7 @@ export class SalesRepresentativeService {
       }))
     );
   
-  
-    return this.salesrepresentatives;
+    return this.salesrepresentative;
   }
 
   getSalesRepByCompanyId(companyId:string){
