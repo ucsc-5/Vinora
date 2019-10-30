@@ -82,7 +82,8 @@ import { RegisterSalesRepresentativeComponent } from './manager/sales-representa
 import { DisplaySalesRepresentativeComponent } from './manager/sales-representative/display-sales-representative/display-sales-representative.component';
 import { CompanyRetailersComponent } from './manager/company-retailers/company-retailers.component';
 import { RetRegCompanyElementComponent } from './retailer/retailer-registered-companies/ret-reg-company-element/ret-reg-company-element.component';
-import { StockMangerDashboardComponent } from './stock-manager/stock-manger-dashboard/stock-manger-dashboard.component';
+import { StockManagerService } from './service/stock-manager.service';
+import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
 
 
 @NgModule({
@@ -140,7 +141,7 @@ import { StockMangerDashboardComponent } from './stock-manager/stock-manger-dash
     DisplaySalesRepresentativeComponent,
     CompanyRetailersComponent,
     RetRegCompanyElementComponent,
-    StockMangerDashboardComponent,
+    StockManagerDashboardComponent
   
   ], 
   entryComponents:[
@@ -170,7 +171,9 @@ import { StockMangerDashboardComponent } from './stock-manager/stock-manger-dash
     AngularFireAuthGuard,
     VehicleService,
     CompanyService,
-    RetailerService,],
+    RetailerService,
+    StockManagerService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

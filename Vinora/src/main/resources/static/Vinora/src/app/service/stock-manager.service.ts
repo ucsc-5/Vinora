@@ -26,7 +26,7 @@ export interface StockManagerId extends StockManager{
 
 
 export class StockManagerService {
-  stockManger: Observable<StockManagerId[]>;
+  stockManager: Observable<StockManagerId[]>;
   dbPath = "stockManagers";
 
   constructor(private afs: AngularFirestore) { }
@@ -34,16 +34,14 @@ export class StockManagerService {
 
 
   getStockManagerByEmail(email:string){
-
-    this.stockManger = this.afs.collection(this.dbPath , ref => ref.where('email', '==',email)).snapshotChanges().pipe(
+    this.stockManager = this.afs.collection(this.dbPath , ref => ref.where('email','==',email)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as StockManager;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-  
-    return this.stockManger;
+    return this.stockManager;
   }
 
 }
