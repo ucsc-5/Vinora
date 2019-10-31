@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ItemsId, CompanyService } from 'src/app/service/company.service';
+import {  CompanyService } from 'src/app/service/company.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
-import { ItemService } from 'src/app/service/item.service';
+import { ItemService, ItemId } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-reg-item-element',
@@ -11,7 +11,7 @@ import { ItemService } from 'src/app/service/item.service';
 })
 export class RegItemElementComponent implements OnInit {
 
-  @Input() item:ItemsId
+  @Input() item:ItemId
 
   message: any;
 

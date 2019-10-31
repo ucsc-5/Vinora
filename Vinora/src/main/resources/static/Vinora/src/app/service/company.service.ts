@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { getMatFormFieldMissingControlError } from '@angular/material';
 import { RetailerEmailTokenId, RetailerEmailToken } from './retailer.service';
+import { Item, ItemId } from './item.service';
 
 
 export interface Company{
@@ -19,22 +20,23 @@ export interface Company{
   contactNumber: string;
   imagePath: string;
   state: string;
+  companyId: string;
 }
 
 export interface CompanyId extends Company{ id: string}
 
-export interface Item{
+// export interface Item{
 
-  itemName: string;
-  brand: string;
-  quantity: number;
-  unitPrice: number;
-  itemImagePath: string;
-  description: string;
-  category: string;
-  state: string;
-}
-export interface ItemsId extends Item { id: string; }
+//   itemName: string;
+//   brand: string;
+//   quantity: number;
+//   unitPrice: number;
+//   itemImagePath: string;
+//   description: string;
+//   category: string;
+//   state: string;
+// }
+// export interface ItemsId extends Item { id: string; }
 
 
 export interface Vehicle{
@@ -62,7 +64,7 @@ export class CompanyService {
   company: Observable<CompanyId[]>;
 
   private itemCollection: AngularFirestoreCollection<Item>;
-  items: Observable<ItemsId[]>;
+  items: Observable<ItemId[]>;
 
 
   private vehicleCollection: AngularFirestoreCollection<Vehicle>;
@@ -113,6 +115,18 @@ export class CompanyService {
   // for the comapany dashboard and retailer 
   getCompanyByEmail(email:string){
     this.company =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).limit(1)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Company;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  
+    return this.company;
+  }
+
+  getCompanyById(uid:string){
+    this.company =this.afs.collection(this.dbPath , ref => ref.where('companyId', '==',uid).limit(1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;

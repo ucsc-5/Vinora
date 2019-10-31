@@ -86,6 +86,8 @@ import { StockManagerService } from './service/stock-manager.service';
 import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
 import { StockManagerProfileComponent } from './stock-manager/stock-manager-profile/stock-manager-profile.component';
 import { StockManagerUpdateComponent } from './stock-manager/update-items/stock-manager-update/stock-manager-update.component';
+import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
+import { OrderItemElementComponent } from './retailer/new-order/order-from-company/order-item-element/order-item-element.component';
 
 
 @NgModule({
@@ -145,7 +147,9 @@ import { StockManagerUpdateComponent } from './stock-manager/update-items/stock-
     RetRegCompanyElementComponent,
     StockManagerDashboardComponent,
     StockManagerProfileComponent,
-    StockManagerUpdateComponent
+    StockManagerUpdateComponent,
+    OrderFromCompanyComponent,
+    OrderItemElementComponent
   
   ], 
   entryComponents:[

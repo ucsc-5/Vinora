@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StockManager } from 'src/app/service/stock-manager.service';
 import { Observable } from 'rxjs';
-import { ItemsId } from 'src/app/service/company.service';
-import { ItemService } from 'src/app/service/item.service';
+import { ItemService, ItemId } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-stock-manager-update',
@@ -12,7 +11,7 @@ import { ItemService } from 'src/app/service/item.service';
 export class StockManagerUpdateComponent implements OnInit {
 
   @Input() stockManager: StockManager;
-  items: Observable<ItemsId[]>;
+  items: Observable<ItemId[]>;
 
   constructor(private itemService:ItemService) { }
 

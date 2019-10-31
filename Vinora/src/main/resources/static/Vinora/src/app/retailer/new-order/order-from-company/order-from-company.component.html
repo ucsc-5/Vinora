@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col" *ngFor="let company of company | async" >
+            <div class="col-3" style="background-color: chartreuse;">
+                    <img src="{{company.imagePath}}" alt="" width="150px" height="150px"> <br>                  
+                    <b>email: </b>{{company.email}}<br>
+                    <b>Contact: </b>{{company.address}}<br>
+                </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+            <app-order-item-element *ngFor="let item of items | async" [item]="item"></app-order-item-element>
+    </div>
+</div>

@@ -37,6 +37,7 @@ import { CompanyRetailersComponent } from './manager/company-retailers/company-r
 import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies/retailer-new-companies.component';
 import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
 import { StockManagerProfileComponent } from './stock-manager/stock-manager-profile/stock-manager-profile.component';
+import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
 
 
 
@@ -58,7 +59,8 @@ const routes: Routes = [
   { path: 'retailer/:retailerId',component: RetailerComponent, children:[
     { path: '' , component: RetailerDashboardComponent},
     { path: 'currentOrders', component: CurrentOrdersComponent},
-    { path: 'newOrder', component: NewOrderComponent},
+    { path: 'companies', component: NewOrderComponent},
+    { path: 'companies/:companyId', component: OrderFromCompanyComponent},
     { path: 'previousOrder', component: PreviousOrdersComponent},
     {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
     // {path: 'newStock', component: NewStockComponent},

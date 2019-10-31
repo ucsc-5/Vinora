@@ -1,0 +1,41 @@
+<mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>{{item.itemName}}</mat-card-title>
+            <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="forimage" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <p>{{item.description}}<br>
+                Unit Price: <b>{{item.unitPrice}}</b><br>
+                Available:  <b></b>{{item.quantity}}<br>                
+            </p>
+            
+        </mat-card-content>
+        <mat-card-actions>
+            <form (ngSubmit)="updateQuantity(f)" #f="ngForm">
+                    <table class="" style="width: 159px" cellspacing="0">
+                            <tr>
+                            <td>
+                                <mat-form-field class="" style="width: 70%">
+                                        <input matInput type="number" placeholder="Quantity" name="quantity" ngModel>
+                                </mat-form-field>
+
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Kg</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- <tr>
+                                <td><mat-form-field class="" style="width: 70%">
+                                        <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel  >
+                                </mat-form-field></td>
+                        </tr> -->
+                       
+
+                    </table>
+                    <button mat-raised-button color="primary" type="reset">Reset</button>
+                    <button mat-raised-button color="primary" type="submit">Add</button>
+            </form>
+        </mat-card-actions>
+    </mat-card>

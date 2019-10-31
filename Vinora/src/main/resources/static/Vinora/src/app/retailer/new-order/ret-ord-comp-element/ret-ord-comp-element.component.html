@@ -1,30 +1,16 @@
 
-<div *ngFor="let company of company | async">
-    <div class="example-card" >
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="{{company.imagePath}}" class="card-img" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{company.companyName}}</h5>                    
-                    <p class="card-text">
-                      <!-- <b>State: </b>{{company.state}}<br> -->
-                      <b>email: </b>{{company.email}}<br>
-                      <!-- <b>Address: </b>{{company.address}}<br> -->
-                      <b>Contact: </b>{{company.id}}<br>
-                      <!-- <b>Key: </b>{{company.id}}<br> -->
-                  </p>
-
-                    
-            </div>
-          </div>
-        </div>
-        
-    </div> 
-    <div class="row">
-      <app-new-order-item-elemet [companyUid]="company.id" ></app-new-order-item-elemet>
+<div class="col col-lg-12"  style="background-color: aqua;" >  
+  <a type="button"  class="row"  *ngFor="let company of company | async" (click)="onClick(company)">
+    <div class="col-3" style="background-color: chartreuse;">
+        <img src="{{company.imagePath}}" alt="" width="150px" height="150px"> <br>                  
+        <b>email: </b>{{company.email}}<br>
+        <b>Contact: </b>{{company.address}}<br>
     </div>
-  </div>
+
+    <div class="col-9" style="background-color: darkcyan;">
+        <app-new-order-item-elemet [companyUid]="company.id" ></app-new-order-item-elemet>
+    </div>
+  </a> 
+</div>
 
 

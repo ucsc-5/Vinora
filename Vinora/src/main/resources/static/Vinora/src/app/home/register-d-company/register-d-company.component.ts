@@ -72,7 +72,7 @@ export class RegisterDCompanyComponent implements OnInit {
         },()=>{},
         ()=>{
           this.authServise.login(userEmail,password).then(()=>{
-            const uid = this.afAuth.auth.currentUser.uid;
+            const companyId = this.afAuth.auth.currentUser.uid;
             const address:string=this.firstFormGroup.value['address'];
             const companyName:string=this.firstFormGroup.value['companyName'];
             const contactNumber:string=this.secondFormGroup.value['tel'];
@@ -81,8 +81,8 @@ export class RegisterDCompanyComponent implements OnInit {
             const managerNic:string=this.secondFormGroup.value['managerNic'];
             const state:string="0";
             const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
-            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath}
-            this.companyCollection.doc(uid).set(company1);
+            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId}
+            this.companyCollection.doc(companyId).set(company1);
           }).catch((error)=>{
             console.log(error+" The error from register then login ");
           })

@@ -5,7 +5,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { CompanyId, CompanyService, Item, ItemsId } from 'src/app/service/company.service';
+import { CompanyId, CompanyService} from 'src/app/service/company.service';
 import { StockManager, StockManagerId, StockManagerService } from 'src/app/service/stock-manager.service';
 import { element } from 'protractor';
 import { database } from 'firebase';

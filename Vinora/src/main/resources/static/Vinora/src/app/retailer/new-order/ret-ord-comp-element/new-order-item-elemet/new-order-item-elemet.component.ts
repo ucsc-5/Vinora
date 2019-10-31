@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ItemService } from 'src/app/service/item.service';
-import { CompanyService, ItemsId } from 'src/app/service/company.service';
+import { ItemService, ItemId } from 'src/app/service/item.service';
+import { CompanyService} from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ export class NewOrderItemElemetComponent implements OnInit {
 
   @Input() companyUid: string;
 
-  items : Observable<ItemsId[]>
+  items : Observable<ItemId[]>
 
   constructor(private companyService: CompanyService) { }
 
