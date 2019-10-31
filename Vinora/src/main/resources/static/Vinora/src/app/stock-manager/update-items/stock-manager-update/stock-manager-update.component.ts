@@ -18,5 +18,4 @@ export class StockManagerUpdateComponent implements OnInit {
   ngOnInit() {
     this.items = this.itemService.getItemsByCompanyId(this.stockManager.companyId);
   }
-
 }

@@ -15,11 +15,11 @@ export class NewOrderItemElemetComponent implements OnInit {
 
   items : Observable<ItemId[]>
 
-  constructor(private companyService: CompanyService) { }
+  constructor(private itemService:ItemService) { }
 
   ngOnInit() {
 
-    this.items = this.companyService.getItems(this.companyUid);
+    this.items = this.itemService.getItemsByCompanyId(this.companyUid);
 
     this.items.forEach(x=>{
       console.log(x);

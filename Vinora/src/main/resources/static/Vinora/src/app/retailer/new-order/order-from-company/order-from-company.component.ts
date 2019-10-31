@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CompanyId, CompanyService } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
-import { ItemId } from 'src/app/service/item.service';
+import { ItemId, ItemService } from 'src/app/service/item.service';
 import { RetailerService } from 'src/app/service/retailer.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class OrderFromCompanyComponent implements OnInit {
   items: Observable<ItemId[]>
 
 0
-  constructor(private companyService: CompanyService,private retailerService:RetailerService, private route:ActivatedRoute) { }
+  constructor(private companyService: CompanyService,private itemService:ItemService, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((param:Params)=>{
@@ -28,7 +28,7 @@ export class OrderFromCompanyComponent implements OnInit {
 
     this.company= this.companyService.getCompanyById(this.companyId);
 
-    this.items = this.companyService.getItems(this.companyId);
+    this.items = this.itemService.getItemsByCompanyId(this.companyId);
     
   }
 

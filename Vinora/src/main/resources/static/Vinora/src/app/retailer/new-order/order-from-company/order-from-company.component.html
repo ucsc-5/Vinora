@@ -8,7 +8,5 @@
     </div>
 </div>
 <div class="row">
-    <div class="col">
-            <app-order-item-element *ngFor="let item of items | async" [item]="item"></app-order-item-element>
-    </div>
+            <app-order-item-element class="col col-4" *ngFor="let item of items | async" [item]="item"></app-order-item-element>
 </div>
