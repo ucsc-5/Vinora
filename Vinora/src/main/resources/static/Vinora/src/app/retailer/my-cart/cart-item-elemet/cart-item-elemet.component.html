@@ -4,31 +4,17 @@
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
+            <img mat-card-image class="forimage" src="{{item.itemImagePath}}" alt="Photo of a Shiba Inu">
             <mat-card-content>
                 <p>{{item.description}}<br>
                     Unit Price: <b>{{item.unitPrice}}</b><br>
                     Quantity:  <b></b>{{item.quantity}}<br>                
                 </p>
-
-                <div class="forimage"></div>
-    
+   
             </mat-card-content>
             <mat-card-actions>
-                <form (ngSubmit)="toCart(f)" #f="ngForm" >
-                        <!-- <table class="example-full-width" cellspacing="0">
-                            <tr>
-                                <td><mat-form-field class="example-full-width">
-                                    <input matInput type="number" placeholder="Quantity" name="quantity" ngModel>
-                                </mat-form-field></td>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Kg</span>
-                                </div>
-                            </tr>
-                        </table> -->
-                        
+                <form (ngSubmit)="toCart(f)" #f="ngForm" >            
                         <button mat-raised-button color="warn" type="submit" >Remove</button>
                 </form>
             </mat-card-actions>
         </mat-card>
-    
-     

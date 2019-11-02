@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { OrderItem } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-cart-item-elemet',
@@ -7,10 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CartItemElemetComponent implements OnInit {
 
-  
+  @Input() item:OrderItem
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

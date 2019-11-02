@@ -88,6 +88,7 @@ import { StockManagerProfileComponent } from './stock-manager/stock-manager-prof
 import { StockManagerUpdateComponent } from './stock-manager/update-items/stock-manager-update/stock-manager-update.component';
 import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
 import { OrderItemElementComponent } from './retailer/new-order/order-from-company/order-item-element/order-item-element.component';
+import { OrderSummeryComponent } from './retailer/new-order/order-from-company/order-summery/order-summery.component';
 
 
 @NgModule({
@@ -149,7 +150,8 @@ import { OrderItemElementComponent } from './retailer/new-order/order-from-compa
     StockManagerProfileComponent,
     StockManagerUpdateComponent,
     OrderFromCompanyComponent,
-    OrderItemElementComponent
+    OrderItemElementComponent,
+    OrderSummeryComponent
   
   ], 
   entryComponents:[

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { AngularFireDatabase} from '@angular/fire/database';
+
 import { OrderService } from 'src/app/service/order.service';
+import { OrderItem } from 'src/app/service/item.service';
 
 @Component({
   selector: 'app-my-cart',
@@ -12,20 +12,17 @@ import { OrderService } from 'src/app/service/order.service';
 export class MyCartComponent implements OnInit {
 
 
-  itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
-  constructor(db: AngularFireDatabase, private orderService:OrderService) {
-        this.itemsRef = db.list('orders');
-        // Use snapshotChanges().map() to store the key
-        this.items = this.itemsRef.snapshotChanges().pipe(
-          map(changes => 
-            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          )
-        );
+  orderItems: OrderItem[];
 
+  constructor(db: AngularFireDatabase, private orderService:OrderService) {
+       
       }
 
   ngOnInit() {
+    
+    this.orderItems = this.orderService.orderItems;
+    console.log(this.orderItems.forEach(x=>{x}));
+
   }
 
 }
