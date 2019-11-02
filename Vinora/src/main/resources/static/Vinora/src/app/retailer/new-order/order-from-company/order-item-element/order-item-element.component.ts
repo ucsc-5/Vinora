@@ -3,6 +3,7 @@ import { ItemId, OrderItem, ItemService } from 'src/app/service/item.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { OrderService } from 'src/app/service/order.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-order-item-element',
@@ -21,14 +22,17 @@ export class OrderItemElementComponent implements OnInit {
   messageOfRootItem: any;
   messageOfOrderItem: any;
 
-  constructor(private route:ActivatedRoute,private itemService:ItemService, private orderService:OrderService) { }
+  constructor(private afAuth: AngularFireAuth,private route:ActivatedRoute,private itemService:ItemService, private orderService:OrderService) {
+    this.retailerId =  this.afAuth.auth.currentUser.uid;
+   }
 
   ngOnInit() {
 
     this.route.params.subscribe((param:Params)=>{
       this.companyId = param['companyId'];
-      this.retailerId = param['retailerId'];
     });
+
+    console.log(this.companyId+" com"+this.retailerId+" ret Id");
   }
 
   addToCart(form:NgForm){
@@ -65,14 +69,13 @@ export class OrderItemElementComponent implements OnInit {
       ).catch(
         error=>{error}
         )
-        console.log(quantity+" the new Item");
+        
+        // console.log(retailerId+ " this is the retailer Id");
         const  orderItem: OrderItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,rootId,retailerId,stockManagerId,salesRefId};
-        this.orderService.addToItemsArray(orderItem);
-    }
+        // console.log(orderItem);
 
-       
-    console.log(this.messageOfRootItem+" this is from the item");
-    // console.log(this.messageOfOrderItem+" this is from the Order");
+        this.orderService.addItems(orderItem);
+    }
   }
   
 }

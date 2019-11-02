@@ -22,16 +22,12 @@ export class OrderFromCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((param:Params)=>{
-      this.companyId = param['companyId'];})
-
-    console.log(this.companyId);
-
+      this.companyId = param['companyId'];
+    });
+   
+    this.items= this.itemService.getItemsByCompanyId(this.companyId);
     this.company= this.companyService.getCompanyById(this.companyId);
-
-    this.items = this.itemService.getItemsByCompanyId(this.companyId);
     
   }
-
-
 
 }

@@ -1,4 +1,4 @@
 <div class="row">
-    <app-cart-item-elemet class="col col-3" *ngFor="let item of orderItems" [item]="item"></app-cart-item-elemet>
+    <app-cart-item-elemet class="col col-3" *ngFor="let item of orderItems | async" [item]="item"></app-cart-item-elemet>
 
 </div>

@@ -1,5 +1,5 @@
 <ul>
-    <li *ngFor="let item of orderItems">
+    <li *ngFor="let item of orderItems | async ">
         <p>{{item.itemName}}       {{item.quantity}} </p>
     </li>
 </ul>
