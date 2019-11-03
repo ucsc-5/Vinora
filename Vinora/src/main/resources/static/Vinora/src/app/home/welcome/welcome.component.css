@@ -1,11 +1,11 @@
-#main{
-    background-attachment: fixed;
-    background-image: url(../../../assets/images/a.jpg);
-    border-image-width: 100%;
-    height: 100%;
+
+.image{
+    height:40em;
+    background-size:cover;
+    width:auto;
+    background-image:url('../../../assets/images/a.jpg');
+    background-position:50% 50%;
     text-align: center;
-    text-emphasis-color: red;
-    image-orientation: flip;
-}
-
-
+    color: deepskyblue;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
