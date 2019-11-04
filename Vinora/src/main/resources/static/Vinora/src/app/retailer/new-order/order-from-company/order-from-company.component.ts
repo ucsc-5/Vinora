@@ -4,6 +4,7 @@ import { CompanyId, CompanyService } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
 import { ItemId, ItemService } from 'src/app/service/item.service';
 import { RetailerService } from 'src/app/service/retailer.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Component({
   selector: 'app-order-from-company',
@@ -29,5 +30,7 @@ export class OrderFromCompanyComponent implements OnInit {
     this.company= this.companyService.getCompanyById(this.companyId);
     
   }
+
+
 
 }

@@ -51,7 +51,7 @@ export class RegisterNewItemComponent implements OnInit {
       // const brandImagePath: string;
       const description = value.description;
       const category = "category";
-      const state = value.state;
+      const state = "active";
       const itemImage = this.itemImage.item(0);                
       
       const basePath ="items"

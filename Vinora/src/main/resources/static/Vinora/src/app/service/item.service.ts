@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 // import { item } from './items';
  
@@ -39,9 +39,10 @@ export class ItemService {
   private dbPath = 'items';
 
   items:Observable<ItemId[]>;
-  private itemCollection : AngularFirestoreCollection<Item>;
+  item:Observable<Item>;
+  private itemDocument : AngularFirestoreDocument<Item>;
 
- 
+  liveQuantity;
  
   constructor(private afs: AngularFirestore) {
     
@@ -62,4 +63,13 @@ export class ItemService {
   updateItem(key: string, value: any): Promise<void> {
     return this.afs.collection('items').doc(key).update(value);
   }  
+
+  retailerRemoveItemFromCart(key:string,quantity:number){
+    
+   
+  }
+
+  add(x:number,y:number): number{
+    return x+y;
+  }
 }
