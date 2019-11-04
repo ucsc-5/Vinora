@@ -31,7 +31,7 @@
             </mat-card-actions> -->
         <!-- </mat-card>      -->
 <div class="row">
-    <div class="col col-2"  style="background-color: burlywood;" *ngFor="let item of items | async">
+    <div class="col col-2" *ngFor="let item of items | async">
             <mat-card class="example-card" >
                 <p>{{item.itemName}}</p>
                 <img mat-card-image src="{{item.itemImagePath}}"  alt="Photo of the Retailer">

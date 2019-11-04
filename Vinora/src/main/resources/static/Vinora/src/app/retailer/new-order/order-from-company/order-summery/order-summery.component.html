@@ -1,5 +1,6 @@
 <ul>
     <li *ngFor="let item of orderItems | async ">
         <p>{{item.itemName}}       {{item.quantity}} </p>
+        <button mat-button color="warn" (click)="onRemove(item)">Remove</button>
     </li>
 </ul>
