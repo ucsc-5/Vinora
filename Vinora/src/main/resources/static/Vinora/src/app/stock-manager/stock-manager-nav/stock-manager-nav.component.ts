@@ -28,7 +28,7 @@ export class StockManagerNavComponent implements OnInit {
   }
 
 
-  onProfile(){
-    this.router.navigate(['myProfile'],{relativeTo: this.route});
-  }
+  // onProfile(){
+  //   this.router.navigate(['myProfile'],{relativeTo: this.route});
+  // }
 }
