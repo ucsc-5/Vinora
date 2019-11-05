@@ -5,18 +5,23 @@
         <div class="row no-gutters">
           <div class="col-md-4">
               <img mat-card-image src="{{stockManager.imagePath}}" alt="Photo of the Retailer">
+             
+              <label>
+                <input type="file" (change)="selectFile($event)">
+              </label>
+              <button  onclick="onAddImage()">Upload Image</button>
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{stockManager.fullName}}</h5>
               <p class="card-text">
                   <p> 
-                      <b>State: </b>{{stockManager.state}}<br>
+                      <!-- <b>State: </b>{{stockManager.state}}<br> -->
                       <b>email: </b>{{stockManager.email}}<br>
                       <b>Address: </b>{{stockManager.address}}<br>
                       <b>Contact: </b>{{stockManager.contactNumber}}<br>
-                      <b>Company Key: </b>{{stockManager.companyId}}<br> 
-                      <b>Key: </b>{{stockManager.id}}<br> 
+                      <!-- <b>Company Key: </b>{{stockManager.companyId}}<br> 
+                      <b>Key: </b>{{stockManager.id}}<br>  -->
                   </p>
             </div>
           </div>
