@@ -27,7 +27,7 @@ export class OrderSummeryComponent implements OnInit {
     this.route.params.subscribe((param:Params)=>{
       this.companyId = param['companyId'];
     });
-    this.orderItems= this.orderService.getItemsFromOrder(this.companyId);
+    this.orderItems= this.orderService.getItemsFromOrderByCompanyId(this.companyId);
   } 
 
   async onRemove(item:OrderItem){

@@ -25,10 +25,13 @@ export interface ItemId extends Item{
 export interface OrderItem extends Item{
 
   rootId: string;
-  
   retailerId: string;
   stockManagerId: string;
   salesRefId: string;
+}
+
+export interface OrderItemId extends OrderItem{
+  id: string;
 }
 
 @Injectable({
@@ -59,6 +62,8 @@ export class ItemService {
     );
     return this.items;
   }
+
+
 
   updateItem(key: string, value: any): Promise<void> {
     return this.afs.collection('items').doc(key).update(value);

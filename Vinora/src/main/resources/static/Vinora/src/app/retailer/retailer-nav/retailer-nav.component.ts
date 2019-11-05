@@ -21,7 +21,7 @@ export class RetailerNavComponent implements OnInit {
   retailerEmail:string;
 
   constructor(private afAuth: AngularFireAuth,private autheService:AuthenticationService, private router:Router, private route:ActivatedRoute, private retailerService:RetailerService) {
-    this.retailerEmail= afAuth.auth.currentUser.email;
+    this.retailerEmail= this.afAuth.auth.currentUser.email;
    }
 
   ngOnInit() {
