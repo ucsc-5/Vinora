@@ -5,6 +5,7 @@ import { OrderService } from 'src/app/service/order.service';
 import { OrderItem } from 'src/app/service/item.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-my-cart',
@@ -14,16 +15,17 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class MyCartComponent implements OnInit {
   orderItems:Observable<OrderItem[]>;
   companyId:string;
+  retailerId: string;
 
-  constructor(private orderService:OrderService, private route:ActivatedRoute) { }
+  constructor(private orderService:OrderService, private route:ActivatedRoute,private afAuth: AngularFireAuth) { 
+    this.retailerId= this.afAuth.auth.currentUser.uid;
+  }
 
 
   ngOnInit() {
 
-    this.route.params.subscribe((param:Params)=>{
-      this.companyId = param['companyId'];
-    });
-    this.orderItems= this.orderService.getItemsFromOrder(this.companyId);
+    console.log(this.companyId);
+    this.orderItems= this.orderService.getItemsFromOrderByRetailerId(this.retailerId);
   } 
 
 }

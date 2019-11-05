@@ -8,13 +8,12 @@
             <mat-card-content>
                 <p>{{item.description}}<br>
                     Unit Price: <b>{{item.unitPrice}}</b><br>
-                    Quantity:  <b></b>{{item.quantity}}<br>                
+                    Quantity:  <b></b>{{item.quantity}}<br>  
+                    Company: <b>{{item.companyId}}</b>              
                 </p>
    
             </mat-card-content>
             <mat-card-actions>
-                <form (ngSubmit)="toCart(f)" #f="ngForm" >            
-                        <button mat-raised-button color="warn" type="submit" >Remove</button>
-                </form>
+                        <button mat-raised-button color="warn" (click)="onRemove(item)" >Remove</button>
             </mat-card-actions>
         </mat-card>

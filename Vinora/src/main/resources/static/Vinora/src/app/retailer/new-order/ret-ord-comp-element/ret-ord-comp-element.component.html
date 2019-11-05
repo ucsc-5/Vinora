@@ -1,5 +1,5 @@
 
-<div class="col col-lg-12"  style="background-color: aqua;" >  
+<div class="col col-lg-12" >  
   <a type="button"  class="row"  *ngFor="let company of company | async" (click)="onClick(company)">
     <div class="col-3">
         <img src="{{company.imagePath}}" alt="" width="150px" height="150px"> <br>                  
@@ -7,10 +7,8 @@
         <b>Contact: </b>{{company.address}}<br>
     </div>
 
-    <div class="col-9" style="background-color: darkcyan;">
+    <div class="col-9">
         <app-new-order-item-elemet [companyUid]="company.id" ></app-new-order-item-elemet>
     </div>
   </a> 
 </div>
-
-

@@ -60,12 +60,13 @@ const routes: Routes = [
     { path: '' , component: RetailerDashboardComponent},
     { path: 'currentOrders', component: CurrentOrdersComponent},
     { path: 'companies', component: NewOrderComponent},
-    { path: 'companies/:companyId', component: OrderFromCompanyComponent},
+    { path: 'companies/:companyId', component: OrderFromCompanyComponent, children:[
+    ]},
+    { path: 'myCart', component: MyCartComponent},
     { path: 'previousOrder', component: PreviousOrdersComponent},
     {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
     // {path: 'newStock', component: NewStockComponent},
     { path: 'allCompanies', component: RetailerNewCompaniesComponent},
-    { path: 'myCart', component: MyCartComponent},
     { path: 'myProfile', component: RetailerProfileComponent}
   ]},
 
