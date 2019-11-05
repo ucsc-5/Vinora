@@ -44,4 +44,12 @@ export class StockManagerService {
     return this.stockManager;
   }
 
+  
+  updateProfilePicture(key: string, value: any): Promise<void> {
+    return this.afs.collection('stockManagers').doc(key).update(value);
+  }  
+  updatePhoneNumber(key:string,value:any):Promise<void>
+{
+  return this.afs.collection('stockmanagers').doc(key).update(value);
+}
 }

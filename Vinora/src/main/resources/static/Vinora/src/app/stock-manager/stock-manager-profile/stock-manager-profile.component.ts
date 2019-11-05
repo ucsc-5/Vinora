@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FileUpload } from 'src/app/uploads/shared/file-upload';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-stock-manager-profile',
@@ -12,11 +14,14 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class StockManagerProfileComponent implements OnInit {
 
+  
+  private basePath = 'stockManagers';
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
 
   stockManager: Observable<StockManagerId[]>;
   stockManagerEmail: string;
+  downloadURL: Observable<any>;
 
 
   constructor(private StockManagerService:StockManagerService,private afAuth:AngularFireAuth,private storage:AngularFireStorage) {
@@ -27,16 +32,37 @@ export class StockManagerProfileComponent implements OnInit {
     this.stockManager= this.StockManagerService.getStockManagerByEmail(this.stockManagerEmail);
   }
 
+  
+  onAddImage(stockManager:StockManagerId){
+      console.log(stockManager.id);
+
+      const file = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
+      const filePath = `${this.basePath}/${file.name}${new Date()}`;
+      const storageRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, file);
+      uploadTask.snapshotChanges().pipe(
+        finalize(() => 
+        storageRef.getDownloadURL().subscribe(durl=>{
+          const photoUrl:string=durl;
+          console.log(photoUrl);
+            this.StockManagerService.updateProfilePicture(stockManager.id,{imagePath:photoUrl});
+            // this.StockManagerService.updatePhoneNumber(stockManager.id,{})
+        })
+         )
+     )
+    .subscribe()
+
+  }     
+
+
+
+  
+
   selectFile(event){
     this.selectedFiles = event.target.files;
   }
 
 
-  onAddImage(){
-    // const file = this.selectedFiles.item(0);
-    // const filePath = ;
-    // const uploadTask = this.storage.upload(filePath,file);
-
-  }
 
 }
