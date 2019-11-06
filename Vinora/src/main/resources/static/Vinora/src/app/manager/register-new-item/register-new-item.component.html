@@ -22,6 +22,16 @@
                         <input type="file" (change)="selectBrandImage($event)">
                 </label> -->
 
+                <mat-form-field>
+                        <mat-label>Select an option</mat-label>
+                        <mat-select [(value)]="selected">
+                          <mat-option value="Kg">Kg </mat-option>
+                          <mat-option value="g">g (grams)</mat-option>
+                          <mat-option value="L">L (Liters)</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                <p>You selected: {{selected}}</p>
+
                 
                 <mat-form-field class="example-full-width">
                         <input matInput placeholder="Unit Price"  type="number"  name="unitPrice" ngModel >

@@ -16,6 +16,7 @@ export interface Item{
   category: string;
   state: string;
   companyId: string;
+  type:string;
 }
 
 export interface ItemId extends Item{
