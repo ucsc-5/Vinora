@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
     
 
     this.showSpinner=false;
+
     console.log(this.authService.user.uid) 
   }
 
