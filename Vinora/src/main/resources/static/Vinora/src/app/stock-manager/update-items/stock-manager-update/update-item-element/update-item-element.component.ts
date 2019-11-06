@@ -5,6 +5,7 @@ import { from, Observable } from 'rxjs';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { StockManager } from 'src/app/service/stock-manager.service';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-update-item-element',
@@ -17,7 +18,7 @@ export class UpdateItemElementComponent implements OnInit {
 
   message: any;
 
-  constructor(private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
+  constructor(private dialogService:DialogService,private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
    }
 
   ngOnInit() {
@@ -25,22 +26,26 @@ export class UpdateItemElementComponent implements OnInit {
 
   updateQuantity(form:NgForm) {
     const value=form.value;
-
-    console.log(value.quantity+"skjdbcjsdbc");
-    console.log(this.item.id);
     const newQuantity= this.item.quantity+value.quantity;
-    console.log(newQuantity+" the new Item");
-    
-    this.message = this.itemServise.updateItem(this.item.id,{quantity: newQuantity}).then(
-      x=>{
-        return "done";
+    const message="Confrim"
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.message = this.itemServise.updateItem(this.item.id,{quantity: newQuantity}).then(
+            x=>{
+              return "Update is done";
+            }
+          ).catch(
+            error=>{error}
+          )
+        }
       }
-    ).catch(
-      error=>{error}
-    )
+    );
+
+  
 
     console.log(this.message);
-    //   .catch(err => console.log(err+"jkdcjdscjsdbc"));
+    
   }
 
 

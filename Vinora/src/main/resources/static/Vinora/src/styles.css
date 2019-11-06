@@ -18,3 +18,20 @@
     background-attachment: fixed;
     background-position: center;
   }
+
+
+  .confirm-dialog-container #yes-button{
+    height: 50px;
+    width: 50px;
+  }
+
+  .confirm-dialog-container #no-button{
+    height: 50px;
+    width: 50px;
+  }
+
+  .confirm-dialog-container #close-icon{
+    padding-right: 90%;
+    color: brown;
+    display: flex;
+  }

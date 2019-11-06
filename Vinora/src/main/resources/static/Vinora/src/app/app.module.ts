@@ -33,7 +33,6 @@ import { AdminReportsComponent } from './admin/admin-reports/admin-reports.compo
 import { AppComponent } from './app.component';
 
 
-import { DataStorageService } from './shared/data-storage.service';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { StockManagerNavComponent } from './stock-manager/stock-manager-nav/stock-manager-nav.component';
 import { VehicleComponent } from './manager/vehicle/vehicle.component';
@@ -89,6 +88,8 @@ import { StockManagerUpdateComponent } from './stock-manager/update-items/stock-
 import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
 import { OrderItemElementComponent } from './retailer/new-order/order-from-company/order-item-element/order-item-element.component';
 import { OrderSummeryComponent } from './retailer/new-order/order-from-company/order-summery/order-summery.component';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { DialogService } from './service/dialog.service';
 
 
 @NgModule({
@@ -151,11 +152,13 @@ import { OrderSummeryComponent } from './retailer/new-order/order-from-company/o
     StockManagerUpdateComponent,
     OrderFromCompanyComponent,
     OrderItemElementComponent,
-    OrderSummeryComponent
+    OrderSummeryComponent,
+    ConfirmDialogComponent
   
   ], 
   entryComponents:[
-    DialogOverviewExampleDialogComponent
+    DialogOverviewExampleDialogComponent,
+    ConfirmDialogComponent
   ], 
   imports: [
     BrowserModule,
@@ -175,15 +178,17 @@ import { OrderSummeryComponent } from './retailer/new-order/order-from-company/o
   providers: [
     AuthenticationService,
     ItemService,
-    DataStorageService,
     UserService,
     OrderService,
     AngularFireAuthGuard,
     VehicleService,
     CompanyService,
     RetailerService,
-    StockManagerService
+    StockManagerService,
+    DialogService
     ],
   bootstrap: [AppComponent]
+  
+
 })
 export class AppModule { }

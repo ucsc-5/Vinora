@@ -8,6 +8,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { HttpClient } from '@angular/common/http';
 
 
+
 @Component({
   selector: 'app-order-summery',
   templateUrl: './order-summery.component.html',
@@ -16,7 +17,8 @@ import { HttpClient } from '@angular/common/http';
 export class OrderSummeryComponent implements OnInit {
   orderItems:Observable<OrderItem[]>;
   companyId:string;
-  mailUrl = "https://us-central1-vinora-dc8a2.cloudfunctions.net/retailerRemoveItems";
+  // mailUrl = "https://us-central1-vinora-dc8a2.cloudfunctions.net/retailerRemoveItems";
+  myUrl="https://us-central1-vinora-dc8a2.cloudfunctions.net/getCartItems";
 
 
   constructor(private http: HttpClient,private fns: AngularFireFunctions,private itemService:ItemService ,private orderService:OrderService, private route:ActivatedRoute,private afs: AngularFirestore) { }
@@ -32,16 +34,18 @@ export class OrderSummeryComponent implements OnInit {
 
   async onRemove(item:OrderItem){
 
-    // this.http.post(this.mailUrl,item.quantity).subscribe(res=>{
-    //   console.log(res);
-    // })
+    this.http.post(this.myUrl,item.quantity).subscribe(res=>{
+      console.log(res);
+    })
 
-    const callable = await this.fns.httpsCallable('addRole');
+    // getCartItems
 
-    callable({quantity: item.quantity}).subscribe(
-      (response)=>{
-           console.log(response);
-      });
+    // const callable = await this.fns.httpsCallable('getCartItems');
+
+    // callable({quantity: item.quantity,rootId: item.rootId}).subscribe(
+    //   (response)=>{
+    //        console.log(response);
+      // });
 
   }
 }
