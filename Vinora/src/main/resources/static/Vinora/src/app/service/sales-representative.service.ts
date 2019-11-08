@@ -8,7 +8,7 @@ export interface SalesRepresentative{
   address:string;
   email:string;
   contactNumber:number;
-  imagePath: string;
+  salesRefImagePath: string;
   nic:string;
   state: string;
   companyId: string;

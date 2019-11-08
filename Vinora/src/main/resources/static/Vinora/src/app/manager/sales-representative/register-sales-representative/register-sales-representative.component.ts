@@ -47,12 +47,12 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
     const contactNumber = value.contactNumber;
     const nic = value.nic;
     const companyId = this.companyId;
-    const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
+    const salesRefImagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
     const state = "0";
    
     const id = this.afs.createId();
 
-    const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,imagePath,state,companyId};
+    const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,salesRefImagePath,state,companyId};
     
     console.log(salesrepresentative);
     

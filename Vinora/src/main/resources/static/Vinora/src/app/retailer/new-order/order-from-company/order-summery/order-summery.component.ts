@@ -6,6 +6,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { HttpClient } from '@angular/common/http';
+import { CartService, CartItemId } from 'src/app/service/cart.service';
+import { DialogService } from 'src/app/service/dialog.service';
 
 
 
@@ -15,13 +17,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./order-summery.component.css']
 })
 export class OrderSummeryComponent implements OnInit {
-  orderItems:Observable<OrderItem[]>;
+  cartItems:Observable<CartItemId[]>;
   companyId:string;
+  liveItemQuantity;
+  newQuantity;
   // mailUrl = "https://us-central1-vinora-dc8a2.cloudfunctions.net/retailerRemoveItems";
-  myUrl="https://us-central1-vinora-dc8a2.cloudfunctions.net/getCartItems";
+  // myUrl="https://us-central1-vinora-dc8a2.cloudfunctions.net/getCartItems";
 
 
-  constructor(private http: HttpClient,private fns: AngularFireFunctions,private itemService:ItemService ,private orderService:OrderService, private route:ActivatedRoute,private afs: AngularFirestore) { }
+  constructor(private dialogService:DialogService,private fns: AngularFireFunctions,private itemService:ItemService ,private cartService:CartService, private route:ActivatedRoute,private afs: AngularFirestore) { }
 
 
   ngOnInit() {
@@ -29,58 +33,19 @@ export class OrderSummeryComponent implements OnInit {
     this.route.params.subscribe((param:Params)=>{
       this.companyId = param['companyId'];
     });
-    this.orderItems= this.orderService.getItemsFromOrderByCompanyId(this.companyId);
+    this.cartItems= this.cartService.getCartItemsFromOrderByCompanyId(this.companyId);
   } 
 
-  async onRemove(item:OrderItem){
-
-    this.http.post(this.myUrl,item.quantity).subscribe(res=>{
-      console.log(res);
-    })
-
-    // getCartItems
-
-    // const callable = await this.fns.httpsCallable('getCartItems');
-
-    // callable({quantity: item.quantity,rootId: item.rootId}).subscribe(
-    //   (response)=>{
-    //        console.log(response);
-      // });
-
+  async onRemove(item:CartItemId){
+    const message="Confirm !"
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.cartService.retailerRemoveItemFromCart(item.itemId,item)
+        }})
+   
   }
 
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: false
-  })
-  
-  swalWithBootstrapButtons.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'No, cancel!',
-    reverseButtons: true
-  }).then((result) => {
-    if (result.value) {
-      swalWithBootstrapButtons.fire(
-        'Deleted!',
-        'Your file has been deleted.',
-        'success'
-      )
-    } else if (
-      /* Read more about handling dismissals below */
-      result.dismiss === Swal.DismissReason.cancel
-    ) {
-      swalWithBootstrapButtons.fire(
-        'Cancelled',
-        'Your imaginary file is safe :)',
-        'error'
-      )
-    }
-  })
+ 
+
 }

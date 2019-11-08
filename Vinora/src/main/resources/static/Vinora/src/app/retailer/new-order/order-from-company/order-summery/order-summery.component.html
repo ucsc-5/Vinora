@@ -1,5 +1,6 @@
+<h3>Cart summery</h3>
 <ul>
-    <li *ngFor="let item of orderItems | async ">
+    <li *ngFor="let item of cartItems | async ">
         <p>{{item.itemName}}       {{item.quantity}} </p>
         <button mat-button color="warn" (click)="onRemove(item)">Remove</button>
     </li>

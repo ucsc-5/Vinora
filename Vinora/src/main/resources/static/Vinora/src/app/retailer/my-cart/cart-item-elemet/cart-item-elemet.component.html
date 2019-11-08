@@ -1,15 +1,15 @@
 
-    <mat-card class="example-card itemcard">
+    <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image class="forimage" src="{{item.itemImagePath}}" alt="Photo of a Shiba Inu">
+            <img mat-card-image src="{{item.itemImagePath}}" alt="Photo of a Shiba Inu">
             <mat-card-content>
                 <p>{{item.description}}<br>
-                    Unit Price: <b>{{item.unitPrice}}</b><br>
+                    Unit Price: <b>{{item.unitPrice}} .00 Rs/-</b><br>
                     Quantity:  <b></b>{{item.quantity}}<br>  
-                    Company: <b>{{item.companyId}}</b>              
+                    Item total: <b>{{item.total}} .00 Rs/-</b>              
                 </p>
    
             </mat-card-content>

@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { OrderService } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DialogService } from 'src/app/service/dialog.service';
+import { CartItem, CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-order-item-element',
@@ -18,12 +19,12 @@ export class OrderItemElementComponent implements OnInit {
   companyId: string;
   retailerId: string;
 
-  orderItem: OrderItem;
+  cartItem: CartItem;
 
   messageOfRootItem: any;
-  messageOfOrderItem: any;
 
-  constructor(private dialogService:DialogService,private afAuth: AngularFireAuth,private route:ActivatedRoute,private itemService:ItemService, private orderService:OrderService) {
+
+  constructor(private dialogService:DialogService,private afAuth: AngularFireAuth,private route:ActivatedRoute,private itemService:ItemService, private cartService:CartService) {
     this.retailerId =  this.afAuth.auth.currentUser.uid;
    }
 
@@ -37,11 +38,8 @@ export class OrderItemElementComponent implements OnInit {
   }
 
   addToCart(form:NgForm){
-
     const value=form.value;
     const message=" Confirm! ";
-
-
 
     if(this.item.quantity<value.quantity){
 
@@ -63,15 +61,14 @@ export class OrderItemElementComponent implements OnInit {
             const companyId = this.item.companyId;
       
             const retailerId = this.retailerId;
-            const rootId = this.item.id;
-            const stockManagerId = "";
-            const salesRefId = "";
+            const itemId = this.item.id;
             const type = this.item.type;
+            const total = this.item.quantity*this.item.unitPrice;
              
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
               x=>{
-                const  orderItem: OrderItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,rootId,retailerId,stockManagerId,salesRefId,type};
-                this.orderService.addItems(orderItem);
+                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total};
+                this.cartService.addItemsToCart(cartItem);
                 return "done";
               }
             ).catch(
@@ -80,11 +77,7 @@ export class OrderItemElementComponent implements OnInit {
               
           }
         
-        })
-
-   
-        
-       
+        })      
     }
   }
   

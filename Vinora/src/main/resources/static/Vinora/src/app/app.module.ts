@@ -90,7 +90,6 @@ import { OrderItemElementComponent } from './retailer/new-order/order-from-compa
 import { OrderSummeryComponent } from './retailer/new-order/order-from-company/order-summery/order-summery.component';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { DialogService } from './service/dialog.service';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -173,8 +172,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
     ReactiveFormsModule,
-    AngularFirestoreModule,
-    SweetAlert2Module.forRoot()
+    AngularFirestoreModule
   ],
   providers: [
     AuthenticationService,

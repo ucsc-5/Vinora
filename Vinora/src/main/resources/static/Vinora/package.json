@@ -22,7 +22,6 @@
     "@angular/platform-browser": "~8.2.3",
     "@angular/platform-browser-dynamic": "~8.2.3",
     "@angular/router": "~8.2.3",
-    "@sweetalert2/ngx-sweetalert2": "^6.0.1",
     "angularfire2": "^5.2.1",
     "firebase": "^6.6.0",
     "firebase-admin": "^8.6.0",

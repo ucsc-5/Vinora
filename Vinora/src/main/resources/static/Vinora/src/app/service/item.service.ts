@@ -35,6 +35,7 @@ export interface OrderItemId extends OrderItem{
   id: string;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,7 +45,9 @@ export class ItemService {
 
   items:Observable<ItemId[]>;
   item:Observable<Item>;
-  private itemDocument : AngularFirestoreDocument<Item>;
+  myItem:Item;
+  newQuantity;
+   private itemDocument : AngularFirestoreDocument<Item>;
 
   liveQuantity;
  
@@ -65,17 +68,22 @@ export class ItemService {
   }
 
 
-
   updateItem(key: string, value: any): Promise<void> {
     return this.afs.collection('items').doc(key).update(value);
   }  
 
-  retailerRemoveItemFromCart(key:string,quantity:number){
-    
-   
-  }
 
-  add(x:number,y:number): number{
-    return x+y;
-  }
+
+
+ removeItem(key:string){
+  this.afs.collection('items').doc(`${key}`).delete().then(function() {
+      console.log("Document successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
+ 
+}
+
+  
+
 }

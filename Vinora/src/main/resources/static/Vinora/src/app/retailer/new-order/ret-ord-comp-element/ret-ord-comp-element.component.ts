@@ -24,8 +24,7 @@ export class RetOrdCompElementComponent implements OnInit {
 
   constructor(private companyService:CompanyService,private readonly afs: AngularFirestore, private router:Router,private route:ActivatedRoute) { }
 
-  ngOnInit() {
-    
+  ngOnInit() { 
   this.company = this.companyService.getCompanyByEmail(this.companyEmail.companyEmail);
   }
 
