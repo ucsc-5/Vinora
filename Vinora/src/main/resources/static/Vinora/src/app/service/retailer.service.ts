@@ -88,7 +88,7 @@ registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,compa
 
 getRetailerByEmail(email:string){
   
-  this.retailer =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).limit(1)).snapshotChanges().pipe(
+  this.retailer =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==', '0').limit(1)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Retailer;
       const id = a.payload.doc.id;

@@ -114,7 +114,7 @@ export class CompanyService {
 
   // for the comapany dashboard and retailer 
   getCompanyByEmail(email:string){
-    this.company =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).limit(1)).snapshotChanges().pipe(
+    this.company =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==',"1").limit(1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;

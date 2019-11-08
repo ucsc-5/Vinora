@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col" *ngFor="let company of company | async" >
-            <div class="col-3" style="background-color: chartreuse;">
-                    <img src="{{company.imagePath}}" alt="" width="150px" height="150px"> <br>                  
+            <div class="col">
+                    <img src="{{company.imagePath}}" width="150px" height="150px"> <br>                  
                     <b>email: </b>{{company.email}}<br>
                     <b>Contact: </b>{{company.address}}<br>
                 </div>

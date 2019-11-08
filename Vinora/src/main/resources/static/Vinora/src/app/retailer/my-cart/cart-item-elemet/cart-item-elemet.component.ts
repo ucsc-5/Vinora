@@ -23,8 +23,9 @@ export class CartItemElemetComponent implements OnInit {
     this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
       res=>{
         if(res){
+          this.cartService.retailerRemoveItemFromCart(item.itemId,item);
         }})
-    this.cartService.retailerRemoveItemFromCart(item.itemId,item);
+   
   }
 
 }

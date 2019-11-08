@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CompanyEmailToken } from 'src/app/service/retailer.service';
 import { CompanyService, CompanyId } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ret-reg-company-element',
@@ -14,7 +15,7 @@ export class RetRegCompanyElementComponent implements OnInit {
   
   company: Observable<CompanyId[]>;
 
-  constructor(private companyService:CompanyService) { }
+  constructor(private companyService:CompanyService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
     
@@ -27,6 +28,10 @@ export class RetRegCompanyElementComponent implements OnInit {
 
   onHold(){
     console.log("This is from the hold function");
+  }
+
+  OrderNow(company:CompanyId){
+    this.router.navigate(['../','companies',company.id],{relativeTo: this.route})
   }
 
 }
