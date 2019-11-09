@@ -55,7 +55,6 @@ export class CartService {
       }
         ).catch(error=>{
         console.log(error+" this is the error");
-        
       })
     })
   }
