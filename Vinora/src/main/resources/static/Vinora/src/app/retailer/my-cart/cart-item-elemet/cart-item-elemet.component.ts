@@ -24,12 +24,12 @@ export class CartItemElemetComponent implements OnInit {
     this.afs.collection('items').doc(`${this.item.itemId}`).get().subscribe(x=>{
       this.availableQuantity=x.data().quantity
   })
-  
+
     }
 
 
   onRemove(item:CartItemId){
-    const message=" Confirm! ";
+    const message="Are you sure removing this item !";
     this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
       res=>{
         if(res){
@@ -39,9 +39,30 @@ export class CartItemElemetComponent implements OnInit {
   }
 
   
-  updateCartItem(item:CartItemId,quantity:number){
+  addQuantity(item:CartItemId,quantity:number){
     const myQ = +quantity;
-    this.cartService.updateCartItem(myQ,item);
+    const message="Confirm Updating!!"
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.cartService.addQuantityCartItem(myQ,item);
+        }})
+    
   }
+
+  reduceQuantity(item:CartItemId,quantity:number){
+    const myQ = +quantity;
+    const message="Confirm !!"
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.cartService.redeuseQuantityCartItem(myQ,item);
+        }})
+  }
+
+  refresh(){
+    this.quantity.value = null;
+  }
+  
 
 }

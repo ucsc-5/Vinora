@@ -21,12 +21,31 @@
                                     <td>
                                         <mat-form-field class="" style="width: 70%">
                                                 <input matInput #quantity type="number" placeholder="Quantity">
+
                                         </mat-form-field>
-        
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">{{item.type}}</span>
-                                        </div>
+                                        :{{item.type}}
+
+                                                
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                            <i class="material-icons" click="refresh()">
+                                                    cached
+                                            </i>
+
+                                            <i class="material-icons" (click)="addQuantity(item,quantity.value)">
+                                                    add
+                                            </i>
+    
+                                            <i class="material-icons" (click)="reduceQuantity(item,quantity.value)">
+                                                    remove
+                                            </i>   
+                                            
+                                            <mat-icon id="close-icon" style="margin-right: 50px;" color="warn" (click)="onRemove(item)">close</mat-icon>
+                                            
+                                    </td>
+                                       
                                 </tr>
         
                                 <!-- <tr>
@@ -37,9 +56,12 @@
                                
         
                             </table>
-                            <button mat-raised-button color="primary" type="reset">Reset</button>
-                            <button mat-raised-button color="primary" id="addButton" (click)="updateCartItem(item,quantity.value)" >Add</button>
-                            <button mat-raised-button color="warn" (click)="onRemove(item)" >Remove</button>
+                            
+                            
+                            <!-- <mat-icon id="close-icon" style="margin-right: 50px;" color="warn" (click)="onRemove(item)">cached</mat-icon>     -->
+                           
+                            
+                            
                     </form>
                 </mat-card-actions>
         </mat-card>

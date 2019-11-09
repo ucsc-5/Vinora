@@ -48,10 +48,23 @@ export class CartService {
   }
 
 
-  updateCartItem(quantity:number,item:CartItemId){
+  addQuantityCartItem(quantity:number,item:CartItemId){
     const newCartQuantity= item.quantity+quantity;
     this.afs.collection('items').doc(`${item.itemId}`).get().subscribe(x=>{
       this.newQuantity=x.data().quantity-quantity;
+      this.itemService.updateItem(item.itemId,{quantity:this.newQuantity}).then(x=>{
+        this.updateItem(item.id,{quantity:newCartQuantity});
+      }
+        ).catch(error=>{
+        console.log(error+" this is the error");
+      })
+    })
+  }
+
+  redeuseQuantityCartItem(quantity:number,item:CartItemId){
+    const newCartQuantity= item.quantity-quantity;
+    this.afs.collection('items').doc(`${item.itemId}`).get().subscribe(x=>{
+      this.newQuantity=x.data().quantity+quantity;
       this.itemService.updateItem(item.itemId,{quantity:this.newQuantity}).then(x=>{
         this.updateItem(item.id,{quantity:newCartQuantity});
       }
