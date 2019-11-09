@@ -19,7 +19,7 @@ export class ManagerDashboardComponent implements OnInit {
 
   companyEmail;
 
-  company: Observable<CompanyId[]>;
+  companies$: Observable<CompanyId[]>;
 
   constructor(private companyService: CompanyService,private afAuth: AngularFireAuth,private readonly afs: AngularFirestore) {
     this.companyEmail= this.afAuth.auth.currentUser.email
@@ -29,8 +29,6 @@ export class ManagerDashboardComponent implements OnInit {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
   ngOnInit() {
-
-    this.company = this.companyService.getCompanyByEmail(this.companyEmail)
-  
+    this.companies$ = this.companyService.getCompanyByEmail(this.companyEmail);
   }
 }

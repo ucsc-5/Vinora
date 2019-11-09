@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrderItem } from 'src/app/service/item.service';
-import { CartItemId, CartService } from 'src/app/service/cart.service';
+import { CartItemId, CartService, CartItem } from 'src/app/service/cart.service';
 import { DialogService } from 'src/app/service/dialog.service';
+import { NgForm } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-cart-item-elemet',
@@ -10,13 +12,21 @@ import { DialogService } from 'src/app/service/dialog.service';
 })
 export class CartItemElemetComponent implements OnInit {
 
-  @Input() item:OrderItem
+  @Input() item:CartItem;
+  availableQuantity 
 
-  constructor(private dialogService:DialogService,private cartService:CartService) { }
+  quantity
+
+  constructor(private afs: AngularFirestore,private dialogService:DialogService,private cartService:CartService) { 
+
+  }
 
   ngOnInit() {
-    
-  }
+    this.afs.collection('items').doc(`${this.item.itemId}`).get().subscribe(x=>{
+      this.availableQuantity=x.data().quantity
+  })
+}
+
 
   onRemove(item:CartItemId){
     const message=" Confirm! ";
@@ -26,6 +36,13 @@ export class CartItemElemetComponent implements OnInit {
           this.cartService.retailerRemoveItemFromCart(item.itemId,item);
         }})
    
+  }
+
+  
+  updateCartItem(item:CartItemId){
+
+      let quantity = +(<HTMLInputElement>document.getElementById("quantity")).value;
+      this.cartService.updateCartItem(quantity,item)
   }
 
 }

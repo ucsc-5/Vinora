@@ -16,7 +16,6 @@ export class RetOrdCompElementComponent implements OnInit {
   @Input() companyEmail : CompanyEmailToken;
   
   company: Observable<CompanyId[]>;
-  // company: CompanyId;
   myCom: Promise<void>;
   
 
@@ -29,17 +28,13 @@ export class RetOrdCompElementComponent implements OnInit {
   }
 
   onClick(com:any){
-    console.log(com.id);
-    // console.log(id+" this is the Id");
-
-    this.router.navigate([com.id],{relativeTo: this.route})
+       this.router.navigate([com.id],{relativeTo: this.route})
   }
 
  
 
   onHold(){
-    // console.log("This is from the hold function");
-    // console.log(this.myCom.id);
+ 
   }
 
 

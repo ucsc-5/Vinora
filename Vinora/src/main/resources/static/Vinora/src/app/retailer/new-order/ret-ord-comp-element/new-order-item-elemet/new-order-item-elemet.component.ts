@@ -20,15 +20,7 @@ export class NewOrderItemElemetComponent implements OnInit {
   ngOnInit() {
 
     this.items = this.itemService.getItemsByCompanyId(this.companyUid);
-
-    this.items.forEach(x=>{
-      console.log(x);
-    })
-    console.log("form the item elements");
   }
 
-  toCart(form: NgForm){
-
-    }
-  
+ 
   }

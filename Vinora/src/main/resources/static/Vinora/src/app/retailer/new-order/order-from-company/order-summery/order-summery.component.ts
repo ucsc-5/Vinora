@@ -8,6 +8,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { HttpClient } from '@angular/common/http';
 import { CartService, CartItemId } from 'src/app/service/cart.service';
 import { DialogService } from 'src/app/service/dialog.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 
@@ -19,13 +20,16 @@ import { DialogService } from 'src/app/service/dialog.service';
 export class OrderSummeryComponent implements OnInit {
   cartItems:Observable<CartItemId[]>;
   companyId:string;
+  retalerId:string;
   liveItemQuantity;
   newQuantity;
   // mailUrl = "https://us-central1-vinora-dc8a2.cloudfunctions.net/retailerRemoveItems";
   // myUrl="https://us-central1-vinora-dc8a2.cloudfunctions.net/getCartItems";
 
 
-  constructor(private dialogService:DialogService,private fns: AngularFireFunctions,private itemService:ItemService ,private cartService:CartService, private route:ActivatedRoute,private afs: AngularFirestore) { }
+  constructor(private afAuth: AngularFireAuth,private dialogService:DialogService,private fns: AngularFireFunctions,private itemService:ItemService ,private cartService:CartService, private route:ActivatedRoute,private afs: AngularFirestore) { 
+    this.retalerId= this.afAuth.auth.currentUser.uid;
+  }
 
 
   ngOnInit() {
@@ -33,7 +37,7 @@ export class OrderSummeryComponent implements OnInit {
     this.route.params.subscribe((param:Params)=>{
       this.companyId = param['companyId'];
     });
-    this.cartItems= this.cartService.getCartItemsFromOrderByCompanyId(this.companyId);
+    this.cartItems= this.cartService.getCartItemsFromOrderByCompanyIdRetailerId( this.companyId,this.retalerId);
   } 
 
   async onRemove(item:CartItemId){

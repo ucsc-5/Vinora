@@ -33,8 +33,6 @@ export class OrderItemElementComponent implements OnInit {
     this.route.params.subscribe((param:Params)=>{
       this.companyId = param['companyId'];
     });
-
-    console.log(this.companyId+" com"+this.retailerId+" ret Id");
   }
 
   addToCart(form:NgForm){
@@ -63,12 +61,12 @@ export class OrderItemElementComponent implements OnInit {
             const retailerId = this.retailerId;
             const itemId = this.item.id;
             const type = this.item.type;
-            const total = this.item.quantity*this.item.unitPrice;
+            const total = quantity*this.item.unitPrice;
              
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
               x=>{
                 const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total};
-                this.cartService.addItemsToCart(cartItem);
+                this.cartService.setItemsToCart(cartItem);
                 return "done";
               }
             ).catch(

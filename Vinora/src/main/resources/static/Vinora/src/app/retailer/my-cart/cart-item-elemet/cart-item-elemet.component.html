@@ -9,11 +9,37 @@
                 <p>{{item.description}}<br>
                     Unit Price: <b>{{item.unitPrice}} .00 Rs/-</b><br>
                     Quantity:  <b></b>{{item.quantity}}<br>  
-                    Item total: <b>{{item.total}} .00 Rs/-</b>              
+                    Item total: <b>{{item.total}} .00 Rs/-</b><br>
+                    Available Stock: <b>{{availableQuantity}} : {{item.type}}</b>              
                 </p>
    
             </mat-card-content>
             <mat-card-actions>
-                        <button mat-raised-button color="warn" (click)="onRemove(item)" >Remove</button>
-            </mat-card-actions>
+                    <form >
+                            <table class="" style="width: 159px" cellspacing="0">
+                                    <tr>
+                                    <td>
+                                        <mat-form-field class="" style="width: 70%">
+                                                <input matInput id="quantity" type="number" placeholder="Quantity">
+                                        </mat-form-field>
+        
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">{{item.type}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+        
+                                <!-- <tr>
+                                        <td><mat-form-field class="" style="width: 70%">
+                                                <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel  >
+                                        </mat-form-field></td>
+                                </tr> -->
+                               
+        
+                            </table>
+                            <button mat-raised-button color="primary" type="reset">Reset</button>
+                            <button mat-raised-button color="primary" id="addButton" (click)="updateCartItem(item)" >Add</button>
+                            <button mat-raised-button color="warn" (click)="onRemove(item)" >Remove</button>
+                    </form>
+                </mat-card-actions>
         </mat-card>

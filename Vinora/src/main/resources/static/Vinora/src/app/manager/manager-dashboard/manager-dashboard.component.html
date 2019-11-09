@@ -1,5 +1,6 @@
-<div class="row" *ngIf="company | async; let company; else loading">
-            <div class="card mb-3" style="max-width: 540px;"  *ngFor="let company of company | async">
+<div class="row" *ngIf="companies$ | async; let company; else loading">
+
+            <mat-card class="example-card"  style="max-width: 540px;"  *ngFor="let company of company">
                 <div class="row no-gutters">
                   <div class="col-md-4">
                     <img src="..." class="card-img" alt="...">
@@ -18,7 +19,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </mat-card >
          <div *ngIf="company.length === 0">Permision is not granted yet!...</div>
 </div>
             <ng-template #loading>Loading&hellip;</ng-template>

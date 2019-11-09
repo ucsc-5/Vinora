@@ -11,7 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class RetailerDashboardComponent implements OnInit {
 
-  retailer: Observable<RetailerId[]>;
+  retailer$: Observable<RetailerId[]>;
   retailerEmail: string
 
   constructor(private retailerService:RetailerService,private afAuth: AngularFireAuth) { 
@@ -19,7 +19,7 @@ export class RetailerDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.retailer = this.retailerService.getRetailerByEmail(this.retailerEmail);
+     this.retailer$ = this.retailerService.getRetailerByEmail(this.retailerEmail);
   }
 
 }
