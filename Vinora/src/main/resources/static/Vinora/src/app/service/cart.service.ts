@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Item, OrderItemId, ItemService, ItemId } from './item.service';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map, first } from 'rxjs/operators';
 
 
 
@@ -23,11 +23,13 @@ export class CartService {
 
   private dbPath = '/cart';
   private cartCollection: AngularFirestoreCollection<CartItem>;
+  
 
   cartItemsByCompayId: Observable<CartItemId[]>;
   cartItemsByRetailerId: Observable<CartItemId[]>;
   cartItemsByCompayRetailer:  Observable<CartItemId[]>;
   newQuantity
+  existCartItem:Observable<CartItem[]>
  
   constructor(private afs: AngularFirestore,private itemService:ItemService) {
     this.cartCollection = this.afs.collection<CartItem>('cart');
@@ -59,30 +61,41 @@ export class CartService {
     })
   }
 
+
   setItemsToCart(cartItem:CartItem){
     console.log("set Items To cart")
     const companyId= cartItem.companyId;
     const itemId = cartItem.itemId;
+    // const itemId = "aksnkasnxka";
     const retailerId = cartItem.retailerId;
     console.log(companyId+" companyId");
     console.log(retailerId+ " retailerId");
     console.log(itemId+" item Id");
-    
-    this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('itemId','==',itemId).where('state','==',"active").limit(1)).snapshotChanges().pipe(
+
+
+    // this.existCartItem = this.afs.collection<CartItem>(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('itemId','==',itemId).where('state','==',"active").limit(1)).valueChanges();
+
+    const x: Subscription = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('itemId','==',itemId).where('state','==',"active").limit(1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as CartItem;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
-    ).subscribe(x=>{
-      if(x[0].quantity){
-        console.log("Yesssssss");
+    ).pipe(first()).subscribe(x=>{
+      if(x.length){
+        const newQuantityValue= x[0].quantity+cartItem.quantity;
+        this.updateItem(x[0].id,{quantity:newQuantityValue});
+        console.log(" yes part");
         
+        // this.updateCartItem(key,{quantity:newQuantityValue})
       }else{
-        console.log("Noooo");
+        this.addItemsToCart(cartItem);
+        console.log(" no part");
         
       }
     })
+
+    // x.unsubscribe();
 
   }
 

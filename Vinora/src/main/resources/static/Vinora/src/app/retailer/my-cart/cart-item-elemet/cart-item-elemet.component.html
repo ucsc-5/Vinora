@@ -20,7 +20,7 @@
                                     <tr>
                                     <td>
                                         <mat-form-field class="" style="width: 70%">
-                                                <input matInput id="quantity" type="number" placeholder="Quantity">
+                                                <input matInput #quantity type="number" placeholder="Quantity">
                                         </mat-form-field>
         
                                         <div class="input-group-append">
@@ -38,7 +38,7 @@
         
                             </table>
                             <button mat-raised-button color="primary" type="reset">Reset</button>
-                            <button mat-raised-button color="primary" id="addButton" (click)="updateCartItem(item)" >Add</button>
+                            <button mat-raised-button color="primary" id="addButton" (click)="updateCartItem(item,quantity.value)" >Add</button>
                             <button mat-raised-button color="warn" (click)="onRemove(item)" >Remove</button>
                     </form>
                 </mat-card-actions>

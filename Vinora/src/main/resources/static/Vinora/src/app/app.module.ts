@@ -90,6 +90,7 @@ import { OrderItemElementComponent } from './retailer/new-order/order-from-compa
 import { OrderSummeryComponent } from './retailer/new-order/order-from-company/order-summery/order-summery.component';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { DialogService } from './service/dialog.service';
+import { CartService } from './service/cart.service';
 
 @NgModule({
   declarations: [
@@ -184,7 +185,8 @@ import { DialogService } from './service/dialog.service';
     CompanyService,
     RetailerService,
     StockManagerService,
-    DialogService
+    DialogService,
+    CartService
     ],
   bootstrap: [AppComponent]
   
