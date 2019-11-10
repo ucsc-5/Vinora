@@ -50,6 +50,6 @@ export class StockManagerService {
   }  
   updatePhoneNumber(key:string,value:any):Promise<void>
 {
-  return this.afs.collection('stockmanagers').doc(key).update(value);
+  return this.afs.collection('stockManagers').doc(key).update(value);
 }
 }

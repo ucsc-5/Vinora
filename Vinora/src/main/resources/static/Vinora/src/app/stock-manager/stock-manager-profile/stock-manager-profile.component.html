@@ -27,14 +27,43 @@
             <div class="card-body">
               <h5 class="card-title">{{stockManager.fullName}}</h5>
               <p class="card-text">
-                  <p> 
+                  
                       <!-- <b>State: </b>{{stockManager.state}}<br> -->
                       <b>email: </b>{{stockManager.email}}<br>
                       <b>Address: </b>{{stockManager.address}}<br>
-                      <b>Contact: </b>{{stockManager.contactNumber}}   <button type="submit" class="btn btn-success">Upload Image</button><br>
-                      <!-- <b>Company Key: </b>{{stockManager.companyId}}<br> 
-                      <b>Key: </b>{{stockManager.id}}<br>  -->
+                      <b>Contact: </b>{{stockManager.contactNumber}}  
+                    
+                      <br>
+                    
+                      
                   </p>
+
+                  <!-- <form class="example-form" (ngSubmit)="onEditContact(f)" #f="ngForm">
+
+                          
+                      <input matInput placeholder="Edit Contact number" [formControl]="contactNumber"ngModel>
+                  
+               
+  
+                  <button type="submit" class="btn btn-success">Save</button>
+  
+                  
+          </form>  -->
+          <form (ngSubmit)="updateContactnumber(f,stockManager)" #f="ngForm">
+             
+                          <mat-form-field class="" style="width: 70%">
+                                  <input matInput type="string" placeholder="Edit contact number" name="contactNumber" ngModel>
+                          </mat-form-field>
+
+                       
+                
+             
+              <button mat-raised-button color="primary" type="submit">Save</button>
+      </form>
+
+
+
+          
             </div>
           </div>
         </div>

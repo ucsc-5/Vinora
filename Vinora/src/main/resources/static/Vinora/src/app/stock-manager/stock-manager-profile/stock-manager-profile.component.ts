@@ -6,6 +6,7 @@ import { FileUpload } from 'src/app/uploads/shared/file-upload';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-stock-manager-profile',
@@ -14,6 +15,7 @@ import { NgForm } from '@angular/forms';
 })
 export class StockManagerProfileComponent implements OnInit {
 
+  message: any;
   
   private basePath = 'stockManagers';
   selectedFiles: FileList;
@@ -24,7 +26,7 @@ export class StockManagerProfileComponent implements OnInit {
   downloadURL: Observable<any>;
 
 
-  constructor(private StockManagerService:StockManagerService,private afAuth:AngularFireAuth,private storage:AngularFireStorage) {
+  constructor(private StockManagerService:StockManagerService,private afAuth:AngularFireAuth,private storage:AngularFireStorage,private dialogService:DialogService) {
     this.stockManagerEmail= this.afAuth.auth.currentUser.email;
    }
 
@@ -55,12 +57,25 @@ export class StockManagerProfileComponent implements OnInit {
 
   }     
 
+  selectFile(event){
+    this.selectedFiles = event.target.files;
+  }
 
+  updateContactnumber(form:NgForm,stockManager:StockManagerId){
+
+    
+    const value1=form.value;
+ 
+  this.message = this.StockManagerService.updatePhoneNumber(stockManager.id,value1);
+       
 
   
 
-  selectFile(event){
-    this.selectedFiles = event.target.files;
+    console.log(this.message);
+
+
+    // this.StockManagerService.updatePhoneNumber(stockManager.id,{contactNumber:value1});
+
   }
 
 
