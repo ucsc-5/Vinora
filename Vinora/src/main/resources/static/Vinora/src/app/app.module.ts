@@ -91,6 +91,7 @@ import { OrderSummeryComponent } from './retailer/new-order/order-from-company/o
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { DialogService } from './service/dialog.service';
 import { CartService } from './service/cart.service';
+import { CurrentOrderElementComponent } from './retailer/current-orders/current-order-element/current-order-element.component';
 
 @NgModule({
   declarations: [
@@ -153,7 +154,8 @@ import { CartService } from './service/cart.service';
     OrderFromCompanyComponent,
     OrderItemElementComponent,
     OrderSummeryComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CurrentOrderElementComponent
    
   
   ], 

@@ -28,6 +28,8 @@ export class CartService {
   cartItemsByCompayId: Observable<CartItemId[]>;
   cartItemsByRetailerId: Observable<CartItemId[]>;
   cartItemsByCompayRetailer:  Observable<CartItemId[]>;
+
+  
   newQuantity
   existCartItem:Observable<CartItem[]>
  
@@ -181,5 +183,7 @@ export class CartService {
     });
    
   }
+
+
 
 }

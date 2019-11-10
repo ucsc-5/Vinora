@@ -1,1 +1,4 @@
-<p>current-orders works!</p>
+<div class="row">
+    <h3>Current Orders</h3>
+    <app-current-order-element *ngFor="let currentOrder of currentOrders | async" [currentOrder]="currentOrder"></app-current-order-element>
+</div>

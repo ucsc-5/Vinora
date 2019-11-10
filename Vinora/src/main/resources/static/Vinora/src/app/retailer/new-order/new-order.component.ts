@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Order } from 'src/app/service/order.model';
 import { OrderService } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { RetailerService, CompanyEmailTokenId } from 'src/app/service/retailer.service';
