@@ -61,8 +61,9 @@ const routes: Routes = [
     { path: 'currentOrders', component: CurrentOrdersComponent},
     { path: 'companies', component: NewOrderComponent},
     { path: 'companies/:companyId', component: OrderFromCompanyComponent, children:[
+      { path: 'myCart', component: MyCartComponent}
     ]},
-    { path: 'myCart', component: MyCartComponent},
+    // { path: 'myCart', component: MyCartComponent},
     { path: 'previousOrder', component: PreviousOrdersComponent},
     {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
     // {path: 'newStock', component: NewStockComponent},

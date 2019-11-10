@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CompanyId, CompanyService } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
 import { ItemId, ItemService } from 'src/app/service/item.service';
@@ -19,7 +19,7 @@ export class OrderFromCompanyComponent implements OnInit {
   items: Observable<ItemId[]>
 
 0
-  constructor(private companyService: CompanyService,private itemService:ItemService, private route:ActivatedRoute) { }
+  constructor(private router:Router,private companyService: CompanyService,private itemService:ItemService, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((param:Params)=>{
@@ -29,6 +29,10 @@ export class OrderFromCompanyComponent implements OnInit {
     this.items= this.itemService.getItemsByCompanyId(this.companyId);
     this.company= this.companyService.getCompanyById(this.companyId);
     
+  }
+
+  toMyCart(){
+    this.router.navigate(['myCart'],{relativeTo: this.route});
   }
 
 

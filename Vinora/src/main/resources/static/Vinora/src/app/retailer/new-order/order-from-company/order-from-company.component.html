@@ -1,3 +1,5 @@
+ <router-outlet></router-outlet>
+ 
 <div class="row">
     <div class="col" *ngFor="let company of company | async" >
             <div class="col">
@@ -14,6 +16,7 @@
         </div>
     </div>
     <div class="col col-2">
+        <button mat-raised-button color="primary" (click)="toMyCart()">My cart</button>
         <app-order-summery></app-order-summery>
     </div>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderItem, ItemService, Item } from 'src/app/service/item.service';
 import { OrderService } from 'src/app/service/order.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +27,7 @@ export class OrderSummeryComponent implements OnInit {
   // myUrl="https://us-central1-vinora-dc8a2.cloudfunctions.net/getCartItems";
 
 
-  constructor(private afAuth: AngularFireAuth,private dialogService:DialogService,private fns: AngularFireFunctions,private itemService:ItemService ,private cartService:CartService, private route:ActivatedRoute,private afs: AngularFirestore) { 
+  constructor(private router:Router,private afAuth: AngularFireAuth,private dialogService:DialogService,private fns: AngularFireFunctions,private itemService:ItemService ,private cartService:CartService, private route:ActivatedRoute,private afs: AngularFirestore) { 
     this.retalerId= this.afAuth.auth.currentUser.uid;
   }
 
@@ -50,6 +50,7 @@ export class OrderSummeryComponent implements OnInit {
    
   }
 
+ 
  
 
 }
