@@ -3,7 +3,10 @@
     <app-cart-item-elemet class="col col-3" *ngFor="let item of cartItems | async" [item]="item"></app-cart-item-elemet>
 </div>
 
+
 <div class="row">
-    <br>
+        <button mat-raised-button color="primary" *ngIf="cartItems | async; let cartItems; else loading" (click)="createOrder(cartItems)" >Create Order</button>
+        <br>
     <br>
 </div>
+

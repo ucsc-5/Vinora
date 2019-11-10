@@ -117,6 +117,15 @@ export class CartService {
     return this.afs.collection('cart').doc(key).update(value);
   } 
 
+  deleteItem(key: string) {
+    this.afs.collection('cart').doc(`${key}`).delete().then(function() {
+      console.log("Document successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
+  } 
+  
+
   getCartItemsFromOrderByCompanyId(companyId:string){
     this.cartItemsByCompayId = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"active")).snapshotChanges().pipe(
       map(actions => actions.map(a => {

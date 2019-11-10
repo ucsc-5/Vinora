@@ -6,7 +6,12 @@ import { OrderItem } from 'src/app/service/item.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { CartService, CartItemId } from 'src/app/service/cart.service';
+import { CartService, CartItemId, CartItem } from 'src/app/service/cart.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { CompanyId } from 'src/app/service/company.service';
+import { RetailerId } from 'src/app/service/retailer.service';
+
+
 
 @Component({
   selector: 'app-my-cart',
@@ -17,21 +22,33 @@ export class MyCartComponent implements OnInit {
   cartItems:Observable<CartItemId[]>;
   companyId:string;
   retailerId: string;
-  total
+  public total=0;
 
-  constructor(private router:Router,private cartService:CartService, private route:ActivatedRoute,private afAuth: AngularFireAuth) { 
+  constructor(private orderService:OrderService,private router:Router,private cartService:CartService, private route:ActivatedRoute,private afAuth: AngularFireAuth,private afs: AngularFirestore) { 
     this.retailerId= this.afAuth.auth.currentUser.uid;
   }
 
 
   ngOnInit() {
-    console.log(this.companyId);
-    this.cartItems= this.cartService.getCartItemsFromOrderByRetailerId(this.retailerId);
-
+    
+    this.route.queryParams.subscribe(x=>{
+      this.companyId=x.cI;  
+    })
+    
+    this.cartItems= this.cartService.getCartItemsFromOrderByCompanyIdRetailerId(this.companyId,this.retailerId);
+    this.cartItems.subscribe(x=>{
+      console.log(x);
+    })
   } 
 
   close(){
     this.router.navigate(['../'],{relativeTo: this.route});
   }
+
+  createOrder(cartItems:CartItemId[]){
+      const id = this.afs.createId();
+     this.orderService.addItems(cartItems,this.companyId,this.retailerId,id);
+  }
+
 
 }

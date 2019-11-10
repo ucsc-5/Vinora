@@ -16,6 +16,7 @@ export class CartItemElemetComponent implements OnInit {
   availableQuantity 
   quantity
 
+
   constructor(private afs: AngularFirestore,private dialogService:DialogService,private cartService:CartService) { 
 
   }
@@ -24,8 +25,8 @@ export class CartItemElemetComponent implements OnInit {
     this.afs.collection('items').doc(`${this.item.itemId}`).get().subscribe(x=>{
       this.availableQuantity=x.data().quantity
   })
-
-    }
+  
+}
 
 
   onRemove(item:CartItemId){

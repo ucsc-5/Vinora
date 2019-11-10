@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ItemId, ItemService } from 'src/app/service/item.service';
 import { RetailerService } from 'src/app/service/retailer.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { relative } from 'path';
 
 @Component({
   selector: 'app-order-from-company',
@@ -31,8 +32,12 @@ export class OrderFromCompanyComponent implements OnInit {
     
   }
 
-  toMyCart(){
-    this.router.navigate(['myCart'],{relativeTo: this.route});
+  toMyCart(company: CompanyId){
+    // this.router.navigate(['/myCart'],{queryParams:{cI:`${this.companyId}`}, fragment:"loading"});
+    // this.router.navigate(['myCart',company.companyId],{relativeTo: this.route});
+    // this.router.navigate(['/myCart']);
+    this.router.navigate(['myCart'],{relativeTo:this.route});
+  
   }
 
 

@@ -110,8 +110,8 @@ const routes: Routes = [
     { path: 'reports', component: AdminReportsComponent}
   ]},
 
-  { path: 'not-found', component: PageNotFoundComponent},
-  { path: '**', redirectTo: '/not-found'}
+  // { path: 'not-found', component: PageNotFoundComponent},
+  // { path: '**', redirectTo: '/not-found'}
 
 
   // { path: '',      component: AppComponent },

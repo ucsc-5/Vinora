@@ -154,6 +154,7 @@ import { CartService } from './service/cart.service';
     OrderItemElementComponent,
     OrderSummeryComponent,
     ConfirmDialogComponent
+   
   
   ], 
   entryComponents:[

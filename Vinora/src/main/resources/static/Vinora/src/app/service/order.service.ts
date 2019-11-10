@@ -6,22 +6,15 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CartItem, CartItemId, CartService } from './cart.service';
 
 export interface Order{
 
-    createDate : Date;
-    purchesDate : Date;
-    acceptedDate : Date;
-    deliveredDate : Date;
-    
+    createDate : Date; 
     retailerId: string;
     companyId: string;
-    stockmanagerId: string;
-    salesRefId: string;
-    
+    total: number;
     state: string;
-
-   
 }
 
 
@@ -39,50 +32,35 @@ export interface OrderId extends Order{
 export class OrderService {
  
   private dbPath = '/orders';
-  private retailerCollection: AngularFirestoreCollection<OrderItem>;
+  private orderCollection: AngularFirestoreCollection<OrderItem>;
   
   order: OrderItem;
 
   orderItems: Observable<OrderItem[]>;
   items: Observable<OrderItemId[]>;
+  total: number=0;
  
-  constructor(private afs: AngularFirestore,private db: AngularFireDatabase) {
-    this.retailerCollection = this.afs.collection<OrderItem>('orders');
-  }
-
-  addItems(OrderItem:OrderItem){
-    const id = this.afs.createId();
-    this.retailerCollection.doc(id).set(OrderItem).then(
-      res=>{
-        console.log(" Here is the response "+res);
-      }
-    ).catch(error=>{
-      console.log("Error "+ error);
-    });
+  constructor(private cartService:CartService,private afs: AngularFirestore,private db: AngularFireDatabase) {
+    this.orderCollection = this.afs.collection<OrderItem>('orders');
     
   }
 
-  getItemsFromOrderByCompanyId(companyId:string){
-    this.orderItems = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"active")).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as OrderItem;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-    return this.orderItems;
+  addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
+    let createDate = new Date();
+    const state="active"
+    let total:number=this.total;
+    cartItems.forEach(element=>{
+      this.orderCollection.doc(id).collection('items').doc(element.id).set(element);
+      total= element.total+total;
+      this.cartService.deleteItem(element.id);
+    })
+    const order: Order ={createDate,retailerId,companyId,total,state};
+    this.orderCollection.doc(id).set(order);
   }
 
-  getItemsFromOrderByRetailerId(retailerId: string){
-    this.items = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',"active")).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as OrderItem;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-    return this.items;
-  }
+
+
+  
 
   
 }

@@ -7,16 +7,17 @@
                     <b>email: </b>{{company.email}}<br>
                     <b>Contact: </b>{{company.address}}<br>
                 </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col col-10">
-        <div class="row">
-            <app-order-item-element class="col col-3" *ngFor="let item of items | async" [item]="item"></app-order-item-element>
+                <a routerLink="myCart" style="margin-left: 90%;" [queryParams]="{cI:company.id}" mat-raised-button  color="primary" >My cart</a>
+            </div>
         </div>
-    </div>
-    <div class="col col-2">
-        <button mat-raised-button color="primary" (click)="toMyCart()">My cart</button>
-        <app-order-summery></app-order-summery>
+        <div class="row">
+            <div class="col col-10">
+                <div class="row">
+                    <app-order-item-element class="col col-3" *ngFor="let item of items | async" [item]="item"></app-order-item-element>
+                </div>
+            </div>
+
+        <div class="col col-2">        
+            <app-order-summery></app-order-summery>
     </div>
 </div>
