@@ -1,18 +1,35 @@
-<mat-card class="example-card"> 
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Company Name</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        <b>Purches Date: </b> {{currentOrder.createDate}}<br>
-        <b>Total Amount: </b> {{currentOrder.total}}<br>
-        <b>Order State: </b> {{currentOrder.state}}<br>
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>Inform</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="row">
+      <div class="col" *ngIf="company | async; let company; else ">
+          <div class="row" *ngFor="let company of company" > 
+            <div class="col col-3"> 
+                <img src="{{company.imagePath}}" style="height: 75px; width: 100px;"  alt="Photo of a Shiba Inu">
+                <br>
+                {{company.companyName}}<br>
+                {{company.email}}
+            </div>
+            <div class="col col-3">    
+                <p>
+                  <b>Purches Date: </b> {{currentOrder.createDate}}<br>
+                  <b>Total Amount: </b> {{currentOrder.total}} .00 Rs/-<br>
+                  <!-- <b>Order State: </b> {{currentOrder.state}}<br> -->
+                </p>
+                <button mat-button>
+                  <i class="material-icons">perm_phone_msg</i>   Inform
+                </button>
+            </div> 
+            <div class="col col-3">
+            </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="row"  *ngIf="items | async; let items ; else">
+      <app-current-item-elemet class="col col-2" *ngFor="let item of items" [item]="item"></app-current-item-elemet>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+
+

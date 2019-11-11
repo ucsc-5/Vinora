@@ -38,6 +38,7 @@ import { RetailerNewCompaniesComponent } from './retailer/retailer-new-companies
 import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
 import { StockManagerProfileComponent } from './stock-manager/stock-manager-profile/stock-manager-profile.component';
 import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
+import { CurrentOrdersFromRetailersComponent } from './stock-manager/current-orders-from-retailers/current-orders-from-retailers.component';
 
 
 
@@ -74,7 +75,8 @@ const routes: Routes = [
   {path: 'stockManager/:id' , component: StockManagerComponent, children:[
     { path: '', component: StockManagerDashboardComponent},
     { path: 'updateItems', component: UpdateItemsComponent},
-    { path: 'myProfile', component: StockManagerProfileComponent}
+    { path: 'myProfile', component: StockManagerProfileComponent},
+    { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent}
     
   ]},
 

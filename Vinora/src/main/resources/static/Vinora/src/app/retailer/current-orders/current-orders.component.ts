@@ -22,11 +22,9 @@ export class CurrentOrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentOrders= this.orderService.getCurrentOrdersByRetailerId(this.retailerId);
   }
 
-  getOrderByRetailerId(){
-    this.currentOrders= this.orderService.getOrderByRetailerId(this.retailerId);
-  }
 
 
 

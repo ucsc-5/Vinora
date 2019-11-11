@@ -10,6 +10,7 @@ import { CartService, CartItemId, CartItem } from 'src/app/service/cart.service'
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CompanyId } from 'src/app/service/company.service';
 import { RetailerId } from 'src/app/service/retailer.service';
+import { DialogService } from 'src/app/service/dialog.service';
 
 
 
@@ -24,7 +25,7 @@ export class MyCartComponent implements OnInit {
   retailerId: string;
   public total=0;
 
-  constructor(private orderService:OrderService,private router:Router,private cartService:CartService, private route:ActivatedRoute,private afAuth: AngularFireAuth,private afs: AngularFirestore) { 
+  constructor(private dialogService:DialogService,private orderService:OrderService,private router:Router,private cartService:CartService, private route:ActivatedRoute,private afAuth: AngularFireAuth,private afs: AngularFirestore) { 
     this.retailerId= this.afAuth.auth.currentUser.uid;
   }
 
@@ -46,9 +47,16 @@ export class MyCartComponent implements OnInit {
   }
 
   createOrder(cartItems:CartItemId[]){
+    const message="Are sure to purches this order!!"
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
       const id = this.afs.createId();
      this.orderService.addItems(cartItems,this.companyId,this.retailerId,id);
-  }
+    }
+  })
 
+
+  }
 
 }

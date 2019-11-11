@@ -83,11 +83,12 @@ export class RegisterRetailerComponent implements OnInit {
       ()=>{},
       ()=>{
         this.authService.login(email,password).then(()=>{
-        const id = this.afAuth.auth.currentUser.uid;
-        const retailer: Retailer= {shopName,email,address,contactNumber,state,url};
+        const retailerId = this.afAuth.auth.currentUser.uid;
+
+        const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId};
         // this.retailerCollection.doc(id). set(retailer);
         // this.companyCollection.doc(uid).set(company1);
-        this.retailerCollection.doc(id).set(retailer).then(
+        this.retailerCollection.doc(retailerId).set(retailer).then(
           res=>{
             console.log(" Here is the response "+res);
           }

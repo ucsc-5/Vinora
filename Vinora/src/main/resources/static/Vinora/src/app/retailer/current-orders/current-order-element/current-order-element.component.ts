@@ -19,6 +19,7 @@ export class CurrentOrderElementComponent implements OnInit {
   constructor(private companyService:CompanyService,private orderService:OrderService) { }
 
   ngOnInit() {
+
     this.company= this.companyService.getCompanyById(this.currentOrder.companyId);
     this.items = this.orderService.getItemsByOrderId(this.currentOrder.id);
   }

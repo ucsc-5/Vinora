@@ -13,7 +13,8 @@ export interface Retailer { shopName: string;
                             address: string;
                             contactNumber: string;
                             state: string;
-                            url: string;                         
+                            url: string;
+                            retailerId: string;                         
 }
 
 export interface RetailerId extends Retailer{id: string}
@@ -47,7 +48,8 @@ export class RetailerService {
 
   dbPath = 'retailers'
  
-  retailer: Observable<RetailerId[]>;
+  retailerByEmail: Observable<RetailerId[]>;
+  retailerById: Observable<RetailerId[]>;
   registerCompanyIds: Observable<CompanyEmailTokenId[]>;
 
  
@@ -88,7 +90,7 @@ registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,compa
 
 getRetailerByEmail(email:string){
   
-  this.retailer =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==', '1').limit(1)).snapshotChanges().pipe(
+  this.retailerByEmail =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==', '1').limit(1)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Retailer;
       const id = a.payload.doc.id;
@@ -96,7 +98,20 @@ getRetailerByEmail(email:string){
     }))
   );
 
-  return this.retailer;
+  return this.retailerByEmail;
+}
+
+getRetailerById(id:string){
+  
+  this.retailerById =this.afs.collection(this.dbPath , ref => ref.where('retailerId', '==',id).where('state', '==', '1').limit(1)).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Retailer;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+
+  return this.retailerById;
 }
 
 

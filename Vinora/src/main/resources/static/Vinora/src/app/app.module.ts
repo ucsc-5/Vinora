@@ -92,6 +92,11 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
 import { DialogService } from './service/dialog.service';
 import { CartService } from './service/cart.service';
 import { CurrentOrderElementComponent } from './retailer/current-orders/current-order-element/current-order-element.component';
+import { CurrentItemElemetComponent } from './retailer/current-orders/current-order-element/current-item-elemet/current-item-elemet.component';
+import { CurrentOrdersFromRetailersComponent } from './stock-manager/current-orders-from-retailers/current-orders-from-retailers.component';
+import { CurOrderElementComponent } from './stock-manager/current-orders-from-retailers/cur-order-element/cur-order-element.component';
+import { StmCrtOrderItemElemetComponent } from './stock-manager/current-orders-from-retailers/cur-order-element/stm-crt-order-item-elemet/stm-crt-order-item-elemet.component';
+
 
 @NgModule({
   declarations: [
@@ -155,7 +160,11 @@ import { CurrentOrderElementComponent } from './retailer/current-orders/current-
     OrderItemElementComponent,
     OrderSummeryComponent,
     ConfirmDialogComponent,
-    CurrentOrderElementComponent
+    CurrentOrderElementComponent,
+    CurrentItemElemetComponent,
+    CurrentOrdersFromRetailersComponent,
+    CurOrderElementComponent,
+    StmCrtOrderItemElemetComponent,
    
   
   ], 

@@ -1,4 +1,9 @@
 <div class="row">
-    <h3>Current Orders</h3>
-    <app-current-order-element *ngFor="let currentOrder of currentOrders | async" [currentOrder]="currentOrder"></app-current-order-element>
+    <h3>Current Orders</h3><br>
+</div>
+<div class="row">
+    <div class="col" *ngIf="currentOrders | async; let currentOrders; else loading">
+        <app-current-order-element *ngFor="let currentOrder of currentOrders" [currentOrder]="currentOrder" ></app-current-order-element>
+    </div>
+    <ng-template #loading>No current orders available!!&hellip;</ng-template>
 </div>
