@@ -96,6 +96,11 @@ import { CurrentItemElemetComponent } from './retailer/current-orders/current-or
 import { CurrentOrdersFromRetailersComponent } from './stock-manager/current-orders-from-retailers/current-orders-from-retailers.component';
 import { CurOrderElementComponent } from './stock-manager/current-orders-from-retailers/cur-order-element/cur-order-element.component';
 import { StmCrtOrderItemElemetComponent } from './stock-manager/current-orders-from-retailers/cur-order-element/stm-crt-order-item-elemet/stm-crt-order-item-elemet.component';
+import { ConfirmedOrdersOfRetailersComponent } from './stock-manager/confirmed-orders-of-retailers/confirmed-orders-of-retailers.component';
+import { ConOrderElementComponent } from './stock-manager/confirmed-orders-of-retailers/con-order-element/con-order-element.component';
+import { StmConOrderElementComponent } from './stock-manager/confirmed-orders-of-retailers/con-order-element/stm-con-order-element/stm-con-order-element.component';
+
+
 
 
 @NgModule({
@@ -165,6 +170,9 @@ import { StmCrtOrderItemElemetComponent } from './stock-manager/current-orders-f
     CurrentOrdersFromRetailersComponent,
     CurOrderElementComponent,
     StmCrtOrderItemElemetComponent,
+    ConfirmedOrdersOfRetailersComponent,
+    ConOrderElementComponent,
+    StmConOrderElementComponent
    
   
   ], 

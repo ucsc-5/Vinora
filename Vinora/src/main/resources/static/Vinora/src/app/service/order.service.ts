@@ -14,7 +14,7 @@ export interface Order{
     retailerId: string;
     companyId: string;
     total: number;
-    state: string;
+    state: number;
 }
 
 
@@ -47,7 +47,7 @@ export class OrderService {
 
   addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
     let createDate = new Date().toLocaleString();
-    const state="current"
+    const state=0;
     let total:number=this.total;
     cartItems.forEach(element=>{
       this.orderCollection.doc(id).collection('items').doc(element.id).set(element);
@@ -60,7 +60,7 @@ export class OrderService {
 
 
   getCurrentOrdersByRetailerId(retailerId:string){  
-   const currnetOrdersByRetailer:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',"current")).snapshotChanges().pipe(
+   const currnetOrdersByRetailer:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',0)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
@@ -71,7 +71,19 @@ export class OrderService {
   }
 
   getCurrentOrdersByCompanyId(companyId:string){
-    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"current")).snapshotChanges().pipe(
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',0)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return currentOordersByCompany;
+  }
+
+
+  getConfirmedOrdersByCompanyId(companyId:string){
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -106,6 +118,10 @@ getItemsByOrderId(orderKey:string){
     }))
   );
   return this.items;
+}
+
+updateState(id:string,stateValue:number){
+  return this.afs.collection('orders').doc(id).update({state:stateValue});
 }
 
   

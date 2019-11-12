@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CartItemId } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-stm-crt-order-item-elemet',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StmCrtOrderItemElemetComponent implements OnInit {
 
+  @Input() item:CartItemId
   constructor() { }
 
   ngOnInit() {

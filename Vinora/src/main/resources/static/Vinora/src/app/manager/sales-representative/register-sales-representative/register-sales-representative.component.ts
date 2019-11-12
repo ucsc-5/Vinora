@@ -59,7 +59,7 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
     
     const callable = await this.fns.httpsCallable('addRole');
     var createUser=this.afAuth.auth.createUserWithEmailAndPassword(email,nic);
-    callable({email:email,role:this.type}).subscribe(
+    callable({email:email,role:this.type,companyId:this.companyId}).subscribe(
       (response)=>{
            console.log(response);
       },

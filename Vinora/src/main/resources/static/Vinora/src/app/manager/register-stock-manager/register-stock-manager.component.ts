@@ -21,9 +21,10 @@ export class RegisterStockManagerComponent implements OnInit {
   private stockManagerCollection: AngularFirestoreCollection<StockManager>;
   stockManagers: Observable<StockManagerId[]>;
   type = 'stockManager';
+  companyId:string;
 
   constructor(private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions) { 
-    const companyId=this.afAuth.auth.currentUser.uid;
+    this.companyId=this.afAuth.auth.currentUser.uid;
     // this.stockManagerCollection = afs.collection<StockManager>(`companies/${companyId}/stockManagers`);  // for the chamods code
     this.stockManagerCollection = afs.collection<StockManager>('stockManagers');
     // this.stockManagers= this.stockManagerCollection.valueChanges();
@@ -76,7 +77,7 @@ export class RegisterStockManagerComponent implements OnInit {
     const stockManager1:StockManager={fullName,address,nic,email,contactNumber,state,companyId,imagePath}
     const callable = await this.fns.httpsCallable('addRole');
     var createUser=this.afAuth.auth.createUserWithEmailAndPassword(this.email.value,this.nic.value);
-    callable({email:email,role:this.type}).subscribe(
+    callable({email:email,role:this.type,companyId:this.companyId}).subscribe(
       (response)=>{
            console.log(response);
       },

@@ -20,6 +20,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 export class RegisterDCompanyComponent implements OnInit {
   private companyCollection: AngularFirestoreCollection<Company>;
   companies: Observable<Company[]>;
+  companyId: string;
   hide = true;
   type = 'manager';
   firstFormGroup: FormGroup;
@@ -36,6 +37,7 @@ export class RegisterDCompanyComponent implements OnInit {
     // method below for how to persist the id with
     // valueChanges()
     this.companies = this.companyCollection.valueChanges();
+    this.companyId = this.afAuth.auth.currentUser.uid;
   }
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -66,7 +68,7 @@ export class RegisterDCompanyComponent implements OnInit {
     this.authServise.register(userEmail,password,this.type).then(()=>{
       const callable = this.fns.httpsCallable('addRole');
     
-      callable({email:userEmail,role:this.type}).subscribe(
+      callable({email:userEmail,role:this.type,companyId:this.companyId}).subscribe(
         response=>{
           console.log(response);
         },()=>{},

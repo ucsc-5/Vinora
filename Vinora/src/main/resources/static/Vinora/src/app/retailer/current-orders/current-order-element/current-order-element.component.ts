@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrderId, OrderService } from 'src/app/service/order.service';
 import { CompanyService, CompanyId } from 'src/app/service/company.service';
-import { CartService, CartItemId } from 'src/app/service/cart.service';
+import { CartService, CartItemId, CartItem } from 'src/app/service/cart.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,6 +22,10 @@ export class CurrentOrderElementComponent implements OnInit {
 
     this.company= this.companyService.getCompanyById(this.currentOrder.companyId);
     this.items = this.orderService.getItemsByOrderId(this.currentOrder.id);
+  }
+
+  confirmOrder(items:CartItemId[]){
+    
   }
 
 }

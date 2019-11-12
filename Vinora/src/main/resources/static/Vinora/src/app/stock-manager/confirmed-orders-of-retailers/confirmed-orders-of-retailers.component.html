@@ -1,9 +1,9 @@
 <div class="row">
-        <h3>Current Orders</h3><br>
+        <h3>Confirmend Orders</h3><br>
     </div>
     <div class="row">
         <div class="col" *ngIf="orders | async; let orders; else loading">
-            <app-cur-order-element *ngFor="let order of orders" [order]="order" ></app-cur-order-element>
+            <app-con-order-element *ngFor="let order of orders" [order]="order" ></app-con-order-element>
         </div>
         <ng-template #loading>No current orders available!!&hellip;</ng-template>
     </div>

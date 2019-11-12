@@ -11,15 +11,19 @@ import { StockManagerService, StockManagerId } from 'src/app/service/stock-manag
 })
 export class CurrentOrdersFromRetailersComponent implements OnInit {
 
-  stockManagers:Observable<StockManagerId[]>;
-  stockManagerEmail:string;
+  companyId: string;
+  orders: Observable<OrderId[]>;
+
   
-  constructor(private afAuth: AngularFireAuth,private stockManagerService:StockManagerService) {
-    this.stockManagerEmail=this.afAuth.auth.currentUser.email;
+  constructor(private afAuth: AngularFireAuth,private stockManagerService:StockManagerService,private orderService:OrderService) {
+    this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+      // console.log(idTokenResult.claims.companyId);
+      this.companyId= idTokenResult.claims.companyId;
+    })
   }
 
   ngOnInit() {
-    this.stockManagers=this.stockManagerService.getStockManagerByEmail(this.stockManagerEmail);
+   this.orders= this.orderService.getCurrentOrdersByCompanyId(this.companyId);
   }
 
 }

@@ -1,20 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrderId, OrderService, Order } from 'src/app/service/order.service';
-import { StockManagerId } from 'src/app/service/stock-manager.service';
+import { OrderId, OrderService } from 'src/app/service/order.service';
 import { Observable } from 'rxjs';
 import { RetailerId, RetailerService } from 'src/app/service/retailer.service';
-import { CartItem, CartItemId } from 'src/app/service/cart.service';
+import { CartItemId } from 'src/app/service/cart.service';
 
 @Component({
-  selector: 'app-cur-order-element',
-  templateUrl: './cur-order-element.component.html',
-  styleUrls: ['./cur-order-element.component.css']
+  selector: 'app-con-order-element',
+  templateUrl: './con-order-element.component.html',
+  styleUrls: ['./con-order-element.component.css']
 })
-export class CurOrderElementComponent implements OnInit {
+export class ConOrderElementComponent implements OnInit {
 
   @Input() order: OrderId
   companyId:string;
-  currentOrders: Observable<OrderId[]>
   retailers: Observable<RetailerId[]>
   items: Observable<CartItemId[]>
 
@@ -25,12 +23,8 @@ export class CurOrderElementComponent implements OnInit {
     this.items=this.orderService.getItemsByOrderId(this.order.id);
   }
 
-  confirmOrder(){
-    this.orderService.updateState(this.order.id,1);
-  }
+  // confirmOrder(){
+  //   this.orderService.updateState(this.order.id,1);
+  // }
 
-
-
-
-  
 }

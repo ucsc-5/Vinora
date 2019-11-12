@@ -15,6 +15,11 @@ export class StockManagerDashboardComponent implements OnInit {
 
   constructor(private StockManagerService:StockManagerService,private afAuth: AngularFireAuth) {
     this.stockManagerEmail= this.afAuth.auth.currentUser.email;
+    this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+      console.log(idTokenResult.claims.companyId);
+      
+    })
+
    }
 
   ngOnInit() {
