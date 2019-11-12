@@ -91,7 +91,6 @@ export class RegisterRetailerComponent implements OnInit {
       (response)=>{
            console.log(response);
       },
-      
       ()=>{},
       ()=>{
         this.authService.login(email,password).then(()=>{
