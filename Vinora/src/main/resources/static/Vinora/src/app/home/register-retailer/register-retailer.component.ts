@@ -10,7 +10,9 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase';
 import { finalize } from 'rxjs/operators';
+
 
 
 
@@ -28,7 +30,10 @@ export class RegisterRetailerComponent implements OnInit {
   secondFormGroup: FormGroup;
   isEditable = false;
   loggined = false;
-  // retailerUid: string;
+
+  latitude = 6.902196;
+  longitude = 79.861133;
+  locationChosen = false;
 
   retailer : Observable<RetailerId[]>;
   private retailerCollection: AngularFirestoreCollection<RetailerId>;
@@ -58,19 +63,22 @@ export class RegisterRetailerComponent implements OnInit {
       email: ['', [Validators.required,Validators.email]],
       address: ['', Validators.required],
       contactNumber: ['', [Validators.required,Validators.minLength(9),Validators.maxLength(9)]]
-    });
-    
+    });   
+
   }
   
   async register(){
     const email : string = this.secondFormGroup.value['email'];
     const password = this.firstFormGroup.value['password'];
-
     const shopName = this.firstFormGroup.value['shopName'];
     const address = this.secondFormGroup.value['address'];
     const contactNumber = this.secondFormGroup.value['contactNumber'];
     const state = "0";
     const url ="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
+    const latitude = this.longitude
+    const longitude = this.longitude
+    
+    const coord = new firebase.firestore.GeoPoint(latitude,longitude);
 
     this.authService.register(email,password,this.type);
 
@@ -85,7 +93,7 @@ export class RegisterRetailerComponent implements OnInit {
         this.authService.login(email,password).then(()=>{
         const retailerId = this.afAuth.auth.currentUser.uid;
 
-        const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId};
+        const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
         // this.retailerCollection.doc(id). set(retailer);
         // this.companyCollection.doc(uid).set(company1);
         this.retailerCollection.doc(retailerId).set(retailer).then(
@@ -118,7 +126,19 @@ export class RegisterRetailerComponent implements OnInit {
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
-  }  
+  }
+  
+  onChoseLocation(event){
+    console.log(event.coords);
+    
+    this.latitude = event.coords.lat;
+    this.longitude = event.coords.lng;
+    this.locationChosen= true;
+
+    console.log(this.latitude+" lati");
+    console.log(this.longitude+" long");
+
+  }
 
 
 }

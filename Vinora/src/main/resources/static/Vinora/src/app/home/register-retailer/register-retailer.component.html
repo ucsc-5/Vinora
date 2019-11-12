@@ -41,7 +41,17 @@
                       
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                  <textarea formControlName="address" matInput placeholder="Your Address" name="address" required  ></textarea>
+
+                
+                <textarea formControlName="address" matInput placeholder="Your Address" name="address" required  ></textarea>
+                
+                <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChoseLocation($event)">
+                    <agm-marker 
+                    [latitude]="latitude" 
+                    [longitude]="longitude" 
+                    *ngIf="locationChosen"></agm-marker>
+                </agm-map>
+                
                 </mat-form-field>
               
                 <mat-form-field class="example-full-width">

@@ -14,8 +14,10 @@ export interface Retailer { shopName: string;
                             contactNumber: string;
                             state: string;
                             url: string;
-                            retailerId: string;                         
-}
+                            retailerId: string;  
+                            coord: firebase.firestore.GeoPoint;
+                          }
+
 
 export interface RetailerId extends Retailer{id: string}
 

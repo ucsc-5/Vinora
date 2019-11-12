@@ -10,6 +10,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 import { environment } from '../environments/environment';
 import { LoginComponent } from './home/login/login.component';
@@ -193,7 +194,10 @@ import { StmConOrderElementComponent } from './stock-manager/confirmed-orders-of
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
     ReactiveFormsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBhDflq5iJrXIcKpeq0IzLQPQpOboX91lY'
+    })
   ],
   providers: [
     AuthenticationService,
