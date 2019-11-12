@@ -82,12 +82,16 @@ export class RegisterRetailerComponent implements OnInit {
 
     this.authService.register(email,password,this.type);
 
+
+
     const callable = await this.fns.httpsCallable('addRole');
+
 
     callable({email:email,role:this.type}).subscribe(
       (response)=>{
            console.log(response);
       },
+      
       ()=>{},
       ()=>{
         this.authService.login(email,password).then(()=>{
