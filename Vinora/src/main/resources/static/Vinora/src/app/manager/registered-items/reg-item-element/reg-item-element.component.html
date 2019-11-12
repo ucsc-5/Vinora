@@ -4,7 +4,7 @@
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image src="{{item.itemImagePath}}" alt="Photo of the Vehicle">
+            <img mat-card-image src="{{item.itemImagePath}}" width="300px" height="350px" alt="Photo of the Vehicle">
             <mat-card-content>
                     
                 <p>
@@ -21,19 +21,97 @@
                             <table class="" style="width: 159px" cellspacing="0">    
                                 <tr>
                                     <td>
+                                            Update unit price: <br>
                                             <mat-form-field class="" style="width: 70%">
                                                 <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel >
-                                            </mat-form-field>
-                                            <span>
-                                                <button mat-raised-button color="primary" type="submit" (click)="OnUpdateUnitPrice()" >Update</button>
-                                                <button mat-raised-button color="primary" type="reset">Reset</button>
-                                            </span>
+                                            </mat-form-field>  : Rs/- 
+
+                                            
+
                                     </td>
-                                </tr>    
+                                </tr>   
+                                <tr>
+                                    <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button class="btn"  
+                                                            type="reset"
+                                                            data-toggle="tooltip"
+                                                            title="Reset"  > 
+                                                        
+                                                            <i class="material-icons">
+                                                                replay
+                                                            </i>
+                                                    </button>
+
+                                                    <button class="btn"  
+                                                            type ="submit"
+                                                            data-toggle="tooltip"
+                                                            title="Update unit price" > 
+                                                        
+                                                            <i class="material-icons">
+                                                                cached
+                                                            </i>
+                                                    </button>
+
+                                                    
+                                            </div>
+
+                                        <!-- <div class="example-button-row">
+                                               
+                                                <button     mat-mini-fab
+                                                            color="primary"
+                                                            matTooltip="Refresh"
+                                                            aria-label="Button that displays a tooltip when focused or hovered over"
+                                                            type="reset">
+                                        
+                                                        <i class="material-icons">
+                                                                replay
+                                                        </i>
+                                                </button>
+
+
+                                                   
+                                                    <button mat-mini-fab 
+                                                            color="primary" 
+                                                             >
+
+                                                            <i class="material-icons">
+                                                                  cached
+                                                            </i>
+
+                                                    </button>
+
+
+                                                    <button mat-mini-fab  
+                                                            color="warn" 
+                                                            (click)="onRemove()" >
+                                                            
+                                                            <i class="material-icons">
+                                                                    remove_circle_outline
+                                                            </i>
+                                                    </button>
+
+                                                    <button mat-raised-button
+                                                                matTooltip="Info about the action"
+                                                                aria-label="Button that displays a tooltip when focused or hovered over">
+                                                        Action
+                                                        </button>
+                                        </div>                                              -->
+                                    </td>
+                                </tr> 
                             </table>
                             <br>
-                            <button mat-raised-button color="warn" (click)="onRemove()" >Remove</button>
+                           
                     </form>
+                    <button class="btn"  
+                            (click)="onRemove()"
+                            data-toggle="tooltip"
+                            title="Remove Item" > 
+                
+                            <i class="material-icons icon-red">
+                                remove_circle_outline
+                            </i>
+                    </button>    
             </mat-card-actions>
 </mat-card>
     

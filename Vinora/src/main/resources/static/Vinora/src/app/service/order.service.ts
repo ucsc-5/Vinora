@@ -34,10 +34,9 @@ export class OrderService {
   private dbPath = '/orders';
   private orderCollection: AngularFirestoreCollection<OrderItem>;
   
- 
 
-  currnetOrdersByRetailer: Observable<OrderId[]>;
-  currentOordersByCompany: Observable<OrderId[]>; 
+  currentStaticOordersByCompany: OrderId
+   
   items: Observable<CartItemId[]>;
   total: number=0;
  
@@ -61,26 +60,41 @@ export class OrderService {
 
 
   getCurrentOrdersByRetailerId(retailerId:string){  
-    this.currnetOrdersByRetailer = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',"current")).snapshotChanges().pipe(
+   const currnetOrdersByRetailer:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',"current")).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
       return { id, ...data };
     }))
   );
-  return this.currnetOrdersByRetailer;
+  return currnetOrdersByRetailer;
   }
 
   getCurrentOrdersByCompanyId(companyId:string){
-    this.currentOordersByCompany = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"current")).snapshotChanges().pipe(
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"current")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-    return this.currentOordersByCompany;
+    return currentOordersByCompany;
   }
+  // getCurrentOrdersByCompanyId(companyId:string){
+  //   const collection = this.afs.collection<Order>(this.dbPath, ref => ref.where('companyId', '==', companyId))
+  //   const user$ = collection
+  //     .valueChanges()
+  //     .pipe(
+  //       map(users => {
+  //         const user = users[0];
+  //         console.log(user);
+  //         return user;
+  //       })
+  //     );
+    
+  //   return user$;
+  // }
+
 
 
 getItemsByOrderId(orderKey:string){

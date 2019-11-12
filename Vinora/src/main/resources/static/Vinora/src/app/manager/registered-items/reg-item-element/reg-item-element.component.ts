@@ -3,6 +3,7 @@ import {  CompanyService } from 'src/app/service/company.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { ItemService, ItemId } from 'src/app/service/item.service';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-reg-item-element',
@@ -15,7 +16,7 @@ export class RegItemElementComponent implements OnInit {
 
   message: any;
 
-  constructor(private itemService:ItemService, private afAuth: AngularFireAuth) {
+  constructor(private dialogService:DialogService, private itemService:ItemService, private afAuth: AngularFireAuth) {
  
   }
 
@@ -24,37 +25,38 @@ export class RegItemElementComponent implements OnInit {
   }
 
   onRemove(){
-      
-    this.message = this.itemService.updateItem(this.item.id,{state: "deleted"}).then(
-      x=>{
-        return "done";
-      }
-    ).catch(
-      error=>{error}
-    )
-
-    console.log(this.message);
-
+    const message=" Are you sure !"
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){ 
+                
+              this.message = this.itemService.updateItem(this.item.id,{state: "deleted"}).then(
+                x=>{
+                  return "done";
+                }
+              ).catch(
+                error=>{error}
+              )
+                    }
+                  }
+                )
   }
 
   OnUpdateUnitPrice(form:NgForm) {
       const value=form.value;
-      console.log(value.unitPrice+"skjdbcjsdbc");
-      console.log(this.item.id);
-      
-      this.message = this.itemService.updateItem(this.item.id,{unitPrice: value.unitPrice}).then(
-        x=>{
-          return "done";
-        }
-      ).catch(
-        error=>{error}
-      )
-  
-      console.log(this.message);
-      //   .catch(err => console.log(err+"jkdcjdscjsdbc"));
-    }
-  
-
-  
+      const message= "Confirm !!"
+      this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+        res=>{
+          if(res){      
+            this.message = this.itemService.updateItem(this.item.id,{unitPrice: value.unitPrice}).then(
+              x=>{
+                return "done";
+              }
+            ).catch(
+              error=>{error}
+            )
+    }}
+    )
+  }
 
 }

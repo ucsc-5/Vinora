@@ -20,10 +20,6 @@ export class CurrentOrdersFromRetailersComponent implements OnInit {
 
   ngOnInit() {
     this.stockManagers=this.stockManagerService.getStockManagerByEmail(this.stockManagerEmail);
-    this.stockManagers.subscribe(x=>{
-      console.log(x);
-      
-    })
   }
 
 }
