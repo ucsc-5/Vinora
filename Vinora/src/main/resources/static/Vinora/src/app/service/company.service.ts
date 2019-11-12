@@ -21,6 +21,7 @@ export interface Company{
   imagePath: string;
   state: string;
   companyId: string;
+  coord: firebase.firestore.GeoPoint;
 }
 
 export interface CompanyId extends Company{ id: string}

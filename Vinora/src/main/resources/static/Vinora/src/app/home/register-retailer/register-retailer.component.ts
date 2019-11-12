@@ -10,7 +10,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { finalize } from 'rxjs/operators';
 
 

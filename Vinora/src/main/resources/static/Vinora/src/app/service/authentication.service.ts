@@ -71,9 +71,8 @@ export class AuthenticationService {
   async register(email: string, password: string,type: string) {
     console.log(email,password);
     // this.loginUser = new LoginUser(type,this.user.uid,email);
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(()=>{
-        // this.userServise.createUser(this.loginUser);
-        
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((response)=>{
+       console.log(response);   
     }
     ).catch(
         error=> console.log(error)

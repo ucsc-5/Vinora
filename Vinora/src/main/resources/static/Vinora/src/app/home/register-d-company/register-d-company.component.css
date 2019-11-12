@@ -43,3 +43,7 @@ input.example-right-align {
 .example-button-row a {
   margin-right: 8px;
 }
+
+agm-map {
+  height: 300px;
+}

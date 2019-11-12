@@ -11,6 +11,7 @@ import { idTokenResult } from '@angular/fire/auth-guard';
 import { CompanyService, Company } from 'src/app/service/company.service';
 import { RetailerService } from 'src/app/service/retailer.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-register-d-company',
@@ -27,6 +28,10 @@ export class RegisterDCompanyComponent implements OnInit {
   secondFormGroup: FormGroup;
   isEditable = false;
   loggined = false;
+
+  latitude = 6.902196;
+  longitude = 79.861133;
+  locationChosen = false;
  
   constructor(private readonly afs: AngularFirestore,private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
     this.companyCollection = afs.collection<Company>('companies');
@@ -83,7 +88,8 @@ export class RegisterDCompanyComponent implements OnInit {
             const managerNic:string=this.secondFormGroup.value['managerNic'];
             const state:string="0";
             const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
-            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId}
+            const coord = new firebase.firestore.GeoPoint(this.latitude,this.longitude);
+            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId,coord}
             this.companyCollection.doc(companyId).set(company1);
           }).catch((error)=>{
             console.log(error+" The error from register then login ");
@@ -122,5 +128,17 @@ export class RegisterDCompanyComponent implements OnInit {
     return this.email.hasError('required') ? 'You must enter a value' :
         this.email.hasError('email') ? 'Not a valid email' :
             '';
+  }
+
+  onChoseLocation(event){
+    console.log(event.coords);
+    
+    this.latitude = event.coords.lat;
+    this.longitude = event.coords.lng;
+    this.locationChosen= true;
+
+    console.log(this.latitude+" lati");
+    console.log(this.longitude+" long");
+
   }
 }

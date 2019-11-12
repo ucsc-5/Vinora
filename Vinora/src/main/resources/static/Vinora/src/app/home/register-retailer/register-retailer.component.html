@@ -40,20 +40,25 @@
                       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                       
               </mat-form-field>
-              <mat-form-field class="example-full-width">
+              
+              
+                <mat-form-field class="example-full-width">
+        
+                <textarea formControlName="address" matInput placeholder="Your Address" name="address" required  ></textarea>
+                             
+                </mat-form-field>
 
                 
-                <textarea formControlName="address" matInput placeholder="Your Address" name="address" required  ></textarea>
                 
-                <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChoseLocation($event)">
+                  <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChoseLocation($event)">
                     <agm-marker 
                     [latitude]="latitude" 
                     [longitude]="longitude" 
                     *ngIf="locationChosen"></agm-marker>
-                </agm-map>
+                  </agm-map>
                 
-                </mat-form-field>
-              
+                  
+
                 <mat-form-field class="example-full-width">
                     <span matPrefix>+94 &nbsp;</span>
                     <input formControlName="contactNumber" minlength="9" maxlength="9" type="tel" matInput placeholder="Telephone" name="contactNumber" required >
