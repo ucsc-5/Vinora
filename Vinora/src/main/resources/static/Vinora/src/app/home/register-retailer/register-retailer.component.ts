@@ -80,36 +80,49 @@ export class RegisterRetailerComponent implements OnInit {
     
     const coord = new firebase.firestore.GeoPoint(latitude,longitude);
 
-    this.authService.register(email,password,this.type);
+    this.authService.register(email,password,this.type).then(
+      response=>{
+        console.log(response);
+        const callable = this.fns.httpsCallable('addRole');
 
-
-
-    const callable = await this.fns.httpsCallable('addRole');
-
-
-    callable({email:email,role:this.type}).subscribe(
-      (response)=>{
-           console.log(response);
-      },
-      ()=>{},
-      ()=>{
-        this.authService.login(email,password).then(()=>{
-        const retailerId = this.afAuth.auth.currentUser.uid;
-
-        const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
-        // this.retailerCollection.doc(id). set(retailer);
-        // this.companyCollection.doc(uid).set(company1);
-        this.retailerCollection.doc(retailerId).set(retailer).then(
-          res=>{
-            console.log(" Here is the response "+res);
+        callable({email:email,role:this.type}).subscribe(
+          (response)=>{
+               console.log(response);
+          },
+          ()=>{},
+          ()=>{
+            this.authService.login(email,password).then(()=>{
+            const retailerId = this.afAuth.auth.currentUser.uid;
+    
+            const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
+            // this.retailerCollection.doc(id). set(retailer);
+            // this.companyCollection.doc(uid).set(company1);
+            this.retailerCollection.doc(retailerId).set(retailer).then(
+              res=>{
+                console.log(" Retailer is set "+res);
+              }
+            ).catch(error=>{
+              console.log(" error of seting retailer "+ error);
+            });
           }
-        ).catch(error=>{
-          console.log("Error "+ error);
-        });
+        )
+       }
+      )
       }
-    )
-   }
-  )
+    ).catch(error => {
+           switch (error.code) {
+              case 'auth/email-already-in-use':
+                console.log(`Email address ${email} already in use.`);
+              case 'auth/invalid-email':
+                console.log(`Email address ${email} is invalid.`);
+              case 'auth/operation-not-allowed':
+                console.log(`Error during sign up.`);
+              case 'auth/weak-password':
+                console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
+              default:
+                console.log("this is the default error message "+error.message);
+            }
+        });
 }
       
       

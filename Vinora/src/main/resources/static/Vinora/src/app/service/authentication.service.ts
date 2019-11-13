@@ -74,9 +74,21 @@ export class AuthenticationService {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((response)=>{
        console.log(response);   
     }
-    ).catch(
-        error=> console.log(error)
-      );  
+    ).catch(error => {
+      switch (error.code) {
+         case 'auth/email-already-in-use':
+           console.log(`Email address ${email} already in use.`);
+         case 'auth/invalid-email':
+           console.log(`Email address ${email} is invalid.`);
+         case 'auth/operation-not-allowed':
+           console.log(`Error during sign up.`);
+         case 'auth/weak-password':
+           console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
+         default:
+           console.log(error.message);
+       }
+   });
+        
   }
 
 async sendEmailVerification() {
@@ -104,3 +116,21 @@ async  loginWithGoogle(){
 }
    
 }
+
+
+// fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+//   .then(u => {})
+//   .catch(error => {
+//      switch (error.code) {
+//         case 'auth/email-already-in-use':
+//           console.log(`Email address ${this.state.email} already in use.`);
+//         case 'auth/invalid-email':
+//           console.log(`Email address ${this.state.email} is invalid.`);
+//         case 'auth/operation-not-allowed':
+//           console.log(`Error during sign up.`);
+//         case 'auth/weak-password':
+//           console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
+//         default:
+//           console.log(error.message);
+//       }
+//   });
