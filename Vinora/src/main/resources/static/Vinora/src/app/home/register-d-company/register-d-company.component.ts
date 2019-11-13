@@ -32,15 +32,12 @@ export class RegisterDCompanyComponent implements OnInit {
   latitude = 6.902196;
   longitude = 79.861133;
   locationChosen = false;
+
+  message   //this message for the error in the login form
  
-  constructor(private readonly afs: AngularFirestore,private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
+  constructor(private authService:AuthenticationService,private readonly afs: AngularFirestore,private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
     this.companyCollection = afs.collection<Company>('companies');
-    // .valueChanges() is simple. It just returns the 
-    // JSON data without metadata. If you need the 
-    // doc.id() in the value you must persist it your self
-    // or use .snapshotChanges() instead. See the addItem()
-    // method below for how to persist the id with
-    // valueChanges()
+ 
     this.companies = this.companyCollection.valueChanges();
     this.companyId = this.afAuth.auth.currentUser.uid;
   }
@@ -68,36 +65,79 @@ export class RegisterDCompanyComponent implements OnInit {
   }
   register(){
     
-    const userEmail = this.secondFormGroup.value['email'];
+    const email = this.secondFormGroup.value['email'];
     const password = this.firstFormGroup.value['password'];
-    this.authServise.register(userEmail,password,this.type).then(()=>{
-      const callable = this.fns.httpsCallable('addRole');
+
+    this.message = this.afAuth.auth.createUserWithEmailAndPassword(email,password).then(res=>{
+      if(res.user.email){
+        const callable = this.fns.httpsCallable('addRole')  //this is a firebase function deployed
+        callable({email:email,role:this.type}).subscribe(
+                (response)=>{
+                     console.log(response);
+                },
+                ()=>{},
+                ()=>{
+                  this.authService.login(email,password).then(x=>{
+                    const companyId = this.afAuth.auth.currentUser.uid;
+                    const address:string=this.firstFormGroup.value['address'];
+                    const companyName:string=this.firstFormGroup.value['companyName'];
+                    const contactNumber:string=this.secondFormGroup.value['tel'];
+                    const email:string=this.secondFormGroup.value['email'];
+                    const managerName:string=this.secondFormGroup.value['managerName'];
+                    const managerNic:string=this.secondFormGroup.value['managerNic'];
+                    const state:string="1";
+                    const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
+                    const coord = new firebase.firestore.GeoPoint(this.latitude,this.longitude);
+                    const company:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId,coord}
+                    this.companyCollection.doc(companyId).set(company).then(
+                                res=>{
+                                  console.log(" Manager is set ");
+                                }
+                              ).catch(error=>{
+                                console.log(" error of seting retailer "+ error);
+                              });
+                  })
+                })
+
+                return ""
+
+      }else{
+       console.log("not done");
+      }
+    })
+   .catch(error => {
+        console.log(error.message);
+        this.message=error.message;
+   })
+
+    // this.authServise.register(userEmail,password).then(()=>{
+    //   const callable = this.fns.httpsCallable('addRole');
     
-      callable({email:userEmail,role:this.type,companyId:this.companyId}).subscribe(
-        response=>{
-          console.log(response);
-        },()=>{},
-        ()=>{
-          this.authServise.login(userEmail,password).then(()=>{
-            const companyId = this.afAuth.auth.currentUser.uid;
-            const address:string=this.firstFormGroup.value['address'];
-            const companyName:string=this.firstFormGroup.value['companyName'];
-            const contactNumber:string=this.secondFormGroup.value['tel'];
-            const email:string=this.secondFormGroup.value['email'];
-            const managerName:string=this.secondFormGroup.value['managerName'];
-            const managerNic:string=this.secondFormGroup.value['managerNic'];
-            const state:string="0";
-            const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
-            const coord = new firebase.firestore.GeoPoint(this.latitude,this.longitude);
-            const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId,coord}
-            this.companyCollection.doc(companyId).set(company1);
-          }).catch((error)=>{
-            console.log(error+" The error from register then login ");
-          })
-          ;          // this.retailerService.setNotRegisteredCompanies(uid);
-        }
-      )
-    });
+    //   callable({email:userEmail,role:this.type,companyId:this.companyId}).subscribe(
+    //     response=>{
+    //       console.log(response);
+    //     },()=>{},
+    //     ()=>{
+    //       this.authServise.login(userEmail,password).then(()=>{
+    //         const companyId = this.afAuth.auth.currentUser.uid;
+    //         const address:string=this.firstFormGroup.value['address'];
+    //         const companyName:string=this.firstFormGroup.value['companyName'];
+    //         const contactNumber:string=this.secondFormGroup.value['tel'];
+    //         const email:string=this.secondFormGroup.value['email'];
+    //         const managerName:string=this.secondFormGroup.value['managerName'];
+    //         const managerNic:string=this.secondFormGroup.value['managerNic'];
+    //         const state:string="0";
+    //         const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
+    //         const coord = new firebase.firestore.GeoPoint(this.latitude,this.longitude);
+    //         const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId,coord}
+    //         this.companyCollection.doc(companyId).set(company1);
+    //       }).catch((error)=>{
+    //         console.log(error+" The error from register then login ");
+    //       })
+    //       ;          // this.retailerService.setNotRegisteredCompanies(uid);
+    //     }
+    //   )
+    // });
       
     
    

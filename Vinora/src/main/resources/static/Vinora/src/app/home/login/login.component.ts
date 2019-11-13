@@ -40,9 +40,7 @@ export class LoginComponent implements OnInit {
             ).snapshotChanges()
           )
         );
-
         this.size$.next('manager');
-      
   }
   openDialog(): void {
      this.dialog.open(DialogOverviewExampleDialogComponent);
@@ -51,11 +49,12 @@ export class LoginComponent implements OnInit {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
     const email = form.value.email;
     const password = form.value.password;
-    // this.authService.login(email,password);
+    this.authService.login(email,password);
     this.showSpinner=true;
     //  this.authService.login('chamod999@gmail.com','0714954149'); //for stock manager
     // this.authService.login('ret1@gmail.com','123123'); //for retailer
-    this.authService.login('vigith@gmail.com','123123'); //for retailer
+    // this.authService.login('vigith@gmail.com','123123'); //for retailer
+    // this.authService.login('vigith@gmail.com','123123'); //for retailer
     // this.authService.login('royalvintage@gmail.com','123123'); //for Manager
     // this.authService.login('company11@gmail.com','123123'); //for Manager
     // this.authService.login('abcstockmanager@gmail.com','972372560v'); //for stockManger

@@ -68,27 +68,9 @@ export class AuthenticationService {
       });
          
   }
-  async register(email: string, password: string,type: string) {
-    console.log(email,password);
-    // this.loginUser = new LoginUser(type,this.user.uid,email);
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((response)=>{
-       console.log(response);   
-    }
-    ).catch(error => {
-      switch (error.code) {
-         case 'auth/email-already-in-use':
-           console.log(`Email address ${email} already in use.`);
-         case 'auth/invalid-email':
-           console.log(`Email address ${email} is invalid.`);
-         case 'auth/operation-not-allowed':
-           console.log(`Error during sign up.`);
-         case 'auth/weak-password':
-           console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
-         default:
-           console.log(error.message);
-       }
-   });
-        
+  async register(email: string, password: string) {
+    console.log("regsiteratons");
+     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
   }
 
 async sendEmailVerification() {

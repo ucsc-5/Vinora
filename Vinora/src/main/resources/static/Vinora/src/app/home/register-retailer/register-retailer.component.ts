@@ -35,6 +35,9 @@ export class RegisterRetailerComponent implements OnInit {
   longitude = 79.861133;
   locationChosen = false;
 
+  message
+
+
   retailer : Observable<RetailerId[]>;
   private retailerCollection: AngularFirestoreCollection<RetailerId>;
 
@@ -73,57 +76,94 @@ export class RegisterRetailerComponent implements OnInit {
     const shopName = this.firstFormGroup.value['shopName'];
     const address = this.secondFormGroup.value['address'];
     const contactNumber = this.secondFormGroup.value['contactNumber'];
-    const state = "0";
+    const state = "1";
     const url ="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
     const latitude = this.longitude
     const longitude = this.longitude
     
     const coord = new firebase.firestore.GeoPoint(latitude,longitude);
 
-    this.authService.register(email,password,this.type).then(
-      response=>{
-        console.log(response);
-        const callable = this.fns.httpsCallable('addRole');
-
+    this.message = this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(res=>{
+      if(res.user.email){
+          
+        const callable = this.fns.httpsCallable('addRole')
         callable({email:email,role:this.type}).subscribe(
-          (response)=>{
-               console.log(response);
-          },
-          ()=>{},
-          ()=>{
-            this.authService.login(email,password).then(()=>{
-            const retailerId = this.afAuth.auth.currentUser.uid;
-    
-            const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
-            // this.retailerCollection.doc(id). set(retailer);
-            // this.companyCollection.doc(uid).set(company1);
-            this.retailerCollection.doc(retailerId).set(retailer).then(
-              res=>{
-                console.log(" Retailer is set "+res);
-              }
-            ).catch(error=>{
-              console.log(" error of seting retailer "+ error);
-            });
-          }
-        )
-       }
-      )
+                (response)=>{
+                     console.log(response);
+                },
+                ()=>{},
+                ()=>{
+                  this.authService.login(email,password).then(x=>{
+                    const retailerId = this.afAuth.auth.currentUser.uid;
+                    const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
+
+                    this.retailerCollection.doc(retailerId).set(retailer).then(
+                                res=>{
+                                  console.log(" Retailer is set "+res);
+                                }
+                              ).catch(error=>{
+                                console.log(" error of seting retailer "+ error);
+                              });
+                  })
+                })
+
+                return ""
+
+      }else{
+       console.log("not done");
       }
-    ).catch(error => {
-           switch (error.code) {
-              case 'auth/email-already-in-use':
-                console.log(`Email address ${email} already in use.`);
-              case 'auth/invalid-email':
-                console.log(`Email address ${email} is invalid.`);
-              case 'auth/operation-not-allowed':
-                console.log(`Error during sign up.`);
-              case 'auth/weak-password':
-                console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
-              default:
-                console.log("this is the default error message "+error.message);
-            }
-        });
-}
+    })
+   .catch(error => {
+        console.log(error.message);
+        this.message=error.message;
+   })
+  }
+   
+
+    // .then(
+    //   response=>{
+    //     console.log(response);
+    //     const callable = this.fns.httpsCallable('addRole');
+
+    //     callable({email:email,role:this.type}).subscribe(
+    //       (response)=>{
+    //            console.log(response);
+    //       },
+    //       ()=>{},
+    //       ()=>{
+    //         this.authService.login(email,password).then(()=>{
+    //         const retailerId = this.afAuth.auth.currentUser.uid;
+    
+    //         const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
+    //         // this.retailerCollection.doc(id). set(retailer);
+    //         // this.companyCollection.doc(uid).set(company1);
+    //         this.retailerCollection.doc(retailerId).set(retailer).then(
+    //           res=>{
+    //             console.log(" Retailer is set "+res);
+    //           }
+    //         ).catch(error=>{
+    //           console.log(" error of seting retailer "+ error);
+    //         });
+    //       }
+    //     )
+    //    }
+    //   )
+    //   }
+    // ).catch(error => {
+    //        switch (error.code) {
+    //           case 'auth/email-already-in-use':
+    //             console.log(`Email address ${email} already in use.`);
+    //           case 'auth/invalid-email':
+    //             console.log(`Email address ${email} is invalid.`);
+    //           case 'auth/operation-not-allowed':
+    //             console.log(`Error during sign up.`);
+    //           case 'auth/weak-password':
+    //             console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
+    //           default:
+    //             console.log("this is the default error message "+error.message);
+    //         }
+    //     });
+// }
       
       
       
@@ -154,6 +194,10 @@ export class RegisterRetailerComponent implements OnInit {
     console.log(this.latitude+" lati");
     console.log(this.longitude+" long");
 
+  }
+
+  retry(){
+    this.router.navigate([],{relativeTo: this.route})
   }
 
 
