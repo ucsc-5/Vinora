@@ -40,7 +40,7 @@ import { StockManagerProfileComponent } from './stock-manager/stock-manager-prof
 import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
 import { CurrentOrdersFromRetailersComponent } from './stock-manager/current-orders-from-retailers/current-orders-from-retailers.component';
 import { ConfirmedOrdersOfRetailersComponent } from './stock-manager/confirmed-orders-of-retailers/confirmed-orders-of-retailers.component';
-
+import { ManagerProfileComponent } from './manager/manager-profile/manager-profile.component';
 
 
 
@@ -84,7 +84,9 @@ const routes: Routes = [
 
   {path: 'manager/:id', component: ManagerComponent, children:[
     {path: '' ,component :ManagerDashboardComponent},
+    
     {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
+    {path: 'myProfile',component : ManagerProfileComponent},
     {path: 'SalesRepresentative' ,component :SalesRepresentativeComponent,children:[
       {path:'registerSalesRepresentative',component:RegisterSalesRepresentativeComponent}
     ]},
