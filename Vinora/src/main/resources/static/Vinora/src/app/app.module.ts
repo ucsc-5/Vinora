@@ -100,6 +100,7 @@ import { StmCrtOrderItemElemetComponent } from './stock-manager/current-orders-f
 import { ConfirmedOrdersOfRetailersComponent } from './stock-manager/confirmed-orders-of-retailers/confirmed-orders-of-retailers.component';
 import { ConOrderElementComponent } from './stock-manager/confirmed-orders-of-retailers/con-order-element/con-order-element.component';
 import { StmConOrderElementComponent } from './stock-manager/confirmed-orders-of-retailers/con-order-element/stm-con-order-element/stm-con-order-element.component';
+import { ManagerProfileComponent } from './manager/manager-profile/manager-profile.component';
 
 
 
@@ -173,7 +174,8 @@ import { StmConOrderElementComponent } from './stock-manager/confirmed-orders-of
     StmCrtOrderItemElemetComponent,
     ConfirmedOrdersOfRetailersComponent,
     ConOrderElementComponent,
-    StmConOrderElementComponent
+    StmConOrderElementComponent,
+    ManagerProfileComponent
    
   
   ], 
