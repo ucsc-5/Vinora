@@ -23,12 +23,24 @@
               <h5 class="card-title">{{retailer.shopName}}</h5>
               <p class="card-text">
                   <p> 
-                      <b>State: </b>{{retailer.state}}<br>
+                      <!-- <b>State: </b>{{retailer.state}}<br> -->
                       <b>email: </b>{{retailer.email}}<br>
                       <b>Address: </b>{{retailer.address}}<br>
                       <b>Contact: </b>{{retailer.contactNumber}}<br>
-                      <b>Key: </b>{{retailer.key}}<br> 
+                      <!-- <b>Key: </b>{{retailer.key}}<br>  -->
                   </p>
+                  <form (ngSubmit)="updateContactnumber(f,retailer)" #f="ngForm">
+             
+                      <mat-form-field class="" style="width: 70%">
+                              <input matInput type="string" placeholder="Edit contact number" name="contactNumber" ngModel>
+                      </mat-form-field>
+
+                   
+            
+         
+          <button mat-raised-button color="primary" type="submit">Save</button>
+  </form>
+
             </div>
           </div>
         </div>

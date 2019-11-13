@@ -4,6 +4,7 @@ import { RetailerService, RetailerId } from 'src/app/service/retailer.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-retailer-profile',
@@ -16,6 +17,7 @@ export class RetailerProfileComponent implements OnInit {
   retailerEmail: string;
   selectedFiles: FileList;
   private basePath = 'retailers';
+  message: any;
 
 
   constructor(private retailerService:RetailerService,private afAuth: AngularFireAuth,private storage:AngularFireStorage) {
@@ -52,4 +54,22 @@ export class RetailerProfileComponent implements OnInit {
 
 } 
 
+updateContactnumber(form:NgForm,retailer:RetailerId){
+
+    
+  const value1=form.value;
+
+this.message = this.retailerService.updatePhoneNumber(retailer.id,value1);
+     
+
+
+
+  console.log(this.message);
+
+
+  // this.StockManagerService.updatePhoneNumber(stockManager.id,{contactNumber:value1});
+
 }
+
+}
+

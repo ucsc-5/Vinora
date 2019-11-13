@@ -138,5 +138,10 @@ getRegisteredCompanies(){
 updateProfilePicture(key: string, value: any): Promise<void>{
   return this.afs.collection('retailers').doc(key).update(value);
 }
+
+updatePhoneNumber(key:string,value:any):Promise<void>
+{
+  return this.afs.collection('retailers').doc(key).update(value);
+}
   
 }
