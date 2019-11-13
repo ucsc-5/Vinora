@@ -8,7 +8,7 @@ import { CompanyService } from '../service/company.service';
 })
 export class AdminComponent implements OnInit {
 
-  opened = false;
+  opened = true;
   constructor(private companyServise:CompanyService) { }
 
   ngOnInit() {

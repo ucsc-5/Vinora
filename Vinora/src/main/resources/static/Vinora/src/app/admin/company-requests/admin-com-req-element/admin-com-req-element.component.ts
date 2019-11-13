@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { CompanyService, Company, CompanyId } from 'src/app/service/company.service';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-admin-com-req-element',
@@ -11,14 +12,22 @@ export class AdminComReqElementComponent implements OnInit {
 
   @Input() company : CompanyId;
 
-  constructor(private companyService: CompanyService) { 
+  constructor(private dialogService:DialogService,private companyService: CompanyService) { 
   }
 
   ngOnInit() {
     // console.log(this.company.key);
-  }    
-    onConfirm(){
-      // this.companyService.updateCompany(this.company.key, {state:"1"})
-      // .catch(err => console.log(err));
-    }
+  }   
+  
+  
+  onConfirm(){
+    const message="Confirm Registration!"
+      this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+        res=>{
+          if(res){
+                  this.companyService.confirmRegistration(this.company.id).catch(err => console.log(err));
+          }
+        })
+
+  }
 }
