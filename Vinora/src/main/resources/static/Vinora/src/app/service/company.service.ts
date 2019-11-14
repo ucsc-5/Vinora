@@ -197,4 +197,8 @@ export class CompanyService {
 
     return message;
   }
+
+  confirmRegistration(key:string){
+    return this.afs.collection('companies').doc(key).update({state:"1"});
+  }
 }
