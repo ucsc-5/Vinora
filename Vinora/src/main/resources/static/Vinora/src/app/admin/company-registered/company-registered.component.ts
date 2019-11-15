@@ -18,7 +18,7 @@ export class CompanyRegisteredComponent implements OnInit {
   ngOnInit() {
     this.companies= this.companyService.getRegisteredCompanies();
     this.companies.subscribe(s=>{
-      console.log(s);
+      console.log(s.length);
     })
   }
 }

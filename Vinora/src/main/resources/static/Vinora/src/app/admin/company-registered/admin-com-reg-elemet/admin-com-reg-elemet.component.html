@@ -1,4 +1,4 @@
-<p> 
+<!-- <p> 
         <b>Company : </b>{{company.companyName}} <br>
         <b>Email : </b>{{company.email}} <br>
         <b>Contact : </b>{{company.contactNumber}} <br>
@@ -7,4 +7,25 @@
     <button class="btn btn-danger" (click)="onReport()">Report</button>
     <hr>
     <br>
-    <br>
+    <br> -->
+
+    <mat-card class="example-card"  style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="{{company.imagePath}}" class="card-img" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{company.companyName}}</h5>
+                  <p class="card-text">
+                      <p> 
+                          <!-- <b>State: </b>{{company.state}}<br> -->
+                          <b>email: </b>{{company.email}}<br>
+                          <b>Address: </b>{{company.address}}<br>
+                          <b>Contact: </b>{{company.contactNumber}}<br>
+                          <!-- <b>Key: </b>{{company.id}}<br> -->
+                      </p>
+                </div>
+              </div>
+            </div>
+          </mat-card >

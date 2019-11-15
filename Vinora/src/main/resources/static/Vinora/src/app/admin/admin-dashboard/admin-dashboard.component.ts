@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyService } from 'src/app/service/company.service';
+import { CompanyService, CompanyId } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -9,19 +10,26 @@ import { Observable } from 'rxjs';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  company: Observable<any[]>
-  requestCount: number;
-  registeredCount: number;
-  constructor(private companyServise:CompanyService) { 
+
+  requestCompanies: Observable<CompanyId[]>;
+  registeredCompanies: Observable<CompanyId[]>;
+  constructor(private companyServise:CompanyService,private router:Router,private route:ActivatedRoute) { 
   }
 
   ngOnInit() {
-    this.companyServise.getRequestedCompanies();
-    this.requestCount = this.companyServise.requestededCompanies.subscribe.length;
-    console.log(this.requestCount+" request Count");
-    this.companyServise.getRegisteredCompanies();
-    this.registeredCount = this.companyServise.registeredCompanies.subscribe.length;
-    console.log(this.registeredCount+" registered Count");
+    this.requestCompanies = this.companyServise.getRequestedCompanies();
+    this.registeredCompanies= this.companyServise.getRegisteredCompanies(); 
   }
+
+  onToRegisteredCompanies(){
+    this.router.navigate(['../','registeredCompanies'],{relativeTo:this.route});
+    console.log("registered");
+    
+  }
+
   
+  onToRequestedCompanies(){
+    this.router.navigate(['../','companyRequests'],{relativeTo:this.route});
+  }
+    
 }

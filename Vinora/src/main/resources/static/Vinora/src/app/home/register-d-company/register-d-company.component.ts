@@ -39,7 +39,7 @@ export class RegisterDCompanyComponent implements OnInit {
     this.companyCollection = afs.collection<Company>('companies');
  
     this.companies = this.companyCollection.valueChanges();
-    this.companyId = this.afAuth.auth.currentUser.uid;
+    // this.companyId = this.afAuth.auth.currentUser.uid;
   }
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({

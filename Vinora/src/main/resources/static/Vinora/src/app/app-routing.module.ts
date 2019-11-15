@@ -110,7 +110,7 @@ const routes: Routes = [
   // },
 
   {path: 'admin/:id', component: AdminComponent, children:[
-    { path: '', component: AdminDashboardComponent},
+    { path: 'dashboard', component: AdminDashboardComponent},
     { path: 'companyRequests', component: CompanyRequestsComponent},
     { path: 'registeredCompanies', component:CompanyRegisteredComponent },
     { path: 'reports', component: AdminReportsComponent}

@@ -1,3 +1,22 @@
 
-<app-admin-com-req-element *ngFor="let company of companies | async" [company]="company"></app-admin-com-req-element>
+ <div class="row" *ngIf="companies | async; let companies; else loadingReg">
+     <app-admin-com-req-element class="col col-3" *ngFor="let company of companies" [company]="company"></app-admin-com-req-element>
+
+
+     <div *ngIf="companies.length===0">
+            <div class="alert alert-primary" role="alert">
+                    No requestes Companies&hellip;
+            </div>
+    </div>  
+
+ </div>
+
+ <ng-template #loadingReg>
+        <div class="alert alert-primary" role="alert">
+                No Registration requested Companies&hellip;
+        </div>
+                       
+
+</ng-template>
+
 

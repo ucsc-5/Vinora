@@ -1,14 +1,45 @@
 <ul class="list-group">
-    <a routerLink="companyRequests">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Company Requests
-          <span class="badge badge-primary badge-pill">{{requstCount}}</span>
-        </li>
-    </a>
-    <a routerLink="registeredCompanies">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Registered Companies
-            <span class="badge badge-primary badge-pill">{{registeredCount}}</span>
-        </li>
-    </a>
+        <div class="row" *ngIf="registeredCompanies | async; let registeredCompanies; else loadingReg">
+
+                <button (click)="onToRegisteredCompanies()" class="list-group-item list-group-item-action">
+                    Regsitered Companies
+                    <span class="badge badge-primary badge-pill">{{registeredCompanies.length}}</span>
+                </button>
+
+                <!-- <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Regsitered Companies
+                          <span class="badge badge-primary badge-pill">{{registeredCompanies.length}}</span>
+                        </li>
+                </ul> -->
+        </div>
+        <ng-template #loadingReg>
+            
+                <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                No registered Companies&hellip;
+                        </li>
+                </ul>
+        </ng-template>
+
+
+
+
+
+
+
+
+        <div class="row" *ngIf="requestCompanies | async; let requestCompanies; else loadingReq">
+                <button (click)="onToRequestedCompanies()" class="list-group-item list-group-item-action">
+                        Requested Companies
+                        <span class="badge badge-primary badge-pill">{{requestCompanies.length}}</span>
+                </button>
+            </div>
+        <ng-template #loadingReq>
+                <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            No requestings from  Companies&hellip;
+                        </li>
+                </ul>
+                </ng-template>
   </ul>

@@ -72,10 +72,7 @@ export class CompanyService {
   vehicles: Observable<VehicleId[]>;
 
   private allCompanyCollection: AngularFirestoreDocument<Company> = null
-  registeredCompanies: Observable<CompanyId[]>
   
-  
-  requestededCompanies: Observable<CompanyId[]>
   
   private registeredRetailersCollection: AngularFirestoreCollection<RetailerEmailTokenId>;
   registeredRetailersKey: Observable<RetailerEmailTokenId[]>
@@ -87,7 +84,7 @@ export class CompanyService {
 
   // for use of admin  retailer
   getRegisteredCompanies(){
-    this.registeredCompanies = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(
+    const registeredCompanies: Observable<CompanyId[]> = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;
@@ -95,12 +92,12 @@ export class CompanyService {
       }))
     );
 
-    return this.registeredCompanies;
+    return registeredCompanies;
   }
 
   //for use of admin
   getRequestedCompanies(){
-    this.requestededCompanies =this.afs.collection(this.dbPath , ref => ref.where('state', '==',"0")).snapshotChanges().pipe(
+    const requestededCompanies: Observable<CompanyId[]> =this.afs.collection(this.dbPath , ref => ref.where('state', '==',"0")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;
@@ -108,7 +105,7 @@ export class CompanyService {
       }))
     );
   
-    return this.requestededCompanies;
+    return requestededCompanies;
   }
 
 
