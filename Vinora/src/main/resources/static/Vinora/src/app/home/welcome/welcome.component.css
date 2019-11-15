@@ -1,5 +1,5 @@
 
-.image{
+/* .image{
     height:40em;
     background-size:cover;
     width:auto;
@@ -15,6 +15,88 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-right: -50%;
+  margin-right: -50%; 
   transform: translate(-50%, -50%)
+} */
+.main{
+  height: 100%;
+  widows: 100%;
+}
+
+#home{
+  background: url(../../../assets/images/katka-pavlickova-0L5gynfR6r4-unsplash.jpg) no-repeat center center fixed;
+  display: table;
+  height: 40em;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+
+}
+.landing-text{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.landing-text h1 {
+  font-size: 500%;
+  font-weight: 700;
+}
+
+.padding{
+  padding: 80px 0;
+
+}
+
+.padding img{
+  width: 100%;
+}
+
+#fixed{
+  background: url(../../../assets/images/7-must-have-features-in-on-demand-food-delivery-apps-and-online-ordering-system.jpg) no-repeat center center fixed;
+  display: table;
+  height: 40em;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+
+
+}
+
+footer{
+  width: 100%;
+  background-color: darkblue;
+  padding: 5% 5% 10% 5%;
+  color: white;
+}
+
+.fa {
+  padding: 15px;
+  font-size: 25px;
+  color: white;
+
+}
+
+.fa:hover {
+  color: #d5d5d5;
+  text-decoration: none;
+}
+
+.icon{
+  max-width: 200px;
+}
+
+@media(max-width: 768px){
+  .landing-text h1{
+    font-size: 300%;
+  }
+  .fa{
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  .icon{
+    padding-top: 5%;
+    max-width: 100px;
+  }
 }
