@@ -9,47 +9,56 @@
           <h3 style="text-align: center;padding-top: 1%;font-family: 'Patua One', cursive;height: 100px;">Register with us</h3>
           <mat-horizontal-stepper linear #stepper>
               <mat-step [stepControl]="firstFormGroup">
-                <form [formGroup]="firstFormGroup">
+
+                <!-- first form group -->
+                <form [formGroup]="firstFormGroup" #f="ngForm">
                   <ng-template matStepLabel>Fill out Company Name</ng-template>
+
                               <mat-form-field class="example-full-width">
                                 <input matInput type="text" placeholder="Shop Name" formControlName="shopName" name="shopName"  required >
                               </mat-form-field>
 
-                              
-                              <!-- <label>
-                              <input type="file" (change)="selectFile($event)">
-                              </label> -->
-
-
                               <mat-form-field class="example-full-width">
-                                  <input formControlName="password" name="password"   minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" > 
+                                  <input formControlName="password" name="password"   minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required> 
                                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                   </button>
                               </mat-form-field>
+
+                              <mat-form-field class="example-full-width">
+                                  <input formControlName="confirmPassword" name="confirmPassword" appEqualValidator="password"  minlength="6" matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'" required> 
+                                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>
+                                  <span *ngIf="confirmPassword?.errors?.notEqual">Password and Confirm Password doesn't match</span>
+                              </mat-form-field>
                   <div>
-                    <button mat-button  matStepperNext>Next</button>
+                    <button mat-button  matStepperNext [disabled]="!f.valid">Next</button>
                   </div>
                 </form>
+
+
               </mat-step>
               <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
-                <form [formGroup]="secondFormGroup">
+
+                <!-- second form group -->
+                <form [formGroup]="secondFormGroup" #g="ngForm">
                   <ng-template matStepLabel>Fill out company contact Details</ng-template>
+
                   <mat-form-field class="example-full-width">
                       <input  formControlName="email" matInput type="email" placeholder="Enter your email"  name="email" required >
                       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                      
-              </mat-form-field>
+                  </mat-form-field>
               
               
-                <mat-form-field class="example-full-width">
-        
-                <textarea formControlName="address" matInput placeholder="Your Address" name="address" required  ></textarea>
-                             
-                </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                     <textarea formControlName="address" matInput placeholder="Your Address" name="address" required  ></textarea>
+                  </mat-form-field>
 
                 
-                
+                  
+                     <p>Select the shop location</p><br>
+                  
                   <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChoseLocation($event)">
                     <agm-marker 
                     [latitude]="latitude" 
@@ -67,9 +76,11 @@
                   
                   <div>
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                    <button mat-button matStepperNext [disabled]="!g.valid">Next</button>
                   </div>
                 </form>
+
+
               </mat-step>
               <mat-step>
                 <ng-template matStepLabel>Register</ng-template>

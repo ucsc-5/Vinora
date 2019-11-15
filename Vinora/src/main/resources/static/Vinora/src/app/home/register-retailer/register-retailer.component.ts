@@ -59,7 +59,9 @@ export class RegisterRetailerComponent implements OnInit {
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       shopName: ['', Validators.required],
-      password: ['', [Validators.required,Validators.minLength(6)]]  
+      password: ['', [Validators.required,Validators.minLength(6)]] ,
+      confirmPassword: ['', [Validators.required,Validators.minLength(6)]]  
+
     });
     
     this.secondFormGroup = this._formBuilder.group({
@@ -71,8 +73,13 @@ export class RegisterRetailerComponent implements OnInit {
   }
   
   async register(){
+
+    console.log(this.secondFormGroup);
+    console.log(this.firstFormGroup);
+    
     const email : string = this.secondFormGroup.value['email'];
     const password = this.firstFormGroup.value['password'];
+    const confirmPassword = this.firstFormGroup.value['confirmPassword'];
     const shopName = this.firstFormGroup.value['shopName'];
     const address = this.secondFormGroup.value['address'];
     const contactNumber = this.secondFormGroup.value['contactNumber'];
