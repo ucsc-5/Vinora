@@ -5,7 +5,9 @@
       <h3 style="text-align: center;padding-top: 1%;font-family: 'Patua One', cursive;height: 100px;">Register your Company</h3>
       <mat-horizontal-stepper linear #stepper>
           <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
+
+            <!-- first form group -->
+            <form [formGroup]="firstFormGroup" #f="ngForm">
               <ng-template matStepLabel>Fill out Company Details</ng-template>
               <mat-form-field class="example-full-width">
                             <input matInput type="text" placeholder="Your Company" formControlName="companyName" required name="shopName" ngModel>
@@ -31,20 +33,30 @@
                               </button>
                              
                           </mat-form-field>
+
+                          <mat-form-field class="example-full-width">
+                              <input formControlName="confirmPassword" minlength="6" appEqualValidator="password" matInput placeholder="Confirm password" required [type]="hide ? 'password' : 'text'"  value="" name="confirmPassword" ngModel>
+                              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                             
+                          </mat-form-field>
   
               <div>
-                <button mat-button  matStepperNext>Next</button>
+                <button mat-button  matStepperNext [disabled]="!f.valid">Next</button>
               </div>
             </form>
           </mat-step>
           <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
-            <form [formGroup]="secondFormGroup">
+
+            <!-- second form group -->
+            <form [formGroup]="secondFormGroup" #g="ngForm">
               <ng-template matStepLabel>Fill out Company Manager Details</ng-template>
               <mat-form-field class="example-full-width">
                   <input matInput type="text" placeholder="Manager" formControlName="managerName" required name="shopName" ngModel>
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
-                    <input matInput type="text" minlength="10" maxlength="12" placeholder="NIC" formControlName="managerNic" required name="shopName" ngModel>
+                    <input matInput type="number" minlength="9" maxlength="9" placeholder="NIC" formControlName="managerNic" required name="managerNic" ngModel>
                   </mat-form-field>
               <mat-form-field class="example-full-width">
                   <input formControlName="email" matInput type="email" placeholder="Enter your email"  name="email" ngModel required>
@@ -60,7 +72,7 @@
               
               <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext [disabled]="!g.valid">Next</button>
               </div>
             </form>
           </mat-step>

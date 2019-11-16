@@ -19,7 +19,7 @@
                               </mat-form-field>
 
                               <mat-form-field class="example-full-width">
-                                  <input formControlName="password" name="password"   minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required> 
+                                  <input formControlName="password" name="password"   minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" value="" ngModel required> 
                                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                   </button>

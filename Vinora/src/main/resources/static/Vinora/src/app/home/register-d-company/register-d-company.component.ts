@@ -45,13 +45,14 @@ export class RegisterDCompanyComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       companyName: ['', Validators.required],
       address: ['', Validators.required],
-      password: ['', [Validators.required,Validators.minLength(6)]]  
+      password: ['', [Validators.required,Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required,Validators.minLength(6)]]  
     });
     
     this.secondFormGroup = this._formBuilder.group({
       email: ['', [Validators.required,Validators.email]],
       managerName: ['', Validators.required],
-      managerNic: ['', Validators.required],
+      managerNic: ['', Validators.required,Validators.minLength(9),Validators.maxLength(9)],
       tel: ['', Validators.required],
     });
 
@@ -84,7 +85,7 @@ export class RegisterDCompanyComponent implements OnInit {
                     const contactNumber:string=this.secondFormGroup.value['tel'];
                     const email:string=this.secondFormGroup.value['email'];
                     const managerName:string=this.secondFormGroup.value['managerName'];
-                    const managerNic:string=this.secondFormGroup.value['managerNic'];
+                    const managerNic:number=this.secondFormGroup.value['managerNic'];
                     const state:string="1";
                     const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
                     const coord = new firebase.firestore.GeoPoint(this.latitude,this.longitude);

@@ -26,6 +26,7 @@ export class RegisterRetailerComponent implements OnInit {
   selectedFiles: FileList;
   state = 'new';
   type = 'retailer';
+  hide = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
