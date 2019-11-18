@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
 
 
 @Injectable({
@@ -23,4 +24,16 @@ export class DialogService {
 
    }) 
   }
+
+  openErrorDialog(message){
+    return this.dialog.open(ErrorDialogComponent,{
+      width: '390px',
+      disableClose: true,
+      panelClass: 'confirm-dialog-container',
+      data:{
+        message: message
+      }
+    }) 
+   }
+
 }

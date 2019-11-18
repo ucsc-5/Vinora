@@ -3,18 +3,18 @@
             <mat-card class="example-card"  style="max-width: 540px;"  *ngFor="let company of company">
                 <div class="row no-gutters">
                   <div class="col-md-4">
-                    <img src="..." class="card-img" alt="...">
+                    <img src="{{company.imagePath}}" class="card-img" alt="...">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title">{{company.companyName}}</h5>
                       <p class="card-text">
                           <p> 
-                              <b>State: </b>{{company.state}}<br>
+                              <!-- <b>State: </b>{{company.state}}<br> -->
                               <b>email: </b>{{company.email}}<br>
                               <b>Address: </b>{{company.address}}<br>
                               <b>Contact: </b>{{company.contactNumber}}<br>
-                              <b>Key: </b>{{company.id}}<br>
+                              <!-- <b>Key: </b>{{company.id}}<br> -->
                           </p>
                     </div>
                   </div>

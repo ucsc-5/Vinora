@@ -102,6 +102,7 @@ import { ConOrderElementComponent } from './stock-manager/confirmed-orders-of-re
 import { StmConOrderElementComponent } from './stock-manager/confirmed-orders-of-retailers/con-order-element/stm-con-order-element/stm-con-order-element.component';
 import { ManagerProfileComponent } from './manager/manager-profile/manager-profile.component';
 import { EqualValidatorDirective } from './shared/equal-validator.directive';
+import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 
 
 
@@ -177,7 +178,8 @@ import { EqualValidatorDirective } from './shared/equal-validator.directive';
     ConOrderElementComponent,
     StmConOrderElementComponent,
     ManagerProfileComponent,
-    EqualValidatorDirective
+    EqualValidatorDirective,
+    ErrorDialogComponent
    
   
   ], 

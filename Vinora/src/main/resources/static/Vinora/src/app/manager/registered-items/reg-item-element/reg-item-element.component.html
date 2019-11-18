@@ -106,7 +106,9 @@
                     <button class="btn"  
                             (click)="onRemove()"
                             data-toggle="tooltip"
-                            title="Remove Item" > 
+                            title="Remove Item" 
+                            [disabled]="allowRemove"
+                            > 
                 
                             <i class="material-icons icon-red">
                                 remove_circle_outline

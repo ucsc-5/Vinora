@@ -16,12 +16,18 @@ export class RegItemElementComponent implements OnInit {
 
   message: any;
 
+  allowRemove: boolean;
+
   constructor(private dialogService:DialogService, private itemService:ItemService, private afAuth: AngularFireAuth) {
- 
+      
   }
 
   ngOnInit() {
-
+    if(this.item.quantity>0){
+      this.allowRemove = true; 
+     } else{
+       this.allowRemove = false;
+     }
   }
 
   onRemove(){
@@ -44,7 +50,11 @@ export class RegItemElementComponent implements OnInit {
                 )
 
     }else{
-      return "You can't delete this item ";
+      // const message=" Are you sure !"
+      // this.dialogService.openErrorDialog(message).afterClosed().subscribe(
+      //   res=>{
+      //   })
+      // return "You can't delete this item ";
     }    
   }
 
