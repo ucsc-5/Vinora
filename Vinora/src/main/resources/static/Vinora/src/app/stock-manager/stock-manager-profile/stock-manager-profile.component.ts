@@ -31,7 +31,7 @@ export class StockManagerProfileComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.stockManager= this.StockManagerService.getStockManagerByEmail(this.stockManagerEmail);
+    this.stockManager= this.StockManagerService.getStockManagerByEmail(this.stockManagerEmail); 
   }
 
   

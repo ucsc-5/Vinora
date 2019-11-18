@@ -5,7 +5,7 @@
     <mat-card class="example-card" *ngFor="let manager of manager | async">
         <div class="row no-gutters">
           <div class="col-md-4">
-              <img mat-card-image src="{{manager.imagePath}}" alt="Photo of the Retailer">
+              <img mat-card-image src="{{manager.imagePath}}" alt="Photo of the Manager">
              
               <!-- <label>
                 <input type="file" (change)="selectFile($event)">
@@ -20,7 +20,7 @@
                 </label>
 
                 <button type="submit" class="btn btn-success">Upload Image</button>
-
+  
                 
                 </form> 
           </div>

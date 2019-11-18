@@ -77,10 +77,10 @@ export class CompanyService {
   private registeredRetailersCollection: AngularFirestoreCollection<RetailerEmailTokenId>;
   registeredRetailersKey: Observable<RetailerEmailTokenId[]>
 
- 
+  
   constructor(private readonly afs: AngularFirestore,private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService,private storage: AngularFireStorage) {
     
-  }
+  }   
 
   // for use of admin  retailer
   getRegisteredCompanies(){
@@ -198,4 +198,16 @@ export class CompanyService {
   confirmRegistration(key:string){
     return this.afs.collection('companies').doc(key).update({state:"1"});
   }
+
+  updateProfilePicture(key: string, value: any): Promise<void> {
+
+    console.log(" updateProfilePicture");
+    return this.afs.collection('companies').doc(key).update(value);
+  }  
+  updatePhoneNumber(key:string,value:any):Promise<void>
+{
+  console.log(" updatePhoneNumber");
+  return this.afs.collection('companies').doc(key).update(value);
 }
+}
+
