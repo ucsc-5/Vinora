@@ -25,14 +25,16 @@ export class RegItemElementComponent implements OnInit {
   }
 
   onRemove(){
-    const message=" Are you sure !"
-    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
-      res=>{
-        if(res){ 
+    if(this.item.quantity==0){
+      
+      const message=" Are you sure !"
+      this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+        res=>{
+          if(res){ 
                 
               this.message = this.itemService.updateItem(this.item.id,{state: "deleted"}).then(
                 x=>{
-                  return "done";
+                  return "Deleted";
                 }
               ).catch(
                 error=>{error}
@@ -40,6 +42,10 @@ export class RegItemElementComponent implements OnInit {
                     }
                   }
                 )
+
+    }else{
+      return "You can't delete this item ";
+    }    
   }
 
   OnUpdateUnitPrice(form:NgForm) {

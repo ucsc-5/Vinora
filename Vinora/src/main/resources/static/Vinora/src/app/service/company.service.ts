@@ -26,20 +26,6 @@ export interface Company{
 
 export interface CompanyId extends Company{ id: string}
 
-// export interface Item{
-
-//   itemName: string;
-//   brand: string;
-//   quantity: number;
-//   unitPrice: number;
-//   itemImagePath: string;
-//   description: string;
-//   category: string;
-//   state: string;
-// }
-// export interface ItemsId extends Item { id: string; }
-
-
 export interface Vehicle{
   number:string;
   model:string;
