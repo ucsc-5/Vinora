@@ -13,7 +13,7 @@ import { Item, ItemId } from './item.service';
 
 export interface Company{
   managerName: string;
-  managerNic: number;
+  managerNic: string;
   companyName: string;
   email: string;
   address: string;
