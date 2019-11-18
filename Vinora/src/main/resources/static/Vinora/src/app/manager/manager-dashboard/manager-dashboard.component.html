@@ -20,6 +20,10 @@
                   </div>
                 </div>
               </mat-card >
-         <div *ngIf="company.length === 0">Permision is not granted yet!...</div>
+         <div *ngIf="company.length === 0">
+            <div class="alert alert-danger" role="alert">
+                Permision is not granted yet!...
+              </div> 
+          </div>
 </div>
             <ng-template #loading>Loading&hellip;</ng-template>

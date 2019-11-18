@@ -86,7 +86,7 @@ export class RegisterDCompanyComponent implements OnInit {
                     const email:string=this.secondFormGroup.value['email'];
                     const managerName:string=this.secondFormGroup.value['managerName'];
                     const managerNic:string=this.secondFormGroup.value['managerNic'];
-                    const state:string="1";
+                    const state:string="0";
                     const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
                     const coord = new firebase.firestore.GeoPoint(this.latitude,this.longitude);
                     const company:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId,coord}
