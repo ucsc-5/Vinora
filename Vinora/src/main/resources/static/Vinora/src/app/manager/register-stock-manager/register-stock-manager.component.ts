@@ -4,7 +4,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { StockManagerId, StockManager } from 'src/app/service/stock-manager.service';
+import { StockManagerId, StockManager, StockManagerService } from 'src/app/service/stock-manager.service';
 import { DialogService } from 'src/app/service/dialog.service';
 
 
@@ -24,7 +24,7 @@ export class RegisterStockManagerComponent implements OnInit {
   type = 'stockManager';
   companyId:string;
 
-  constructor(private dialogService:DialogService,private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions) { 
+  constructor(private stockManagerService:StockManagerService,private dialogService:DialogService,private afAuth: AngularFireAuth,private readonly afs: AngularFirestore,private fns: AngularFireFunctions) { 
     this.companyId=this.afAuth.auth.currentUser.uid;
     // this.stockManagerCollection = afs.collection<StockManager>(`companies/${companyId}/stockManagers`);  // for the chamods code
     this.stockManagerCollection = afs.collection<StockManager>('stockManagers');
@@ -32,6 +32,11 @@ export class RegisterStockManagerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.stockManagers = this.stockManagerService.getStockManagerByCompanyId(this.companyId);
+    this.stockManagers.subscribe(x=>{
+      console.log(x);
+      
+    })
   }
   getErrorMessage() {
     return this.email.hasError('required') ? 'You must enter a value' :

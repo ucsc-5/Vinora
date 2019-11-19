@@ -38,6 +38,14 @@
             </div>
 
         </div>
-        <div class="col-4"></div>
+        <div class="col-4">
+
+                <div class="row" *ngIf="stockManagers | async; let stockManagers; else loading">
+                    <app-display-stock-manager *ngFor="let stockManager of stockManagers" [stockManager]="stockManager"></app-display-stock-manager>
+                    <div *ngIf="stockManagers.length === 0">No stock managers registered</div>
+                </div>
+                <ng-template #loading>Loading&hellip;</ng-template>
+        
+        </div>
     </div>
 </div>

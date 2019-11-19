@@ -44,6 +44,18 @@ export class StockManagerService {
     return this.stockManager;
   }
 
+  getStockManagerByCompanyId(companyId:string){
+    const  stockManager  = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as StockManager;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return stockManager;
+
+  }
+
   
   updateProfilePicture(key: string, value: any): Promise<void> {
     return this.afs.collection('stockManagers').doc(key).update(value);
@@ -52,4 +64,6 @@ export class StockManagerService {
 {
   return this.afs.collection('stockManagers').doc(key).update(value);
 }
+
+
 }
