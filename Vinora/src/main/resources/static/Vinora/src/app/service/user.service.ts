@@ -4,7 +4,6 @@ import { LoginUser } from './login-user';
 import { of as observableOf, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, switchMap } from 'rxjs/operators';
-// import { item } from './items';
 
 
  
@@ -24,16 +23,7 @@ export class UserService {
           }
         }),
   );
-  // isAdmin:Observable<boolean> = this.uid.pipe(
-  //   switchMap(uid => {
-  //     if(!uid){
-  //       return observableOf(false);
-  //     }else{
-  //       return this.db.object<boolean>('/users/'+uid).valueChanges();
-  //     }
-  //   })
-    
-  // );
+
  
   userRef: AngularFireList<any> = null;
  

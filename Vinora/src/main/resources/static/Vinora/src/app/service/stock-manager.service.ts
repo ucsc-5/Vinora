@@ -12,10 +12,15 @@ export interface StockManager{
   state:string;
   companyId:string;
   imagePath: string;
+  uid: string
 }
 
 export interface StockManagerId extends StockManager{
   id: string;
+}
+
+export interface RemovedStockManager extends StockManager{
+  reason:string
 }
 
 @Injectable({
@@ -44,8 +49,8 @@ export class StockManagerService {
     return this.stockManager;
   }
 
-  getStockManagerByCompanyId(companyId:string){
-    const  stockManager  = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId)).snapshotChanges().pipe(
+  getActiveStockManagerByCompanyId(companyId:string){
+    const  stockManager  = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==','active') ).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as StockManager;
         const id = a.payload.doc.id;
@@ -53,7 +58,18 @@ export class StockManagerService {
       }))
     );
     return stockManager;
+  }
 
+
+  getDeleteStockManagerByCompanyId(companyId:string){
+    const  stockManager  = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==','deleted') ).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as RemovedStockManager;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return stockManager;
   }
 
   
@@ -66,4 +82,13 @@ export class StockManagerService {
 }
 
 
+  removeStockManger(key:string, value: any):Promise<void>{
+
+    return this.afs.collection('stockManagers').doc(key).update(value);
+  // this.afs.collection('stockManagers').doc(`${key}`).delete().then(function() {
+  //     console.log("Document successfully deleted!");
+  // }).catch(function(error) {
+  //     console.error("Error removing document: ", error);
+  // });
+  }
 }

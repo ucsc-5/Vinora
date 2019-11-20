@@ -91,7 +91,7 @@ export class RegisterRetailerComponent implements OnInit {
     
     const coord = new firebase.firestore.GeoPoint(latitude,longitude);
 
-    this.message = this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(res=>{
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(res=>{
       if(res.user.email){
           
         const callable = this.fns.httpsCallable('addRole')

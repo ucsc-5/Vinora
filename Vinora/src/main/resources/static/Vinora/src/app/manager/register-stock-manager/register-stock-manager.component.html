@@ -1,42 +1,92 @@
-<div class="container">
+
+    
+    
+    
     <div class="row">
-        <div class="col-3"></div>
-        <div class="col-5 example-container">
+        <div class="col-8" style="padding-left: 10%;">
+
+                <form class="example-form" [formGroup]="registerForm" >
+                    
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="Full Name" 
+                            formControlName="fullName"
+                            >
+
+                            <mat-error *ngIf="!registerForm.get('fullName').valid && registerForm.get('fullName').touched">
+                                    Please enter a name here!
+                            </mat-error>
+
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-full-width">
+                        <textarea 
+                            formControlName="address"  
+                            matInput 
+                            placeholder="Address">
+                        </textarea>
+
+                        <mat-error *ngIf="!registerForm.get('address').valid && registerForm.get('address').touched">
+                                Please enter your address here
+                        </mat-error>
+
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            formControlName="nic" 
+                            matInput 
+                            placeholder="NIC" 
+                            >
+
+                            <mat-error *ngIf="!registerForm.get('nic').valid && registerForm.get('nic').touched">
+                                    Please enter a valid NIC number!
+                            </mat-error>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="Email" 
+                            formControlName="email" 
+                            >
+                            <mat-error *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">
+                                    Please enter a valid email address
+                            </mat-error>
+                    </mat-form-field>
+                    
+                   
+                    <mat-form-field class="example-full-width">
+                        <span matPrefix>+94 &nbsp;</span>
+                        <input 
+                            type="tel"
+                            formControlName="contactNumber"
+                            matInput 
+                            placeholder="Mobile Number">
+
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                        
+                        <mat-error *ngIf="!registerForm.get('contactNumber').valid && registerForm.get('contactNumber').touched">
+                                    Please enter a valid contact number here!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <p style="text-align: center; color: red;"> {{message}}</p><br>
+                    
+                </form>
+                    <div class="row">
+                        
+                        <div class="col">
+                            <button  mat-raised-button (click)="onReset()">Reset</button> 
+                        </div>
+                        
+                        <div class="col">
+                            <button mat-raised-button color="primary" [disabled]="!valid" (click)="register()">Register</button>
+                        </div>
+                        
+                    </div>
             
-            <mat-form-field>
-                <input matInput placeholder="Full Name" [formControl]="fullName" required>
-            </mat-form-field>
-            
-            <mat-form-field>
-                <textarea [formControl]="address" matInput placeholder="Address"></textarea>
-            </mat-form-field>
-            
-            <mat-form-field>
-                <input [formControl]="nic" matInput placeholder="NIC" required>
-            </mat-form-field>
-            
-            <mat-form-field>
-                <input matInput placeholder="Email" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-
-
-            <mat-form-field>
-                <input [formControl]="contactNumber" matInput placeholder="Mobile Number" required>
-            </mat-form-field>
-            
-            <div class="row">
-
-                <div class="col">
-                    <button type="reset" mat-raised-button>Reset</button> 
-                </div>
-
-                <div class="col">
-                    <button (click)="register()" mat-raised-button color="primary">Register</button>
-                </div>
-
-            </div>
-
         </div>
         <div class="col-4">
 
@@ -48,4 +98,4 @@
         
         </div>
     </div>
-</div>
+

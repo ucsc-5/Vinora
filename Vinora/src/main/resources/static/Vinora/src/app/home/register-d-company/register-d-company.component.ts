@@ -69,7 +69,7 @@ export class RegisterDCompanyComponent implements OnInit {
     const email = this.secondFormGroup.value['email'];
     const password = this.firstFormGroup.value['password'];
 
-    this.message = this.afAuth.auth.createUserWithEmailAndPassword(email,password).then(res=>{
+    this.afAuth.auth.createUserWithEmailAndPassword(email,password).then(res=>{
       if(res.user.email){
         const callable = this.fns.httpsCallable('addRole')  //this is a firebase function deployed
         callable({email:email,role:this.type}).subscribe(
