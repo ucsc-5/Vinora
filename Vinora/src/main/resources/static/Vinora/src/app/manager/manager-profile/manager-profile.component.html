@@ -54,11 +54,37 @@
                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                </button>
      
-                               <mat-error *ngIf="!resetPasswordForm.get('password').valid && resetPasswordForm.get('password').touched">
+                                <mat-error *ngIf="resetPasswordForm.get('password').touched">
                                    Please enter a valid Password
-                               </mat-error>
+                                </mat-error>
+
+                                <mat-error  *ngIf="resetPasswordForm.controls['password'].hasError('hasNumber')">
+                                    Must have at least 1 number!
+                                </mat-error>
+
+                                <mat-error  *ngIf="resetPasswordForm.controls['password'].hasError('hasCapitalCase')">
+                                    Must contain at least 1 in Capital Case!
+                                </mat-error>
+
+                                <mat-error  *ngIf="resetPasswordForm.controls['password'].hasError('hasSmallCase')">
+                                    Must contain at least 1 Letter in Small Case!
+                                </mat-error>
+
+                                <!-- <mat-error  *ngIf="resetPasswordForm.controls['password'].hasError('hasSpecialCharacters')">
+                                    Must contain at least 1 Special Character (!@#$...)!
+                                </mat-error> -->
+
+                                <mat-error  *ngIf="resetPasswordForm.controls['password'].hasError('minlength')">
+                                    Must be at least 6 characters!
+                                </mat-error>
+
+                               
      
                            </mat-form-field>
+
+                           
+
+                           <br>
      
                            <mat-form-field class="example-full-width">
                                <input formControlName="confirmPassword" name="confirmPassword" appEqualValidator="password"  matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'" > 
@@ -70,7 +96,6 @@
      
                           
                                <button mat-raised-button color="primary" [disabled]="!valid" (click)="onResetPassword()">Reset Password</button>
-                           
                  </form>
            </div>
 

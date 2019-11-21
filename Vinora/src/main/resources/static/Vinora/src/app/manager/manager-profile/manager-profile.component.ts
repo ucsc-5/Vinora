@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { NgForm, FormControl, Validators, FormGroup } from '@angular/forms';
 import { DialogService } from 'src/app/service/dialog.service';
+import { CustomPasswordValidator } from 'src/app/shared/custom-password-validator';
 
 @Component({
   selector: 'app-manager-profile',
@@ -38,7 +39,15 @@ export class ManagerProfileComponent implements OnInit {
     this.manager= this.ManagerService.getCompanyByEmail(this.managerEmail);
     
     this.resetPasswordForm = new FormGroup({
-      'password': new FormControl(null,[Validators.required,Validators.minLength(6)]),
+      'password': new FormControl(null,
+        [ Validators.required,Validators.minLength(6),
+          CustomPasswordValidator.patternValidator(/\d/, { hasNumber: true }),
+          CustomPasswordValidator.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+          CustomPasswordValidator.patternValidator(/[a-z]/, { hasSmallCase: true }),
+          // CustomPasswordValidator.patternValidator(/[!@#$%^&*()_+-=[\]{};':"|,.<>?]/,{ hasSpecialCharacters: true }),
+          // CustomPasswordValidator.patternValidator(/[ [!@#$%^&*()_+-=[]{};':"|,.<>/?(<mailto:!@#$%^&*()_+-=[]{};':"|,.<>/?>)]/, { hasSpecialCharacters: true }),
+          // CustomValidators.patternValidator(/[ [!@#$%^&*()_+-=[]{};':"|,.<>/?]/](<mailto:!@#$%^&*()_+-=[]{};':"|,.<>/?]/>), { hasSpecialCharacters: true }),   
+    ]),
       'confirmPassword': new FormControl(null,[Validators.required,Validators.minLength(6)])
     });
 
@@ -94,6 +103,7 @@ export class ManagerProfileComponent implements OnInit {
   onResetPassword(){
     console.log(this.resetPasswordForm.value.password);
     this.afAuth.auth.currentUser.updatePassword(this.resetPasswordForm.value.password);
+
   }
 
 
