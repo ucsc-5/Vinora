@@ -1,68 +1,85 @@
-<!-- <p>manager-profile works!</p> -->
-
-<div class="row">
-
+<div class="col" style="padding-left: 20%;">
     <mat-card class="example-card" *ngFor="let manager of manager | async">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-              <img  src="{{manager.imagePath}}" width="100px" height="200px" alt="Photo of the Manager">
-             
-              <!-- <label>
-                <input type="file" (change)="selectFile($event)">
-              </label> -->
-              <!-- <button  onclick="onAddImage()">Upload Image</button> -->
-              <form class="example-form" (ngSubmit)="onAddImage(manager)" #f="ngForm">
+            <div >
+                <img  src="{{manager.imagePath}}" width="200px" height="180px" alt="Photo of the Manager">
+                  <form class="example-form" (ngSubmit)="onAddImage(manager)" #f="ngForm">
+              
+                    <label>
+                            <input type="file" (change)="selectFile($event)">
+                            
+                    </label>
 
-           
-                <label>
-                        <input type="file" (change)="selectFile($event)">
-                        <!-- <input type="file" (change)="uploadFile($event)"> -->
-                </label>
-
-                <button type="submit" class="btn btn-success">Upload Image</button>
-  
-                
-                </form> 
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{manager.fullName}}</h5>
-              <p class="card-text">
-                  
-                      <!-- <b>State: </b>{{stockManager.state}}<br> -->
-                      <b>email: </b>{{manager.email}}<br>
-                      <b>Address: </b>{{manager.address}}<br>
-                      <b>Contact: </b>{{manager.contactNumber}}  
-                    
-                      <br>
-                    
+                    <button type="submit" class="btn btn-success">Upload Image</button>
                       
-                  </p>
-
-                  <!-- <form class="example-form" (ngSubmit)="onEditContact(f)" #f="ngForm">
-
-                          
-                      <input matInput placeholder="Edit Contact number" [formControl]="contactNumber"ngModel>
-                  
-               
-  
-                  <button type="submit" class="btn btn-success">Save</button>
-  
-                  
-          </form>  -->
-            <form (ngSubmit)="updateContactnumber(f,manager)" #f="ngForm">
-             
-                          <mat-form-field class="" style="width: 70%">
-                                  <input matInput type="string" placeholder="Edit contact number" name="contactNumber" ngModel>
-                          </mat-form-field>
-
-                       
-                
-             
-                <button mat-raised-button color="primary" type="submit">Save</button>
-                </form>
-                </div>
+                    </form> 
             </div>
-        </div>
+            
+            <div>
+                    <div class="card-body">
+                      <h5 class="card-title">{{manager.fullName}}</h5>
+                      <table>
+                        <tr>
+                            <td>email</td>
+                            <td>: {{manager.email}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Address</td>
+                            <td> :{{manager.address}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Contact</td>
+                            <td>: {{manager.contactNumber}}</td>
+                          </tr>
+                      </table>
+
+                      <form (ngSubmit)="updateContactnumber(f,manager)" #f="ngForm">
+                  
+                                <mat-form-field class="" style="width: 70%">
+                                        <input matInput type="string" placeholder="Edit contact number" name="contactNumber" ngModel>
+                                </mat-form-field>
+                      <button mat-raised-button color="primary" type="submit">Save</button>
+                      </form>
+                      <button mat-raised-button color="primary" (click)="onResetPassword()">Primary</button>
+                    </div>
+              </div> 
+
+              <div>
+                  <h5 class="h5">Reset my password</h5>
+                  <form class="example-form" [formGroup]="resetPasswordForm">
+                    <mat-form-field class="example-full-width">
+                               <input formControlName="password" name="password"   minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" value="" > 
+                               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                               </button>
+     
+                               <mat-error *ngIf="!resetPasswordForm.get('password').valid && resetPasswordForm.get('password').touched">
+                                   Please enter a valid Password
+                               </mat-error>
+     
+                           </mat-form-field>
+     
+                           <mat-form-field class="example-full-width">
+                               <input formControlName="confirmPassword" name="confirmPassword" appEqualValidator="password"  matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'" > 
+                               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                               </button>
+                               <span *ngIf="confirmPassword?.errors?.notEqual">Password and Confirm Password doesn't match</span>
+                           </mat-form-field>
+     
+                          
+                               <button mat-raised-button color="primary" [disabled]="!valid" (click)="onResetPassword()">Reset Password</button>
+                           
+                 </form>
+           </div>
+
+
     </mat-card>
-</div>
+
+  
+
+
+      
+
+    </div>

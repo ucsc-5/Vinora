@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, Validators, FormGroup } from '@angular/forms';
 import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
@@ -19,10 +19,15 @@ export class ManagerProfileComponent implements OnInit {
   private basePath = 'managers';
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
+  hide = true;
+  valid = false;
+  type = 'retailer';
 
   manager: Observable<CompanyId[]>;
   managerEmail: string;
   downloadURL: Observable<any>;
+
+  resetPasswordForm: FormGroup
 
 
   constructor(private ManagerService:CompanyService,private afAuth:AngularFireAuth,private storage:AngularFireStorage,private dialogService:DialogService) {
@@ -31,6 +36,22 @@ export class ManagerProfileComponent implements OnInit {
 
   ngOnInit() {
     this.manager= this.ManagerService.getCompanyByEmail(this.managerEmail);
+    
+    this.resetPasswordForm = new FormGroup({
+      'password': new FormControl(null,[Validators.required,Validators.minLength(6)]),
+      'confirmPassword': new FormControl(null,[Validators.required,Validators.minLength(6)])
+    });
+
+    this.resetPasswordForm.statusChanges.subscribe(state=>{
+      console.log(state);
+      
+      if(state=="VALID"){
+        this.valid=true;
+      }else{
+        this.valid=false;
+      }
+    })
+
       
   }
 
@@ -64,22 +85,16 @@ export class ManagerProfileComponent implements OnInit {
   }
 
   updateContactnumber(form:NgForm,manager:CompanyId){
-
     
     const value1=form.value;
- 
-  this.message = this.ManagerService.updatePhoneNumber(manager.id,value1);
-       
-
-  
-
-    console.log(this.message);
-
-
-    // this.StockManagerService.updatePhoneNumber(stockManager.id,{contactNumber:value1});
-
+    this.message = this.ManagerService.updatePhoneNumber(manager.id,value1);
+     console.log(this.message);
   }
 
+  onResetPassword(){
+    console.log(this.resetPasswordForm.value.password);
+    this.afAuth.auth.currentUser.updatePassword(this.resetPasswordForm.value.password);
+  }
 
 
 }

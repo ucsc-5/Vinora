@@ -18,11 +18,6 @@ export class RegisterStockManagerComponent implements OnInit {
 
 
 
-  // fullName=new FormControl('', [Validators.required]);
-  // address=new FormControl('', [Validators.required]);
-  // nic=new FormControl('', [Validators.required]);
-  // email = new FormControl('', [Validators.required, Validators.email]);
-  // contactNumber=new FormControl('', [Validators.required,Validators.minLength(9),Validators.maxLength(9),this.forbiddenContactNumbersValidator.bind(this)]);
   frobiddenContactNumbers: Array<string> = ['000000000','0000000000'];
 
   registerForm: FormGroup
