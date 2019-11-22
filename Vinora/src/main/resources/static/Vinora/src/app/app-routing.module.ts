@@ -20,7 +20,6 @@ import { VehicleRegisterComponent } from './manager/vehicle/vehicle-register/veh
 import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 
 
-import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { CompanyRequestsComponent } from './admin/company-requests/company-requests.component';
 import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-dashboard.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
@@ -42,13 +41,16 @@ import { CurrentOrdersFromRetailersComponent } from './stock-manager/current-ord
 import { ConfirmedOrdersOfRetailersComponent } from './stock-manager/confirmed-orders-of-retailers/confirmed-orders-of-retailers.component';
 import { ManagerProfileComponent } from './manager/manager-profile/manager-profile.component';
 import { ConfirmOrdersComponent } from './retailer/confirm-orders/confirm-orders.component';
+import { AuthGuardService } from './service/auth-guard.service';
+import { RetailerGuardService } from './shared/routerGuards/retailer-guard.service';
+import { StockManagerGuardService } from './shared/routerGuards/stock-manager-guard.service';
+import { ManagerGuardService } from './shared/routerGuards/manager-guard.service';
+import { AdminGuardService } from './shared/routerGuards/admin-guard.service';
 
 
 
-const retailerOnly = hasCustomClaim('retailer');
-const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['login']);
-const redirectLoggedInToItems = redirectLoggedInTo(['items']);
-const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
+
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -59,7 +61,7 @@ const routes: Routes = [
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
 
-  { path: 'retailer/:retailerId',component: RetailerComponent, children:[
+  { path: 'retailer/:retailerId',component: RetailerComponent ,canActivate: [RetailerGuardService], children:[
     { path: '' , component: RetailerDashboardComponent},
     { path: 'currentOrders', component: CurrentOrdersComponent},
     { path: 'companies', component: NewOrderComponent},
@@ -75,7 +77,7 @@ const routes: Routes = [
     { path: 'myProfile', component: RetailerProfileComponent}
   ]},
 
-  {path: 'stockManager/:id' , component: StockManagerComponent, children:[
+  {path: 'stockManager/:id' , canActivate: [StockManagerGuardService],component: StockManagerComponent, children:[
     { path: '', component: StockManagerDashboardComponent},
     { path: 'updateItems', component: UpdateItemsComponent},
     { path: 'myProfile', component: StockManagerProfileComponent},
@@ -84,7 +86,7 @@ const routes: Routes = [
     
   ]},
 
-  {path: 'manager/:id', component: ManagerComponent, children:[
+  {path: 'manager/:id',canActivate: [ManagerGuardService], component: ManagerComponent, children:[
     {path: '' ,component :ManagerDashboardComponent},
     
     {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
@@ -103,15 +105,8 @@ const routes: Routes = [
       ]}
   ]},
 
-  // {path: 'stockManger/:id', component: StockManagerComponent, children:[
-   
-  //   { path:'updateItems', component: StockManagerDashboardComponent},
-  //   { path:'mainStock', component: StockManagerDashboardComponent}
-  // ]
 
-  // },
-
-  {path: 'admin/:id', component: AdminComponent, children:[
+  {path: 'admin/:id', canActivate: [AdminGuardService],component: AdminComponent, children:[
     { path: 'dashboard', component: AdminDashboardComponent},
     { path: 'companyRequests', component: CompanyRequestsComponent},
     { path: 'registeredCompanies', component:CompanyRegisteredComponent },
@@ -121,12 +116,6 @@ const routes: Routes = [
   // { path: 'not-found', component: PageNotFoundComponent},
   // { path: '**', redirectTo: '/not-found'}
 
-
-  // { path: '',      component: AppComponent },
-    // { path: 'login', component: LoginComponent,        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems }},
-    // { path: 'items', component: ItemListComponent,     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-    // { path: 'admin', component: AdminComponent,        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }},
-    // { path: 'accounts/:id', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: belongsToAccount }}
 
 ];
 

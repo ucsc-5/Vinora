@@ -53,7 +53,6 @@ import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/cart-item-elemet.component';
 import { UserService } from './service/user.service';
 import { OrderService } from './service/order.service';
-import { AngularFireAuthGuard } from './auth-guard';
 import { from } from 'rxjs';
 import { VehicleService } from './service/vehicle.service';
 import { VehicleDisplayComponent } from './manager/vehicle/vehicle-display/vehicle-display.component';
@@ -107,6 +106,11 @@ import { DisplayStockManagerComponent } from './manager/register-stock-manager/d
 import { ConfirmOrdersComponent } from './retailer/confirm-orders/confirm-orders.component';
 import { ConfirmOrderElementComponent } from './retailer/confirm-orders/confirm-order-element/confirm-order-element.component';
 import { ConfirmOrderItemComponent } from './retailer/confirm-orders/confirm-order-element/confirm-order-item/confirm-order-item.component';
+import { RetailerGuardService } from './shared/routerGuards/retailer-guard.service';
+import { SaleRepGuardService } from './shared/routerGuards/sale-rep-guard.service';
+import { StockManagerGuardService } from './shared/routerGuards/stock-manager-guard.service';
+import { AdminGuardService } from './shared/routerGuards/admin-guard.service';
+import { ManagerGuardService } from './shared/routerGuards/manager-guard.service';
 
 
 
@@ -187,9 +191,8 @@ import { ConfirmOrderItemComponent } from './retailer/confirm-orders/confirm-ord
     DisplayStockManagerComponent,
     ConfirmOrdersComponent,
     ConfirmOrderElementComponent,
-    ConfirmOrderItemComponent
-   
-  
+    ConfirmOrderItemComponent,
+    
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
@@ -218,16 +221,19 @@ import { ConfirmOrderItemComponent } from './retailer/confirm-orders/confirm-ord
     ItemService,
     UserService,
     OrderService,
-    AngularFireAuthGuard,
     VehicleService,
     CompanyService,
     RetailerService,
     StockManagerService,
     DialogService,
-    CartService
+    CartService,
+    RetailerGuardService,
+    SaleRepGuardService,
+    StockManagerGuardService,
+    AdminGuardService,
+    ManagerGuardService
     ],
   bootstrap: [AppComponent]
   
-
 })
 export class AppModule { }

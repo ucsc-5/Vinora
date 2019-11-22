@@ -59,9 +59,7 @@ export class ManagerProfileComponent implements OnInit {
       }else{
         this.valid=false;
       }
-    })
-
-      
+    })      
   }
 
   

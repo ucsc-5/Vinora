@@ -10,7 +10,6 @@ import { LoginUser } from './login-user';
 import { AngularFireDatabase, AngularFireAction } from '@angular/fire/database';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { idTokenResult } from '../auth-guard';
 
 
 @Injectable({
@@ -98,21 +97,3 @@ async  loginWithGoogle(){
 }
    
 }
-
-
-// fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-//   .then(u => {})
-//   .catch(error => {
-//      switch (error.code) {
-//         case 'auth/email-already-in-use':
-//           console.log(`Email address ${this.state.email} already in use.`);
-//         case 'auth/invalid-email':
-//           console.log(`Email address ${this.state.email} is invalid.`);
-//         case 'auth/operation-not-allowed':
-//           console.log(`Error during sign up.`);
-//         case 'auth/weak-password':
-//           console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
-//         default:
-//           console.log(error.message);
-//       }
-//   });
