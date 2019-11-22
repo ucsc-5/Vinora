@@ -27,6 +27,7 @@ export class RetailerComponent {
 
   ngOnInit(){
     
+    
     this.route.params.subscribe((param:Params)=>{
       this.retailerId = param['retailerId'];})
 

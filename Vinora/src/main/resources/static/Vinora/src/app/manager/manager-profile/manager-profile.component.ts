@@ -32,7 +32,7 @@ export class ManagerProfileComponent implements OnInit {
 
 
   constructor(private ManagerService:CompanyService,private afAuth:AngularFireAuth,private storage:AngularFireStorage,private dialogService:DialogService) {
-    this.managerEmail= this.afAuth.auth.currentUser.email;
+    this.managerEmail= this.afAuth.auth.currentUser.email;    
    }
 
   ngOnInit() {

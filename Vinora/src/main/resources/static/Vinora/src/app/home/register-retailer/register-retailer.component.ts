@@ -84,7 +84,7 @@ export class RegisterRetailerComponent implements OnInit {
     const shopName = this.firstFormGroup.value['shopName'];
     const address = this.secondFormGroup.value['address'];
     const contactNumber = this.secondFormGroup.value['contactNumber'];
-    const state = "0";
+    const state = "1";
     const url ="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
     const latitude = this.longitude
     const longitude = this.longitude

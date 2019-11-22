@@ -19,6 +19,7 @@ export class RetailerDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.afAuth.auth.currentUser.emailVerified);
      this.retailer$ = this.retailerService.getRetailerByEmail(this.retailerEmail);
   }
 
