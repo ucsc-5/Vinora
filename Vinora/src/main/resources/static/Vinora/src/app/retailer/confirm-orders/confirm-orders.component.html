@@ -1,0 +1,9 @@
+<div class="row">
+    <h3>Confirmed Orders</h3><br>
+</div>
+<div class="row">
+    <div class="col" *ngIf="confirmedOrders | async; let confirmedOrders; else loading">
+        <app-confirm-order-element *ngFor="let confirmOrder of confirmedOrders" [confirmOrder]="confirmOrder" ></app-confirm-order-element>
+    </div>
+    <ng-template #loading>No current orders available!!&hellip;</ng-template>
+</div>

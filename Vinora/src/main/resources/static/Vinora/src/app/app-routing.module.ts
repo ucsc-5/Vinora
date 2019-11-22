@@ -41,6 +41,7 @@ import { OrderFromCompanyComponent } from './retailer/new-order/order-from-compa
 import { CurrentOrdersFromRetailersComponent } from './stock-manager/current-orders-from-retailers/current-orders-from-retailers.component';
 import { ConfirmedOrdersOfRetailersComponent } from './stock-manager/confirmed-orders-of-retailers/confirmed-orders-of-retailers.component';
 import { ManagerProfileComponent } from './manager/manager-profile/manager-profile.component';
+import { ConfirmOrdersComponent } from './retailer/confirm-orders/confirm-orders.component';
 
 
 
@@ -62,6 +63,7 @@ const routes: Routes = [
     { path: '' , component: RetailerDashboardComponent},
     { path: 'currentOrders', component: CurrentOrdersComponent},
     { path: 'companies', component: NewOrderComponent},
+    { path: 'confirmedOrders', component: ConfirmOrdersComponent},
     { path: 'companies/:companyId', component: OrderFromCompanyComponent, children:[
       { path: 'myCart', component: MyCartComponent}
     ]},

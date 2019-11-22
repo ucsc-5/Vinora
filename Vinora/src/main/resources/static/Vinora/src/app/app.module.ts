@@ -104,6 +104,9 @@ import { ManagerProfileComponent } from './manager/manager-profile/manager-profi
 import { EqualValidatorDirective } from './shared/equal-validator.directive';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { DisplayStockManagerComponent } from './manager/register-stock-manager/display-stock-manager/display-stock-manager.component';
+import { ConfirmOrdersComponent } from './retailer/confirm-orders/confirm-orders.component';
+import { ConfirmOrderElementComponent } from './retailer/confirm-orders/confirm-order-element/confirm-order-element.component';
+import { ConfirmOrderItemComponent } from './retailer/confirm-orders/confirm-order-element/confirm-order-item/confirm-order-item.component';
 
 
 
@@ -181,7 +184,10 @@ import { DisplayStockManagerComponent } from './manager/register-stock-manager/d
     ManagerProfileComponent,
     EqualValidatorDirective,
     ErrorDialogComponent,
-    DisplayStockManagerComponent
+    DisplayStockManagerComponent,
+    ConfirmOrdersComponent,
+    ConfirmOrderElementComponent,
+    ConfirmOrderItemComponent
    
   
   ], 
