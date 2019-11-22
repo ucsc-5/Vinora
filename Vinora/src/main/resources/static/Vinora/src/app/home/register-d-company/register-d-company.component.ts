@@ -76,7 +76,12 @@ export class RegisterDCompanyComponent implements OnInit {
                 (response)=>{
                      console.log(response);
                 },
-                ()=>{},
+                (error)=>{
+                  console.log("this is error of firebase function");
+                  
+                  console.log(error);
+                  
+                },
                 ()=>{
                   this.authService.login(email,password).then(x=>{
                     const companyId = this.afAuth.auth.currentUser.uid;

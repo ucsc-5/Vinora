@@ -46,6 +46,8 @@ import { RetailerGuardService } from './shared/routerGuards/retailer-guard.servi
 import { StockManagerGuardService } from './shared/routerGuards/stock-manager-guard.service';
 import { ManagerGuardService } from './shared/routerGuards/manager-guard.service';
 import { AdminGuardService } from './shared/routerGuards/admin-guard.service';
+import { CompanyPermisionGuardService } from './shared/routerGuards/company-permision-guard.service';
+import { WelcomeNewCompanyComponent } from './manager/welcome-new-company/welcome-new-company.component';
 
 
 
@@ -83,12 +85,10 @@ const routes: Routes = [
     { path: 'myProfile', component: StockManagerProfileComponent},
     { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},
     { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent}
-    
   ]},
 
-  {path: 'manager/:id',canActivate: [ManagerGuardService], component: ManagerComponent, children:[
+  {path: 'manager/:id',canActivate: [ManagerGuardService,CompanyPermisionGuardService], component: ManagerComponent, children:[
     {path: '' ,component :ManagerDashboardComponent},
-    
     {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
     {path: 'myProfile',component : ManagerProfileComponent},
     {path: 'SalesRepresentative' ,component :SalesRepresentativeComponent,children:[
@@ -113,8 +113,10 @@ const routes: Routes = [
     { path: 'reports', component: AdminReportsComponent}
   ]},
 
-  // { path: 'not-found', component: PageNotFoundComponent},
-  // { path: '**', redirectTo: '/not-found'}
+  { path: 'welcomeNewCompany', component: WelcomeNewCompanyComponent},   // this is for companies which are not permision granted
+
+  { path: 'not-found', component: PageNotFoundComponent},
+  { path: '**', redirectTo: '/not-found'}
 
 
 ];

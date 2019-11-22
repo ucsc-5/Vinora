@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { CompanyService, Company, CompanyId } from 'src/app/service/company.service';
 import { DialogService } from 'src/app/service/dialog.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Component({
   selector: 'app-admin-com-req-element',
@@ -12,7 +13,9 @@ export class AdminComReqElementComponent implements OnInit {
 
   @Input() company : CompanyId;
 
-  constructor(private dialogService:DialogService,private companyService: CompanyService) { 
+  registerMessage
+
+  constructor(private dialogService:DialogService,private companyService: CompanyService, private fns: AngularFireFunctions) { 
   }
 
   ngOnInit() {
@@ -20,14 +23,34 @@ export class AdminComReqElementComponent implements OnInit {
   }   
   
   
-  onConfirm(){
+  onConfirm(email:string){
+
+    console.log(email);
+    
     const message="Confirm Registration!"
       this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
         res=>{
           if(res){
-                  this.companyService.confirmRegistration(this.company.id).catch(err => console.log(err));
+
+            const callable = this.fns.httpsCallable('adminConfirmCompanyRequest');
+
+            callable({email:email}).subscribe(
+                    (response)=>{
+                         this.registerMessage=response;
+                         console.log(response);
+                         
+                    },
+                    (error)=>{
+                      console.log(error);
+                      
+                    },
+                    ()=>{
+                      this.companyService.confirmRegistration(this.company.id).catch(err => console.log(err));
+                    })
           }
         })
 
+        console.log(this.registerMessage);
+        
   }
 }

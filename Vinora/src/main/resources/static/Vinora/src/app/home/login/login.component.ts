@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     // this.authService.login('ret1@gmail.com','123123'); //for retailer
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
-    this.authService.login('royalvintage@gmail.com','654321'); //for Manager
+    // this.authService.login('royalvintage@gmail.com','654321'); //for Manager
     // this.authService.login('company11@gmail.com','123123'); //for Manager
     //  this.authService.login('abcstockmanager@gmail.com','972372560v'); //for stockManger
     

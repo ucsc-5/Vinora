@@ -57,7 +57,9 @@ export class AuthenticationService {
             this.router.navigate(['/salesRepresntative/',this.user.uid]);
           }
           else{
-            console.log('another uSer')
+            this.router.navigate(['/']);
+            console.log("another user");
+            
           }
         })   
       }).catch(function(error){

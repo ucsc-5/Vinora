@@ -111,6 +111,8 @@ import { SaleRepGuardService } from './shared/routerGuards/sale-rep-guard.servic
 import { StockManagerGuardService } from './shared/routerGuards/stock-manager-guard.service';
 import { AdminGuardService } from './shared/routerGuards/admin-guard.service';
 import { ManagerGuardService } from './shared/routerGuards/manager-guard.service';
+import { CompanyPermisionGuardService } from './shared/routerGuards/company-permision-guard.service';
+import { WelcomeNewCompanyComponent } from './manager/welcome-new-company/welcome-new-company.component';
 
 
 
@@ -192,6 +194,7 @@ import { ManagerGuardService } from './shared/routerGuards/manager-guard.service
     ConfirmOrdersComponent,
     ConfirmOrderElementComponent,
     ConfirmOrderItemComponent,
+    WelcomeNewCompanyComponent,
     
   ], 
   entryComponents:[
@@ -231,7 +234,8 @@ import { ManagerGuardService } from './shared/routerGuards/manager-guard.service
     SaleRepGuardService,
     StockManagerGuardService,
     AdminGuardService,
-    ManagerGuardService
+    ManagerGuardService,
+    CompanyPermisionGuardService
     ],
   bootstrap: [AppComponent]
   
