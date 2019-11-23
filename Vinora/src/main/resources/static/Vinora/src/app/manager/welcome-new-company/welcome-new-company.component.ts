@@ -14,8 +14,5 @@ export class WelcomeNewCompanyComponent implements OnInit {
   }
 
 
-  onBack(){
-    this.router.navigate(['/'])
-  }
 
 }

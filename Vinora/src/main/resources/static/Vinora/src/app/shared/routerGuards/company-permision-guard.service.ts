@@ -15,7 +15,7 @@ export class CompanyPermisionGuardService implements CanActivate {
       if(idTokenResult.claims.register){
         return true
       }else{
-        this.router.navigate(['/welcomeNewCompany'])
+        this.router.navigate(['/temporaryWelcome',0]);
       }
     })
   }

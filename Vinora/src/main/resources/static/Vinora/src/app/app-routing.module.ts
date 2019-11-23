@@ -47,8 +47,8 @@ import { StockManagerGuardService } from './shared/routerGuards/stock-manager-gu
 import { ManagerGuardService } from './shared/routerGuards/manager-guard.service';
 import { AdminGuardService } from './shared/routerGuards/admin-guard.service';
 import { CompanyPermisionGuardService } from './shared/routerGuards/company-permision-guard.service';
-import { WelcomeNewCompanyComponent } from './manager/welcome-new-company/welcome-new-company.component';
 import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.service';
+import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
 
 
 
@@ -67,47 +67,53 @@ const routes: Routes = [
   { path: 'retailer/:retailerId',component: RetailerComponent ,
         canActivate: [RetailerGuardService],
         canActivateChild:[ValidEmailGuardService], 
-        
         children:[
-    { path: '' , component: RetailerDashboardComponent},
-    { path: 'currentOrders', component: CurrentOrdersComponent},
-    { path: 'companies', component: NewOrderComponent},
-    { path: 'confirmedOrders', component: ConfirmOrdersComponent},
-    { path: 'companies/:companyId', component: OrderFromCompanyComponent, children:[
-      { path: 'myCart', component: MyCartComponent}
-    ]},
-    // { path: 'myCart', component: MyCartComponent},
-    { path: 'previousOrder', component: PreviousOrdersComponent},
-    {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
-    // {path: 'newStock', component: NewStockComponent},
-    { path: 'allCompanies', component: RetailerNewCompaniesComponent},
-    { path: 'myProfile', component: RetailerProfileComponent}
+            { path: '' , component: RetailerDashboardComponent},
+            { path: 'currentOrders', component: CurrentOrdersComponent},
+            { path: 'companies', component: NewOrderComponent},
+            { path: 'confirmedOrders', component: ConfirmOrdersComponent},
+            { path: 'companies/:companyId', component: OrderFromCompanyComponent, children:[
+              { path: 'myCart', component: MyCartComponent}
+            ]},
+            // { path: 'myCart', component: MyCartComponent},
+            { path: 'previousOrder', component: PreviousOrdersComponent},
+            {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
+            // {path: 'newStock', component: NewStockComponent},
+            { path: 'allCompanies', component: RetailerNewCompaniesComponent},
+            { path: 'myProfile', component: RetailerProfileComponent}
   ]},
 
-  {path: 'stockManager/:id' , canActivate: [StockManagerGuardService],component: StockManagerComponent, children:[
-    { path: '', component: StockManagerDashboardComponent},
-    { path: 'updateItems', component: UpdateItemsComponent},
-    { path: 'myProfile', component: StockManagerProfileComponent},
-    { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},
-    { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent}
+  {path: 'stockManager/:id' , component: StockManagerComponent,
+        canActivate: [StockManagerGuardService],
+        canActivateChild:[ValidEmailGuardService], 
+        children:[
+            { path: '', component: StockManagerDashboardComponent},
+            { path: 'updateItems', component: UpdateItemsComponent},
+            { path: 'myProfile', component: StockManagerProfileComponent},
+            { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},
+            { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent}
   ]},
 
-  {path: 'manager/:id',canActivate: [ManagerGuardService,CompanyPermisionGuardService], component: ManagerComponent, children:[
-    {path: '' ,component :ManagerDashboardComponent},
-    {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
-    {path: 'myProfile',  component : ManagerProfileComponent},
-    {path: 'SalesRepresentative' ,component :SalesRepresentativeComponent,children:[
-      {path:'registerSalesRepresentative',component:RegisterSalesRepresentativeComponent}
-    ]},
-      {path: 'newRetailers', component: CompanyRetailersComponent},
-      {path: 'registerNewItem', component: RegisterNewItemComponent},
-    {path: 'vehicleRegister', component: VehicleComponent,children:[
-      {path: 'registerVehicle', component: VehicleRegisterComponent }
-    ]},
-    {path: 'registeredItems', component: RegisteredItemsComponent},
-    { path: 'vehicle', component: VehicleComponent, children:[
-      {path: 'register' , component: VehicleRegisterComponent}
-      ]}
+  {path: 'manager/:id', component: ManagerComponent,
+        canActivate: [ManagerGuardService,CompanyPermisionGuardService],
+        canActivateChild:[ValidEmailGuardService],
+
+        children:[
+            {path: '' ,component :ManagerDashboardComponent},
+            {path: 'registerStockManager' ,component :RegisterStockManagerComponent},
+            {path: 'myProfile',  component : ManagerProfileComponent},
+            {path: 'SalesRepresentative' ,component :SalesRepresentativeComponent,children:[
+              {path:'registerSalesRepresentative',component:RegisterSalesRepresentativeComponent}
+            ]},
+              {path: 'newRetailers', component: CompanyRetailersComponent},
+              {path: 'registerNewItem', component: RegisterNewItemComponent},
+            {path: 'vehicleRegister', component: VehicleComponent,children:[
+              {path: 'registerVehicle', component: VehicleRegisterComponent }
+            ]},
+            {path: 'registeredItems', component: RegisteredItemsComponent},
+            { path: 'vehicle', component: VehicleComponent, children:[
+              {path: 'register' , component: VehicleRegisterComponent}
+              ]}
   ]},
 
 
@@ -118,7 +124,7 @@ const routes: Routes = [
     { path: 'reports', component: AdminReportsComponent}
   ]},
 
-  { path: 'welcomeNewCompany', component: WelcomeNewCompanyComponent},   // this is for companies which are not permision granted
+  { path: 'temporaryWelcome/:type', component: TemporaryWelcomeComponent},   // this is for companies which are not permision granted
 
   { path: 'not-found', component: PageNotFoundComponent},
   { path: '**', redirectTo: '/not-found'}

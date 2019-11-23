@@ -114,6 +114,7 @@ import { ManagerGuardService } from './shared/routerGuards/manager-guard.service
 import { CompanyPermisionGuardService } from './shared/routerGuards/company-permision-guard.service';
 import { WelcomeNewCompanyComponent } from './manager/welcome-new-company/welcome-new-company.component';
 import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.service';
+import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
 
 
 
@@ -196,6 +197,7 @@ import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.
     ConfirmOrderElementComponent,
     ConfirmOrderItemComponent,
     WelcomeNewCompanyComponent,
+    TemporaryWelcomeComponent,
     
   ], 
   entryComponents:[
