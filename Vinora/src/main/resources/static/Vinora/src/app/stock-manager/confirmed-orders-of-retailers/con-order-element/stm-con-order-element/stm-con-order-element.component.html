@@ -12,5 +12,8 @@
                     Quantity:  <b>{{item.quantity}}</b><br>  
                     Item total: <b>{{item.total}} .00 Rs/-</b><br>              
                     </p>       
-            </mat-card-content>                   
+            </mat-card-content>    
+            <mat-card-actions>
+                    <button mat-raised-button (click)="onAdd()">Add</button>
+            </mat-card-actions>               
         </mat-card>

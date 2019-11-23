@@ -138,6 +138,10 @@ updateState(id:string,stateValue:number){
   return this.afs.collection('orders').doc(id).update({state:stateValue});
 }
 
+setItemForOrder(){
+  
+}
+
   
 
   

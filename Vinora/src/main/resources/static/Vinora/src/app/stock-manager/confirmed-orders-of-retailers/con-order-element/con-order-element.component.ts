@@ -15,14 +15,17 @@ export class ConOrderElementComponent implements OnInit {
   companyId:string;
   retailers: Observable<RetailerId[]>
   items: Observable<CartItemId[]>
+  orderId:string
 
   constructor(private orderService:OrderService,private retailerServie:RetailerService) { }
 
   ngOnInit() {
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.items=this.orderService.getItemsByOrderId(this.order.id);
+    this.orderId=this.order.id;
   }
 
+  
   // confirmOrder(){
   //   this.orderService.updateState(this.order.id,1);
   // }

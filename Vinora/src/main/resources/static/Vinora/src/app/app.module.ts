@@ -115,6 +115,9 @@ import { CompanyPermisionGuardService } from './shared/routerGuards/company-perm
 import { WelcomeNewCompanyComponent } from './manager/welcome-new-company/welcome-new-company.component';
 import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.service';
 import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
+import { ConfirmItemPopupComponent } from './stock-manager/confirmed-orders-of-retailers/confirm-item-popup/confirm-item-popup.component';
+import { MatDialogModule } from '@angular/material';
+import { StmConfirmOrderTempService } from './service/stm-confirm-order-temp.service';
 
 
 
@@ -198,17 +201,19 @@ import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-we
     ConfirmOrderItemComponent,
     WelcomeNewCompanyComponent,
     TemporaryWelcomeComponent,
-    
+    ConfirmItemPopupComponent
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ConfirmItemPopupComponent
   ], 
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatModule,
+    MatDialogModule,
     FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase,'vinora'),
@@ -239,7 +244,8 @@ import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-we
     AdminGuardService,
     ManagerGuardService,
     CompanyPermisionGuardService,
-    ValidEmailGuardService
+    ValidEmailGuardService,
+    StmConfirmOrderTempService
     ],
   bootstrap: [AppComponent]
   

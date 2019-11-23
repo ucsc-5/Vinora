@@ -17,12 +17,14 @@ export class CurOrderElementComponent implements OnInit {
   currentOrders: Observable<OrderId[]>
   retailers: Observable<RetailerId[]>
   items: Observable<CartItemId[]>
+  orderId
 
   constructor(private orderService:OrderService,private retailerServie:RetailerService) { }
 
   ngOnInit() {
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.items=this.orderService.getItemsByOrderId(this.order.id);
+    this.orderId=this.order.id;
   }
 
   confirmOrder(){

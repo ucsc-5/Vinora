@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartItemId } from 'src/app/service/cart.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogService } from 'src/app/service/dialog.service';
+import { StmConfirmOrderTempService } from 'src/app/service/stm-confirm-order-temp.service';
 
 @Component({
   selector: 'app-stm-crt-order-item-elemet',
@@ -9,9 +12,25 @@ import { CartItemId } from 'src/app/service/cart.service';
 export class StmCrtOrderItemElemetComponent implements OnInit {
 
   @Input() item:CartItemId
-  constructor() { }
+  @Input() orderId: string
+
+  constructor(private dialogService:DialogService,private tempOrder:StmConfirmOrderTempService) { }
 
   ngOnInit() {
+  }
+
+  onSelect(){
+    console.log(this.orderId);
+    
+    this.dialogService.openItemDialog(this.item).afterClosed().subscribe(
+      res=>{
+        
+        // this.tempOrder.addItems(this.item,this.orderId);
+        
+        })
+
+    console.log(this.item);
+    
   }
 
 }

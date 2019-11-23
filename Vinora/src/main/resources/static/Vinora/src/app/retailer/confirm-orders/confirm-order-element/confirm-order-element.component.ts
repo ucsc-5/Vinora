@@ -20,6 +20,8 @@ export class ConfirmOrderElementComponent implements OnInit {
   constructor(private companyService: CompanyService,private orderService:OrderService) { }
 
   ngOnInit() {
+    console.log(this.confirmOrder.createDate);
+    
     this.company = this.companyService.getCompanyById(this.confirmOrder.companyId);
     this.items = this.orderService.getItemsByOrderId(this.confirmOrder.id);
 

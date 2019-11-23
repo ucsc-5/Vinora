@@ -1,0 +1,24 @@
+
+    <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>{{data.itemName}}</mat-card-title>
+                <mat-card-subtitle>{{data.brand}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="{{data.itemImagePath}}"  alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    {{data.description}} <br>
+
+                    Unit Price: <b>{{data.unitPrice}} .00 Rs/-</b><br>
+                    Quantity:  <b>{{data.quantity}}</b><br>  
+                    Item total: <b>{{data.total}} .00 Rs/-</b><br>              
+                    </p>       
+            </mat-card-content> 
+            <mat-card-actions>
+                    <button mat-flat-button id="no-button" [mat-dialog-close]="false">Back</button>
+                    <button mat-flat-button id="yes-button" [mat-dialog-close]="data">Confirm</button>
+            </mat-card-actions>
+    
+    
+    
+        </mat-card>

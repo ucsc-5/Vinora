@@ -26,7 +26,7 @@
 </div>
 
 <div class="row"  *ngIf="items | async; let items ; else">
-    <app-stm-crt-order-item-elemet class="col col-2" *ngFor="let item of items" [item]="item"></app-stm-crt-order-item-elemet>
+    <app-stm-crt-order-item-elemet class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId"></app-stm-crt-order-item-elemet>
 </div>
 
 <br>
