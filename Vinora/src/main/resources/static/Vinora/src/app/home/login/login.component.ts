@@ -24,12 +24,10 @@ export class LoginComponent implements OnInit {
 
   items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string|null>;
-
-  //email
   email = new FormControl('', [Validators.required, Validators.email]);
-
-
   hide = true;
+  message: string
+
   constructor(public dialog: MatDialog,public afAuth: AngularFireAuth, private authService : AuthenticationService,private db: AngularFireDatabase) {
     
     this.size$ = new BehaviorSubject(null);
@@ -49,7 +47,15 @@ export class LoginComponent implements OnInit {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
     const email = form.value.email;
     const password = form.value.password;
-    this.authService.login(email,password);
+     this.authService.login(email,password).then(res=>{
+      //  console.log(" this is the response "+res);
+       this.message="Please check your email and password again!!"
+       
+     }).catch(error=>{
+       console.log(" this is the error  "+error);
+      //  this.message=error;
+     })
+
     this.showSpinner=true;
 
     // this.authService.login('admin@gmail.com','123123'); //for admin
@@ -59,13 +65,16 @@ export class LoginComponent implements OnInit {
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
     // this.authService.login('royalvintage@gmail.com','654321'); //for Manager
 
+    // this.authService.login('udulaindunil@gmail.com','123123'); //for Manager with veryfied email address
+    
+
     // this.authService.login('company12@gmail.com','123123'); //for Manager
     //  this.authService.login('abcstockmanager@gmail.com','972372560v'); //for stockManger
     
 
     this.showSpinner=false;
 
-    console.log(this.authService.user.uid) 
+    console.log(this.authService.user.uid); 
   }
 
   logout() {

@@ -59,14 +59,15 @@ export class AuthenticationService {
           else{
             this.router.navigate(['/']);
             console.log("another user");
-            
           }
-        })   
+        }
+        )   
+        
       }).catch(function(error){
-        var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log("Eroor Msg"  + errorMessage);
+      return error.message
       });
+
+      return result
          
   }
   async register(email: string, password: string) {
