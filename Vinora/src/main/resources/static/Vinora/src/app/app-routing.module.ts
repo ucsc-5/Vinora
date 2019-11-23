@@ -64,7 +64,11 @@ const routes: Routes = [
       {path: 'registerCompany', component: RegisterDCompanyComponent} 
     ]},
 
-  { path: 'retailer/:retailerId',component: RetailerComponent ,canActivate: [RetailerGuardService], children:[
+  { path: 'retailer/:retailerId',component: RetailerComponent ,
+        canActivate: [RetailerGuardService],
+        canActivateChild:[ValidEmailGuardService], 
+        
+        children:[
     { path: '' , component: RetailerDashboardComponent},
     { path: 'currentOrders', component: CurrentOrdersComponent},
     { path: 'companies', component: NewOrderComponent},
