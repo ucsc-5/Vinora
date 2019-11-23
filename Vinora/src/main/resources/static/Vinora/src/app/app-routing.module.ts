@@ -66,7 +66,7 @@ const routes: Routes = [
 
   { path: 'retailer/:retailerId',component: RetailerComponent ,
         canActivate: [RetailerGuardService],
-        canActivateChild:[ValidEmailGuardService], 
+        // canActivateChild:[ValidEmailGuardService], 
         children:[
             { path: '' , component: RetailerDashboardComponent},
             { path: 'currentOrders', component: CurrentOrdersComponent},
@@ -85,7 +85,7 @@ const routes: Routes = [
 
   {path: 'stockManager/:id' , component: StockManagerComponent,
         canActivate: [StockManagerGuardService],
-        canActivateChild:[ValidEmailGuardService], 
+        // canActivateChild:[ValidEmailGuardService], 
         children:[
             { path: '', component: StockManagerDashboardComponent},
             { path: 'updateItems', component: UpdateItemsComponent},
@@ -95,8 +95,8 @@ const routes: Routes = [
   ]},
 
   {path: 'manager/:id', component: ManagerComponent,
-        canActivate: [ManagerGuardService,CompanyPermisionGuardService],
-        canActivateChild:[ValidEmailGuardService],
+        // canActivate: [ManagerGuardService,CompanyPermisionGuardService],
+        // canActivateChild:[ValidEmailGuardService],
 
         children:[
             {path: '' ,component :ManagerDashboardComponent},
