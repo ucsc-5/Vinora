@@ -21,7 +21,6 @@ import { Observable } from 'rxjs';
 export class RegisterNewItemComponent implements OnInit {
 
   itemImage: FileList;
-  type = 'option2';
 
 
   private itemsCollection: AngularFirestoreCollection<Item>;
@@ -54,7 +53,7 @@ export class RegisterNewItemComponent implements OnInit {
       const category = "category";
       const state = "active";
       const itemImage = this.itemImage.item(0);  
-      const type= this.type;              
+      const type= value.type;              
       
       const basePath ="items"
       const filePath = `${basePath}/${itemImage.name}${new Date()}`;

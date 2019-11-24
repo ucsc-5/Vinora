@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {  CompanyService } from 'src/app/service/company.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ItemService, ItemId } from 'src/app/service/item.service';
 import { DialogService } from 'src/app/service/dialog.service';
 
@@ -13,10 +13,9 @@ import { DialogService } from 'src/app/service/dialog.service';
 export class RegItemElementComponent implements OnInit {
 
   @Input() item:ItemId
-
   message: any;
-
   allowRemove: boolean;
+  updateForm: FormGroup
 
   constructor(private dialogService:DialogService, private itemService:ItemService, private afAuth: AngularFireAuth) {
       
@@ -28,6 +27,10 @@ export class RegItemElementComponent implements OnInit {
      } else{
        this.allowRemove = false;
      }
+
+     this.updateForm = new FormGroup({
+      'unitPrice': new FormControl(null,[Validators.min(0)])
+    });
   }
 
   onRemove(){
@@ -58,13 +61,13 @@ export class RegItemElementComponent implements OnInit {
     }    
   }
 
-  OnUpdateUnitPrice(form:NgForm) {
-      const value=form.value;
+  OnUpdateUnitPrice() {
+      const unitPrice=this.updateForm.value.unitPrice;
       const message= "Confirm !!"
       this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
         res=>{
           if(res){      
-            this.message = this.itemService.updateItem(this.item.id,{unitPrice: value.unitPrice}).then(
+            this.message = this.itemService.updateItem(this.item.id,{unitPrice: unitPrice}).then(
               x=>{
                 return "done";
               }
@@ -73,6 +76,14 @@ export class RegItemElementComponent implements OnInit {
             )
     }}
     )
+  }
+
+  reset(){
+    this.updateForm.reset();
+  }
+
+  itemDetails(item:ItemId){
+    this.dialogService.openItemDetailsDialog(item).afterClosed();
   }
 
 }

@@ -5,6 +5,7 @@ import { ErrorDialogComponent } from '../shared/popups/error-dialog/error-dialog
 import { ConfirmItemPopupComponent } from '../shared/popups/confirm-item-popup/confirm-item-popup.component';
 import { CartItemId } from './cart.service';
 import { ItemDetailsPopupComponent } from '../shared/popups/item-details-popup/item-details-popup.component';
+import { ItemId } from './item.service';
 
 
 @Injectable({
@@ -39,7 +40,7 @@ export class DialogService {
     }) 
    }
 
-   openItemDetailsDialog(item:CartItemId){
+   openCartItemDetailsDialog(item:CartItemId){
     return this.dialog.open(ItemDetailsPopupComponent,{
       width: '580px',
       height: '800px',
@@ -74,6 +75,24 @@ export class DialogService {
         unitPrice:item.unitPrice,
         quantity:item.quantity,
         total:item.total
+      }
+    }) 
+   }
+
+   openItemDetailsDialog(item:ItemId){
+    return this.dialog.open(ItemDetailsPopupComponent,{
+      width: '580px',
+      height: '800px',
+      disableClose: true,
+      panelClass: 'confirm-dialog-container', 
+      
+      data:{
+        itemName: item.itemName,
+        brand: item.brand,
+        description: item.description,
+        itemImagePath:item.itemImagePath,
+        unitPrice:item.unitPrice,
+        quantity:item.quantity
       }
     }) 
    }

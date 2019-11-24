@@ -28,7 +28,7 @@ export class CartItemElemetComponent implements OnInit {
    })
 
    this.updateForm = new FormGroup({
-    'quantity': new FormControl(null,[Validators.required,Validators.min(0)])
+    'quantity': new FormControl(null,[Validators.min(0)])
   });
   
 }
@@ -71,7 +71,7 @@ export class CartItemElemetComponent implements OnInit {
   }
 
   itemDetails(item:CartItemId){
-    this.dialogService.openItemDetailsDialog(item).afterClosed();
+    this.dialogService.openCartItemDetailsDialog(item).afterClosed();
   }
   
 

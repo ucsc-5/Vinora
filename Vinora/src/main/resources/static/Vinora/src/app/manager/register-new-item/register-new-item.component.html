@@ -16,15 +16,10 @@
                         <input matInput placeholder="Brand" name="brandName" ngModel >
                 </mat-form-field>
 
-                <!-- for the item brand -->
-
-                <!-- <label>
-                        <input type="file" (change)="selectBrandImage($event)">
-                </label> -->
 
                 <mat-form-field>
                         <mat-label>Type</mat-label>
-                        <mat-select [(value)]="selected">
+                        <mat-select [(value)]="selected" name="type" ngModel >
                           <mat-option value="Kg">Kg </mat-option>
                           <mat-option value="g">g (grams)</mat-option>
                           <mat-option value="L">L (Liters)</mat-option>

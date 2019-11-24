@@ -25,7 +25,6 @@
                                                         matInput 
                                                         #quantity 
                                                         type="number" 
-                                                       
                                                         placeholder="Quantity"
                                                         formControlName="quantity">
 
@@ -57,7 +56,8 @@
 
                                                                 <button class="btn"  
                                                                         data-toggle="tooltip"
-                                                                        title="Redeuse" > 
+                                                                        title="Redeuse" 
+                                                                        style="color:firebrick;"> 
                                                                         <i class="material-icons" (click)="reduceQuantity(item,quantity.value)">
                                                                                         remove
                                                                                 </i>  
@@ -65,8 +65,11 @@
 
                                                                 <button class="btn"  
                                                                         data-toggle="tooltip"
-                                                                        title="Drop item" > 
-                                                                        <mat-icon id="close-icon" style="margin-right: 50px;" color="warn" (click)="onRemove(item)">close</mat-icon>
+                                                                        title="Drop item" 
+                                                                        style="color:firebrick;">
+                                                                        <i class="material-icons" (click)="onRemove(item)">
+                                                                                        clear             
+                                                                        </i>   
                                                                 </button>
 
                                                                 <button class="btn"  
@@ -76,40 +79,14 @@
                                                                                         list_alt               
                                                                         </i>  
                                                                 </button>
-
-
-            
-                                                                
+                                       
                                                         </div>
-
-
-
-                                            
-
-                                           
-    
-                                             
-                                            
-                                            
-                                            
+           
                                     </td>
                                        
                                 </tr>
-        
-                                <!-- <tr>
-                                        <td><mat-form-field class="" style="width: 70%">
-                                                <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel  >
-                                        </mat-form-field></td>
-                                </tr> -->
-                               
-        
                             </table>
-                            
-                            
-                            <!-- <mat-icon id="close-icon" style="margin-right: 50px;" color="warn" (click)="onRemove(item)">cached</mat-icon>     -->
-                           
-                            
-                            
+                                                        
                     </form>
                 </mat-card-actions>
         </mat-card>
