@@ -21,16 +21,8 @@ export class StmCrtOrderItemElemetComponent implements OnInit {
 
   onSelect(){
     console.log(this.orderId);
-    
-    this.dialogService.openItemDialog(this.item).afterClosed().subscribe(
-      res=>{
-        
-        // this.tempOrder.addItems(this.item,this.orderId);
-        
-        })
-
+    this.dialogService.openItemDetailsDialog(this.item).afterClosed();
     console.log(this.item);
-    
   }
 
 }

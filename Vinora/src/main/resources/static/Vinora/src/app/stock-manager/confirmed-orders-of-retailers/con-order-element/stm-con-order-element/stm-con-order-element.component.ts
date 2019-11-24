@@ -20,7 +20,7 @@ export class StmConOrderElementComponent implements OnInit {
   onAdd(){
     console.log(this.orderId);
     
-    this.dialogService.openItemDialog(this.item).afterClosed().subscribe(
+    this.dialogService.confirmItemDialog(this.item).afterClosed().subscribe(
       res=>{
         if(res){
           this.dialogService.openConfirmDialog("confirm").afterClosed().subscribe(

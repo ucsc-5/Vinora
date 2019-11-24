@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrderItem } from 'src/app/service/item.service';
+import { OrderItem, ItemId } from 'src/app/service/item.service';
 import { CartItemId, CartService, CartItem } from 'src/app/service/cart.service';
 import { DialogService } from 'src/app/service/dialog.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -12,10 +12,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class CartItemElemetComponent implements OnInit {
 
-  @Input() item:CartItem;
+  @Input() item:CartItemId;
   availableQuantity 
   quantity
 
+  updateForm: FormGroup
 
   constructor(private afs: AngularFirestore,private dialogService:DialogService,private cartService:CartService) { 
 
@@ -24,7 +25,11 @@ export class CartItemElemetComponent implements OnInit {
   ngOnInit() {
     this.afs.collection('items').doc(`${this.item.itemId}`).get().subscribe(x=>{
       this.availableQuantity=x.data().quantity
-  })
+   })
+
+   this.updateForm = new FormGroup({
+    'quantity': new FormControl(null,[Validators.required,Validators.min(0)])
+  });
   
 }
 
@@ -62,7 +67,11 @@ export class CartItemElemetComponent implements OnInit {
   }
 
   refresh(){
-    this.quantity.value = null;
+    this.updateForm.reset();
+  }
+
+  itemDetails(item:CartItemId){
+    this.dialogService.openItemDetailsDialog(item).afterClosed();
   }
   
 

@@ -88,7 +88,7 @@ import { StockManagerUpdateComponent } from './stock-manager/update-items/stock-
 import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
 import { OrderItemElementComponent } from './retailer/new-order/order-from-company/order-item-element/order-item-element.component';
 import { OrderSummeryComponent } from './retailer/new-order/order-from-company/order-summery/order-summery.component';
-import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './shared/popups/confirm-dialog/confirm-dialog.component';
 import { DialogService } from './service/dialog.service';
 import { CartService } from './service/cart.service';
 import { CurrentOrderElementComponent } from './retailer/current-orders/current-order-element/current-order-element.component';
@@ -101,7 +101,7 @@ import { ConOrderElementComponent } from './stock-manager/confirmed-orders-of-re
 import { StmConOrderElementComponent } from './stock-manager/confirmed-orders-of-retailers/con-order-element/stm-con-order-element/stm-con-order-element.component';
 import { ManagerProfileComponent } from './manager/manager-profile/manager-profile.component';
 import { EqualValidatorDirective } from './shared/equal-validator.directive';
-import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from './shared/popups/error-dialog/error-dialog.component';
 import { DisplayStockManagerComponent } from './manager/register-stock-manager/display-stock-manager/display-stock-manager.component';
 import { ConfirmOrdersComponent } from './retailer/confirm-orders/confirm-orders.component';
 import { ConfirmOrderElementComponent } from './retailer/confirm-orders/confirm-order-element/confirm-order-element.component';
@@ -115,9 +115,10 @@ import { CompanyPermisionGuardService } from './shared/routerGuards/company-perm
 import { WelcomeNewCompanyComponent } from './manager/welcome-new-company/welcome-new-company.component';
 import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.service';
 import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
-import { ConfirmItemPopupComponent } from './stock-manager/confirmed-orders-of-retailers/confirm-item-popup/confirm-item-popup.component';
+import { ConfirmItemPopupComponent } from './shared/popups/confirm-item-popup/confirm-item-popup.component';
 import { MatDialogModule } from '@angular/material';
 import { StmConfirmOrderTempService } from './service/stm-confirm-order-temp.service';
+import { ItemDetailsPopupComponent } from './shared/popups/item-details-popup/item-details-popup.component';
 
 
 
@@ -201,12 +202,14 @@ import { StmConfirmOrderTempService } from './service/stm-confirm-order-temp.ser
     ConfirmOrderItemComponent,
     WelcomeNewCompanyComponent,
     TemporaryWelcomeComponent,
-    ConfirmItemPopupComponent
+    ConfirmItemPopupComponent,
+    ItemDetailsPopupComponent
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
     ConfirmDialogComponent,
-    ConfirmItemPopupComponent
+    ConfirmItemPopupComponent,
+    ItemDetailsPopupComponent
   ], 
   imports: [
     BrowserModule,

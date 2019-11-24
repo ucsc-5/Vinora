@@ -16,12 +16,18 @@
    
             </mat-card-content>
             <mat-card-actions>
-                    <form >
+                    <form [formGroup]="updateForm" >
                             <table class="" style="width: 159px" cellspacing="0">
                                     <tr>
                                     <td>
                                         <mat-form-field class="" style="width: 70%">
-                                                <input matInput #quantity type="number" min="0" placeholder="Quantity">
+                                                <input 
+                                                        matInput 
+                                                        #quantity 
+                                                        type="number" 
+                                                       
+                                                        placeholder="Quantity"
+                                                        formControlName="quantity">
 
                                         </mat-form-field>
                                         :{{item.type}}
@@ -31,19 +37,60 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                            <i class="material-icons" click="refresh()">
-                                                    cached
-                                            </i>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                                <button class="btn"  
+                                                                        data-toggle="tooltip"
+                                                                        title="Reset"  > 
+                                                                    
+                                                                        <i class="material-icons" (click)="refresh()">
+                                                                                        cached
+                                                                        </i>
+                                                                </button>
+            
+                                                                <button class="btn"  
+                                                                        data-toggle="tooltip"
+                                                                        title="Add more" > 
+                                                                        <i class="material-icons" (click)="addQuantity(item,quantity.value)">
+                                                                                        add
+                                                                        </i>
+                                                                </button>
 
-                                            <i class="material-icons" (click)="addQuantity(item,quantity.value)">
-                                                    add
-                                            </i>
-    
-                                            <i class="material-icons" (click)="reduceQuantity(item,quantity.value)">
-                                                    remove
-                                            </i>   
+                                                                <button class="btn"  
+                                                                        data-toggle="tooltip"
+                                                                        title="Redeuse" > 
+                                                                        <i class="material-icons" (click)="reduceQuantity(item,quantity.value)">
+                                                                                        remove
+                                                                                </i>  
+                                                                </button>
+
+                                                                <button class="btn"  
+                                                                        data-toggle="tooltip"
+                                                                        title="Drop item" > 
+                                                                        <mat-icon id="close-icon" style="margin-right: 50px;" color="warn" (click)="onRemove(item)">close</mat-icon>
+                                                                </button>
+
+                                                                <button class="btn"  
+                                                                        data-toggle="tooltip"
+                                                                        title="More details" > 
+                                                                        <i class="material-icons" (click)="itemDetails(item)">
+                                                                                        list_alt               
+                                                                        </i>  
+                                                                </button>
+
+
+            
+                                                                
+                                                        </div>
+
+
+
                                             
-                                            <mat-icon id="close-icon" style="margin-right: 50px;" color="warn" (click)="onRemove(item)">close</mat-icon>
+
+                                           
+    
+                                             
+                                            
+                                            
                                             
                                     </td>
                                        
