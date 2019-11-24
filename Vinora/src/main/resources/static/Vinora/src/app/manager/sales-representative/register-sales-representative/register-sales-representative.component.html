@@ -3,23 +3,38 @@
         <form class="example-form" (ngSubmit)="onAddSalesrepresentative(f)" #f="ngForm">
 
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder=" Name" name="fullName" ngModel >
+                        <input matInput placeholder=" Name" name="fullName" ngModel required>
+                        <mat-error *ngIf="!f.valid && f.touched">
+                                Please enter a name here!
+                        </mat-error>
                 </mat-form-field>
    
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Address" name="address" ngModel >
+                        <input matInput placeholder="Address" name="address" ngModel required>
+                        <mat-error *ngIf="!f.valid && f.touched">
+                                Please enter your address here
+                        </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Email" name="email" ngModel >
+                        <input matInput placeholder="Email" name="email" ngModel required>
+                        <mat-error *ngIf="!f.valid && f.touched">
+                                Please enter a valid email address
+                        </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Mobile" name="contactNumber" ngModel >
+                    <input matInput placeholder="Mobile" name="contactNumber" ngModel required>
+                    <mat-error *ngIf="!f.valid && f.touched">
+                        Please enter a valid contact number here!
+            </mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="NIC" name="nic" ngModel >
+                <input matInput placeholder="NIC" name="nic" ngModel required>
+                <mat-error *ngIf="!f.valid && f.touched">
+                        Please enter a valid NIC number!
+                </mat-error>
         </mat-form-field>
 
 <!-- 
@@ -31,7 +46,7 @@
         <input  placeholder="Description"  type="hidden"  name="state" ngModel  value="new">
             
 
-                <button class="btn btn-success">Register</button>
+                <button class="btn btn-success" [disabled]=!f.valid>Register</button>
                 
         </form>     
          
