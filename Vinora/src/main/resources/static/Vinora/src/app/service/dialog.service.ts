@@ -6,6 +6,7 @@ import { ConfirmItemPopupComponent } from '../shared/popups/confirm-item-popup/c
 import { CartItemId } from './cart.service';
 import { ItemDetailsPopupComponent } from '../shared/popups/item-details-popup/item-details-popup.component';
 import { ItemId } from './item.service';
+import { ResetPasswordPopupComponent } from '../shared/popups/reset-password-popup/reset-password-popup.component';
 
 
 @Injectable({
@@ -95,6 +96,21 @@ export class DialogService {
         quantity:item.quantity
       }
     }) 
+   }
+
+   openPaswordReset(message:string){
+    return this.dialog.open(ResetPasswordPopupComponent,{
+      width: '580px',
+      height: '800px',
+      disableClose: true,
+      // panelClass: 'confirm-dialog-container', 
+      
+      data:{
+        message: message
+      }
+    
+    }) 
+    
    }
 
 }

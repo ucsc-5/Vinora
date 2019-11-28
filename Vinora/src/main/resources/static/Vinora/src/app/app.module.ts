@@ -119,6 +119,8 @@ import { ConfirmItemPopupComponent } from './shared/popups/confirm-item-popup/co
 import { MatDialogModule } from '@angular/material';
 import { StmConfirmOrderTempService } from './service/stm-confirm-order-temp.service';
 import { ItemDetailsPopupComponent } from './shared/popups/item-details-popup/item-details-popup.component';
+import { ResetPasswordService } from './shared/routerGuards/reset-password.service';
+import { ResetPasswordPopupComponent } from './shared/popups/reset-password-popup/reset-password-popup.component';
 
 
 
@@ -203,13 +205,15 @@ import { ItemDetailsPopupComponent } from './shared/popups/item-details-popup/it
     WelcomeNewCompanyComponent,
     TemporaryWelcomeComponent,
     ConfirmItemPopupComponent,
-    ItemDetailsPopupComponent
+    ItemDetailsPopupComponent,
+    ResetPasswordPopupComponent
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
     ConfirmDialogComponent,
     ConfirmItemPopupComponent,
-    ItemDetailsPopupComponent
+    ItemDetailsPopupComponent,
+    ResetPasswordPopupComponent
   ], 
   imports: [
     BrowserModule,
@@ -248,6 +252,7 @@ import { ItemDetailsPopupComponent } from './shared/popups/item-details-popup/it
     ManagerGuardService,
     CompanyPermisionGuardService,
     ValidEmailGuardService,
+    ResetPasswordService,
     StmConfirmOrderTempService
     ],
   bootstrap: [AppComponent]

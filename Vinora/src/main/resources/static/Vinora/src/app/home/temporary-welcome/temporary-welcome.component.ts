@@ -9,6 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class TemporaryWelcomeComponent implements OnInit {
 
   notRegsiter
+  passwordNotReseted = true
 
   constructor(private router:Router,private route:ActivatedRoute) { }
 
@@ -17,8 +18,8 @@ export class TemporaryWelcomeComponent implements OnInit {
       if(param['type']==0){
         this.notRegsiter = true;
       }else if(param['type']==1){
-        this.notRegsiter = false
-      } 
+        this.notRegsiter = false;
+      }
     })
   }
 

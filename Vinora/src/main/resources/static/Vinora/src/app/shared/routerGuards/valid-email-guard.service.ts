@@ -45,6 +45,7 @@ export class ValidEmailGuardService implements CanActivate,CanActivateChild {
             this.afAuth.auth.currentUser.sendEmailVerification();
             this.router.navigate(['/temporaryWelcome',1]);   
           }else{
+           
             this.router.navigate(['/']);    
           }
         }) 

@@ -49,6 +49,7 @@ import { AdminGuardService } from './shared/routerGuards/admin-guard.service';
 import { CompanyPermisionGuardService } from './shared/routerGuards/company-permision-guard.service';
 import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.service';
 import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
+import { ResetPasswordService } from './shared/routerGuards/reset-password.service';
 
 
 
@@ -85,7 +86,9 @@ const routes: Routes = [
 
   {path: 'stockManager/:id' , component: StockManagerComponent,
         canActivate: [StockManagerGuardService],
-        // canActivateChild:[ValidEmailGuardService], 
+        canActivateChild:[ResetPasswordService,ValidEmailGuardService], 
+        // canActivateChild:[ResetPasswordService], 
+        
         children:[
             { path: '', component: StockManagerDashboardComponent},
             { path: 'updateItems', component: UpdateItemsComponent},
