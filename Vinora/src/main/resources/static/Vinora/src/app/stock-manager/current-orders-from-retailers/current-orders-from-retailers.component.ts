@@ -17,7 +17,7 @@ export class CurrentOrdersFromRetailersComponent implements OnInit {
   
   constructor(private afAuth: AngularFireAuth,private stockManagerService:StockManagerService,private orderService:OrderService) {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
-      // console.log(idTokenResult.claims.companyId);
+      console.log("This is the needed"+idTokenResult.claims.companyId);
       this.companyId= idTokenResult.claims.cmpId;
     })
   }

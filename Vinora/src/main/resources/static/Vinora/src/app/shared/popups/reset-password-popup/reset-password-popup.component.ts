@@ -1,9 +1,11 @@
 import { Component, OnInit , Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomPasswordValidator } from '../../custom-password-validator';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogService } from 'src/app/service/dialog.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+
 
 @Component({
   selector: 'app-reset-password-popup',
@@ -14,18 +16,21 @@ export class ResetPasswordPopupComponent implements OnInit {
 
   hide = true;
   valid = false;
-  emailMismatch = false;
   resetPasswordForm: FormGroup;
-  userEmail;
-
+  message
+  email
+  password
+  
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
-  public dialogRef: MatDialogRef<ResetPasswordPopupComponent>,private afAuth: AngularFireAuth,private dialogService:DialogService) {
-    this.userEmail=this.afAuth.auth.currentUser.email;
+  public dialogRef: MatDialogRef<ResetPasswordPopupComponent>,private afAuth: AngularFireAuth,private fns: AngularFireFunctions,private authService:AuthenticationService) {
+    
    }
 
   ngOnInit() {
     this.resetPasswordForm = new FormGroup({
+      'email' : new FormControl(null,[Validators.required,Validators.email]),
+      'currentPassword': new FormControl(null,[Validators.required]),
       'password': new FormControl(null,
         [ Validators.required,Validators.minLength(6),
           CustomPasswordValidator.patternValidator(/\d/, { hasNumber: true }),
@@ -35,13 +40,9 @@ export class ResetPasswordPopupComponent implements OnInit {
           // CustomPasswordValidator.patternValidator(/[ [!@#$%^&*()_+-=[]{};':"|,.<>/?(<mailto:!@#$%^&*()_+-=[]{};':"|,.<>/?>)]/, { hasSpecialCharacters: true }),
           // CustomValidators.patternValidator(/[ [!@#$%^&*()_+-=[]{};':"|,.<>/?]/](<mailto:!@#$%^&*()_+-=[]{};':"|,.<>/?]/>), { hasSpecialCharacters: true }),   
     ]),
-      'confirmPassword': new FormControl(null,[Validators.required,Validators.minLength(6)]),
-      'email': new FormControl(null,[Validators.required,Validators.email])
+      'confirmPassword': new FormControl(null,[Validators.required,Validators.minLength(6)])
+      
     });
-
-    if(this.userEmail===this.resetPasswordForm.value.email){
-      this.emailMismatch = true
-    }
 
     this.resetPasswordForm.statusChanges.subscribe(state=>{
       console.log(state);
@@ -53,9 +54,33 @@ export class ResetPasswordPopupComponent implements OnInit {
     });    
   }
   
-  // onResetPassword(){
-  //   this.afAuth.auth.currentUser.updatePassword(this.resetPasswordForm.value.password);
-  // }
+  onResetPassword(){
+
+    this.email = this.resetPasswordForm.value.email;
+    this.password = this.resetPasswordForm.value.password;
+    this.authService.login(this.email,this.password).then(res=>{
+      this.resetPasswordForm.setValue({'email' : new FormControl(null), 'currentPassword': new FormControl(null)});
+      this.message="Please check your email and password again!!"           
+     }).catch(error=>{
+       console.log(" this is the error  "+error);
+      
+     })
+   
+
+   
+     
+        // this.afAuth.auth.currentUser.updatePassword(this.resetPasswordForm.value.password);
+        // const callable =  this.fns.httpsCallable('setPasswordTrue');
+        //                           callable({email:this.email}).subscribe(
+        //                             (response)=>{
+        //                                 console.log(response);     
+        //                             },()=>{},
+        //                             ()=>{
+        //                               this.dialogRef.close(true);
+        //                             });
+   
+
+  }
 
   closeDialog(){
     this.dialogRef.close(false);

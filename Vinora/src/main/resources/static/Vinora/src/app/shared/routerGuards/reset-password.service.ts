@@ -30,17 +30,16 @@ export class ResetPasswordService implements CanActivateChild {
             this.router.navigate(['/']);    
           }
         }) 
-
-       
-      }else if(!idTokenResult.claims.pwd){
+      }else if(!idTokenResult.claims.pswd){
 
         const message2="Please reset your password!"
         this.dialogService.openPaswordReset(message2).afterClosed().subscribe(
           res=>{
             if(res){
               console.log(res);
-              
-              // this.afAuth.auth.currentUser.updatePassword();
+              this.router.navigate(['/home/login']);
+              return true;
+             
             }else{
               this.router.navigate(['/']);  
             }})

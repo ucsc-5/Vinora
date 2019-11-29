@@ -86,7 +86,7 @@ const routes: Routes = [
 
   {path: 'stockManager/:id' , component: StockManagerComponent,
         canActivate: [StockManagerGuardService],
-        canActivateChild:[ResetPasswordService,ValidEmailGuardService], 
+        canActivateChild:[ResetPasswordService], 
         // canActivateChild:[ResetPasswordService], 
         
         children:[
