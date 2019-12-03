@@ -14,9 +14,9 @@ export class ResetPasswordService implements CanActivateChild {
   constructor(private afAuth: AngularFireAuth, private router: Router,private dialogService:DialogService) {}
 
   canActivateChild(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):Observable<boolean>| Promise<boolean>| boolean {
-
     return this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
-      if(idTokenResult.claims.pwd && this.afAuth.auth.currentUser.emailVerified){
+          
+      if((idTokenResult.claims.pswd)&&(this.afAuth.auth.currentUser.emailVerified)){
         return true
       }else if(!this.afAuth.auth.currentUser.emailVerified){
         const message1=`Veryfy my email address ${this.afAuth.auth.currentUser.email}`;

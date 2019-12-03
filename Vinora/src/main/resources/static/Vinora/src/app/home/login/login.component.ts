@@ -47,8 +47,9 @@ export class LoginComponent implements OnInit {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
     const email = form.value.email;
     const password = form.value.password;
-     this.authService.login(email,password).then(res=>{
-      //  console.log(" this is the response "+res);
+    // this.authService.logout();
+    this.authService.login(email,password).then(res=>{
+       console.log(" this is the response "+res);
       this.message="Please check your email and password again!!"
       setTimeout(() => {
         this.message=null;
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
        
      }).catch(error=>{
        console.log(" this is the error  "+error);
-      //  this.message=error;
+  
      })
 
     this.showSpinner=true;

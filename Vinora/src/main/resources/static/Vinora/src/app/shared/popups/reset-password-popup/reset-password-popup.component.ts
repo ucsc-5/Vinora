@@ -20,6 +20,7 @@ export class ResetPasswordPopupComponent implements OnInit {
   message
   email
   password
+  currentPassword
   
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
@@ -58,27 +59,33 @@ export class ResetPasswordPopupComponent implements OnInit {
 
     this.email = this.resetPasswordForm.value.email;
     this.password = this.resetPasswordForm.value.password;
-    this.authService.login(this.email,this.password).then(res=>{
-      this.resetPasswordForm.setValue({'email' : new FormControl(null), 'currentPassword': new FormControl(null)});
-      this.message="Please check your email and password again!!"           
-     }).catch(error=>{
-       console.log(" this is the error  "+error);
-      
-     })
-   
+    this.currentPassword = this.resetPasswordForm.value.currentPassword;
 
-   
-     
-        // this.afAuth.auth.currentUser.updatePassword(this.resetPasswordForm.value.password);
-        // const callable =  this.fns.httpsCallable('setPasswordTrue');
-        //                           callable({email:this.email}).subscribe(
-        //                             (response)=>{
-        //                                 console.log(response);     
-        //                             },()=>{},
-        //                             ()=>{
-        //                               this.dialogRef.close(true);
-        //                             });
-   
+    console.log(this.currentPassword);
+    
+    this.afAuth.auth.signInWithEmailAndPassword(this.email,this.currentPassword).then(res=>{
+      console.log("this is the response"+res.user.email);
+      if(res.user.emailVerified){
+          console.log(this.afAuth.auth.currentUser.email);
+           this.afAuth.auth.currentUser.updatePassword(this.resetPasswordForm.value.password).then(
+             res=>{
+               const callable =  this.fns.httpsCallable('setPasswordTrue');
+                                     callable({email:this.email}).subscribe(
+                                       (response)=>{
+                                           console.log(response); 
+                                           this.authService.logout();    
+                                       },()=>{},
+                                       ()=>{
+                                         this.dialogRef.close(true);
+                                       });   
+
+             },()=>{}
+           )
+      }
+    }).catch(error=>{
+      console.log(" this is the error  "+error);
+      this.message="Please check your email and password again!!"      
+    })
 
   }
 

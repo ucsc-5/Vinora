@@ -42,9 +42,14 @@ export class AuthenticationService {
    }
 
   async login(email: string, password: string) {
+   
+    
     await this.afAuth.auth.signOut();
-      var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password).then(()=>{
+      var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((res)=>{
+     
+        
         this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+          
           if(idTokenResult.claims.retailer){
             this.router.navigate(['/retailer/',this.user.uid]);
           }else if(idTokenResult.claims.manager){
@@ -64,6 +69,8 @@ export class AuthenticationService {
         )   
         
       }).catch(function(error){
+        console.log("this is the new error"+error);
+        
       return error.message
       });
 
