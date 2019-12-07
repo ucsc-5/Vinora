@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
     this.showSpinner=true;
 
     // this.authService.login('admin@gmail.com','123123'); //for admin
-    //  this.authService.login('chamod999@gmail.com','0714954149'); //for stock manager
+     this.authService.login('chamod999@gmail.com','0714954149'); //for stock manager
     // this.authService.login('ret1@gmail.com','123123'); //for retailer
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
