@@ -13,7 +13,12 @@
                     Item total: <b>{{item.total}} .00 Rs/-</b><br>              
                     </p>       
             </mat-card-content>    
-            <mat-card-actions>
+            <mat-card-actions *ngIf="!buttonFalse">
                     <button mat-raised-button (click)="onAdd()">Add</button>
-            </mat-card-actions>               
+            </mat-card-actions>    
+            
+            <mat-card-actions *ngIf="buttonFalse">
+                <button mat-raised-button (click)="onDrop()">Drop</button>
+            </mat-card-actions>    
+        
         </mat-card>

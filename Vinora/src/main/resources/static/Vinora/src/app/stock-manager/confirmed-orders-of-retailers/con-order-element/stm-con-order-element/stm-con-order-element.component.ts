@@ -12,6 +12,9 @@ export class StmConOrderElementComponent implements OnInit {
 
   @Input() item:CartItemId
   @Input() orderId:string
+  @Input() buttonFalse: Boolean
+  @Input() orderTotal: number
+
   constructor(private dialogService:DialogService,private tempOrder:StmConfirmOrderTempService) { }
 
   ngOnInit() {
@@ -26,7 +29,7 @@ export class StmConOrderElementComponent implements OnInit {
           this.dialogService.openConfirmDialog("confirm").afterClosed().subscribe(
             res2=>{
               if(res2){
-                this.tempOrder.addItems(this.item,this.orderId);
+                this.tempOrder.addItems(this.item,this.orderId,this.orderTotal);
               }
             }
           )
@@ -36,6 +39,19 @@ export class StmConOrderElementComponent implements OnInit {
 
     console.log(this.item);
     
+  }
+
+  onDrop(){
+
+    this.dialogService.openConfirmDialog("confirm").afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.tempOrder.dropItems(this.item.id,this.orderId).then(response=>{
+            console.log("Item droped");
+          }).catch(er=>{
+            console.log("The Error "+er);
+          })
+        }})
   }
 
 }

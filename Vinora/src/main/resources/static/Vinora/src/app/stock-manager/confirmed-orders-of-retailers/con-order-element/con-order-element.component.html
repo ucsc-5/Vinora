@@ -25,11 +25,24 @@
         </div>
     </div>
     
-    <div class="row"  *ngIf="items | async; let items ; else">
-        <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId"></app-stm-con-order-element>
+    <div class="row"  *ngIf="items | async; let items">
+        <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [orderTotal]="orderTotal"></app-stm-con-order-element>
+    </div>
+
+    <div class="row" *ngIf="setItems|  async; let items ">
+      <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [buttonFalse]="true" [orderTotal]="orderTotal"></app-stm-con-order-element>
+    </div>
+    
+    <div *ngIf="allowRefAssign">
+      <button mat-button >
+        Assign Representative here
+        <i class="material-icons"></i>   Inform
+      </button>
     </div>
     
     <br>
     <br>
     <br>
+
+  
     

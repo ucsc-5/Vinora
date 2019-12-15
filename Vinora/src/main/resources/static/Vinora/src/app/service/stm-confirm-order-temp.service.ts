@@ -26,8 +26,28 @@ export class StmConfirmOrderTempService {
     
   }
 
-  addItems(item:CartItemId,orderId:string){
+  addItems(item:CartItemId,orderId:string,orderTotal:number){
+      // this.orderCollection.doc(orderId).set({total:orderTotal});
       this.orderCollection.doc(orderId).collection('items').doc(item.id).set(item);
+      console.log("This function is running");
+      
+  }
+
+  dropItems(itemId:string,orderId:string){
+    console.log("Order Key: "+orderId+"Item id: "+itemId+"This is the keys");
+    console.log("This function is running Deleting");
+    return this.orderCollection.doc(orderId).collection('items').doc(itemId).delete();
+  }
+
+  getItemsByOrderId(orderKey:string){
+    this.items = this.orderCollection.doc(orderKey).collection('items').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as CartItem;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return this.items;
   }
 
 
