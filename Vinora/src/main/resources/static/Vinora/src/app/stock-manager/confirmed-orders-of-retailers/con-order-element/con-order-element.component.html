@@ -7,8 +7,9 @@
               <div class="col col-3">    
                   <p>
                     {{retailer.email}}
-                    <!-- <b>Purches Date: </b> {{currentOrder.createDate}}<br> -->
-                    <!-- <b>Total Amount: </b> {{currentOrder.total}} .00 Rs/-<br> -->
+                    <br>
+                    <b>Purches Date: </b> {{order.createDate}}<br>
+                    <b>Total Amount: </b> {{order.total}} .00 Rs/-<br>
                   </p>
                   <button mat-button (focus)="myfunction()">
                     <i class="material-icons">perm_phone_msg</i>   Inform
@@ -29,15 +30,25 @@
         <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [orderTotal]="orderTotal"></app-stm-con-order-element>
     </div>
 
-    <div class="row" *ngIf="setItems|  async; let items ">
+    <div class="row" *ngIf="setItems|  async; let items" style="background-color: darkgrey;">
       <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [buttonFalse]="true" [orderTotal]="orderTotal"></app-stm-con-order-element>
     </div>
     
     <div *ngIf="allowRefAssign">
-      <button mat-button >
-        Assign Representative here
-        <i class="material-icons"></i>   Inform
-      </button>
+
+      <form  *ngIf="salesRepresentatives | async; let salesRepresentatives">
+        <h4>Assigning Rep</h4>
+        <mat-form-field>
+          <mat-label>Sales Representatives</mat-label>
+          <mat-select [(ngModel)]="selectedRep">
+            <mat-option *ngFor="let salesRepresentative of salesRepresentatives" [value]="salesRepresentative.fullName">
+              {{salesRepresentative.fullName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p> Selected Rep: {{selectedRep}} </p>
+      </form>
+
     </div>
     
     <br>

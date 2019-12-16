@@ -121,6 +121,7 @@ import { StmConfirmOrderTempService } from './service/stm-confirm-order-temp.ser
 import { ItemDetailsPopupComponent } from './shared/popups/item-details-popup/item-details-popup.component';
 import { ResetPasswordService } from './shared/routerGuards/reset-password.service';
 import { ResetPasswordPopupComponent } from './shared/popups/reset-password-popup/reset-password-popup.component';
+import { SalesRepresentativeService } from './service/sales-representative.service';
 
 
 
@@ -253,7 +254,8 @@ import { ResetPasswordPopupComponent } from './shared/popups/reset-password-popu
     CompanyPermisionGuardService,
     ValidEmailGuardService,
     ResetPasswordService,
-    StmConfirmOrderTempService
+    StmConfirmOrderTempService,
+    SalesRepresentativeService
     ],
   bootstrap: [AppComponent]
   

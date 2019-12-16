@@ -6,6 +6,7 @@ import { CartItemId,CartItem } from 'src/app/service/cart.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { StmConfirmOrderTempService } from 'src/app/service/stm-confirm-order-temp.service';
+import { SalesRepresentativeId, SalesRepresentativeService } from 'src/app/service/sales-representative.service';
 
 @Component({
   selector: 'app-con-order-element',
@@ -17,13 +18,18 @@ export class ConOrderElementComponent implements OnInit {
   @Input() order: OrderId
   retailers: Observable<RetailerId[]>
   items: Observable<CartItemId[]>
-  orderId:string
   setItems: Observable<CartItemId[]>
+  salesRepresentatives: Observable<SalesRepresentativeId[]>
+  
+  orderId:string
   orderTotal:number
   tempOrderTotal:number
   allowRefAssign= false;
+  selectedRep: string;
 
-  constructor(private orderService:OrderService,private retailerServie:RetailerService,private afs: AngularFirestore,private tempItems:StmConfirmOrderTempService) { }
+
+
+  constructor(private salesRepService:SalesRepresentativeService,private orderService:OrderService,private retailerServie:RetailerService,private afs: AngularFirestore,private tempItems:StmConfirmOrderTempService) { }
 
   ngOnInit() {
     this.orderId=this.order.id;
@@ -37,6 +43,12 @@ export class ConOrderElementComponent implements OnInit {
     if(this.orderTotal==this.tempOrderTotal){
       this.allowRefAssign= true;
     }
+
+    this.salesRepresentatives =  this.salesRepService.getSalesRepByCompanyId(this.order.companyId);
+    this.salesRepresentatives.forEach(x=>{
+      console.log(x);
+      
+    })
   }
 
   
