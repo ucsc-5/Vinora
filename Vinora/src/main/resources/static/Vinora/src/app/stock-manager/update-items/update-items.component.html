@@ -1,5 +1,5 @@
- <div class="row">
-         <app-stock-manager-update *ngFor="let stockManager of stockManager | async" [stockManager]="stockManager"></app-stock-manager-update>
+ <div class="row">      
+        <app-update-item-element *ngFor="let item of items | async" [item]="item"></app-update-item-element>
  </div>
     
 

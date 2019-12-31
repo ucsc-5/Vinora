@@ -47,7 +47,7 @@ import { RegisteredItemsComponent } from './manager/registered-items/registered-
 import { RegItemElementComponent } from './manager/registered-items/reg-item-element/reg-item-element.component';
 import { RegisterDCompanyComponent } from './home/register-d-company/register-d-company.component';
 import { UpdateItemsComponent } from './stock-manager/update-items/update-items.component';
-import { UpdateItemElementComponent } from './stock-manager/update-items/stock-manager-update/update-item-element/update-item-element.component';
+import { UpdateItemElementComponent } from './stock-manager/update-items/update-item-element/update-item-element.component';
 import { VehicleRegisterComponent } from './manager/vehicle/vehicle-register/vehicle-register.component';
 import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 import { CartItemElemetComponent } from './retailer/my-cart/cart-item-elemet/cart-item-elemet.component';
@@ -84,7 +84,6 @@ import { RetRegCompanyElementComponent } from './retailer/retailer-registered-co
 import { StockManagerService } from './service/stock-manager.service';
 import { StockManagerDashboardComponent } from './stock-manager/stock-manager-dashboard/stock-manager-dashboard.component';
 import { StockManagerProfileComponent } from './stock-manager/stock-manager-profile/stock-manager-profile.component';
-import { StockManagerUpdateComponent } from './stock-manager/update-items/stock-manager-update/stock-manager-update.component';
 import { OrderFromCompanyComponent } from './retailer/new-order/order-from-company/order-from-company.component';
 import { OrderItemElementComponent } from './retailer/new-order/order-from-company/order-item-element/order-item-element.component';
 import { OrderSummeryComponent } from './retailer/new-order/order-from-company/order-summery/order-summery.component';
@@ -122,8 +121,6 @@ import { ItemDetailsPopupComponent } from './shared/popups/item-details-popup/it
 import { ResetPasswordService } from './shared/routerGuards/reset-password.service';
 import { ResetPasswordPopupComponent } from './shared/popups/reset-password-popup/reset-password-popup.component';
 import { SalesRepresentativeService } from './service/sales-representative.service';
-
-
 
 
 @NgModule({
@@ -183,7 +180,6 @@ import { SalesRepresentativeService } from './service/sales-representative.servi
     RetRegCompanyElementComponent,
     StockManagerDashboardComponent,
     StockManagerProfileComponent,
-    StockManagerUpdateComponent,
     OrderFromCompanyComponent,
     OrderItemElementComponent,
     OrderSummeryComponent,
@@ -207,7 +203,7 @@ import { SalesRepresentativeService } from './service/sales-representative.servi
     TemporaryWelcomeComponent,
     ConfirmItemPopupComponent,
     ItemDetailsPopupComponent,
-    ResetPasswordPopupComponent
+    ResetPasswordPopupComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

@@ -27,7 +27,7 @@ export class StmConfirmOrderTempService {
   }
 
   addItems(item:CartItemId,orderId:string,orderTotal:number){
-      // this.orderCollection.doc(orderId).set({total:orderTotal});
+      this.orderCollection.doc(orderId).set({total:orderTotal});
       this.orderCollection.doc(orderId).collection('items').doc(item.id).set(item);
       console.log("This function is running");
       

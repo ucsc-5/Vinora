@@ -49,7 +49,7 @@
                   <h5 class="h5">Reset my password</h5>
                   <form class="example-form" [formGroup]="resetPasswordForm">
                     <mat-form-field class="example-full-width">
-                               <input formControlName="password" name="password"   minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" value="" > 
+                               <input formControlName="password" name="password"  appEqualValidator="confirmPassword" minlength="6" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" value="" > 
                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                </button>

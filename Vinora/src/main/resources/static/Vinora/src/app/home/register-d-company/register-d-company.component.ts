@@ -7,6 +7,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, from } from 'rxjs';
+import { CustomPasswordValidator } from 'src/app/shared/custom-password-validator';
+
 import { idTokenResult } from '@angular/fire/auth-guard';
 import { CompanyService, Company } from 'src/app/service/company.service';
 import { RetailerService } from 'src/app/service/retailer.service';
@@ -42,20 +44,33 @@ export class RegisterDCompanyComponent implements OnInit {
     // this.companyId = this.afAuth.auth.currentUser.uid;
   }
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      companyName: ['', Validators.required],
-      address: ['', Validators.required],
-      password: ['', [Validators.required,Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required,Validators.minLength(6)]]  
-    });
-    
-    this.secondFormGroup = this._formBuilder.group({
-      email: ['', [Validators.required,Validators.email]],
-      managerName: ['', Validators.required],
-      managerNic: ['', Validators.required],
-      tel: ['', Validators.required],
-    });
 
+  
+    this.firstFormGroup = new FormGroup({
+
+      'companyName': new FormControl(null,[Validators.required]),
+      'address': new FormControl(null,[Validators.required]),
+      'password': new FormControl(null,
+        [ Validators.required,Validators.minLength(6),
+          CustomPasswordValidator.patternValidator(/\d/, { hasNumber: true }),
+          CustomPasswordValidator.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+          CustomPasswordValidator.patternValidator(/[a-z]/, { hasSmallCase: true })
+        ]),
+      'confirmPassword': new FormControl(null,
+        [Validators.required,Validators.minLength(6)])
+    })
+
+    
+
+    this.secondFormGroup = new FormGroup({
+      'email': new FormControl(null,
+        [Validators.email,Validators.required]),
+      'managerName': new FormControl(null,
+        [Validators.required]),
+      'managerNic': new FormControl(null,
+        [Validators.required]),
+      'tel': new FormControl(null,[Validators.required])
+    })
    
   }
   get fval(){

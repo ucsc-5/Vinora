@@ -85,8 +85,8 @@ const routes: Routes = [
   ]},
 
   {path: 'stockManager/:id' , component: StockManagerComponent,
-        // canActivate: [StockManagerGuardService],
-        // canActivateChild:[ResetPasswordService], 
+        canActivate: [StockManagerGuardService],
+        canActivateChild:[ResetPasswordService], 
         
         
         children:[
@@ -98,8 +98,8 @@ const routes: Routes = [
   ]},
 
   {path: 'manager/:id', component: ManagerComponent,
-        // canActivate: [ManagerGuardService,CompanyPermisionGuardService],
-        // canActivateChild:[ValidEmailGuardService],
+        canActivate: [ManagerGuardService,CompanyPermisionGuardService],
+        canActivateChild:[ValidEmailGuardService],
 
         children:[
             {path: '' ,component :ManagerDashboardComponent},

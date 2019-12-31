@@ -17,7 +17,6 @@ export class EqualValidatorDirective implements Validator {
 
         const controlToCompare = control.parent.get(this.appEqualValidator);
         if(controlToCompare && controlToCompare.value !==control.value){
-
             return{'notEqual': true};
         }
 

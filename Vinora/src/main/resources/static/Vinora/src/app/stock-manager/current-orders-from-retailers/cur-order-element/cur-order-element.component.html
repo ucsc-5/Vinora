@@ -6,9 +6,9 @@
           </div>
           <div class="col col-3">    
               <p>
-                {{retailer.email}}
-                <!-- <b>Purches Date: </b> {{currentOrder.createDate}}<br> -->
-                <!-- <b>Total Amount: </b> {{currentOrder.total}} .00 Rs/-<br> -->
+                <b>Retailer: </b> {{retailer.email}}<br>
+                <b>Purches Date: </b> {{order.createDate}}<br>
+                <b>Total Amount: </b> {{order.total}} .00 Rs/-<br>
               </p>
               <button mat-button (focus)="myfunction()">
                 <i class="material-icons">perm_phone_msg</i>   Inform
