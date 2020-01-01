@@ -62,10 +62,11 @@ export class OrderItemElementComponent implements OnInit {
             const itemId = this.item.id;
             const type = this.item.type;
             const total = quantity*this.item.unitPrice;
+            const stmadded = false;
              
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
               x=>{
-                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total};
+                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded};
                 this.cartService.setItemsToCart(cartItem);
                 return "done";
               }

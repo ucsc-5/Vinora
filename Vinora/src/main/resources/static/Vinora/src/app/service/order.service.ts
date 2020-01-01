@@ -15,6 +15,7 @@ export interface Order{
     companyId: string;
     total: number;
     state: number;
+    tempTotal: number;
 }
 
 
@@ -47,14 +48,15 @@ export class OrderService {
 
   addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
     let createDate = new Date().toLocaleString();
-    const state=0;
+    const state=-1;
+    const tempTotal=0;
     let total:number=this.total;
     cartItems.forEach(element=>{
       this.orderCollection.doc(id).collection('items').doc(element.id).set(element);
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
-    const order: Order ={createDate,retailerId,companyId,total,state};
+    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal};
     this.orderCollection.doc(id).set(order);
   }
 
@@ -135,11 +137,52 @@ getItemsByOrderId(orderKey:string){
 }
 
 updateState(id:string,stateValue:number){
-  return this.afs.collection('orders').doc(id).update({state:stateValue});
+  this.afs.collection('orders').doc(id).update({state:stateValue});
+  this.afs.collection('orders').doc(id).update({tempTotal:0});
 }
 
-setItemForOrder(){
-  
+stockManagerAddItem(orderKey:string,itemId:string,itemsPrice:number){
+    this.afs.collection('orders').doc(orderKey).collection('items').doc(itemId).update({stmadded:true}).then(x=>{
+      this.afs.collection('orders').doc(orderKey).get().subscribe(
+        x2=>{
+          const newTotal=x2.data().tempTotal+itemsPrice;
+          this.afs.collection('orders').doc(orderKey).update({tempTotal:newTotal}).then().catch(
+            error=>{
+              console.log(error+" this is error in update tempTotal");
+              return error;
+            }
+          )
+        }
+      )
+    }).catch(error=>{
+      console.log(error+" This is the error of update the stmadded ");
+      return error;
+    })
+ 
+}
+
+stockManagerDropItem(orderKey:string,itemId:string,itemsPrice:number){
+  this.afs.collection('orders').doc(orderKey).collection('items').doc(itemId).update({stmadded:false}).then(x=>{
+    this.afs.collection('orders').doc(orderKey).get().subscribe(
+      x2=>{
+        const newTotal=x2.data().tempTotal-itemsPrice;
+        this.afs.collection('orders').doc(orderKey).update({tempTotal:newTotal}).then().catch(
+          error=>{
+            console.log(error+" this is error in update tempTotal");
+            return error;
+          }
+        )
+      }
+    )
+  }).catch(error=>{
+    console.log(error+" this the error of updating in stmadded");
+    return error;
+  })
+
+}
+
+setStmAddedFeild(orderKey:string,itemId:string){
+  this.afs.collection('orders').doc(orderKey).collection('items').doc(itemId).update({stmadded:false});
 }
 
   

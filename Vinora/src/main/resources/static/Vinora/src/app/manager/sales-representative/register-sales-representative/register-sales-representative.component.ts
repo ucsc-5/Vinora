@@ -56,29 +56,34 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
           const companyId = this.companyId;
           const salesRefImagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
           const state = "0";
+          
          
           const id = this.afs.createId();
       
-          const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,salesRefImagePath,state,companyId};
           
-          console.log(salesrepresentative);
           
           
           const callable = this.fns.httpsCallable('addRole');
-          var createUser=this.afAuth.auth.createUserWithEmailAndPassword(email,nic);
-          callable({email:email,role:this.type,companyId:this.companyId}).subscribe(
-            (response)=>{
-                 console.log(response);
-            },
-            ()=>{},
-            ()=>{
-              createUser.then( (data)=>{
-                this.salesRepresentativeCollection.doc(id).set(salesrepresentative);
-              });
-         }
-        ) 
+          var createUser=this.afAuth.auth.createUserWithEmailAndPassword(email,nic).then(
+            response=>{
+              const saleRepId = response.user.uid;
 
-
+              callable({email:email,role:this.type,companyId:this.companyId}).subscribe(
+                (response)=>{
+                  console.log(response);  
+                },
+                ()=>{},
+                ()=>{
+                  createUser.then( (data)=>{
+                    
+                    const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,salesRefImagePath,state,companyId,saleRepId};
+                    console.log(salesrepresentative);
+                    this.salesRepresentativeCollection.doc(id).set(salesrepresentative);
+                  });
+             }
+            ) 
+            }
+          )
         }})
             
 

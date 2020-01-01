@@ -12,6 +12,7 @@ export interface SalesRepresentative{
   nic:string;
   state: string;
   companyId: string;
+  saleRepId: string;
   
 }
 

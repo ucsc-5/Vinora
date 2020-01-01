@@ -5,8 +5,10 @@ import { RetailerId, RetailerService } from 'src/app/service/retailer.service';
 import { CartItemId,CartItem } from 'src/app/service/cart.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { StmConfirmOrderTempService } from 'src/app/service/stm-confirm-order-temp.service';
+import { FormControl, Validators } from '@angular/forms';
+
 import { SalesRepresentativeId, SalesRepresentativeService } from 'src/app/service/sales-representative.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-con-order-element',
@@ -26,32 +28,40 @@ export class ConOrderElementComponent implements OnInit {
   tempOrderTotal:number
   allowRefAssign= false;
   selectedRep: string;
+  selectRep: FormGroup;
 
 
 
-  constructor(private salesRepService:SalesRepresentativeService,private orderService:OrderService,private retailerServie:RetailerService,private afs: AngularFirestore,private tempItems:StmConfirmOrderTempService) { }
+  constructor(private salesRepService:SalesRepresentativeService,private orderService:OrderService,private retailerServie:RetailerService,private afs: AngularFirestore) { }
 
   ngOnInit() {
     this.orderId=this.order.id;
-    this.orderTotal= this.order.total;
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.items=this.orderService.getItemsByOrderId(this.order.id);
-    this.setItems =this.tempItems.getItemsByOrderId(this.order.id); 
-
-    this.tempOrderTotal=this.orderTotal=100;
-
-    if(this.orderTotal==this.tempOrderTotal){
+    
+    if(this.order.total==this.order.tempTotal){
       this.allowRefAssign= true;
     }
 
     this.salesRepresentatives =  this.salesRepService.getSalesRepByCompanyId(this.order.companyId);
     this.salesRepresentatives.forEach(x=>{
       console.log(x);
-      
     })
+
+    // this.selectRep = new FormGroup({
+
+    //   'companyName': new FormControl(null,[Validators.required]),})
+
   }
 
+  selected(event){
+    console.log(event);
+    
+  }
   
+  assign(){
+    console.log(this.selectedRep);
+  }
 
 
 }

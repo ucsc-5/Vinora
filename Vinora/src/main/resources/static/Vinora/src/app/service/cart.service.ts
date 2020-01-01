@@ -10,6 +10,7 @@ export interface CartItem extends Item{
   itemId: string;
   retailerId: string;
   total: number;
+  stmadded: boolean;
 }
 
 export interface CartItemId extends CartItem{

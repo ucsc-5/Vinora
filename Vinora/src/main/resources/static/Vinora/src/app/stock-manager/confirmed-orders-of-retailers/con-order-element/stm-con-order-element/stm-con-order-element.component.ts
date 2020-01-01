@@ -1,23 +1,35 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartItemId } from 'src/app/service/cart.service';
 import { DialogService } from 'src/app/service/dialog.service';
-import { StmConfirmOrderTempService } from 'src/app/service/stm-confirm-order-temp.service';
+import { OrderService } from 'src/app/service/order.service';
+
 
 @Component({
   selector: 'app-stm-con-order-element',
   templateUrl: './stm-con-order-element.component.html',
+  styles:[`
+    .online{
+      color: red;
+    }
+  `],
   styleUrls: ['./stm-con-order-element.component.css']
 })
 export class StmConOrderElementComponent implements OnInit {
 
   @Input() item:CartItemId
   @Input() orderId:string
-  @Input() buttonFalse: Boolean
+  added: Boolean
+  
   @Input() orderTotal: number
 
-  constructor(private dialogService:DialogService,private tempOrder:StmConfirmOrderTempService) { }
+  constructor(private dialogService:DialogService,private orderService:OrderService) { }
 
   ngOnInit() {
+    if(this.item.stmadded){
+      this.added=true;
+    }else{
+      this.added=false;
+    }
   }
 
   onAdd(){
@@ -29,7 +41,8 @@ export class StmConOrderElementComponent implements OnInit {
           this.dialogService.openConfirmDialog("confirm").afterClosed().subscribe(
             res2=>{
               if(res2){
-                this.tempOrder.addItems(this.item,this.orderId,this.orderTotal);
+                this.orderService.stockManagerAddItem(this.orderId,this.item.id,this.item.total);
+                // this.tempOrder.addItems(this.item,this.orderId,this.orderTotal);
               }
             }
           )
@@ -46,11 +59,7 @@ export class StmConOrderElementComponent implements OnInit {
     this.dialogService.openConfirmDialog("confirm").afterClosed().subscribe(
       res=>{
         if(res){
-          this.tempOrder.dropItems(this.item.id,this.orderId).then(response=>{
-            console.log("Item droped");
-          }).catch(er=>{
-            console.log("The Error "+er);
-          })
+          this.orderService.stockManagerDropItem(this.orderId,this.item.id,this.item.total);
         }})
   }
 

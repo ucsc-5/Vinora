@@ -30,23 +30,24 @@
         <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [orderTotal]="orderTotal"></app-stm-con-order-element>
     </div>
 
-    <div class="row" *ngIf="setItems|  async; let items" style="background-color: darkgrey;">
-      <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [buttonFalse]="true" [orderTotal]="orderTotal"></app-stm-con-order-element>
-    </div>
     
-    <div *ngIf="allowRefAssign">
-
-      <form  *ngIf="salesRepresentatives | async; let salesRepresentatives">
+    <div [ngClass]="{assign: !allowRefAssign}" *ngIf="salesRepresentatives | async; let salesRepresentatives">
+      <form [formGroup]="selectRep" >
         <h4>Assigning Rep</h4>
         <mat-form-field>
           <mat-label>Sales Representatives</mat-label>
-          <mat-select [(ngModel)]="selectedRep">
-            <mat-option *ngFor="let salesRepresentative of salesRepresentatives" [value]="salesRepresentative.fullName">
+          <mat-select  [(ngModel)]="selectedRep" (change)="selected($event)">
+            <mat-option *ngFor="let salesRepresentative of salesRepresentatives" [value]="salesRepresentative">
               {{salesRepresentative.fullName}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <p> Selected Rep: {{selectedRep}} </p>
+        
+
+        <button mat-button (click)="assign()"  [disabled]="!allowRefAssign" >
+          Assign now
+        </button>
+
       </form>
 
     </div>
