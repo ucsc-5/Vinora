@@ -47,18 +47,18 @@ export class LoginComponent implements OnInit {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
     const email = form.value.email;
     const password = form.value.password;
-    // this.authService.logout();
-    // this.authService.login(email,password).then(res=>{
-    //    console.log(" this is the response "+res);
-    //   this.message="Please check your email and password again!!"
-    //   setTimeout(() => {
-    //     this.message=null;
-    //    }, 2000);
+    this.authService.logout();
+    this.authService.login(email,password).then(res=>{
+       console.log(" this is the response "+res);
+      this.message="Please check your email and password again!!"
+      setTimeout(() => {
+        this.message=null;
+       }, 2000);
        
-    //  }).catch(error=>{
-    //    console.log(" this is the error  "+error);
+     }).catch(error=>{
+       console.log(" this is the error  "+error);
   
-    //  })
+     })
 
     this.showSpinner=true;
 
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
     // this.authService.login('royalvintage@gmail.com','654321'); //for Manager
    
-    this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
+    // this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
     
 
     this.showSpinner=false;

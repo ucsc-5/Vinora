@@ -6,6 +6,7 @@ import { CartItemId,CartItem } from 'src/app/service/cart.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
+import { DialogService } from 'src/app/service/dialog.service';
 
 import { SalesRepresentativeId, SalesRepresentativeService } from 'src/app/service/sales-representative.service';
 import { FormGroup } from '@angular/forms';
@@ -27,30 +28,31 @@ export class ConOrderElementComponent implements OnInit {
   orderTotal:number
   tempOrderTotal:number
   allowRefAssign= false;
-  selectedRep: string;
+  formValid= false;
+  selectedRepId: string;
   selectRep: FormGroup;
 
 
 
-  constructor(private salesRepService:SalesRepresentativeService,private orderService:OrderService,private retailerServie:RetailerService,private afs: AngularFirestore) { }
+  constructor(private dialogService:DialogService,private salesRepService:SalesRepresentativeService,private orderService:OrderService,private retailerServie:RetailerService,private afs: AngularFirestore) { }
 
   ngOnInit() {
     this.orderId=this.order.id;
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.items=this.orderService.getItemsByOrderId(this.order.id);
-    
-    if(this.order.total==this.order.tempTotal){
-      this.allowRefAssign= true;
-    }
-
     this.salesRepresentatives =  this.salesRepService.getSalesRepByCompanyId(this.order.companyId);
-    this.salesRepresentatives.forEach(x=>{
-      console.log(x);
+
+    this.selectRep = new FormGroup({
+      'saleRep': new FormControl(null,[Validators.required])
     })
 
-    // this.selectRep = new FormGroup({
-
-    //   'companyName': new FormControl(null,[Validators.required]),})
+    this.selectRep.statusChanges.subscribe(state=>{
+      console.log(state);
+      
+      if((state=="VALID")&&((this.order.total==this.order.tempTotal))){
+        this.allowRefAssign= true;
+        }
+            })
 
   }
 
@@ -60,7 +62,15 @@ export class ConOrderElementComponent implements OnInit {
   }
   
   assign(){
-    console.log(this.selectedRep);
+
+    const message = "Confirm Assigning";
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.orderService.setSaleRep(this.selectedRepId,this.orderId)
+        }})
+
+
   }
 
 

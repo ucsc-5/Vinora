@@ -1,55 +1,52 @@
-<div class="row">
-        <div class="col" *ngIf="retailers | async; let retailers; ">
-            <div class="row" *ngFor="let retailer of retailers" > 
-              <div class="col col-3"> 
-                  <br>
-              </div>
-              <div class="col col-3">    
-                  <p>
-                    {{retailer.email}}
-                    <br>
-                    <b>Purches Date: </b> {{order.createDate}}<br>
-                    <b>Total Amount: </b> {{order.total}} .00 Rs/-<br>
-                  </p>
-                  <button mat-button (focus)="myfunction()">
-                    <i class="material-icons">perm_phone_msg</i>   Inform
-                  </button>
-    
-                  <button mat-button (click)="confirmOrder()">
-                      Confirm Order
-                      <i class="material-icons"></i>   Inform
+<div class="row" *ngIf="retailers | async; let retailers;">
+
+            <div class="col" *ngFor="let retailer of retailers"> 
+              <div class="row">
+                <div class="col col-3">    
+                    <p>
+                      <b>Retailer Email: </b> {{retailer.email}}<br>
+                      <b>Purches Date: </b> {{order.createDate}}<br>
+                      <b>Total Amount: </b> {{order.total}} .00 Rs/-<br>
+                    </p>
+                    <button mat-button (focus)="myfunction()">
+                      <i class="material-icons">perm_phone_msg</i>   Inform
                     </button>
-              </div> 
-              <div class="col col-3">
-              </div>
-            </div>
+      
+                    <button mat-button (click)="confirmOrder()">
+                        Confirm Order
+                        <i class="material-icons"></i>   Inform
+                      </button>
+                </div> 
+
+                <div class="col col-3"> 
+                <br>
+                </div>
+              
+                <div class="col col-3" *ngIf="salesRepresentatives | async; let salesRepresentatives">
+                  <form [formGroup]="selectRep" [ngClass]="{assign: !allowRefAssign}">
+                    <h4>Assign To</h4>
+                    <mat-form-field>
+                      <mat-label>Sales Representatives</mat-label>
+                      <mat-select  [(ngModel)]="selectedRepId" formControlName="saleRep">
+                        <mat-option *ngFor="let salesRepresentative of salesRepresentatives" [value]="salesRepresentative.saleRepId">
+                          {{salesRepresentative.fullName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <button mat-button (click)="assign()"  [disabled]="!allowRefAssign" >
+                      Assign now
+                    </button>
+                  </form>
+                </div>
+                <ng-template #elseBlock style="color: darkred;">
+                  No salesrepresentatives registered yet!
+                </ng-template>
         </div>
-    </div>
-    
-    <div class="row"  *ngIf="items | async; let items">
-        <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [orderTotal]="orderTotal"></app-stm-con-order-element>
-    </div>
-
-    
-    <div [ngClass]="{assign: !allowRefAssign}" *ngIf="salesRepresentatives | async; let salesRepresentatives">
-      <form [formGroup]="selectRep" >
-        <h4>Assigning Rep</h4>
-        <mat-form-field>
-          <mat-label>Sales Representatives</mat-label>
-          <mat-select  [(ngModel)]="selectedRep" (change)="selected($event)">
-            <mat-option *ngFor="let salesRepresentative of salesRepresentatives" [value]="salesRepresentative">
-              {{salesRepresentative.fullName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        
-
-        <button mat-button (click)="assign()"  [disabled]="!allowRefAssign" >
-          Assign now
-        </button>
-
-      </form>
-
+        <div class="row"  *ngIf="items | async; let items">
+          <app-stm-con-order-element class="col col-2" *ngFor="let item of items" [item]="item" [orderId]="orderId" [orderTotal]="orderTotal"></app-stm-con-order-element>
+        </div>
+   
+      </div>
     </div>
     
     <br>

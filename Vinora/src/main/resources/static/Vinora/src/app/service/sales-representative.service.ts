@@ -13,6 +13,7 @@ export interface SalesRepresentative{
   state: string;
   companyId: string;
   saleRepId: string;
+  saleRepAccept: number;
   
 }
 

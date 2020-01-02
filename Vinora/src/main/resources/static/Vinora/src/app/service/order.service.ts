@@ -97,7 +97,7 @@ export class OrderService {
 
 
   getConfirmedOrdersByCompanyId(companyId:string){
-    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',1)).snapshotChanges().pipe(
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',1).where('saleRepAccept','==',0)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -183,6 +183,10 @@ stockManagerDropItem(orderKey:string,itemId:string,itemsPrice:number){
 
 setStmAddedFeild(orderKey:string,itemId:string){
   this.afs.collection('orders').doc(orderKey).collection('items').doc(itemId).update({stmadded:false});
+}
+
+setSaleRep(saleRepId:string,orderKey:string){
+  this.afs.collection('orders').doc(orderKey).update({saleRepId:saleRepId,saleRepAccept:1});
 }
 
   

@@ -56,6 +56,7 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
           const companyId = this.companyId;
           const salesRefImagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
           const state = "0";
+          const saleRepAccept = 0;
           
          
           const id = this.afs.createId();
@@ -67,6 +68,10 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
           var createUser=this.afAuth.auth.createUserWithEmailAndPassword(email,nic).then(
             response=>{
               const saleRepId = response.user.uid;
+              console.log("sale Rep Id "+ saleRepId);
+              console.log("Company Id "+companyId);
+              
+              
 
               callable({email:email,role:this.type,companyId:this.companyId}).subscribe(
                 (response)=>{
@@ -75,8 +80,7 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
                 ()=>{},
                 ()=>{
                   createUser.then( (data)=>{
-                    
-                    const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,salesRefImagePath,state,companyId,saleRepId};
+                    const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,salesRefImagePath,state,companyId,saleRepId,saleRepAccept};
                     console.log(salesrepresentative);
                     this.salesRepresentativeCollection.doc(id).set(salesrepresentative);
                   });
