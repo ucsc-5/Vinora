@@ -28,7 +28,7 @@ export class CurOrderElementComponent implements OnInit {
   }
 
   confirmOrder(){
-    this.orderService.updateState(this.order.id,1);
+    this.orderService.updateState(this.order.id,0);
     this.items.forEach(x=>{
       x.forEach(x2=>{
         console.log(x2.id);

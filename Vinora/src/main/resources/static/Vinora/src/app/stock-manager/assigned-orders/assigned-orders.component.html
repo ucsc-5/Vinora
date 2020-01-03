@@ -1,1 +1,16 @@
-<p>assigned-orders works!</p>
+
+<div class="row">
+    <div class="col-3">
+        <mat-selection-list #shoes *ngIf="salesRepresentatives | async; let salesRepresentatives; else loading">
+            <mat-list-option *ngFor="let saleRep of salesRepresentatives">
+                <button style="background: none;" (click)="select(saleRep.saleRepId)">
+                    {{saleRep.email}}
+                </button>
+            </mat-list-option>    
+        </mat-selection-list> 
+    </div>
+
+    <div class="col-9">
+        
+    </div>
+</div>
