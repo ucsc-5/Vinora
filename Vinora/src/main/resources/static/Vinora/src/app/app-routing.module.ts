@@ -65,26 +65,30 @@ const routes: Routes = [
     ]},
 
   { path: 'retailer/:retailerId',component: RetailerComponent ,
-        canActivate: [RetailerGuardService],
+        // canActivate: [RetailerGuardService],
         // canActivateChild:[ValidEmailGuardService], 
         children:[
             { path: '' , component: RetailerDashboardComponent},
             { path: 'currentOrders', component: CurrentOrdersComponent},
+          
             { path: 'companies', component: NewOrderComponent},
             { path: 'confirmedOrders', component: ConfirmOrdersComponent},
             { path: 'companies/:companyId', component: OrderFromCompanyComponent, children:[
-              { path: 'myCart', component: MyCartComponent}
+              { path: 'myCart', component: MyCartComponent},
+             
+
             ]},
             // { path: 'myCart', component: MyCartComponent},
-            { path: 'previousOrder', component: PreviousOrdersComponent},
+           
             {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
+            { path: 'previousOrders', component: PreviousOrdersComponent},
             // {path: 'newStock', component: NewStockComponent},
             { path: 'allCompanies', component: RetailerNewCompaniesComponent},
             { path: 'myProfile', component: RetailerProfileComponent}
   ]},
 
   {path: 'stockManager/:id' , component: StockManagerComponent,
-        canActivate: [StockManagerGuardService],
+        // canActivate: [StockManagerGuardService],
         canActivateChild:[ResetPasswordService], 
         
         
@@ -99,8 +103,8 @@ const routes: Routes = [
   ]},
 
   {path: 'manager/:id', component: ManagerComponent,
-        canActivate: [ManagerGuardService,CompanyPermisionGuardService],
-        canActivateChild:[ValidEmailGuardService],
+        // canActivate: [ManagerGuardService,CompanyPermisionGuardService],
+        // canActivateChild:[ValidEmailGuardService],
 
         children:[
             {path: '' ,component :ManagerDashboardComponent},
@@ -121,7 +125,9 @@ const routes: Routes = [
   ]},
 
 
-  {path: 'admin/:id', canActivate: [AdminGuardService],component: AdminComponent, children:[
+  {path: 'admin/:id',
+  //  canActivate: [AdminGuardService],
+   component: AdminComponent, children:[
     { path: 'dashboard', component: AdminDashboardComponent},
     { path: 'companyRequests', component: CompanyRequestsComponent},
     { path: 'registeredCompanies', component:CompanyRegisteredComponent },

@@ -34,6 +34,10 @@ export class RetailerComponent {
     // this.retailerService.getRetailer(this.retailerId);
  
   }
+
+  previousOrder(){
+    
+  }
  
 }
   
