@@ -49,9 +49,8 @@ import { AdminGuardService } from './shared/routerGuards/admin-guard.service';
 import { CompanyPermisionGuardService } from './shared/routerGuards/company-permision-guard.service';
 import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.service';
 import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
-import { ResetPasswordService } from './shared/routerGuards/reset-password.service';
-
-
+import { ResetPasswordService } from './shared/routerGuards/reset-password.service'; 
+import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigned-orders.component';
 
 
 
@@ -94,7 +93,9 @@ const routes: Routes = [
             { path: 'updateItems', component: UpdateItemsComponent},
             { path: 'myProfile', component: StockManagerProfileComponent},
             { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},
-            { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent}
+            { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent},
+            { path: 'assignedOrders', component: AssignedOrdersComponent}
+            
   ]},
 
   {path: 'manager/:id', component: ManagerComponent,
