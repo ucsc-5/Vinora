@@ -22,16 +22,31 @@ export class AssignedOrdersComponent implements OnInit {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       this.companyId= idTokenResult.claims.cmpId.cmpId;
     })
+    this.saleRepId=this.afAuth.auth.currentUser.uid
    }
 
   ngOnInit() {
     this.salesRepresentatives=this.salesRepService.getSalesRepByCompanyId(this.companyId);
+
+    console.log(this.companyId+" company id");
+    console.log(this.saleRepId+ " saleRep iD");
+    console.log("this is the assign")
+    
   }
 
 
   select(saleRepId:string){
     console.log("This is the rep Id "+saleRepId);
     this.saleRepId=saleRepId;
+    this.orders= this.orderService.getAssignedOrdersByCompanyIdSaleRepId(this.companyId,this.saleRepId);
+
+    this.orders.forEach(
+      x=>{
+        console.log(x);
+        console.log("inside the foreach function");
+      }
+    )
+
   }
 
 

@@ -10,7 +10,7 @@
         </mat-selection-list> 
     </div>
 
-    <div class="col-9">
-        
+    <div class="col-9"  *ngIf="orders | async; let orders; else loading">     
+            <app-assigned-orders *ngFor="let order of orders" [order]="order"></app-assigned-orders>
     </div>
 </div>

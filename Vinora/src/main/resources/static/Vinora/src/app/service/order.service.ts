@@ -107,7 +107,7 @@ export class OrderService {
   }
 
   getAssignedOrdersByCompanyIdSaleRepId(companyId:string,saleRepId:string){
-    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',0).where('saleRepId','==',saleRepId).where('saleRepAccept','==',0)).snapshotChanges().pipe(
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('saleRepId','==',saleRepId)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
