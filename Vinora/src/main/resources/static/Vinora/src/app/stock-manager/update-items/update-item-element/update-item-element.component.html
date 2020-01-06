@@ -5,19 +5,24 @@
             </mat-card-header>
             <img mat-card-image class="forimage" src="{{item.itemImagePath}}" alt="Photo of a Shiba Inu">
             <mat-card-content>
-                <p>{{item.description}}<br>
+                <p>
+                    <!-- {{item.description}}<br> -->
                     Unit Price: <b>{{item.unitPrice}}</b><br>
                     Available:  <b></b>{{item.quantity}}<br>                
                 </p>
                 
             </mat-card-content>
             <mat-card-actions>
-                <form (ngSubmit)="updateQuantity(f)" #f="ngForm">
+                <form [formGroup]="updateForm">
                         <table class="" style="width: 159px" cellspacing="0">
-                                <tr>
+                            <tr>
                                 <td>
                                     <mat-form-field class="" style="width: 70%">
-                                            <input matInput type="number" min="0" placeholder="Quantity" name="quantity" ngModel>
+                                            <input 
+                                                matInput 
+                                                type="number" 
+                                                placeholder="Quantity"
+                                                formControlName="quantity">
                                     </mat-form-field>
 
                                     <div class="input-group-append">
@@ -34,8 +39,50 @@
                            
 
                         </table>
-                        <button mat-raised-button color="primary" type="reset">Reset</button>
-                        <button mat-raised-button color="primary" type="submit">Add</button>
+
+
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button class="btn"  
+                                    data-toggle="tooltip"
+                                    title="Reset"
+                                    (click)="reset()"> 
+                                    
+                                    <i class="material-icons">
+                                            replay
+                                    </i>
+                            </button>
+
+                            <button class="btn"  
+                                    data-toggle="tooltip"
+                                    title="Update unit price"
+                                    (click)="updateQuantity()" > 
+                                    <i class="material-icons">
+                                            cached
+                                    </i>
+                            </button>
+
+                            <!-- <button class="btn"  
+                                    data-toggle="tooltip"
+                                    title="Remove Item"
+                                    (click)="onRemove()"
+                                    [disabled]="allowRemove"> 
+                                    <i class="material-icons icon-red">
+                                            remove_circle_outline
+                                    </i>
+                            </button> -->
+
+                            <button class="btn"  
+                                    data-toggle="tooltip"
+                                    title="More details" 
+                                    (click)="itemDetails(item)"> 
+                                    <i class="material-icons">
+                                            list_alt               
+                                    </i>  
+                            </button>                                                       
+                        </div>
+
+                        <!-- <button mat-raised-button color="primary" type="reset">Reset</button>
+                        <button mat-raised-button color="primary" type="submit">Add</button> -->
                 </form>
             </mat-card-actions>
         </mat-card>

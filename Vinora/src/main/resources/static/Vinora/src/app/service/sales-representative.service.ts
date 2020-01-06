@@ -45,6 +45,19 @@ export class SalesRepresentativeService {
     return this.salesrepresentative;
   }
 
+  getSalesRepByRepId(id:string){
+
+    const salesrepresentative = this.afs.collection(this.dbPath , ref => ref.where('saleRepId','==',id).limit(1)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as SalesRepresentative;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  
+    return salesrepresentative;
+  }
+
   getSalesRepByCompanyId(companyId:string){
     const  salesrepresentatives: Observable<SalesRepresentativeId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId)).snapshotChanges().pipe(
       map(actions => actions.map(a => {

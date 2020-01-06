@@ -122,6 +122,7 @@ import { ResetPasswordService } from './shared/routerGuards/reset-password.servi
 import { ResetPasswordPopupComponent } from './shared/popups/reset-password-popup/reset-password-popup.component';
 import { SalesRepresentativeService } from './service/sales-representative.service';
 import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigned-orders.component';
+import { AsiignedOrderDetailsComponent } from './stock-manager/assigned-orders/asiigned-order-details/asiigned-order-details.component';
 
 
 @NgModule({
@@ -206,6 +207,7 @@ import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigne
     ItemDetailsPopupComponent,
     ResetPasswordPopupComponent,
     AssignedOrdersComponent,
+    AsiignedOrderDetailsComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

@@ -1,12 +1,9 @@
-    <mat-card class="example-card">
+    <!-- <mat-card class="example-card">
         <mat-card-header>
             <mat-card-title>{{data.itemName}}</mat-card-title>
             <mat-card-subtitle>{{data.brand}}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="{{data.itemImagePath}}"  alt="Photo of a Shiba Inu">
-        
-        
-        
         <mat-card-content>
                 <p>
                 {{data.description}} <br>
@@ -15,12 +12,16 @@
                 </p>       
                 <div *ngIf="data.total">Item total: <b>{{data.total}} .00 Rs/-</b><br></div>              
         </mat-card-content> 
-       
-
-
-
-
         <mat-card-actions>
                 <button mat-flat-button id="no-button" [mat-dialog-close]="false">Back</button>
         </mat-card-actions>
-    </mat-card>
+    </mat-card> -->
+
+    {{data.itemName}} <br>
+    {{data.brand}} <br>
+    <img mat-card-image src="{{data.itemImagePath}}"  alt="Photo of a Shiba Inu">
+    Description: {{data.description}<br>
+    Unit Price: <b>{{data.unitPrice}} .00 Rs/-</b><br>
+    Quantity:  <b>{{data.quantity}}</b><br>  
+    <div *ngIf="data.total">Item total: <b>{{data.total}} .00 Rs/-</b><br></div>       
+    <button mat-flat-button id="no-button" [mat-dialog-close]="false">Back</button>

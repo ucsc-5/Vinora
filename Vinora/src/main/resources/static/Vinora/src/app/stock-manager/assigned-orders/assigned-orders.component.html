@@ -1,16 +1,26 @@
 
 <div class="row">
-    <div class="col-3">
-        <mat-selection-list #shoes *ngIf="salesRepresentatives | async; let salesRepresentatives; else loading">
-            <mat-list-option *ngFor="let saleRep of salesRepresentatives">
-                <button style="background: none;" (click)="select(saleRep.saleRepId)">
-                    {{saleRep.email}}
-                </button>
-            </mat-list-option>    
-        </mat-selection-list> 
+    <div class="col-3" style="background-image: linear-gradient(to right, rgb(243, 245, 247) , rgb(203, 203, 204));" >
+        <h4>Salerepresectatives here  
+            <i class="material-icons">
+            group
+            </i>
+        </h4>
+
+        <mat-nav-list *ngIf="salesRepresentatives | async; let salesRepresentatives; else loading">
+            <a class="activeLink" mat-list-item  *ngFor="let saleRep of salesRepresentatives" (click)="select(saleRep.saleRepId)"> {{saleRep.fullName}} </a>
+         </mat-nav-list>
+       
     </div>
 
-    <!-- <div class="col-9"  *ngIf="orders | async; let orders; else loading">     
-            <app-assigned-orders *ngFor="let order of orders" [order]="order"></app-assigned-orders>
-    </div> -->
+    <ng-template #loading>Sale representatives available!!&hellip;</ng-template>
+
+    <div class="col-9">
+        <div class="row" *ngIf="selectedReps | async; let selectedReps" style="background-image: linear-gradient(to right,rgb(203, 203, 204),rgb(243, 245, 247));">
+            <h4  style="text-shadow: darkblue; text-align: center;" *ngFor="let selectedRep of selectedReps"><b>{{selectedRep.fullName}}'s Orders here...</b></h4>
+        </div>
+        <div class="row" *ngIf="orders | async; let orders; else loading2">
+            <app-asiigned-order-details *ngFor="let order of orders" [order]="order"></app-asiigned-order-details>
+        </div>                      
+    </div>
 </div>
