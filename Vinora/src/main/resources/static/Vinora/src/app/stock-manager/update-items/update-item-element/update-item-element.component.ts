@@ -6,7 +6,8 @@ import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firest
 import { AngularFireAuth } from '@angular/fire/auth';
 import { StockManager } from 'src/app/service/stock-manager.service';
 import { DialogService } from 'src/app/service/dialog.service';
-
+import { AngularFireDatabase,AngularFireList } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-item-element',
@@ -19,15 +20,18 @@ export class UpdateItemElementComponent implements OnInit {
 
   updateForm: FormGroup;
   message: any;
+ 
 
   constructor(private dialogService:DialogService,private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
-   }
+    // this.itemVal = db.object('vehicles').valueChanges();
+  }
 
   ngOnInit() {
     this.updateForm = new FormGroup({
       'quantity': new FormControl(null,[Validators.min(0)])
     })
   }
+
 
   updateQuantity() {
     const quantity = this.updateForm.value.quantity;

@@ -25,12 +25,24 @@ export class UpdateItemsComponent implements OnInit {
 
   companyId: string;
   items: Observable<ItemId[]>;
+  itemsRef: AngularFireList<any>;
+  itemsQuantity: Observable<any[]>;
 
-  constructor(private StockManagerService:StockManagerService,private afAuth: AngularFireAuth,private itemService:ItemService){
+  constructor(db: AngularFireDatabase,private StockManagerService:StockManagerService,private afAuth: AngularFireAuth,private itemService:ItemService){
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
       this.companyId= idTokenResult.claims.cmpId.cmpId;
     })  
+
+    
+    this.itemsRef = db.list('vehicles');
+    // Use snapshotChanges().map() to store the key
+    this.itemsQuantity = this.itemsRef.snapshotChanges().pipe(
+      map(changes => 
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
+    console.log(this.itemsQuantity.forEach(x2=>{ return x2}));
   
   }
  
