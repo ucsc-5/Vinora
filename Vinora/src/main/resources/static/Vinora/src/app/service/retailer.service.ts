@@ -23,20 +23,31 @@ export interface RetailerId extends Retailer{id: string}
 
 export interface RetailerEmailToken{
                 retailerEmail: string;
-                registerState: string;              
+                registerState: string;  
+                         
 }
 
 export interface RetailerEmailTokenId extends RetailerEmailToken{
                 id: string;
 }
 
-export interface CompanyEmailToken{
+export interface CompanyEmailnextToken{
                 companyEmail: string;
-                registerState: string
+                registerState: string;
+}
+
+export interface CompanyEmailnextTokenId extends CompanyEmailnextToken{
+                id: string;
+}
+
+export interface CompanyEmailToken{
+  companyEmail: string;
+  registerState: string;
+  companyName:string; 
 }
 
 export interface CompanyEmailTokenId extends CompanyEmailToken{
-                id: string;
+  id: string;
 }
 
 
@@ -53,6 +64,7 @@ export class RetailerService {
   retailerByEmail: Observable<RetailerId[]>;
   retailerById: Observable<RetailerId[]>;
   registerCompanyIds: Observable<CompanyEmailTokenId[]>;
+  registerCompanyIdnexts:  Observable<CompanyEmailnextTokenId[]>;
 
  
   constructor(private storage: AngularFireStorage,private readonly afs: AngularFirestore,private afAuth: AngularFireAuth) {
@@ -64,7 +76,7 @@ getAllCompanies(){
 
 }
 
-registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,companyEmail:string){
+registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,companyEmail:string,companyName:string){
 
   const registerState= "0"
   console.log(retailerUid+"From the service"+companyUid);
@@ -80,7 +92,7 @@ registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,compa
 
   const retailerCollection =  this.afs.collection<CompanyEmailToken>(`retailers/${retailerUid}/companyRegistrations`);
   const id2 = this.afs.createId();
-  const companyRegisterOnRetailer : CompanyEmailToken ={companyEmail,registerState}
+  const companyRegisterOnRetailer : CompanyEmailToken ={companyEmail,registerState,companyName}
   retailerCollection.doc(id2).set(companyRegisterOnRetailer).then(
     x=>{console.log(x)}
   ).catch(error=>{
@@ -128,6 +140,17 @@ getRegisteredAllCompanies(retailerUid:string){
   );
   return this.registerCompanyIds;
   
+
+}
+getRegisterCompanyNames(retailerUid:string){
+  this.registerCompanyIdnexts =this.afs.collection(`${this.dbPath}/${retailerUid}/companyRegistrations`, ref => ref.where('registerState', '==',"0")).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as CompanyEmailnextToken;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  console.log(this.registerCompanyIdnexts);
 }
 
 
