@@ -18,6 +18,8 @@ export class RetRegComElementComponent implements OnInit {
   retailerUid: string;
   companyEmail: string;
   comapanyUid: string;
+  registerCompanyName: string;
+ 
   
 
 
@@ -25,6 +27,8 @@ export class RetRegComElementComponent implements OnInit {
   constructor(private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
     this.retailerEmail= this.afAuth.auth.currentUser.email;
     this.retailerUid = this.afAuth.auth.currentUser.uid;
+    // this.registerCompanyName=this.company.companyName;
+    
   }
 
   ngOnInit() {
@@ -32,7 +36,8 @@ export class RetRegComElementComponent implements OnInit {
   }
 
   onRegister(){
-    this.retailerService.registerRetailer(this.retailerEmail,this.retailerUid,this.company.id,this.company.email)
+    // const companyName= this.company.companyName;
+    this.retailerService.registerRetailer(this.retailerEmail,this.retailerUid,this.company.id,this.company.email,this.company.companyName)
   }
 
 }
