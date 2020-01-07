@@ -22,7 +22,8 @@
                                                 matInput 
                                                 type="number" 
                                                 placeholder="Quantity"
-                                                formControlName="quantity">
+                                                formControlName="quantity"
+                                                value="{{ (itemsQuantity | async)?.weight }}">
                                     </mat-form-field>
 
                                     <div class="input-group-append">

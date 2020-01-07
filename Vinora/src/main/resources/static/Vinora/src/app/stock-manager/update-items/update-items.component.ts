@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angular/fire/database';
 import { ItemService,ItemId} from 'src/app/service/item.service';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
@@ -25,25 +25,21 @@ export class UpdateItemsComponent implements OnInit {
 
   companyId: string;
   items: Observable<ItemId[]>;
-  itemsRef: AngularFireList<any>;
+  // itemsRef: AngularFireList<any>;
+  quantityRef: AngularFireObject<any>
+ 
   itemsQuantity: Observable<any[]>;
 
-  constructor(db: AngularFireDatabase,private StockManagerService:StockManagerService,private afAuth: AngularFireAuth,private itemService:ItemService){
+  constructor(private db: AngularFireDatabase,private StockManagerService:StockManagerService,private afAuth: AngularFireAuth,private itemService:ItemService){
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
       this.companyId= idTokenResult.claims.cmpId.cmpId;
     })  
 
-    
-    this.itemsRef = db.list('vehicles');
-    // Use snapshotChanges().map() to store the key
-    this.itemsQuantity = this.itemsRef.snapshotChanges().pipe(
-      map(changes => 
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
-    console.log(this.itemsQuantity.forEach(x2=>{ return x2}));
   
+    this.quantityRef = db.object('weights');
+    this.itemsQuantity = this.quantityRef.valueChanges();
+    
   }
  
   ngOnInit() {

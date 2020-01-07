@@ -1,9 +1,8 @@
  <div class="row">      
-        <app-update-item-element *ngFor="let item of items | async" [item]="item"></app-update-item-element>
+        <app-update-item-element *ngFor="let item of items | async" [item]="item" ></app-update-item-element>
  </div>
 
- <p *ngFor="let itemq of itemsQuantity | async">
-        ksnclknjsdcislduic {{itemq.owner_name}}
- </p>
+ 
+ <h1>{{ (itemsQuantity | async)?.weight }}</h1>
     
 

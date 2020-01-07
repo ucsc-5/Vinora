@@ -6,7 +6,7 @@ import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firest
 import { AngularFireAuth } from '@angular/fire/auth';
 import { StockManager } from 'src/app/service/stock-manager.service';
 import { DialogService } from 'src/app/service/dialog.service';
-import { AngularFireDatabase,AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase,AngularFireList,AngularFireObject } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -17,19 +17,31 @@ import { map } from 'rxjs/operators';
 
 export class UpdateItemElementComponent implements OnInit {
   @Input() item: ItemId;
+  @Input() quantity: any
 
   updateForm: FormGroup;
   message: any;
+
+  quantityRef: AngularFireObject<any>
+ 
+  itemsQuantity: Observable<any[]>;
  
 
-  constructor(private dialogService:DialogService,private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
+  constructor(private db: AngularFireDatabase,private dialogService:DialogService,private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
     // this.itemVal = db.object('vehicles').valueChanges();
+
+    this.quantityRef = db.object('weights');
+    this.itemsQuantity = this.quantityRef.valueChanges();
   }
 
   ngOnInit() {
     this.updateForm = new FormGroup({
       'quantity': new FormControl(null,[Validators.min(0)])
     })
+
+    this.updateForm.value.quantity = this.quantity;
+    console.log(this.quantity+" this is the quantity");
+    
   }
 
 
