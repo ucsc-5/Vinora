@@ -8,10 +8,10 @@ import { map } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, from } from 'rxjs';
 import { CustomPasswordValidator } from 'src/app/shared/custom-password-validator';
+import { RetailerService, RetailerId, Retailer } from 'src/app/service/retailer.service';
 
 import { idTokenResult } from '@angular/fire/auth-guard';
-import { CompanyService, Company } from 'src/app/service/company.service';
-import { RetailerService } from 'src/app/service/retailer.service';
+import { CompanyService, Company, CompanyId } from 'src/app/service/company.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 
@@ -21,7 +21,8 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./register-d-company.component.css']
 })
 export class RegisterDCompanyComponent implements OnInit {
-  private companyCollection: AngularFirestoreCollection<Company>;
+  private companyCollection: AngularFirestoreCollection<CompanyId>;
+  private retailerCollection: AngularFirestoreCollection<RetailerId>;
   companies: Observable<Company[]>;
   companyId: string;
   hide = true;
@@ -38,7 +39,7 @@ export class RegisterDCompanyComponent implements OnInit {
   message   //this message for the error in the login form
  
   constructor(private authService:AuthenticationService,private readonly afs: AngularFirestore,private retailerService: RetailerService,private afAuth: AngularFireAuth,private _formBuilder: FormBuilder,private fns: AngularFireFunctions,private companyService:CompanyService,private db: AngularFireDatabase, private authServise:AuthenticationService) { 
-    this.companyCollection = afs.collection<Company>('companies');
+    this.companyCollection = afs.collection<CompanyId>('companies');
  
     this.companies = this.companyCollection.valueChanges();
     // this.companyId = this.afAuth.auth.currentUser.uid;
@@ -112,6 +113,23 @@ export class RegisterDCompanyComponent implements OnInit {
                     const company:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId,coord}
                     this.companyCollection.doc(companyId).set(company).then(
                                 res=>{
+                                  this.retailerService.getAllRetailers().forEach(res1=>{
+                                    res1.forEach(res2=>{
+                                        this.companyCollection.doc(companyId).collection('notRegRetailers').doc(res2.id).set(res2).then(res=>{
+                                          console.log("Retailers Set");
+                                        }
+                                        ).catch(error=>{
+                                          console.log(error);
+                                        });
+
+                                        this.afs.collection('retailers').doc(res2.id).collection('notRegCompanies').doc(companyId).set(company).then(res=>{
+                                          console.log("company Added to each retailers");
+                                        }).catch(error=>{
+                                          console.log(error)
+                                        }
+                                        )
+                                    })
+                                  })
                                   console.log(" Manager is set ");
                                 }
                               ).catch(error=>{
@@ -119,9 +137,7 @@ export class RegisterDCompanyComponent implements OnInit {
                               });
                   })
                 })
-
                 return ""
-
       }else{
        console.log("not done");
       }
@@ -130,56 +146,6 @@ export class RegisterDCompanyComponent implements OnInit {
         console.log(error.message);
         this.message=error.message;
    })
-
-    // this.authServise.register(userEmail,password).then(()=>{
-    //   const callable = this.fns.httpsCallable('addRole');
-    
-    //   callable({email:userEmail,role:this.type,companyId:this.companyId}).subscribe(
-    //     response=>{
-    //       console.log(response);
-    //     },()=>{},
-    //     ()=>{
-    //       this.authServise.login(userEmail,password).then(()=>{
-    //         const companyId = this.afAuth.auth.currentUser.uid;
-    //         const address:string=this.firstFormGroup.value['address'];
-    //         const companyName:string=this.firstFormGroup.value['companyName'];
-    //         const contactNumber:string=this.secondFormGroup.value['tel'];
-    //         const email:string=this.secondFormGroup.value['email'];
-    //         const managerName:string=this.secondFormGroup.value['managerName'];
-    //         const managerNic:string=this.secondFormGroup.value['managerNic'];
-    //         const state:string="0";
-    //         const imagePath:string="https://www.pureingenuity.com/wp-content/uploads/2018/07/empty-profile-image.jpg";
-    //         const coord = new firebase.firestore.GeoPoint(this.latitude,this.longitude);
-    //         const company1:Company={address,companyName,contactNumber,email,managerName,managerNic,state,imagePath,companyId,coord}
-    //         this.companyCollection.doc(companyId).set(company1);
-    //       }).catch((error)=>{
-    //         console.log(error+" The error from register then login ");
-    //       })
-    //       ;          // this.retailerService.setNotRegisteredCompanies(uid);
-    //     }
-    //   )
-    // });
-      
-    
-   
-        
-    /*const stock = new Company(this.firstFormGroup.value['companyName'],this.secondFormGroup.value['managerNic'],this.secondFormGroup.value['managerName'],this.secondFormGroup.value['email'],this.firstFormGroup.value['address'],this.secondFormGroup.value['tel'])
-    console.log(stock);
-    this.authServise.register(userEmail,password,this.type);
-    const callable = this.fns.httpsCallable('addRole');
-    
-    callable({email:userEmail,role:this.type}).subscribe(
-      response=>{
-        console.log(response);
-      },()=>{},
-      ()=>{
-        this.authServise.login(userEmail,password);
-        const uid = this.afAuth.auth.currentUser.uid;
-        this.companyService.createCompany(stock,uid);
-        // this.retailerService.setNotRegisteredCompanies(uid);
-      }
-    )  */
-
 
   }
 

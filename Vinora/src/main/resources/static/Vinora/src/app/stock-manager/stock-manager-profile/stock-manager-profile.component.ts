@@ -5,8 +5,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FileUpload } from 'src/app/uploads/shared/file-upload';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, Validators, FormGroup  } from '@angular/forms';
 import { DialogService } from 'src/app/service/dialog.service';
+import { CustomPasswordValidator } from 'src/app/shared/custom-password-validator';
 
 @Component({
   selector: 'app-stock-manager-profile',
@@ -24,6 +25,8 @@ export class StockManagerProfileComponent implements OnInit {
   stockManager: Observable<StockManagerId[]>;
   stockManagerEmail: string;
   downloadURL: Observable<any>;
+  valid;
+  resetPasswordForm: FormGroup;
 
 
   constructor(private StockManagerService:StockManagerService,private afAuth:AngularFireAuth,private storage:AngularFireStorage,private dialogService:DialogService) {
@@ -32,6 +35,31 @@ export class StockManagerProfileComponent implements OnInit {
 
   ngOnInit() {
     this.stockManager= this.StockManagerService.getStockManagerByEmail(this.stockManagerEmail); 
+
+
+    this.resetPasswordForm = new FormGroup({
+      'password': new FormControl(null,
+        [ Validators.required,Validators.minLength(6),
+          CustomPasswordValidator.patternValidator(/\d/, { hasNumber: true }),
+          CustomPasswordValidator.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+          CustomPasswordValidator.patternValidator(/[a-z]/, { hasSmallCase: true }),
+          // CustomPasswordValidator.patternValidator(/[!@#$%^&*()_+-=[\]{};':"|,.<>?]/,{ hasSpecialCharacters: true }),
+          // CustomPasswordValidator.patternValidator(/[ [!@#$%^&*()_+-=[]{};':"|,.<>/?(<mailto:!@#$%^&*()_+-=[]{};':"|,.<>/?>)]/, { hasSpecialCharacters: true }),
+          // CustomValidators.patternValidator(/[ [!@#$%^&*()_+-=[]{};':"|,.<>/?]/](<mailto:!@#$%^&*()_+-=[]{};':"|,.<>/?]/>), { hasSpecialCharacters: true }),   
+    ]),
+      'confirmPassword': new FormControl(null,[Validators.required,Validators.minLength(6)])
+    });
+
+    this.resetPasswordForm.statusChanges.subscribe(state=>{
+      console.log(state);
+      
+      if(state=="VALID"){
+        this.valid=true;
+      }else{
+        this.valid=false;
+      }
+    })   
+
   }
 
   

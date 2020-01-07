@@ -12,6 +12,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { finalize } from 'rxjs/operators';
+import { CompanyService, CompanyId } from 'src/app/service/company.service';
 
 
 
@@ -41,6 +42,7 @@ export class RegisterRetailerComponent implements OnInit {
 
   retailer : Observable<RetailerId[]>;
   private retailerCollection: AngularFirestoreCollection<RetailerId>;
+  private companyCollection : AngularFirestoreCollection<CompanyId>;
 
   constructor(
                 private fns: AngularFireFunctions,
@@ -51,7 +53,8 @@ export class RegisterRetailerComponent implements OnInit {
                 private authService: AuthenticationService,
                 private retailerService:RetailerService,
                 private readonly afs: AngularFirestore,
-                private storage: AngularFireStorage) {
+                private storage: AngularFireStorage,
+                private companyService:CompanyService) {
 
                   this.retailerCollection = afs.collection<RetailerId>('retailers');
    
@@ -104,10 +107,23 @@ export class RegisterRetailerComponent implements OnInit {
                   this.authService.login(email,password).then(x=>{
                     const retailerId = this.afAuth.auth.currentUser.uid;
                     const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
-
                     this.retailerCollection.doc(retailerId).set(retailer).then(
                                 res=>{
-                                  console.log(" Retailer is set "+res);
+                                  
+                                  this.companyService.getAllCompanies().forEach(x=>{
+                                    x.forEach(x2=>{
+                                      this.retailerCollection.doc(retailerId).collection("notRegCompanies").doc(x2.id).set(x2).then(res1=>{
+                                          console.log("Sucsess");
+                                        }).catch(error=>{
+                                          console.log(error+"this is from frist");
+                                        })
+                                      this.afs.collection('companies').doc(x2.id).collection('notRegRetailers').doc(retailerId).set(retailer).then(res=>{
+                                        console.log("sucsess");
+                                      }).catch(error1=>{
+                                        console.log(error1+"this is from Second");
+                                      })
+                                    })
+                                  })
                                 }
                               ).catch(error=>{
                                 console.log(" error of seting retailer "+ error);
@@ -126,59 +142,6 @@ export class RegisterRetailerComponent implements OnInit {
         this.message=error.message;
    })
   }
-   
-
-    // .then(
-    //   response=>{
-    //     console.log(response);
-    //     const callable = this.fns.httpsCallable('addRole');
-
-    //     callable({email:email,role:this.type}).subscribe(
-    //       (response)=>{
-    //            console.log(response);
-    //       },
-    //       ()=>{},
-    //       ()=>{
-    //         this.authService.login(email,password).then(()=>{
-    //         const retailerId = this.afAuth.auth.currentUser.uid;
-    
-    //         const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
-    //         // this.retailerCollection.doc(id). set(retailer);
-    //         // this.companyCollection.doc(uid).set(company1);
-    //         this.retailerCollection.doc(retailerId).set(retailer).then(
-    //           res=>{
-    //             console.log(" Retailer is set "+res);
-    //           }
-    //         ).catch(error=>{
-    //           console.log(" error of seting retailer "+ error);
-    //         });
-    //       }
-    //     )
-    //    }
-    //   )
-    //   }
-    // ).catch(error => {
-    //        switch (error.code) {
-    //           case 'auth/email-already-in-use':
-    //             console.log(`Email address ${email} already in use.`);
-    //           case 'auth/invalid-email':
-    //             console.log(`Email address ${email} is invalid.`);
-    //           case 'auth/operation-not-allowed':
-    //             console.log(`Error during sign up.`);
-    //           case 'auth/weak-password':
-    //             console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
-    //           default:
-    //             console.log("this is the default error message "+error.message);
-    //         }
-    //     });
-// }
-      
-      
-      
-      // return uploadTask.percentageChanges();
-
- 
-  
 
   email = new FormControl('', [Validators.required, Validators.email]);
 

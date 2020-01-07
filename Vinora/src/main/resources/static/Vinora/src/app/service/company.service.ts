@@ -68,6 +68,18 @@ export class CompanyService {
     
   }   
 
+  getAllCompanies(){
+    const companies: Observable<CompanyId[]> = this.afs.collection(this.dbPath).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Company;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+
+    return companies;
+  }
+
   // for use of admin  retailer
   getRegisteredCompanies(){
     const registeredCompanies: Observable<CompanyId[]> = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(

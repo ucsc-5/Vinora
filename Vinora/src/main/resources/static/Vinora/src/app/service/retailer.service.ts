@@ -60,8 +60,15 @@ export class RetailerService {
 
   
  
-getAllCompanies(){
-
+getAllRetailers(){
+  const retailers = this.afs.collection<RetailerId>(this.dbPath).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Retailer;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return retailers;
 }
 
 registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,companyEmail:string){
