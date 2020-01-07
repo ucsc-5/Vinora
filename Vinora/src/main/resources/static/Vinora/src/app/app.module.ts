@@ -123,6 +123,7 @@ import { ResetPasswordPopupComponent } from './shared/popups/reset-password-popu
 import { SalesRepresentativeService } from './service/sales-representative.service';
 import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigned-orders.component';
 import { AsiignedOrderDetailsComponent } from './stock-manager/assigned-orders/asiigned-order-details/asiigned-order-details.component';
+import { StockManagerRetailersComponent } from './stock-manager/stock-manager-retailers/stock-manager-retailers.component';
 
 
 @NgModule({
@@ -208,6 +209,7 @@ import { AsiignedOrderDetailsComponent } from './stock-manager/assigned-orders/a
     ResetPasswordPopupComponent,
     AssignedOrdersComponent,
     AsiignedOrderDetailsComponent,
+    StockManagerRetailersComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

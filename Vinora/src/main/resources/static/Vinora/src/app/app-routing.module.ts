@@ -51,6 +51,7 @@ import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.
 import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
 import { ResetPasswordService } from './shared/routerGuards/reset-password.service'; 
 import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigned-orders.component';
+import { StockManagerRetailersComponent } from './stock-manager/stock-manager-retailers/stock-manager-retailers.component';
 
 
 
@@ -98,7 +99,8 @@ const routes: Routes = [
             { path: 'myProfile', component: StockManagerProfileComponent},
             { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},
             { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent},
-            { path: 'assignedOrders', component: AssignedOrdersComponent}
+            { path: 'assignedOrders', component: AssignedOrdersComponent},
+            { path: 'retailers', component: StockManagerRetailersComponent}
             
   ]},
 

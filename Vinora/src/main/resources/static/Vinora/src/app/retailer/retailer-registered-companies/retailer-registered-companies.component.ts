@@ -13,7 +13,7 @@ import { CompanyService, CompanyId } from 'src/app/service/company.service';
 export class RetailerRegisteredCompaniesComponent implements OnInit {
 
 
-  companyEmails: Observable<CompanyEmailTokenId[]>
+  companies: Observable<CompanyId[]>
   retailerId: string;
 
 
@@ -23,7 +23,7 @@ export class RetailerRegisteredCompaniesComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.companyEmails=this.retailerService.getRegisteredAllCompanies(this.retailerId);
+    this.companies =this.retailerService.getMyRegisteredCompanies(this.retailerId);
     
   }
 

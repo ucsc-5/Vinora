@@ -10,5 +10,5 @@
   <ng-template #loading>Loading&hellip;</ng-template> -->
 
 
-    <app-ret-reg-company-element *ngFor="let companyEmail of companyEmails | async" [companyEmail]="companyEmail" ></app-ret-reg-company-element>
+    <app-ret-reg-company-element *ngFor="let company of companies | async" [company]="company" ></app-ret-reg-company-element>
 

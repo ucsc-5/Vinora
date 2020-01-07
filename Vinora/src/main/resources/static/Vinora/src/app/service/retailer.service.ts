@@ -96,7 +96,6 @@ registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,compa
     console.log(error)
   });
 
-
   const retailerCollection =  this.afs.collection<CompanyEmailToken>(`retailers/${retailerUid}/companyRegistrations`);
   const id2 = this.afs.createId();
   const companyRegisterOnRetailer : CompanyEmailToken ={companyEmail,registerState,companyName}
@@ -107,6 +106,43 @@ registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,compa
   });
 
 }
+
+getMyNotRegisteredCompanies(retailerId:string){
+  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('notRegCompanies').snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Company;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return companies;
+}
+
+
+getMyRegisteredCompanies(retailerId:string){
+  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('registeredCompanies').snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Company;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return companies;
+}
+
+
+registerWithCompany(retailerId:string,companyId:string,company:CompanyId){
+  this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).set(company).then(res=>{
+    this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).delete().then(response=>{
+      console.log("Registration successfull!");
+      return "Registration success!!"      
+    }).catch(error=>{
+      console.log(error);
+    })
+  })
+}
+
+
 
 
 getRetailerByEmail(email:string){
@@ -174,4 +210,5 @@ updatePhoneNumber(key:string,value:any):Promise<void>
   return this.afs.collection('retailers').doc(key).update(value);
 }
   
+
 }

@@ -11,19 +11,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RetRegCompanyElementComponent implements OnInit {
 
-  @Input() companyEmail : CompanyEmailToken;
+  @Input() company : CompanyId;
   
-  company: Observable<CompanyId[]>;
+
 
   constructor(private companyService:CompanyService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
-    
-    this.company = this.companyService.getCompanyByEmail(this.companyEmail.companyEmail);
-    console.log(this.companyEmail.companyEmail);
-    this.company.subscribe(x=>{
-      console.log(x);
-    })
+
   }
 
   onHold(){

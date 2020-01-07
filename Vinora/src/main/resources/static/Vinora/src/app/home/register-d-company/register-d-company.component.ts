@@ -121,13 +121,6 @@ export class RegisterDCompanyComponent implements OnInit {
                                         ).catch(error=>{
                                           console.log(error);
                                         });
-
-                                        this.afs.collection('retailers').doc(res2.id).collection('notRegCompanies').doc(companyId).set(company).then(res=>{
-                                          console.log("company Added to each retailers");
-                                        }).catch(error=>{
-                                          console.log(error)
-                                        }
-                                        )
                                     })
                                   })
                                   console.log(" Manager is set ");

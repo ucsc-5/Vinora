@@ -36,8 +36,7 @@ export class RetRegComElementComponent implements OnInit {
   }
 
   onRegister(){
-    // const companyName= this.company.companyName;
-    this.retailerService.registerRetailer(this.retailerEmail,this.retailerUid,this.company.id,this.company.email,this.company.companyName)
-  }
+    this.retailerService.registerWithCompany(this.retailerUid,this.company.id,this.company);
+    }
 
 }
