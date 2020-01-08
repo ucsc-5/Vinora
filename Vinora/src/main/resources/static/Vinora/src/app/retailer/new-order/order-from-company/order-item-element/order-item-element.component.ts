@@ -39,10 +39,7 @@ export class OrderItemElementComponent implements OnInit {
     const value=form.value;
     const message=" Confirm! ";
 
-    if(this.item.quantity<value.quantity){
-
-    }else{
-      this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
         res=>{
           if(res){
 
@@ -63,10 +60,11 @@ export class OrderItemElementComponent implements OnInit {
             const type = this.item.type;
             const total = quantity*this.item.unitPrice;
             const stmadded = false;
+            const reOrderingLevel = this.item.reOrderingLevel;
              
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
               x=>{
-                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded};
+                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded,reOrderingLevel};
                 this.cartService.setItemsToCart(cartItem);
                 return "done";
               }
@@ -77,7 +75,7 @@ export class OrderItemElementComponent implements OnInit {
           }
         
         })      
-    }
+  
   }
   
 }

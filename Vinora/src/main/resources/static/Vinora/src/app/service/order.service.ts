@@ -197,10 +197,7 @@ setStmAddedFeild(orderKey:string,itemId:string){
 }
 
 setSaleRep(saleRepId:string,orderKey:string){
-  this.afs.collection('orders').doc(orderKey).update({saleRepId:saleRepId,saleRepAccept:1});
+  this.afs.collection('orders').doc(orderKey).update({saleRepId:saleRepId,saleRepAccept:0});
 }
-
-  
-
   
 }

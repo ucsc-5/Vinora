@@ -15,22 +15,48 @@ export class RegItemElementComponent implements OnInit {
   @Input() item:ItemId
   message: any;
   allowRemove: boolean;
-  updateForm: FormGroup
+  valid: boolean;
+  updateForm: FormGroup;
+  formValid: boolean;
+  edit: boolean = false;
+  button: string ;
+
 
   constructor(private dialogService:DialogService, private itemService:ItemService, private afAuth: AngularFireAuth) {
       
   }
 
   ngOnInit() {
+
+
     if(this.item.quantity>0){
       this.allowRemove = true; 
      } else{
        this.allowRemove = false;
      }
 
+     if(this.edit){
+       this.button="Back"
+     }else{
+       this.button="Edit"
+     }
+
      this.updateForm = new FormGroup({
-      'unitPrice': new FormControl(null,[Validators.min(0)])
-    });
+       'unitPrice': new FormControl(null,[Validators.min(0),Validators.required]),
+       'reOrderingLevel': new FormControl(null,[Validators.min(0),Validators.required])
+      });
+     
+     
+      
+
+             this.updateForm.statusChanges.subscribe(state=>{
+              console.log(state);
+              if(state=="VALID"){
+                  this.valid=true;
+              }else{
+                this.valid=false;
+              }
+            })
   }
 
   onRemove(){
@@ -61,29 +87,40 @@ export class RegItemElementComponent implements OnInit {
     }    
   }
 
-  OnUpdateUnitPrice() {
-      const unitPrice=this.updateForm.value.unitPrice;
-      const message= "Confirm !!"
-      this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
-        res=>{
-          if(res){      
-            this.message = this.itemService.updateItem(this.item.id,{unitPrice: unitPrice}).then(
-              x=>{
-                return "done";
-              }
-            ).catch(
-              error=>{error}
-            )
-    }}
+  OnUpdateValues(){
+
+    const message= "Confirm !!"
+
+    const reOrderLevel=this.updateForm.value.reOrderingLevel;
+    const unitPrice=this.updateForm.value.unitPrice;
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){      
+          this.itemService.updateItem(this.item.id,{reOrderingLevel: reOrderLevel}).then(res=>{
+            this.itemService.updateItem(this.item.id,{unitPrice: unitPrice}).then(res2=>{
+              console.log(" Done");
+            })
+          }).catch(error=>{
+            console.log(error);
+          }
+          )
+      }}
     )
+
+  }
+
+
+  itemDetails(item:ItemId){
+    this.dialogService.openItemDetailsDialog(item).afterClosed();
   }
 
   reset(){
     this.updateForm.reset();
   }
 
-  itemDetails(item:ItemId){
-    this.dialogService.openItemDetailsDialog(item).afterClosed();
+  onEdit(){
+    this.edit=!this.edit;
+    
   }
 
 }

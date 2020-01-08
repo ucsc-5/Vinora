@@ -17,6 +17,7 @@ export interface Item{
   state: string;
   companyId: string;
   type:string;
+  reOrderingLevel: number;
 }
 
 export interface ItemId extends Item{

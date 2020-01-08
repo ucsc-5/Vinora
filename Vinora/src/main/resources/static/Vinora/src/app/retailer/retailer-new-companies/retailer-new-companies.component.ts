@@ -20,7 +20,7 @@ export class RetailerNewCompaniesComponent implements OnInit {
     this.retailerId = this.afAuth.auth.currentUser.uid;
   }
 
-  ngOnInit() {
+  ngOnInit(){
     this.companies = this.retailerService.getMyNotRegisteredCompanies(this.retailerId);
   }
 

@@ -4,20 +4,21 @@
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image src="{{item.itemImagePath}}" width="300px" height="350px" alt="Photo of the Vehicle">
-            <mat-card-content>
-                    
+            <img *ngIf="!edit" mat-card-image src="{{item.itemImagePath}}" width="300px" height="350px" alt="Photo of the Vehicle">
+            <mat-card-content>   
                 <p>
                     <!-- {{item.description}}<br> -->
                     Unit Price: <b>{{item.unitPrice}} : Rs</b><br>
-                    Available:  <b></b>{{item.quantity}}<br>                
+                    Available:  <b></b>{{item.quantity}}<br>      
+                    Reordering Level: <b>{{item.reOrderingLevel}}</b>          
                 </p>
     
             </mat-card-content>
 
-            <mat-card-actions>  
-                
-                    <form [formGroup]="updateForm">
+            <button (click)="onEdit()"> {{button}} </button>
+
+            <mat-card-actions *ngIf="edit" width="300px">  
+                    <form [formGroup]="updateForm" >
                             <table class="" style="width: 159px" cellspacing="0">    
                                 <tr>
                                     <td>
@@ -27,6 +28,7 @@
                                                         matInput 
                                                         type="number" 
                                                         placeholder="Unit Price"
+                                                        
                                                         formControlName="unitPrice"  >
                                             </mat-form-field>  : Rs/- 
 
@@ -34,6 +36,22 @@
 
                                     </td>
                                 </tr>   
+
+                                <tr>
+                                        <td>
+                                                Reordering level: <br>
+                                                <mat-form-field class="" style="width: 70%">
+                                                    <input 
+                                                            matInput 
+                                                            type="number" 
+                                                            placeholder="Reordering level"
+                                                            formControlName="reOrderingLevel"  >
+                                                </mat-form-field>  {{item.type}}
+    
+                                                
+    
+                                        </td>
+                                    </tr>   
                                 <tr>
                                     <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -50,7 +68,8 @@
                                                 <button class="btn"  
                                                         data-toggle="tooltip"
                                                         title="Update unit price"
-                                                        (click)="OnUpdateUnitPrice()" > 
+                                                        [disabled]="!valid"
+                                                        (click)="OnUpdateValues()" > 
                                                         <i class="material-icons">
                                                                 cached
                                                         </i>
@@ -84,6 +103,33 @@
                     </form>
     
             </mat-card-actions>
+
+
+        <mat-card-actions>    
+        
+                <div class="btn-group" role="group" aria-label="Basic example">
+                        
+                        <button class="btn"  
+                        data-toggle="tooltip"
+                        title="Remove Item"
+                        (click)="onRemove()"
+                        [disabled]="allowRemove"> 
+                        <i class="material-icons icon-red">
+                                remove_circle_outline
+                        </i>
+                        </button>
+                
+                        <button class="btn"  
+                        data-toggle="tooltip"
+                        title="More details" 
+                        (click)="itemDetails(item)"> 
+                        <i class="material-icons">
+                                list_alt               
+                        </i>  
+                        </button>                                                       
+                </div>
+        </mat-card-actions>
+
 </mat-card>
-    
-     
+
+

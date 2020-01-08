@@ -53,7 +53,6 @@ export class ConOrderElementComponent implements OnInit {
         this.allowRefAssign= true;
         }
             })
-
   }
 
   selected(event){
@@ -61,6 +60,7 @@ export class ConOrderElementComponent implements OnInit {
     
   }
   
+
   assign(){
 
     const message = "Confirm Assigning";
@@ -70,8 +70,6 @@ export class ConOrderElementComponent implements OnInit {
           this.orderService.setSaleRep(this.selectedRepId,this.orderId)
         }})
 
-
   }
-
 
 }

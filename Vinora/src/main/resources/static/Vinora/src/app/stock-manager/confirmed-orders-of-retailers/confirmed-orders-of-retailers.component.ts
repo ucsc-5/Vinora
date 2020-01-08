@@ -21,7 +21,6 @@ export class ConfirmedOrdersOfRetailersComponent implements OnInit {
   }
 
   ngOnInit() {
-
    this.orders= this.orderService.getConfirmedOrdersByCompanyId(this.companyId);
   }
 }
