@@ -6,6 +6,7 @@ import { OrderService } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DialogService } from 'src/app/service/dialog.service';
 import { CartItem, CartService } from 'src/app/service/cart.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-order-item-element',
@@ -24,7 +25,7 @@ export class OrderItemElementComponent implements OnInit {
   messageOfRootItem: any;
 
 
-  constructor(private dialogService:DialogService,private afAuth: AngularFireAuth,private route:ActivatedRoute,private itemService:ItemService, private cartService:CartService) {
+  constructor(private afs: AngularFirestore,private dialogService:DialogService,private afAuth: AngularFireAuth,private route:ActivatedRoute,private itemService:ItemService, private cartService:CartService) {
     this.retailerId =  this.afAuth.auth.currentUser.uid;
    }
 
@@ -61,8 +62,16 @@ export class OrderItemElementComponent implements OnInit {
             const total = quantity*this.item.unitPrice;
             const stmadded = false;
             const reOrderingLevel = this.item.reOrderingLevel;
+
+              
+            if(newQuantity>reOrderingLevel){
+              this.itemService.updateItem(this.item.id,{reOrder:false})
+            }else{
+              this.itemService.updateItem(this.item.id,{reOrder:true})
+            }
              
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
+
               x=>{
                 const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded,reOrderingLevel};
                 this.cartService.setItemsToCart(cartItem);

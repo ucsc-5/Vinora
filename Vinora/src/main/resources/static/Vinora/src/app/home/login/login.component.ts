@@ -70,6 +70,9 @@ export class LoginComponent implements OnInit {
     // this.authService.login('royalvintage@gmail.com','654321'); //for Manager
    
     // this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
+    // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
+    
+    
     
 
     this.showSpinner=false;

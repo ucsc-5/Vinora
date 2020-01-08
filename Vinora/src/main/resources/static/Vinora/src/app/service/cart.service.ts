@@ -54,13 +54,24 @@ export class CartService {
   addQuantityCartItem(quantity:number,item:CartItemId){
     const newCartQuantity= item.quantity+quantity;
     this.afs.collection('items').doc(`${item.itemId}`).get().subscribe(x=>{
-      this.newQuantity=x.data().quantity-quantity;
-      this.itemService.updateItem(item.itemId,{quantity:this.newQuantity}).then(x=>{
-        this.updateItem(item.id,{quantity:newCartQuantity});
-      }
-        ).catch(error=>{
-        console.log(error+" this is the error");
+      this.newQuantity=+x.data().quantity-quantity;
+      const reOrderLevel=+x.data().reOrderingLevel;
+
+      console.log(reOrderLevel+"Re order level");
+      console.log(this.newQuantity+" new quantity");
+      
+    
+      this.itemService.updateItem(item.itemId,{quantity:this.newQuantity}).then(res=>{
+            if(this.newQuantity>reOrderLevel){
+              this.itemService.updateItem(item.itemId,{reOrder:false})  
+            }else{
+              this.itemService.updateItem(item.itemId,{reOrder:true})
+            }
+      }).catch(error=>{
+        console.log(error);
+        
       })
+      this.updateItem(item.id,{quantity:newCartQuantity})
     })
   }
 
@@ -68,7 +79,16 @@ export class CartService {
     const newCartQuantity= item.quantity-quantity;
     this.afs.collection('items').doc(`${item.itemId}`).get().subscribe(x=>{
       this.newQuantity=x.data().quantity+quantity;
+      const reOrderLevel=+x.data().reOrderingLevel;
+
       this.itemService.updateItem(item.itemId,{quantity:this.newQuantity}).then(x=>{
+        
+        if(this.newQuantity>reOrderLevel){
+          this.itemService.updateItem(item.itemId,{reOrder:false})  
+        }else{
+          this.itemService.updateItem(item.itemId,{reOrder:true})
+        }
+
         this.updateItem(item.id,{quantity:newCartQuantity});
       }
         ).catch(error=>{
@@ -165,8 +185,14 @@ export class CartService {
 
   retailerRemoveItemFromCart(key: string,item:CartItemId){
     this.afs.collection('items').doc(`${item.itemId}`).get().subscribe(x=>{
+      const reOrderLevel=+x.data().reOrderingLevel;
       this.newQuantity=x.data().quantity+item.quantity;
       this.itemService.updateItem(item.itemId,{quantity:this.newQuantity}).then(x=>{
+        if(this.newQuantity>reOrderLevel){
+          this.itemService.updateItem(item.itemId,{reOrder:false})  
+        }else{
+          this.itemService.updateItem(item.itemId,{reOrder:true})
+        }
         this.removeItem(item.id);
       }
         ).catch(error=>{
