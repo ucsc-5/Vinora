@@ -124,6 +124,8 @@ import { SalesRepresentativeService } from './service/sales-representative.servi
 import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigned-orders.component';
 import { AsiignedOrderDetailsComponent } from './stock-manager/assigned-orders/asiigned-order-details/asiigned-order-details.component';
 import { StockManagerRetailersComponent } from './stock-manager/stock-manager-retailers/stock-manager-retailers.component';
+import { RetailerRegComElementComponent } from './retailer/previous-orders/retailer-reg-com-element/retailer-reg-com-element.component';
+import { ReportComponent } from './retailer/previous-orders/report/report.component';
 
 
 @NgModule({
@@ -210,6 +212,8 @@ import { StockManagerRetailersComponent } from './stock-manager/stock-manager-re
     AssignedOrdersComponent,
     AsiignedOrderDetailsComponent,
     StockManagerRetailersComponent,
+    RetailerRegComElementComponent,
+    ReportComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

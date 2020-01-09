@@ -1,0 +1,15 @@
+
+<div class="row">
+  
+    <div class="col" *ngFor="let company of company | async" >
+            <div class="col">
+                    <img src="{{company.imagePath}}" width="150px" height="150px"> <br>                  
+                     <p>monthly chart</p>
+                     <button>Download pdf</button>
+                </div>
+            
+            </div>
+        
+      
+</div>
+

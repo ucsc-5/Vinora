@@ -52,6 +52,7 @@ import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-we
 import { ResetPasswordService } from './shared/routerGuards/reset-password.service'; 
 import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigned-orders.component';
 import { StockManagerRetailersComponent } from './stock-manager/stock-manager-retailers/stock-manager-retailers.component';
+import { ReportComponent } from './retailer/previous-orders/report/report.component';
 
 
 
@@ -79,13 +80,20 @@ const routes: Routes = [
              
 
             ]},
+           
             // { path: 'myCart', component: MyCartComponent},
            
             {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
-            { path: 'previousOrders', component: PreviousOrdersComponent},
+            
+            { path: 'previousOrders', component: PreviousOrdersComponent,children:[
+              {path: ':companyId/chart',component:ReportComponent}
+                //  {path: 'chart',component:ReportComponent}
+             
+            ]},
             // {path: 'newStock', component: NewStockComponent},
             { path: 'allCompanies', component: RetailerNewCompaniesComponent},
-            { path: 'myProfile', component: RetailerProfileComponent}
+            { path: 'myProfile', component: RetailerProfileComponent},
+          
   ]},
 
   {path: 'stockManager/:id' , component: StockManagerComponent,

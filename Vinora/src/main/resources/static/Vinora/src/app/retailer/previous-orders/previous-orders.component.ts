@@ -3,6 +3,7 @@ import { CompanyEmailTokenId, RetailerService } from 'src/app/service/retailer.s
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { CompanyId } from 'src/app/service/company.service';
 
 @Component({
   selector: 'app-previous-orders',
@@ -12,8 +13,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class PreviousOrdersComponent implements OnInit {
 
 
-  companyEmails: Observable<CompanyEmailTokenId[]>
-  retailerId: string;
+  companies: Observable<CompanyId[]>;
+  retailerId
   
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private retailerService:RetailerService) {
@@ -22,7 +23,7 @@ export class PreviousOrdersComponent implements OnInit {
 
   ngOnInit() {
 
-    this.companyEmails=this.retailerService.getRegisteredAllCompanies(this.retailerId);
+    this.companies = this.retailerService.getMyRegisteredCompanies(this.retailerId);
   }
 
 }
