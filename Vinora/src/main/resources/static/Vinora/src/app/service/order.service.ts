@@ -93,6 +93,17 @@ export class OrderService {
     );
     return ConfirmedOrdersByRetailerId;
   }
+  getOrdersByRetailerIdCompanyId(retailerId:string,companyId:string){
+    const OrdersByRetailerIdCompanyId:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',0).where('companyId','==',companyId)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return OrdersByRetailerIdCompanyId;
+
+  }
 
 
   getConfirmedOrdersByCompanyId(companyId:string){

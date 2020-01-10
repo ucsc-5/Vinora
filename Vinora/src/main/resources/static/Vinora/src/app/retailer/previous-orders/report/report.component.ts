@@ -37,17 +37,17 @@ export class ReportComponent implements OnInit {
 
     // }
 
-    this.confirmedOrders = this.orderService.getConfirmedOrdersByRetailerId(this.retailerId);
+    this.confirmedOrders = this.orderService.getOrdersByRetailerIdCompanyId(this.retailerId,this.companyId);
     this.confirmedOrders.subscribe(x=>{
       console.log(x);
       
     });
 
-    this.company = this.companyService.getCompanyById(this.confirmOrder.companyId);
-    this.company.subscribe(y=>{
-      console.log("hashini"+y);
+    // this.company = this.companyService.getCompanyById(this.confirmOrder.companyId);
+    // this.company.subscribe(y=>{
+    //   console.log("hashini"+y);
       
-    });
+    // });
 
     console.log(this.confirmOrder.createDate);
   }
