@@ -1,1 +1,4 @@
-<p>stock-manager-retailers works!</p>
+<div class="col" *ngIf="retailersTakens | async; let retailersTakens; else loading">
+    <app-stm-retailer-list-element *ngFor="let retailersTaken of retailersTakens" [retailersTaken]="retailersTaken" ></app-stm-retailer-list-element>
+</div>
+

@@ -126,6 +126,7 @@ import { AsiignedOrderDetailsComponent } from './stock-manager/assigned-orders/a
 import { StockManagerRetailersComponent } from './stock-manager/stock-manager-retailers/stock-manager-retailers.component';
 import { RetailerRegComElementComponent } from './retailer/previous-orders/retailer-reg-com-element/retailer-reg-com-element.component';
 import { ReportComponent } from './retailer/previous-orders/report/report.component';
+import { StmRetailerListElementComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/stm-retailer-list-element.component';
 
 
 @NgModule({
@@ -214,6 +215,7 @@ import { ReportComponent } from './retailer/previous-orders/report/report.compon
     StockManagerRetailersComponent,
     RetailerRegComElementComponent,
     ReportComponent,
+    StmRetailerListElementComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

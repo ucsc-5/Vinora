@@ -7,7 +7,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { getMatFormFieldMissingControlError } from '@angular/material';
-import { RetailerEmailTokenId, RetailerEmailToken } from './retailer.service';
+import { RetailerEmailTokenId, RetailerEmailToken,Retailer,RetailerId } from './retailer.service';
 import { Item, ItemId } from './item.service';
 
 
@@ -61,7 +61,7 @@ export class CompanyService {
   
   
   private registeredRetailersCollection: AngularFirestoreCollection<RetailerEmailTokenId>;
-  registeredRetailersKey: Observable<RetailerEmailTokenId[]>
+  private notRegRetailersCollection: AngularFirestoreCollection<RetailerId>;
 
   
   constructor(private readonly afs: AngularFirestore,private db: AngularFireDatabase, private afAuth: AngularFireAuth,private authService : AuthenticationService,private storage: AngularFireStorage) {
@@ -172,14 +172,27 @@ export class CompanyService {
 
     this.registeredRetailersCollection = this.afs.collection<RetailerEmailTokenId>(`companies/${uid}/registeredRetailers`);
     
-    this.registeredRetailersKey = this.registeredRetailersCollection.snapshotChanges().pipe(
+    const RetailerEmailTokens: Observable<RetailerEmailTokenId[]> = this.registeredRetailersCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as RetailerEmailToken;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-    return this.registeredRetailersKey;
+    return RetailerEmailTokens;
+  }
+
+  getNotRegRetailers(uid:string){
+
+    this.notRegRetailersCollection = this.afs.collection<RetailerId>(`companies/${uid}/notRegRetailers`);  
+    const notRegRetailers: Observable<RetailerId[]> = this.notRegRetailersCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Retailer;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return notRegRetailers;
   }
 
 

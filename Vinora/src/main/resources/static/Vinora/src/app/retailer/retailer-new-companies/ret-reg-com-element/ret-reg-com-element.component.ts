@@ -22,9 +22,6 @@ export class RetRegComElementComponent implements OnInit {
   registerCompanyName: string;
   retailer: Observable<RetailerId[]>;
  
-  
-
-
  
   constructor(private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
     this.retailerEmail= this.afAuth.auth.currentUser.email;

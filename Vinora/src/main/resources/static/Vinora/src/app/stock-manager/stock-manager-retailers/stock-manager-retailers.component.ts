@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RetailerService,RetailerId } from 'src/app/service/retailer.service';
+import { RetailerService,RetailerId,RetailerEmailTokenId } from 'src/app/service/retailer.service';
 import { CompanyService } from 'src/app/service/company.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -11,12 +12,19 @@ import { CompanyService } from 'src/app/service/company.service';
 })
 export class StockManagerRetailersComponent implements OnInit {
 
-  retailers: Observable<RetailerId[]>
+  retailersTakens: Observable<RetailerEmailTokenId[]>
+  companyId: string
+  
 
-  constructor(private companyService :CompanyService) { }
+  constructor(private companyService :CompanyService,private afAuth: AngularFireAuth) {
+    this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+      // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
+      this.companyId= idTokenResult.claims.cmpId.cmpId;
+    })
+  }
 
   ngOnInit() {
-    // this.retailers = this.companyService.getRegisteredRetailers()
+    this.retailersTakens = this.companyService.getRegisteredRetailers(this.companyId);
   }
 
 }
