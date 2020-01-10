@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyService, Company, CompanyId } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { RetailerService } from 'src/app/service/retailer.service';
+import { RetailerService,RetailerId } from 'src/app/service/retailer.service';
 
 @Component({
   selector: 'app-retailer-new-companies',
@@ -14,6 +14,7 @@ export class RetailerNewCompaniesComponent implements OnInit {
  
  
   companies: Observable<CompanyId[]>;
+
   retailerId
 
   constructor(private retailerService:RetailerService,private companyServise: CompanyService,private afAuth: AngularFireAuth) { 

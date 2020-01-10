@@ -23,8 +23,7 @@ export interface RetailerId extends Retailer{id: string}
 
 export interface RetailerEmailToken{
                 retailerEmail: string;
-                registerState: string;  
-                         
+                retailerUid: string;           
 }
 
 export interface RetailerEmailTokenId extends RetailerEmailToken{
@@ -85,25 +84,25 @@ getAllRetailers(){
 
 registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,companyEmail:string,companyName:string){
 
-  const registerState= "0"
-  console.log(retailerUid+"From the service"+companyUid);
-  const companyCollection =  this.afs.collection<RetailerEmailToken>(`companies/${companyUid}/retailerRegistrations`);
-  const id1 = this.afs.createId();
-  const retailerRegisterOnCompany : RetailerEmailToken={retailerEmail,registerState}
-  companyCollection.doc(id1).set(retailerRegisterOnCompany).then(res=>{
-    console.log(res);
-  }).catch(error=>{
-    console.log(error)
-  });
+  // const registerState= "0"
+  // console.log(retailerUid+"From the service"+companyUid);
+  // const companyCollection =  this.afs.collection<RetailerEmailToken>(`companies/${companyUid}/retailerRegistrations`);
+  // const id1 = this.afs.createId();
+  // const retailerRegisterOnCompany : RetailerEmailToken={retailerEmail,registerState}
+  // companyCollection.doc(id1).set(retailerRegisterOnCompany).then(res=>{
+  //   console.log(res);
+  // }).catch(error=>{
+  //   console.log(error)
+  // });
 
-  const retailerCollection =  this.afs.collection<CompanyEmailToken>(`retailers/${retailerUid}/companyRegistrations`);
-  const id2 = this.afs.createId();
-  const companyRegisterOnRetailer : CompanyEmailToken ={companyEmail,registerState,companyName}
-  retailerCollection.doc(id2).set(companyRegisterOnRetailer).then(
-    x=>{console.log(x)}
-  ).catch(error=>{
-    console.log(error)
-  });
+  // const retailerCollection =  this.afs.collection<CompanyEmailToken>(`retailers/${retailerUid}/companyRegistrations`);
+  // const id2 = this.afs.createId();
+  // const companyRegisterOnRetailer : CompanyEmailToken ={companyEmail,registerState,companyName}
+  // retailerCollection.doc(id2).set(companyRegisterOnRetailer).then(
+  //   x=>{console.log(x)}
+  // ).catch(error=>{
+  //   console.log(error)
+  // });
 
 }
 
@@ -131,7 +130,8 @@ getMyRegisteredCompanies(retailerId:string){
 }
 
 
-registerWithCompany(retailerId:string,companyId:string,company:CompanyId){
+registerWithCompany(retailerId:string,companyId:string,company:CompanyId,retailerEmail:string){
+  
   this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).set(company).then(res=>{
     this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).delete().then(response=>{
       console.log("Registration successfull!");
@@ -140,6 +140,10 @@ registerWithCompany(retailerId:string,companyId:string,company:CompanyId){
       console.log(error);
     })
   })
+
+  const RetailerEmailToken = {retailerEmail,retailerId}
+
+  this.afs.collection('companies').doc(companyId).collection('registeredRetailers').doc(retailerId).set(RetailerEmailToken);
 }
 
 
