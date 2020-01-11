@@ -1,14 +1,27 @@
+<!-- <div class="row" *ngFor="let company of company" > 
+    <div class="col col-3"> 
+        <br>
+        {{company.companyName}}<br>
+        {{company.email}}
+    </div>
+</div>
+<br> -->
 
+
+ <button>Download pdf</button>
 <div class="row">
   
-    <div class="col" *ngFor="let company of company | async" >
-            <div class="col">
-                    <img src="{{company.imagePath}}" width="150px" height="150px"> <br>                  
-                     <p>monthly chart</p>
-                     <button>Download pdf</button>
-                </div>
+  
+
             
-            </div>
+
+ <div class="col" *ngIf="confirmedOrders | async; let confirmedOrders; else loading">
+                  
+    <app-report-confirm-order-element *ngFor="let confirmOrder of confirmedOrders" [confirmOrder]="confirmOrder" ></app-report-confirm-order-element>
+</div>
+
+ <ng-template #loading>No current orders available!!&hellip;</ng-template>
+         
         
       
 </div>

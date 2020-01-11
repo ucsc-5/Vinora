@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CompanyId, CompanyService } from 'src/app/service/company.service';
+import { CompanyId, CompanyService, Company } from 'src/app/service/company.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ReportService } from 'src/app/service/report.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -15,10 +15,10 @@ export class ReportComponent implements OnInit {
 
 
   companyId: string;
-
+  
   company: Observable<CompanyId[]>
   confirmedOrders:Observable<OrderId[]>;
-  @Input() confirmOrder: OrderId;
+  // @Input() confirmOrder: OrderId;
   retailerId;
  
   constructor(private router:Router,private companyService: CompanyService, private route:ActivatedRoute,private reportService:ReportService, private afAuth: AngularFireAuth,private orderService: OrderService) { 
@@ -43,13 +43,7 @@ export class ReportComponent implements OnInit {
       
     });
 
-    // this.company = this.companyService.getCompanyById(this.confirmOrder.companyId);
-    // this.company.subscribe(y=>{
-    //   console.log("hashini"+y);
-      
-    // });
-
-    console.log(this.confirmOrder.createDate);
+    // console.log(this.confirmOrder.createDate);
   }
 
 }

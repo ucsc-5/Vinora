@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col" *ngIf="company | async; let company; else ">
+        <div class="row" *ngFor="let company of company" > 
+        
+          <div class="col col-3">    
+              <p>
+                <b>Purches Date: </b> {{confirmOrder.createDate}}<br>
+                <b>Total Amount: </b> {{confirmOrder.total}} .00 Rs/-<br>
+                <!-- <b>Order State: </b> {{currentOrder.state}}<br> -->
+              </p>
+            
+          </div> 
+          <div class="col col-3">
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row"  *ngIf="items | async; let items ; else">
+    <app-report-confirm-order-item class="col col-2" *ngFor="let item of items" [item]="item"></app-report-confirm-order-item>
+</div>
+
+<br>
+<br>
+<br>
