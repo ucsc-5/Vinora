@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { RetailerService,RetailerId,RetailerEmailTokenId } from 'src/app/service/retailer.service';
+import { Router,ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-stm-retailer-list-element',
@@ -8,9 +9,14 @@ import { RetailerService,RetailerId,RetailerEmailTokenId } from 'src/app/service
 })
 export class StmRetailerListElementComponent implements OnInit {
   @Input()  retailersTaken: RetailerEmailTokenId
-  constructor() { }
+  constructor(private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
+
+  }
+
+  onSelect(){
+    this.router.navigate([this.retailersTaken.retailerUid],{relativeTo: this.route})
   }
 
 }

@@ -53,7 +53,9 @@ import { ResetPasswordService } from './shared/routerGuards/reset-password.servi
 import { AssignedOrdersComponent } from './stock-manager/assigned-orders/assigned-orders.component';
 import { StockManagerRetailersComponent } from './stock-manager/stock-manager-retailers/stock-manager-retailers.component';
 import { ReportComponent } from './retailer/previous-orders/report/report.component';
-
+import { RetailerProfileForSTMComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/retailer-profile-for-stm/retailer-profile-for-stm.component';
+import { RetailerOrdersForSTMComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/retailer-orders-for-stm/retailer-orders-for-stm.component';
+import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/retailer-dashboard-for-stm/retailer-dashboard-for-stm.component';
 
 
 
@@ -98,7 +100,7 @@ const routes: Routes = [
 
   {path: 'stockManager/:id' , component: StockManagerComponent,
         // canActivate: [StockManagerGuardService],
-        canActivateChild:[ResetPasswordService], 
+        // canActivateChild:[ResetPasswordService], 
         
         
         children:[
@@ -108,7 +110,12 @@ const routes: Routes = [
             { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},
             { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent},
             { path: 'assignedOrders', component: AssignedOrdersComponent},
-            { path: 'retailers', component: StockManagerRetailersComponent}
+            { path: 'retailers', component: StockManagerRetailersComponent, children:[
+              { path: ':retailerId', component: RetailerDashboardForSTMComponent, children:[
+                { path: 'retailerOrders', component: RetailerOrdersForSTMComponent}
+              ]},
+              { path: 'retailerProfile', component: RetailerProfileForSTMComponent },
+            ]}
             
   ]},
 
