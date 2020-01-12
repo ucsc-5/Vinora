@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CompanyId, CompanyService, Company } from 'src/app/service/company.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ReportService } from 'src/app/service/report.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { OrderId, OrderService } from 'src/app/service/order.service';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-report',
@@ -18,8 +19,9 @@ export class ReportComponent implements OnInit {
   
   company: Observable<CompanyId[]>
   confirmedOrders:Observable<OrderId[]>;
-  // @Input() confirmOrder: OrderId;
   retailerId;
+
+  @ViewChild('content',{ static: true }) content:ElementRef;
  
   constructor(private router:Router,private companyService: CompanyService, private route:ActivatedRoute,private reportService:ReportService, private afAuth: AngularFireAuth,private orderService: OrderService) { 
     this.retailerId= this.afAuth.auth.currentUser.uid;
@@ -32,10 +34,7 @@ export class ReportComponent implements OnInit {
    
    
     this.company= this.companyService.getCompanyById(this.companyId);
-
-    // this.reportService.getreportdetails(this.companyId).subscribe{
-
-    // }
+  
 
     this.confirmedOrders = this.orderService.getOrdersByRetailerIdCompanyId(this.retailerId,this.companyId);
     this.confirmedOrders.subscribe(x=>{
@@ -43,7 +42,24 @@ export class ReportComponent implements OnInit {
       
     });
 
-    // console.log(this.confirmOrder.createDate);
+  
+  }
+
+  public downloadPdf(){
+
+    let doc = new jsPDF();
+    let specialElementHandlers={
+      '#editor' :function(element,renderer) {
+        return true;
+        
+      }
+    };
+    let content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML,15,15,{
+      'width':190,
+      'elementHandlers':specialElementHandlers
+    });
+    doc.save('report.pdf');
   }
 
 }
