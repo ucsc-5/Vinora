@@ -58,9 +58,7 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
           const state = "0";
           const saleRepAccept = 0;
           
-         
-          const id = this.afs.createId();
-      
+ 
           
           
           
@@ -71,8 +69,6 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
               console.log("sale Rep Id "+ saleRepId);
               console.log("Company Id "+companyId);
               
-              
-
               callable({email:email,role:this.type,companyId:this.companyId}).subscribe(
                 (response)=>{
                   console.log(response);  
@@ -82,12 +78,21 @@ export class RegisterSalesRepresentativeComponent implements OnInit {
                   createUser.then( (data)=>{
                     const salesrepresentative:SalesRepresentative = {fullName,address,email,contactNumber,nic,salesRefImagePath,state,companyId,saleRepId,saleRepAccept};
                     console.log(salesrepresentative);
-                    this.salesRepresentativeCollection.doc(id).set(salesrepresentative);
+                    this.salesRepresentativeCollection.doc(saleRepId).set(salesrepresentative).then(res=>{
+                      // this.afAuth.auth.signOut().then(response3=>{
+                      //   console.log(" Sign Out from stock manager registrations");
+                      // })                 
+                    })
                   });
              }
             ) 
             }
-          )
+
+          ).catch(error=>{
+            console.log(error);
+            
+          })
+          
         }})
             
 

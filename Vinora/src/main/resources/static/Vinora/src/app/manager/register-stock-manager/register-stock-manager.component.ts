@@ -42,6 +42,7 @@ export class RegisterStockManagerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.companyId=this.afAuth.auth.currentUser.uid;
     this.stockManagers = this.stockManagerService.getActiveStockManagerByCompanyId(this.companyId);
 
     let numericRegex = /^[0-9]+$/;
@@ -108,11 +109,19 @@ export class RegisterStockManagerComponent implements OnInit {
                                   },
                                   ()=>{},
                                   ()=>{
-                                      const uid = res.user.uid;
+                                    
+                                    const uid = res.user.uid;
+                                    console.log(uid+ " nely registered uid");
+                                    console.log(this.companyId+" this is the company Id");
+                                    
                                       const stockManager1:StockManager={fullName,address,nic,email,contactNumber,state,companyId,imagePath,uid}
                                       this.stockManagerCollection.doc(res.user.uid).set(stockManager1).then(response2=>{
                                         console.log(response2);
                                         this.registerForm.reset();
+                                        // this.afAuth.auth.signOut().then(x3=>{
+                                        //   console.log("Sign Out here");
+                                          
+                                        // })
                                       }
                                       )
                                     }

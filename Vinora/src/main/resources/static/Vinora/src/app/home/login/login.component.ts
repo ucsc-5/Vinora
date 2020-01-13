@@ -48,17 +48,21 @@ export class LoginComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     this.authService.logout();
-    this.authService.login(email,password).then(res=>{
-       console.log(" this is the response "+res);
-      this.message="Please check your email and password again!!"
-      setTimeout(() => {
-        this.message=null;
-       }, 2000);
+
+    
+
+
+    // this.authService.login(email,password).then(res=>{
+    //    console.log(" this is the response "+res);
+    //   this.message="Please check your email and password again!!"
+    //   setTimeout(() => {
+    //     this.message=null;
+    //    }, 2000);
        
-     }).catch(error=>{
-       console.log(" this is the error  "+error);
+    //  }).catch(error=>{
+    //    console.log(" this is the error  "+error);
   
-     })
+    //  })
 
     this.showSpinner=true;
 
@@ -71,6 +75,8 @@ export class LoginComponent implements OnInit {
    
     // this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
     // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
+
+        this.authService.login('udulastm@gmail.com','0123456789v'); //for Manager
     
     
     

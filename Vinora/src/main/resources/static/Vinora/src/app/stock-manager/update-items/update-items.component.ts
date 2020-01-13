@@ -33,7 +33,8 @@ export class UpdateItemsComponent implements OnInit {
   constructor(private db: AngularFireDatabase,private StockManagerService:StockManagerService,private afAuth: AngularFireAuth,private itemService:ItemService){
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
-      this.companyId= idTokenResult.claims.cmpId.cmpId;
+      this.companyId= idTokenResult.claims.cmpId;
+      console.log(idTokenResult);      
     })  
 
   

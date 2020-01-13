@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router,ActivatedRoute,Params} from '@angular/router';
 import { RetailerService, Retailer, RetailerId } from 'src/app/service/retailer.service';
 import { Observable } from 'rxjs';
@@ -10,14 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class RetailerOrdersForSTMComponent implements OnInit {
 
-  orderType: string;
+  @Input()retailer: RetailerId;
   
 
-  constructor(private router:Router,private route:ActivatedRoute,private retailerService:RetailerService) { }
+  constructor(private router:Router,private route:ActivatedRoute,private retailerService:RetailerService) { 
+
+  }
 
   ngOnInit() {
-    this.route.params.subscribe((param:Params)=>{
-      this.orderType = param['orderType'];})
+    console.log(this.retailer.id+" this is the retailer Id");
   }
 
 }

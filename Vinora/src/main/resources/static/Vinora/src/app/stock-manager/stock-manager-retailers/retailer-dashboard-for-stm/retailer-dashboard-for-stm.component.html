@@ -1,4 +1,5 @@
-<div class="row" *ngIf="retailer$ | async; let retailer; else loading">
+<div class="row" *ngIf="retailer | async; let retailer; else loading">
+  <div class="col-7">
     <mat-card class="example-card" *ngFor="let retailer of retailer">
         <div class="row no-gutters">
           <div class="col-md-4">
@@ -8,17 +9,26 @@
             <div class="card-body">
               <h5 class="card-title">{{retailer.shopName}}</h5>
               <p class="card-text">
-                  <p> 
-                      <b>State: </b>{{retailer.state}}<br>
+                  <p>    {{retailer.id}}
+                      {{retailer.retailerId}}
                       <b>email: </b>{{retailer.email}}<br>
                       <b>Address: </b>{{retailer.address}}<br>
                       <b>Contact: </b>{{retailer.contactNumber}}<br>
-                      <b>Id: </b>{{retailer.Id}}<br> 
                   </p>
             </div>
           </div>
         </div>
       </mat-card>
-      <div *ngIf="retailer.length === 0">Permision is not granted yet!...</div>
+    </div>
+    <div class="col-5">
+      <agm-map [latitude]="latitude" [longitude]="longitude">
+        <agm-marker 
+        [latitude]="latitude" 
+        [longitude]="longitude" 
+        ></agm-marker>
+      </agm-map>
+    </div>
+    <app-retailer-orders-for-stm [retailer]="retailer"> </app-retailer-orders-for-stm>
 </div>
+
 <ng-template #loading>Loading&hellip;</ng-template>

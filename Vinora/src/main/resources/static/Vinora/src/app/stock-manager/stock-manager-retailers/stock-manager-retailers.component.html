@@ -1,4 +1,9 @@
 <div class="col" *ngIf="retailersTakens | async; let retailersTakens; else loading">
-    <app-stm-retailer-list-element *ngFor="let retailersTaken of retailersTakens" [retailersTaken]="retailersTaken" ></app-stm-retailer-list-element>
+    <ul>
+        <li type="button" (click)="onSelect(retailersTaken.retailerId)" *ngFor="let retailersTaken of retailersTakens" >
+            {{retailersTaken.retailerEmail}}
+            {{retailersTaken.retailerId}}
+        </li>
+    </ul>
 </div>
 

@@ -129,9 +129,9 @@ import { ReportComponent } from './retailer/previous-orders/report/report.compon
 import { StmRetailerListElementComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/stm-retailer-list-element.component';
 import { ReportConfirmOrderElementComponent } from './retailer/previous-orders/report/report-confirm-order-element/report-confirm-order-element.component';
 import { ReportConfirmOrderItemComponent } from './retailer/previous-orders/report/report-confirm-order-element/report-confirm-order-item/report-confirm-order-item.component';
-import { RetailerProfileForSTMComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/retailer-profile-for-stm/retailer-profile-for-stm.component';
-import { RetailerOrdersForSTMComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/retailer-orders-for-stm/retailer-orders-for-stm.component';
-import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-retailers/stm-retailer-list-element/retailer-dashboard-for-stm/retailer-dashboard-for-stm.component';
+import { RetailerProfileForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-profile-for-stm/retailer-profile-for-stm.component';
+import { RetailerOrdersForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-dashboard-for-stm/retailer-orders-for-stm/retailer-orders-for-stm.component';
+import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-dashboard-for-stm/retailer-dashboard-for-stm.component';
 
 
 @NgModule({
