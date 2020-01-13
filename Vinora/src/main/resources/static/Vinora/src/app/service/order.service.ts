@@ -128,7 +128,16 @@ export class OrderService {
     return orders;
   }
 
-
+  getAssignedOrdersByRetailerId(retailerId:string){
+    const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',1)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return orders;
+  }
 
   // getCurrentOrdersByCompanyId(companyId:string){
   //   const collection = this.afs.collection<Order>(this.dbPath, ref => ref.where('companyId', '==', companyId))

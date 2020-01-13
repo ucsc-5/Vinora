@@ -1,1 +1,43 @@
-<p>retailer-orders-for-stm works! {{retailer.id}}</p>
+<div class="row">
+    <div class="col-12">
+        <b>Purches Date: </b> {{order.createDate}} <br>
+        <b>Total Amount: </b> {{order.total}} .00 Rs/-<br>
+    </div>
+    <div class="col-3" *ngFor="let item of items | async">
+        
+
+            <mat-card class="example-card">
+                <div>
+                    <mat-card-header>
+                        <mat-card-title>{{item.itemName}}</mat-card-title>   
+                            <i *ngIf="added" class="material-icons green">
+                                done
+                            </i> 
+                        <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img src="{{item.itemImagePath}}" height="60px" width="90px" alt="Photo of a Shiba Inu">
+                    <mat-card-content>
+                        <p  >
+                            <!-- {{item.description}} -->
+                            Unit Price: <b>{{item.unitPrice}} .00 Rs/-</b><br>
+                            Quantity:  <b>{{item.quantity}}</b><br>  
+                            Item total: <b>{{item.total}} .00 Rs/-</b><br>              
+                            </p>       
+                    </mat-card-content>      
+                </div>
+        
+                    <mat-card-actions *ngIf="!added">
+                            <button mat-raised-button (click)="onAdd()">Add</button>
+                    </mat-card-actions>   
+        
+                    
+                    <mat-card-actions *ngIf="added">
+                        <button mat-raised-button (click)="onDrop()">Reset</button>
+                    </mat-card-actions>    
+                
+                </mat-card>
+        </div>
+</div>
+
+
+

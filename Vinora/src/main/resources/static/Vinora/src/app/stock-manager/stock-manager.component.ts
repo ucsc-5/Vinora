@@ -13,7 +13,12 @@ export class StockManagerComponent implements OnInit {
   stockManager: Observable<StockManagerId[]>;
   stockManagerEmail: string;
   constructor(private StockManagerService:StockManagerService,private afAuth: AngularFireAuth) {
-    this.stockManagerEmail=this.afAuth.auth.currentUser.email;
+    this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+      console.log(idTokenResult);
+      this.stockManagerEmail= idTokenResult.claims.email;
+    })
+
+    // this.stockManagerEmail=this.afAuth.auth.currentUser.email;
   }
 
   ngOnInit() {

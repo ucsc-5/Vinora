@@ -1,34 +1,74 @@
 <div class="row" *ngIf="retailer | async; let retailer; else loading">
-  <div class="col-7">
-    <mat-card class="example-card" *ngFor="let retailer of retailer">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-              <img mat-card-image src="{{retailer.url}}" alt="Photo of the Retailer">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{retailer.shopName}}</h5>
-              <p class="card-text">
-                  <p>    {{retailer.id}}
-                      {{retailer.retailerId}}
-                      <b>email: </b>{{retailer.email}}<br>
-                      <b>Address: </b>{{retailer.address}}<br>
-                      <b>Contact: </b>{{retailer.contactNumber}}<br>
-                  </p>
+  <div class="col-12">
+    <button (click)="onProfile()">Profile</button>
+    <button (click)="onPurches()">Purches</button>
+    <button (click)="onConfirmed()">Confirmed</button>
+    <button (click)="onAssigned()">Assigned</button>
+    <button (click)="onDelivered()">Delivered</button>
+  </div>
+
+  <div class="col-12" *ngIf="profile">
+    <div class="row">
+      <div class="col-7">
+        <mat-card class="example-card" *ngFor="let retailer of retailer">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                  <img mat-card-image src="{{retailer.url}}" alt="Photo of the Retailer">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{retailer.shopName}}</h5>
+                  <p class="card-text">
+                      <p>   
+                          <b>email: </b>{{retailer.email}}<br>
+                          <b>Address: </b>{{retailer.address}}<br>
+                          <b>Contact: </b>{{retailer.contactNumber}}<br>
+                      </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </mat-card>
         </div>
-      </mat-card>
+        <div class="col-5">
+          <agm-map [latitude]="latitude" [longitude]="longitude">
+            <agm-marker 
+            [latitude]="latitude" 
+            [longitude]="longitude" 
+            ></agm-marker>
+          </agm-map>
+        </div>
     </div>
-    <div class="col-5">
-      <agm-map [latitude]="latitude" [longitude]="longitude">
-        <agm-marker 
-        [latitude]="latitude" 
-        [longitude]="longitude" 
-        ></agm-marker>
-      </agm-map>
+
+  </div>
+
+
+
+
+  
+
+    <div class="col-12" *ngIf="purches" >
+        <!-- <app-retailer-orders-for-stm *ngFor="let order of currentOrders | async" [order]="order" ></app-retailer-orders-for-stm> -->
+        <app-cur-order-element *ngFor="let order of currentOrders | async" [order]="order" ></app-cur-order-element>
     </div>
-    <app-retailer-orders-for-stm [retailer]="retailer"> </app-retailer-orders-for-stm>
+
+    <div class="col-12" *ngIf="confirmed">
+          <app-con-order-element *ngFor="let order of confirmedOrders | async" [order]="order" ></app-con-order-element>
+    </div>
+        <!-- <app-retailer-orders-for-stm *ngFor="let order of orders" [order]="order" ></app-retailer-orders-for-stm> -->
+   
+
+    <div class="col-12" *ngIf="assigned" >
+        <app-retailer-orders-for-stm *ngFor="let order of assignedOrders | async" [order]="order" ></app-retailer-orders-for-stm>
+    </div>
+
+
+    <div class="col-12" *ngIf="delivered">
+
+    </div>
+    
+    
+
+
 </div>
 
 <ng-template #loading>Loading&hellip;</ng-template>

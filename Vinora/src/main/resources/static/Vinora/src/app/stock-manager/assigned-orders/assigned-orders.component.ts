@@ -21,7 +21,7 @@ export class AssignedOrdersComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth,private salesRepService:SalesRepresentativeService,private orderService:OrderService) {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
-      this.companyId= idTokenResult.claims.cmpId.cmpId;
+      this.companyId= idTokenResult.claims.cmpId;
     })
     this.stockMangerId=this.afAuth.auth.currentUser.uid
    }

@@ -73,6 +73,10 @@ export class ItemService {
     return this.afs.collection('items').doc(key).update(value);
   }  
 
+  getStockItem(key:string){
+    const items = this.afs.collection('items').doc(key);
+    return items;
+  }
 
 
 
