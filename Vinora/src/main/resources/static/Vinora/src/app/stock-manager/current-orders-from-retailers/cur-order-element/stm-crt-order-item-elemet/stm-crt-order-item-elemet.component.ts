@@ -25,7 +25,8 @@ export class StmCrtOrderItemElemetComponent implements OnInit {
        return x.data().quantity;
     })
 
-    console.log(this.available);
+  console.log(this.available.quantity);
+    
     
   }
 

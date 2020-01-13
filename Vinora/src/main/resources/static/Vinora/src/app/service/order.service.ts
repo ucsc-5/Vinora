@@ -82,6 +82,17 @@ export class OrderService {
     return currentOordersByCompany;
   }
 
+  getCurrentOrdersByRetailerIdCompanyId(companyId:string,retailerId:string){
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',-1).where('retailerId','==',retailerId)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return currentOordersByCompany;
+  }
+
 
   getConfirmedOrdersByRetailerId(retailerId:string){
     const ConfirmedOrdersByRetailerId:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',0)).snapshotChanges().pipe(
@@ -93,6 +104,32 @@ export class OrderService {
     );
     return ConfirmedOrdersByRetailerId;
   }
+
+
+
+      getConfirmedOrdersByRetaiilerIdCompanyId(companyId:string, retailerId:string){
+        const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0)).snapshotChanges().pipe(
+          map(actions => actions.map(a => {
+            const data = a.payload.doc.data() as Order;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          }))
+          );
+          return orders;
+        }
+        
+        getConfirmedOrdersByCompanyId(companyId:string){
+          const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',0)).snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+              const data = a.payload.doc.data() as Order;
+              const id = a.payload.doc.id;
+              return { id, ...data };
+            }))
+          );
+          return currentOordersByCompany;
+        }
+
+
   getOrdersByRetailerIdCompanyId(retailerId:string,companyId:string){
     const OrdersByRetailerIdCompanyId:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',0).where('companyId','==',companyId)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -106,16 +143,8 @@ export class OrderService {
   }
 
 
-  getConfirmedOrdersByCompanyId(companyId:string){
-    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',0).where('saleRepAccept','==',0)).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Order;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-    return currentOordersByCompany;
-  }
+
+
 
   getAssignedOrdersByCompanyIdSaleRepId(companyId:string,saleRepId:string){
     const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('saleRepId','==',saleRepId)).snapshotChanges().pipe(
@@ -127,6 +156,18 @@ export class OrderService {
     );
     return orders;
   }
+
+  getAssignedOrdersByRetailerIdCompanyId(companyId:string,retailerId:string){
+    const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',1).where('companyId','==',companyId)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return orders;
+  }
+
 
   getAssignedOrdersByRetailerId(retailerId:string){
     const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',1)).snapshotChanges().pipe(

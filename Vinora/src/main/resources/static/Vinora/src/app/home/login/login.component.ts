@@ -49,10 +49,7 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     this.authService.logout();
 
-    
-
-
-    // this.authService.login(email,password).then(res=>{
+    //   this.authService.login(email,password).then(res=>{
     //    console.log(" this is the response "+res);
     //   this.message="Please check your email and password again!!"
     //   setTimeout(() => {
@@ -77,6 +74,7 @@ export class LoginComponent implements OnInit {
     // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
 
         this.authService.login('udulastm@gmail.com','0123456789v'); //for Manager
+        //  this.authService.login('udulacompany@gmail.com','#Vinora@123'); //for Manager
     
     
     

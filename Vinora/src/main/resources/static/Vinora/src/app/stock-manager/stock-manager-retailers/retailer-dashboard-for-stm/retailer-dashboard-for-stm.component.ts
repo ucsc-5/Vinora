@@ -3,6 +3,7 @@ import { Router,ActivatedRoute,Params} from '@angular/router';
 import { RetailerService, Retailer, RetailerId } from 'src/app/service/retailer.service';
 import { Observable } from 'rxjs';
 import { OrderId, OrderService } from 'src/app/service/order.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-retailer-dashboard-for-stm',
@@ -26,15 +27,22 @@ export class RetailerDashboardForSTMComponent implements OnInit {
   delivered = false;
   profile = true;
 
-  constructor(private router:Router,private route:ActivatedRoute,private retailerService:RetailerService,private orderService:OrderService) { }
+  companyId
+
+  constructor(private afAuth: AngularFireAuth,private router:Router,private route:ActivatedRoute,private retailerService:RetailerService,private orderService:OrderService) {
+    this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+      this.companyId= idTokenResult.claims.cmpId;
+    })
+
+   }
 
   ngOnInit() {
     this.route.params.subscribe((param:Params)=>{
     this.retailerId = param['retailerId'];})
     this.retailer = this.retailerService.getRetailerById(this.retailerId);
-    this.currentOrders = this.orderService.getCurrentOrdersByRetailerId(this.retailerId);
-    this.confirmedOrders = this.orderService.getConfirmedOrdersByRetailerId(this.retailerId);
-    this.assignedOrders = this.orderService.getAssignedOrdersByRetailerId(this.retailerId);
+    this.currentOrders = this.orderService.getCurrentOrdersByRetailerIdCompanyId(this.companyId,this.retailerId);
+    this.confirmedOrders = this.orderService.getConfirmedOrdersByRetaiilerIdCompanyId(this.companyId,this.retailerId);
+    this.assignedOrders = this.orderService.getAssignedOrdersByRetailerIdCompanyId(this.companyId,this.retailerId);
   }
 
 

@@ -40,6 +40,8 @@ export class ConOrderElementComponent implements OnInit {
     this.orderId=this.order.id;
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.items=this.orderService.getItemsByOrderId(this.order.id);
+    console.log(this.order.companyId);
+    
     this.salesRepresentatives =  this.salesRepService.getSalesRepByCompanyId(this.order.companyId);
 
     this.selectRep = new FormGroup({
@@ -49,9 +51,24 @@ export class ConOrderElementComponent implements OnInit {
     this.selectRep.statusChanges.subscribe(state=>{
       console.log(state);
       
-      if((state=="VALID")&&((this.order.total==this.order.tempTotal))){
-        this.allowRefAssign= true;
+      if(this.order.total==this.order.tempTotal){
+        console.log("total same");
+        
+        if(state=="VALID"){
+          this.allowRefAssign= true;
+          console.log("form valid here");
+          
+        }else{
+          this.allowRefAssign= false;
+          console.log("form invalid here");
+          
         }
+      }else{
+        this.allowRefAssign= false;
+        console.log("total not same");
+        
+      }
+      
             })
   }
 
@@ -62,7 +79,6 @@ export class ConOrderElementComponent implements OnInit {
   
 
   assign(){
-
     const message = "Confirm Assigning";
     this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
       res=>{

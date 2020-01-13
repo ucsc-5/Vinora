@@ -132,6 +132,7 @@ import { ReportConfirmOrderItemComponent } from './retailer/previous-orders/repo
 import { RetailerProfileForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-profile-for-stm/retailer-profile-for-stm.component';
 import { RetailerOrdersForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-dashboard-for-stm/retailer-orders-for-stm/retailer-orders-for-stm.component';
 import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-dashboard-for-stm/retailer-dashboard-for-stm.component';
+import { StmCompanyProfileComponent } from './stock-manager/stm-company-profile/stm-company-profile.component';
 
 
 @NgModule({
@@ -226,6 +227,7 @@ import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-
     RetailerProfileForSTMComponent,
     RetailerOrdersForSTMComponent,
     RetailerDashboardForSTMComponent,
+    StmCompanyProfileComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
