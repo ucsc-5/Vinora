@@ -20,11 +20,11 @@ export class UpdateItemElementComponent implements OnInit {
   @Input() quantity: any
 
   updateForm: FormGroup;
-  message: any;
-
   quantityRef: AngularFireObject<any>
- 
   itemsQuantity: Observable<any[]>;
+  message: any;
+  manual:boolean = true;
+  byScaler: boolean = false;
  
 
   constructor(private db: AngularFireDatabase,private dialogService:DialogService,private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
@@ -47,23 +47,34 @@ export class UpdateItemElementComponent implements OnInit {
 
   updateQuantity() {
     const quantity = this.updateForm.value.quantity;
-    const newQuantity= this.item.quantity+quantity;
-    const message="Confrim"
-    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
-      res=>{
-        if(res){
-          this.message = this.itemServise.updateItem(this.item.id,{quantity: newQuantity}).then(
-            x=>{
-              return "Update is done";
-            }
-          ).catch(
-            error=>{error}
-          )
-        }
-      }
-    );
-    console.log(this.message);
+    console.log(quantity);
+    
+    // const newQuantity= this.item.quantity+quantity;
+    // const message="Confrim"
+    // this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+    //   res=>{
+    //     if(res){
+    //       this.message = this.itemServise.updateItem(this.item.id,{quantity: newQuantity}).then(
+    //         x=>{
+    //           return "Update is done";
+    //         }
+    //       ).catch(
+    //         error=>{error}
+    //       )
+    //     }
+    //   }
+    // );
+    // console.log(this.message);
  
+  }
+
+  onClickManual(){
+    this.manual=!this.manual;
+    this.byScaler=!this.byScaler;
+  }
+  onClickScaler(){
+    this.byScaler=!this.byScaler;
+    this.manual=!this.manual;
   }
 
 

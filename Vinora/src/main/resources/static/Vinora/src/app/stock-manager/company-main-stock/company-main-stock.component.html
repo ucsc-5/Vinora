@@ -1,0 +1,20 @@
+<div class="row" *ngIf="reorderItems | async; let items; else loading1">
+    <div class="col-12">
+        <h3>Reordering Items</h3>
+    </div>
+    <div class="col-12">
+        <app-update-item-element *ngFor="let item of items" [item]="item" ></app-update-item-element>
+    </div>
+</div>
+<ng-template #loading1>No Reordering Items vailable!!&hellip;</ng-template>
+
+<div class="row" *ngIf="regularItems | async; let items; else loading2">
+    <div class="col-12">
+        <h3>Available Items</h3>
+    </div>
+    <div class="col-12">
+        <app-update-item-element *ngFor="let item of items" [item]="item" ></app-update-item-element>
+    </div>
+</div>
+<ng-template #loading2>No Items vailable!!&hellip;</ng-template>
+

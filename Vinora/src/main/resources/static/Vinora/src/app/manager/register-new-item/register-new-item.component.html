@@ -23,17 +23,23 @@
                           <mat-option value="Kg">Kg </mat-option>
                           <mat-option value="g">g (grams)</mat-option>
                           <mat-option value="L">L (Liters)</mat-option>
+                         
+                          
                         </mat-select>
                       </mat-form-field>
                 <p>You selected: {{selected}}</p>
 
                 
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Unit Price"  type="number" min="0"  name="unitPrice" ngModel >
+                        <input matInput placeholder="Unit Price"  type="number" min="0"  name="unitPrice" ngModel required >
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Reordering level"  type="number" min="0"  name="reOrderingLevel" ngModel >
+                        <input matInput placeholder="Reordering level"  type="number" min="0"  name="reOrderingLevel" ngModel required>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Unit Value"  type="number" min="0"  name="unitValue" ngModel required>
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">

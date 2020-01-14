@@ -20,6 +20,7 @@ import { VehicleRegisterComponent } from './manager/vehicle/vehicle-register/veh
 import { MyCartComponent } from './retailer/my-cart/my-cart.component';
 
 
+
 import { CompanyRequestsComponent } from './admin/company-requests/company-requests.component';
 import { ManagerDashboardComponent } from './manager/manager-dashboard/manager-dashboard.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
@@ -57,6 +58,7 @@ import { RetailerProfileForSTMComponent } from './stock-manager/stock-manager-re
 import { RetailerOrdersForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-dashboard-for-stm/retailer-orders-for-stm/retailer-orders-for-stm.component';
 import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-dashboard-for-stm/retailer-dashboard-for-stm.component';
 import { StmCompanyProfileComponent } from './stock-manager/stm-company-profile/stm-company-profile.component';
+import { CompanyMainStockComponent } from './stock-manager/company-main-stock/company-main-stock.component';
 
 
 
@@ -106,6 +108,7 @@ const routes: Routes = [
         
         children:[
             { path: '', component: StockManagerDashboardComponent},
+            { path: 'mainStock', component:CompanyMainStockComponent},
             { path: 'updateItems', component: UpdateItemsComponent},
             { path: 'myProfile', component: StockManagerProfileComponent},
             { path: 'myCompany', component: StmCompanyProfileComponent},
@@ -114,7 +117,6 @@ const routes: Routes = [
             { path: 'assignedOrders', component: AssignedOrdersComponent},
             { path: 'retailers', component: StockManagerRetailersComponent},
             { path: 'retailers/:retailerId', component: RetailerDashboardForSTMComponent, children:[      
-            
                 { path: 'retailerOrders', component: RetailerOrdersForSTMComponent},
                 { path: 'retailerProfile', component: RetailerProfileForSTMComponent },
               ]},

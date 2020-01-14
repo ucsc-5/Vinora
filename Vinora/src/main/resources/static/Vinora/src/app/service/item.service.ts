@@ -18,6 +18,7 @@ export interface Item{
   companyId: string;
   type:string;
   reOrderingLevel: number;
+  unitValue: number;
 }
 
 export interface ItemId extends Item{
@@ -68,6 +69,27 @@ export class ItemService {
     return this.items;
   }
 
+  getReorderItemsByCompanyId(companyId: string){
+    this.items = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"active").where('reOrder','==',true)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Item;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return this.items;
+  }
+
+  getRegularItemsByCompnayId(companyId: string){
+    this.items = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"active").where('reOrder','==',false)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Item;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return this.items;
+  }
 
   updateItem(key: string, value: any): Promise<void> {
     return this.afs.collection('items').doc(key).update(value);
