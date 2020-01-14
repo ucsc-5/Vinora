@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
        
     //  }).catch(error=>{
     //    console.log(" this is the error  "+error);
-  
     //  })
 
     this.showSpinner=true;
@@ -73,11 +72,8 @@ export class LoginComponent implements OnInit {
     // this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
     // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
 
-        this.authService.login('udulastm@gmail.com','0123456789v'); //for Manager
-        //  this.authService.login('udulacompany@gmail.com','#Vinora@123'); //for Manager
-    
-    
-    
+        // this.authService.login('udulastm@gmail.com','0123456789v'); //for Manager
+         this.authService.login('udulacompany@gmail.com','#Vinora@123'); //for Manager
 
     this.showSpinner=false;
 
