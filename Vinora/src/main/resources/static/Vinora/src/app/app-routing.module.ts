@@ -59,6 +59,7 @@ import { RetailerOrdersForSTMComponent } from './stock-manager/stock-manager-ret
 import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-retailers/retailer-dashboard-for-stm/retailer-dashboard-for-stm.component';
 import { StmCompanyProfileComponent } from './stock-manager/stm-company-profile/stm-company-profile.component';
 import { CompanyMainStockComponent } from './stock-manager/company-main-stock/company-main-stock.component';
+import { UpdateItemDetailsComponent } from './stock-manager/update-items/update-item-element/update-item-details/update-item-details.component';
 
 
 
@@ -110,6 +111,7 @@ const routes: Routes = [
             { path: '', component: StockManagerDashboardComponent},
             { path: 'mainStock', component:CompanyMainStockComponent},
             { path: 'updateItems', component: UpdateItemsComponent},
+            { path: 'updateItems/:itemId', component:UpdateItemDetailsComponent},
             { path: 'myProfile', component: StockManagerProfileComponent},
             { path: 'myCompany', component: StmCompanyProfileComponent},
             { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},

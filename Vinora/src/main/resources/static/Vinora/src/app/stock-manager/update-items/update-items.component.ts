@@ -35,7 +35,6 @@ export class UpdateItemsComponent implements OnInit {
       // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
       this.companyId= idTokenResult.claims.cmpId;
       console.log(this.companyId+" this is the compnay id of retailer");
-      
       console.log(idTokenResult);      
     })  
 
@@ -48,7 +47,7 @@ export class UpdateItemsComponent implements OnInit {
   ngOnInit() {
 
     console.log(this.companyId+"This is the company Id");
-   this.items = this.itemService.getItemsByCompanyId(this.companyId);
+    this.items = this.itemService.getItemsByCompanyId(this.companyId);
   }
 }
 

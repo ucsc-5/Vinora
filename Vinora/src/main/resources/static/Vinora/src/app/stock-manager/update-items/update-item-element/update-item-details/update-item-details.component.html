@@ -1,0 +1,197 @@
+<div class="row">
+    <div class="col-4">
+
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>{{item.itemName}}</mat-card-title>
+                <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="{{item.itemImagePath}}" width="500px" height="400px" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    {{item.description}}<br>
+                    Unit Price: <b>{{item.unitPrice}}</b><br>
+                    Available:  <b></b>{{item.quantity}}<br>  {{item.type}}                
+                </p>
+                
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="col-4">
+        <form [formGroup]="updateUnitValueForm">
+            <b>Update unit value </b> <br>
+
+            current Unit Value:     {{item.unitValue}} <br>
+
+            <mat-form-field class="" style="width: 70%">
+                <input 
+                    matInput 
+                    type="number" 
+                    placeholder="Unit value"
+                    formControlName="unitValue"
+                >
+            </mat-form-field>
+
+            <span>{{item.type}}</span>
+            
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button mat-raised-button  
+                                data-toggle="tooltip"
+                                title="Reset"
+                                (click)="resetUnitValueForm()"> Reset
+                                
+                                <i class="material-icons">
+                                    replay
+                                </i>
+                                
+                        </button>
+                        
+                        
+                
+                        <button mat-raised-button  
+                                data-toggle="tooltip"
+                                title="Update unit price"
+                                (click)="updateUnitValue()" >  Update
+                                
+                                <i class="material-icons">
+                                    cached
+                                </i>
+                        </button>
+                      
+                        
+                                                                
+                    </div>
+            
+        </form>
+    </div>
+    <div class="col-4" >
+        <form [formGroup]="updateQuantityForm">
+
+            <mat-form-field class="" style="width: 70%">
+                <input 
+                    matInput 
+                    type="number" 
+                    placeholder="Quantity"
+                    formControlName="quantity"
+                >
+            </mat-form-field>
+
+            <div class="input-group-append">
+                <span class="input-group-text">{{item.type}}</span>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button  mat-raised-button  
+                        data-toggle="tooltip"
+                        title="Reset"
+                        (click)="resetQuantityForm()"> Reset
+                        
+                        <i class="material-icons">
+                                replay
+                        </i>
+                </button>
+        
+                <button mat-raised-button 
+                        data-toggle="tooltip"
+                        title="Update unit price"
+                        (click)="updateQuantity()" >  Update
+                        <i class="material-icons">
+                                cached
+                        </i>
+                </button>
+            </div>
+        </form>
+
+ </div>
+</div>
+
+
+
+    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn"  
+                data-toggle="tooltip"
+                title="Reset"
+                (click)="resetQuantityForm()"> 
+                
+                <i class="material-icons">
+                        replay
+                </i>
+        </button>
+
+        <button class="btn"  
+                data-toggle="tooltip"
+                title="Update unit price"
+                (click)="updateQuantity()" > 
+                <i class="material-icons">
+                        cached
+                </i>
+        </button> -->
+
+        <!-- <button class="btn"  
+                data-toggle="tooltip"
+                title="Remove Item"
+                (click)="onRemove()"
+                [disabled]="allowRemove"> 
+                <i class="material-icons icon-red">
+                        remove_circle_outline
+                </i>
+        </button> -->
+<!-- 
+
+ <button class="btn"  
+                            data-toggle="tooltip"
+                            title="More details" 
+                            (click)="itemDetails(item)"> 
+                            <i class="material-icons">
+                                    list_alt               
+                            </i>  
+                    </button>      
+        <button class="btn"  
+                data-toggle="tooltip"
+                title="More details" 
+                (click)="itemDetails(item)"> 
+                <i class="material-icons">
+                        list_alt               
+                </i>  
+        </button>                                                       
+    </div> -->
+
+    <!-- <button mat-raised-button color="primary" type="reset">Reset</button>
+    <button mat-raised-button color="primary" type="submit">Add</button> -->
+
+
+
+
+
+         <!-- <div class="example-button-row">
+                    <button mat-raised-button [disabled]="manual" (click)="onClickManual()">Manual</button>
+                    <button mat-raised-button [disabled]="byScaler" (click)="onClickScaler()">By Scaler</button>
+        </div> -->
+
+
+
+        <!-- <tr *ngIf="byScaler">
+            <td>
+                    <mat-form-field class="" style="width: 70%">
+                            <input 
+                                matInput 
+                                type="number" 
+                                placeholder="Quantity"
+                                formControlName="quantity"
+                                value="{{newQuantity}}"
+                               >
+                    </mat-form-field>
+
+                              
+                </td>
+
+        </tr> -->
+
+        <!-- <tr>
+                <td><mat-form-field class="" style="width: 70%">
+                        <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel  >
+                </mat-form-field></td>
+
+                 
+        </tr> -->

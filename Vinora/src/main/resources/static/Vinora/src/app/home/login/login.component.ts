@@ -51,15 +51,15 @@ export class LoginComponent implements OnInit {
       
       
       this.authService.logout();
-      this.authService.login(email,password).then(res=>{
-      // setTimeout(() => {
-      //   this.message=null;
-      //  }, 2000);
+    //   this.authService.login(email,password).then(res=>{
+    //   // setTimeout(() => {
+    //   //   this.message=null;
+    //   //  }, 2000);
        
-     }).catch(error=>{
-      this.message="Please check your email and password again!!"
-       console.log(" this is the error  "+error);
-     })
+    //  }).catch(error=>{
+    //   this.message="Please check your email and password again!!"
+    //    console.log(" this is the error  "+error);
+    //  })
     this.showSpinner=true;
 
     // this.authService.login('admin@gmail.com','123123'); //for admin
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
     // this.authService.login('royalvintage@gmail.com','654321'); //for Manager
    
-    // this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
+    this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
     // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
 
         // this.authService.login('udulastm@gmail.com','0123456789v'); //for Manager

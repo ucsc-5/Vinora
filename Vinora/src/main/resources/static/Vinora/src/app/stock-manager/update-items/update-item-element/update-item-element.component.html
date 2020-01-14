@@ -1,4 +1,4 @@
-        <mat-card class="example-card">
+        <mat-card class="example-card" (click)="onSelect()" >
             <mat-card-header>
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
@@ -8,18 +8,17 @@
                 <p>
                     <!-- {{item.description}}<br> -->
                     Unit Price: <b>{{item.unitPrice}}</b><br>
-                    Available:  <b></b>{{item.quantity}}<br>                
+                    Available:  <b></b>{{item.quantity}}<br>  {{item.type}}                
                 </p>
                 
             </mat-card-content>
-            <mat-card-actions>
-                    <button></button>
-                <form [formGroup]="updateForm">
+            <!-- <mat-card-actions>
+                    <form [formGroup]="updateForm">
+                            <div class="example-button-row">
+                                        <button mat-raised-button [disabled]="manual" (click)="onClickManual()">Manual</button>
+                                        <button mat-raised-button [disabled]="byScaler" (click)="onClickScaler()">By Scaler</button>
+                            </div>
                         <table class="" style="width: 159px" cellspacing="0">
-                                <tr>
-                                        <td><button (click)="onClickManual()">Manual</button></td>
-                                        <td><button (click)="onClickScaler()">By Scaler</button></td>
-                                </tr>
                             <tr *ngIf="manual">
                                 <td>
                                     <mat-form-field class="" style="width: 70%">
@@ -45,24 +44,28 @@
                                                     type="number" 
                                                     placeholder="Quantity"
                                                     formControlName="quantity"
-                                                    value="{{ (itemsQuantity | async)?.weight }}"
+                                                    value="{{newQuantity}}"
+                                                   >
+                                        </mat-form-field>
+
+                                        <mat-form-field class="" style="width: 70%">
+                                                <input 
+                                                    matInput 
+                                                    type="number" 
+                                                    placeholder="Unit value"
+                                                    formControlName="unitValue"
+                                                    value="{{item.unitValue}}"
                                                    >
                                         </mat-form-field>
     
-                                        <div class="input-group-append">
+                                        
                                             <span class="input-group-text">{{item.type}}</span>
-                                        </div>
+                                
                                     </td>
 
                             </tr>
 
-                            <!-- <tr>
-                                    <td><mat-form-field class="" style="width: 70%">
-                                            <input matInput type="number" placeholder="Unit Price" name="unitPrice" ngModel  >
-                                    </mat-form-field></td>
-
-                                     
-                            </tr> -->
+                           
                            
 
                         </table>
@@ -88,15 +91,7 @@
                                     </i>
                             </button>
 
-                            <!-- <button class="btn"  
-                                    data-toggle="tooltip"
-                                    title="Remove Item"
-                                    (click)="onRemove()"
-                                    [disabled]="allowRemove"> 
-                                    <i class="material-icons icon-red">
-                                            remove_circle_outline
-                                    </i>
-                            </button> -->
+                           
 
                             <button class="btn"  
                                     data-toggle="tooltip"
@@ -108,8 +103,22 @@
                             </button>                                                       
                         </div>
 
-                        <!-- <button mat-raised-button color="primary" type="reset">Reset</button>
-                        <button mat-raised-button color="primary" type="submit">Add</button> -->
+                       
                 </form>
-            </mat-card-actions>
+            </mat-card-actions> -->
         </mat-card>
+
+
+
+         <!-- <button class="btn"  
+                                    data-toggle="tooltip"
+                                    title="Remove Item"
+                                    (click)="onRemove()"
+                                    [disabled]="allowRemove"> 
+                                    <i class="material-icons icon-red">
+                                            remove_circle_outline
+                                    </i>
+                            </button> -->
+
+                             <!-- <button mat-raised-button color="primary" type="reset">Reset</button>
+                        <button mat-raised-button color="primary" type="submit">Add</button> -->

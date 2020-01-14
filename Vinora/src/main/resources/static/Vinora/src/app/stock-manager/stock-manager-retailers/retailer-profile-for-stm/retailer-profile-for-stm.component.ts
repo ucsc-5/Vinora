@@ -3,6 +3,7 @@ import { Router,ActivatedRoute,Params} from '@angular/router';
 import { RetailerService, Retailer, RetailerId } from 'src/app/service/retailer.service';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-retailer-profile-for-stm',
   templateUrl: './retailer-profile-for-stm.component.html',
