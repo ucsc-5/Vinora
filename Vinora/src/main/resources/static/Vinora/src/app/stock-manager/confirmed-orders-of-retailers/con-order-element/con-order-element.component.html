@@ -7,16 +7,12 @@
                       <b>Retailer Email: </b> {{retailer.email}}<br>
                       <b>Purches Date: </b> {{order.createDate}}<br>
                       <b>Total Amount: </b> {{order.total}} .00 Rs/-<br>
+                      <mat-progress-bar mode="determinate" value="{{precentage}}"></mat-progress-bar>
                     </p>
-                    <button mat-button (focus)="myfunction()">
-                      <i class="material-icons">perm_phone_msg</i>   Inform
-                    </button>
-      
-                    <button mat-button (click)="confirmOrder()">
-                        Confirm Order
-                        <i class="material-icons"></i>   Inform
-                      </button>
-                </div> 
+                   
+                      <h5 *ngIf="nowAssign" style="color: darkred;">Assign Now <i  class="material-icons">fast_forward</i> </h5>
+                  
+                  </div> 
 
                 <div class="col col-3"> 
                 <br>

@@ -43,11 +43,7 @@ export class AuthenticationService {
 
   async login(email: string, password: string) {
    
-    
-    await this.afAuth.auth.signOut();
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((res)=>{
-     
-        
         this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
           
           if(idTokenResult.claims.retailer){

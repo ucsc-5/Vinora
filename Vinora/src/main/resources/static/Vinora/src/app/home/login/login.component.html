@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             
-                <form class="example-form" (ngSubmit)="signUp(f)" #f="ngForm">
+                <form class="example-form" [formGroup]="loginForm">
 
                     <div class="col form-group-lg" style="padding-top:5%; padding-left: 25%;"> 
                             
@@ -10,19 +10,22 @@
                                 <h2 style="text-align: center;padding-top: 1%;font-family: 'Patua One', cursive;height: 100px;">Login With Us</h2>
                                 <mat-form-field class="example-full-width" appearance="outline">
                                   <mat-label>Your Email</mat-label>  
-                                  <input matInput required value=""  name="email" ngModel required>
+                                  <input matInput formControlName="email">
                                     <mat-icon matSuffix>email</mat-icon>
-                                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                   
+                                    
                                 </mat-form-field>
                                 
                                 
                             <mat-form-field class="example-full-width" appearance="outline" >
                               <mat-label>Password</mat-label>   
-                              <input matInput placeholder="Enter your password" required [type]="hide ? 'password' : 'text'" name="password" ngModel>
+                              <input matInput placeholder="Enter your password"  [type]="hide ? 'password' : 'text'" formControlName="password"  >
                                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </button>
                             </mat-form-field>
+
+                            <mat-error *ngIf="loginForm.invalid">{{getErrorMessage()}}</mat-error>
                                 
                                 <div class="row">
                                     <div class="col">
@@ -45,7 +48,6 @@
                 </div>
             </form>
             <div class="container">
-                
             <div class="row">
                 <div class="col-3" ></div>
                 <div class="col-6">

@@ -21,7 +21,7 @@ export class ResetPasswordPopupComponent implements OnInit {
   email
   password
   currentPassword
-  
+  companyId
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
   public dialogRef: MatDialogRef<ResetPasswordPopupComponent>,private afAuth: AngularFireAuth,private fns: AngularFireFunctions,private authService:AuthenticationService) {
@@ -65,12 +65,18 @@ export class ResetPasswordPopupComponent implements OnInit {
     
     this.afAuth.auth.signInWithEmailAndPassword(this.email,this.currentPassword).then(res=>{
       console.log("this is the response"+res.user.email);
+          this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+          // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
+          this.companyId= idTokenResult.claims.cmpId;
+        })
+
+      
       if(res.user.emailVerified){
           console.log(this.afAuth.auth.currentUser.email);
            this.afAuth.auth.currentUser.updatePassword(this.resetPasswordForm.value.password).then(
              res=>{
                const callable =  this.fns.httpsCallable('setPasswordTrue');
-                                     callable({email:this.email}).subscribe(
+                                     callable({email:this.email,cmpId:this.companyId}).subscribe(
                                        (response)=>{
                                            console.log(response); 
                                            this.authService.logout();    

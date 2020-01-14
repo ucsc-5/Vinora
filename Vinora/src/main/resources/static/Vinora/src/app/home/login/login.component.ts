@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable,Inject } from '@angular/core';
 
-import {FormControl, Validators, NgForm} from '@angular/forms';
+import {FormControl, Validators, NgForm, FormGroup} from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -21,45 +21,45 @@ import { DialogOverviewExampleDialogComponent } from './dialog-overview-example-
 export class LoginComponent implements OnInit {
  
   showSpinner=false;
-
-  items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
-  size$: BehaviorSubject<string|null>;
-  email = new FormControl('', [Validators.required, Validators.email]);
+  loginForm: FormGroup;
   hide = true;
   message: string
+  // // email:string;
+  // emailFeild = new FormControl('', [Validators.required, Validators.email]);
+  // passwordFeild = new FormControl(null,[Validators.required,Validators.min(6)]);
 
   constructor(public dialog: MatDialog,public afAuth: AngularFireAuth, private authService : AuthenticationService,private db: AngularFireDatabase) {
-    
-    this.size$ = new BehaviorSubject(null);
-        this.items$ = this.size$.pipe(
-          switchMap(size => 
-            this.db.list('/users', ref =>
-              size ? ref.orderByKey() : ref
-            ).snapshotChanges()
-          )
-        );
-        this.size$.next('manager');
   }
+
+
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      'email': new FormControl(null,[Validators.required,Validators.email]),
+      'password': new FormControl(null,[Validators.min(6),Validators.required])
+  })
+  
+}
+
   openDialog(): void {
      this.dialog.open(DialogOverviewExampleDialogComponent);
   }
-  signUp(form: NgForm) {
-    // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()); this is for login with gmail
-    const email = form.value.email;
-    const password = form.value.password;
-    this.authService.logout();
-
-    //   this.authService.login(email,password).then(res=>{
-    //    console.log(" this is the response "+res);
-    //   this.message="Please check your email and password again!!"
-    //   setTimeout(() => {
-    //     this.message=null;
-    //    }, 2000);
+  signUp() {
+      const email=this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+      console.log(email);
+      console.log(password);
+      
+      
+      this.authService.logout();
+      this.authService.login(email,password).then(res=>{
+      // setTimeout(() => {
+      //   this.message=null;
+      //  }, 2000);
        
-    //  }).catch(error=>{
-    //    console.log(" this is the error  "+error);
-    //  })
-
+     }).catch(error=>{
+      this.message="Please check your email and password again!!"
+       console.log(" this is the error  "+error);
+     })
     this.showSpinner=true;
 
     // this.authService.login('admin@gmail.com','123123'); //for admin
@@ -73,10 +73,8 @@ export class LoginComponent implements OnInit {
     // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
 
         // this.authService.login('udulastm@gmail.com','0123456789v'); //for Manager
-         this.authService.login('udulacompany@gmail.com','#Vinora@123'); //for Manager
-
+        //  this.authService.login('udulacompany@gmail.com','#Vinora@123'); //for Manager
     this.showSpinner=false;
-
     console.log(this.authService.user.uid); 
   }
 
@@ -84,14 +82,10 @@ export class LoginComponent implements OnInit {
     // this.afAuth.auth.signOut(); sign out with gmail
     this.authService.logout();
   }
- 
-  ngOnInit() {
-    
-  }
 
   getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' :
+    return this.loginForm.hasError('required') ? 'You must enter a value' :
+        this.loginForm.hasError('email') ? 'Not a valid email' :
             '';
   } 
 }

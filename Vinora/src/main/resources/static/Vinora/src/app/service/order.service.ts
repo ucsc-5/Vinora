@@ -146,8 +146,6 @@ export class OrderService {
 
 
 
-
-
   getAssignedOrdersByCompanyIdSaleRepId(companyId:string,saleRepId:string){
     const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('saleRepId','==',saleRepId)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -217,10 +215,14 @@ updateState(id:string,stateValue:number){
 
 stockManagerAddItem(orderKey:string,itemId:string,itemsPrice:number){
     this.afs.collection('orders').doc(orderKey).collection('items').doc(itemId).update({stmadded:true}).then(x=>{
+      console.log("Item updatete stmadded");
       this.afs.collection('orders').doc(orderKey).get().subscribe(
         x2=>{
           const newTotal=x2.data().tempTotal+itemsPrice;
-          this.afs.collection('orders').doc(orderKey).update({tempTotal:newTotal}).then().catch(
+          this.afs.collection('orders').doc(orderKey).update({tempTotal:newTotal}).then(()=>{
+            console.log("Temp total updated");
+            
+          }).catch(
             error=>{
               console.log(error+" this is error in update tempTotal");
               return error;

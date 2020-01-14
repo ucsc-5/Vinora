@@ -34,6 +34,8 @@ export class UpdateItemsComponent implements OnInit {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
       this.companyId= idTokenResult.claims.cmpId;
+      console.log(this.companyId+" this is the compnay id of retailer");
+      
       console.log(idTokenResult);      
     })  
 

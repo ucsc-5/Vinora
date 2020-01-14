@@ -17,6 +17,8 @@ export class ConfirmedOrdersOfRetailersComponent implements OnInit {
   constructor(private afAuth: AngularFireAuth,private orderService:OrderService) {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       this.companyId= idTokenResult.claims.cmpId;
+      console.log(this.companyId);
+      
     })
   }
 

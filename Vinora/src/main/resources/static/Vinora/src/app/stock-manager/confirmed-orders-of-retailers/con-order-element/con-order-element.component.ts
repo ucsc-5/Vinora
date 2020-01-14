@@ -28,9 +28,11 @@ export class ConOrderElementComponent implements OnInit {
   orderTotal:number
   tempOrderTotal:number
   allowRefAssign= false;
+  nowAssign= false;
   formValid= false;
   selectedRepId: string;
   selectRep: FormGroup;
+  precentage
 
 
 
@@ -38,9 +40,16 @@ export class ConOrderElementComponent implements OnInit {
 
   ngOnInit() {
     this.orderId=this.order.id;
+    this.precentage= (this.order.tempTotal/this.order.total)*100;
+
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.items=this.orderService.getItemsByOrderId(this.order.id);
-    console.log(this.order.companyId);
+    
+    console.log("Total :"+this.order.total);
+    console.log("Temp total "+this.order.tempTotal);
+    console.log("Precentage "+this.precentage);
+    
+    
     
     this.salesRepresentatives =  this.salesRepService.getSalesRepByCompanyId(this.order.companyId);
 
@@ -51,24 +60,25 @@ export class ConOrderElementComponent implements OnInit {
     this.selectRep.statusChanges.subscribe(state=>{
       console.log(state);
       
-      if(this.order.total==this.order.tempTotal){
-        console.log("total same");
-        
-        if(state=="VALID"){
-          this.allowRefAssign= true;
-          console.log("form valid here");
-          
-        }else{
-          this.allowRefAssign= false;
-          console.log("form invalid here");
-          
-        }
-      }else{
-        this.allowRefAssign= false;
-        console.log("total not same");
-        
-      }
-      
+                if(this.order.total==this.order.tempTotal){
+                  console.log("total same");
+                  this.nowAssign=true
+                  
+                  if(state=="VALID"){
+                    this.allowRefAssign= true;
+                    console.log("form valid here");
+                    
+                  }else{
+                    this.allowRefAssign= false;
+                    console.log("form invalid here");
+                    
+                  }
+                }else{
+                  this.allowRefAssign= false;
+                  this.nowAssign= false;
+                  console.log("total not same");
+                  
+                }      
             })
   }
 
