@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col-4">
-
         <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title>{{item.itemName}}</mat-card-title>
@@ -19,91 +18,22 @@
     </div>
 
     <div class="col-4">
-        <form [formGroup]="updateUnitValueForm">
-            <b>Update unit value </b> <br>
 
-            current Unit Value:     {{item.unitValue}} <br>
+        <app-stm-update-item-unitvalue  [scalerRead]="(itemsQuantity | async)?.weight">
 
-            <mat-form-field class="" style="width: 70%">
-                <input 
-                    matInput 
-                    type="number" 
-                    placeholder="Unit value"
-                    formControlName="unitValue"
-                >
-            </mat-form-field>
+        </app-stm-update-item-unitvalue>
 
-            <span>{{item.type}}</span>
-            
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button mat-raised-button  
-                                data-toggle="tooltip"
-                                title="Reset"
-                                (click)="resetUnitValueForm()"> Reset
-                                
-                                <i class="material-icons">
-                                    replay
-                                </i>
-                                
-                        </button>
-                        
-                        
-                
-                        <button mat-raised-button  
-                                data-toggle="tooltip"
-                                title="Update unit price"
-                                (click)="updateUnitValue()" >  Update
-                                
-                                <i class="material-icons">
-                                    cached
-                                </i>
-                        </button>
-                      
-                        
-                                                                
-                    </div>
-            
-        </form>
+
     </div>
     <div class="col-4" >
-        <form [formGroup]="updateQuantityForm">
+        <app-stm-update-item-quantity [scalerRead]="(itemsQuantity | async)?.weight" >
 
-            <mat-form-field class="" style="width: 70%">
-                <input 
-                    matInput 
-                    type="number" 
-                    placeholder="Quantity"
-                    formControlName="quantity"
-                >
-            </mat-form-field>
+        </app-stm-update-item-quantity>
 
-            <div class="input-group-append">
-                <span class="input-group-text">{{item.type}}</span>
-            </div>
-
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button  mat-raised-button  
-                        data-toggle="tooltip"
-                        title="Reset"
-                        (click)="resetQuantityForm()"> Reset
-                        
-                        <i class="material-icons">
-                                replay
-                        </i>
-                </button>
-        
-                <button mat-raised-button 
-                        data-toggle="tooltip"
-                        title="Update unit price"
-                        (click)="updateQuantity()" >  Update
-                        <i class="material-icons">
-                                cached
-                        </i>
-                </button>
-            </div>
-        </form>
-
- </div>
+    </div>
+</div>
+<div class="row">
+    <h4>Scaler Reading : {{(itemsQuantity | async)?.weight}}</h4>
 </div>
 
 

@@ -4,7 +4,7 @@ import { ItemService, Item, ItemId } from 'src/app/service/item.service';
 import { Observable } from 'rxjs';
 import { NgForm,FormGroup, FormControl, Validators} from '@angular/forms';
 import { DialogService } from 'src/app/service/dialog.service';
-
+import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angular/fire/database';
 
 @Component({
   selector: 'app-update-item-details',
@@ -15,37 +15,26 @@ export class UpdateItemDetailsComponent  implements OnInit {
 
   itemId:string;
 
-mySubscription: any;
-
-  // item:Observable<ItemId[]>
   item:Item
 
-  updateUnitValueForm: FormGroup;
   updateQuantityForm:FormGroup;
-  // quantityRef: AngularFireObject<any>
-  // itemsQuantity: Observable<any[]>;
+  updateQuantityFormValid=true;
   message: any;
   manual:boolean = true;
   byScaler: boolean = false;
+  method = ' manual'
   newQuantity
   quantity
 
-
+  quantityRef: AngularFireObject<number>
+  itemsQuantity: Observable<number>;
   
-  constructor(private router:Router,private route:ActivatedRoute,private itemService:ItemService,private dialogService:DialogService) {
-    // this.router.routeReuseStrategy.shouldReuseRoute = function () {
-    //   return false;
-    // };
-    // this.mySubscription = this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     // Trick the Router into believing it's last link wasn't previously loaded
-    //     this.router.navigated = false;
-    //   }
-    // });
+  constructor(private db: AngularFireDatabase,private router:Router,private route:ActivatedRoute,private itemService:ItemService,private dialogService:DialogService) {
 
    }
 
   ngOnInit() {
+
     this.route.params.subscribe((param:Params)=>{
       this.itemId = param['itemId'];})
     this.itemService.getStockItem(this.itemId).get().subscribe(
@@ -64,117 +53,35 @@ mySubscription: any;
         const unitValue=x.data().unitValue;
         this.item = {brand,category,companyId,description,itemImagePath,itemName,quantity,reOrderingLevel,state,type,unitPrice,unitValue};
 
-        console.log(this.item);
-        
-        // this.item.brand=x.data().brand;
-
-        // this.item.category=;
-        // this.item.companyId=x.data().companyId;
-        // this.item.description=x.data().description;
-        // this.item.itemImagePath=x.data().itemImagePath;
-        // this.item.itemName=x.data().itemName;
-        // this.item.quantity=x.data().quantity;
-        // this.item.reOrderingLevel=x.data().reOrderingLevel;
-        // this.item.state=x.data().state;
-        
         
       }
     )
-
-    this.updateUnitValueForm = new FormGroup({
-     
-      'unitValue': new FormControl(null,[Validators.min(0)])
-    })
-
-    this.updateQuantityForm = new FormGroup({
-      'quantity': new FormControl(null,[Validators.min(0)])
-    })
+    this.quantityRef = this.db.object('weights');
+    this.itemsQuantity = this.quantityRef.valueChanges();
 
   
+
+  }
+
+  readUnitValueFromScaler(){
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+onSend(x:string){
+  console.log(x+"this is the value");
   
-  }
-
-
-
-  updateUnitValue() {
-    const unitValue = this.updateUnitValueForm.value.unitValue;
-    console.log(unitValue);
-    
-    
-    
-    const message="Confrim"
-    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
-      res=>{
-        if(res){
-          this.message = this.itemService.updateItem(this.itemId,{unitValue: unitValue}).then(
-            x=>{
-              this.ngOnInit();
-              // this.unitValue=unitValue;
-              return "Update is done";
-              
-            }
-          ).catch(
-            error=>{error}
-          )
-        }
-      }
-    );
-    console.log(this.message);
-
-    
- 
-  }
-
-
-
-  updateQuantity() {
-    const quantity = this.updateQuantityForm.value.quantity;
-    console.log(quantity);
-    
-    const newQuantity= this.item.quantity+quantity;
-    const message="Confrim"
-    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
-      res=>{
-        if(res){
-          this.message = this.itemService.updateItem(this.itemId,{quantity: newQuantity}).then(
-            x=>{
-              this.ngOnInit();
-              return "Update is done";
-             
-            }
-          ).catch(
-            error=>{error}
-          )
-        }
-      }
-    );
-    console.log(this.message);
-      
-  }
-
-  onClickManual(){
-    this.manual=!this.manual;
-    this.byScaler=!this.byScaler;
-  }
-  onClickScaler(){
-    this.byScaler=!this.byScaler;
-    this.manual=!this.manual;
-  }
-
-
-  resetQuantityForm(){
-    this.updateQuantityForm.reset();
-  }
-
-  resetUnitValueForm(){
-    this.updateUnitValueForm.reset();
-  }
-
-
-
-ngOnDestroy() {
-  if (this.mySubscription) {
-    this.mySubscription.unsubscribe();
-  }
+  console.log(this.itemsQuantity.source);
+  
 }
+
 }

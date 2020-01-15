@@ -1,0 +1,63 @@
+
+<h5>{{ (itemsQuantity | async)?.weight }}</h5>
+<form [formGroup]="updateUnitValueForm">
+    <b>Update unit value {{method}}  </b> <br>
+
+    <div class="example-button-row">
+        <button mat-raised-button   [disabled]="manual" (click)="onClickManual()">Manual</button>
+        <button mat-raised-button   [disabled]="byScaler" (click)="onClickScaler()">By Scaler</button>
+    </div>
+    current Unit Value:     {{item.unitValue}} <br>
+    <hr>
+    <mat-form-field *ngIf="manual" style="width: 70%">
+        <input 
+            matInput 
+            type="number" 
+            placeholder="Unit value manual"
+            formControlName="unitValue"
+        >
+    </mat-form-field>
+
+    <mat-form-field *ngIf="byScaler" style="width: 70%">
+        <input 
+            matInput 
+            type="number" 
+            placeholder="Unit value from scaler"
+            formControlName="unitValue"
+        >
+    </mat-form-field>
+
+    <span>{{item.type}}</span>
+    
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button mat-raised-button  
+                        data-toggle="tooltip"
+                        title="Reset"
+                        (click)="resetUnitValueForm()"> Reset
+                        
+                        <i class="material-icons">
+                            replay
+                        </i>
+                        
+                </button>
+                
+                
+        
+                <button mat-raised-button  
+                        data-toggle="tooltip"
+                        title="Update unit price"
+                        (click)="updateUnitValue()"
+                        [disabled]="!updateUnitValueFormValid"
+                        >  Update
+                        
+                        <i class="material-icons">
+                            cached
+                        </i>
+                </button>
+              
+                
+               
+                
+            </div>
+    
+</form>

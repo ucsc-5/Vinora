@@ -135,6 +135,8 @@ import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-
 import { StmCompanyProfileComponent } from './stock-manager/stm-company-profile/stm-company-profile.component';
 import { CompanyMainStockComponent } from './stock-manager/company-main-stock/company-main-stock.component';
 import { UpdateItemDetailsComponent } from './stock-manager/update-items/update-item-element/update-item-details/update-item-details.component';
+import { StmUpdateItemUnitvalueComponent } from './stock-manager/update-items/update-item-element/update-item-details/stm-update-item-unitvalue/stm-update-item-unitvalue.component';
+import { StmUpdateItemQuantityComponent } from './stock-manager/update-items/update-item-element/update-item-details/stm-update-item-quantity/stm-update-item-quantity.component';
 
 
 @NgModule({
@@ -232,6 +234,8 @@ import { UpdateItemDetailsComponent } from './stock-manager/update-items/update-
     StmCompanyProfileComponent,
     CompanyMainStockComponent,
     UpdateItemDetailsComponent,
+    StmUpdateItemUnitvalueComponent,
+    StmUpdateItemQuantityComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

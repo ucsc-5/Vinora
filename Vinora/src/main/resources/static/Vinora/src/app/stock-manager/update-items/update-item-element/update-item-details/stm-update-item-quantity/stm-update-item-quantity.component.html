@@ -1,0 +1,56 @@
+<form [formGroup]="updateQuantityForm">
+
+    <b>Update quantity {{method}}  </b> <br>
+
+    <div class="example-button-row">
+        <button mat-raised-button   [disabled]="manual" (click)="onClickManual()">Manual</button>
+        <button mat-raised-button   [disabled]="byScaler" (click)="onClickScaler()">By Scaler</button>
+    </div>
+    Available quantity {{item.quantity}} <br>
+    <hr>
+
+
+    <mat-form-field *ngIf="manual" style="width: 70%">
+        <input 
+            matInput 
+            type="number" 
+            placeholder="Quantity manualy"
+            formControlName="quantity"
+        >
+    </mat-form-field>
+
+    <mat-form-field *ngIf="byScaler" style="width: 70%">
+        <input 
+            matInput 
+            type="number" 
+            placeholder="quantity from scaler"
+            formControlName="quantity"
+        >
+    </mat-form-field>
+
+
+        <span>{{item.type}}</span>
+   
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button  mat-raised-button  
+                data-toggle="tooltip"
+                title="Reset"
+                (click)="resetQuantityForm()"> Reset
+                
+                <i class="material-icons">
+                        replay
+                </i>
+        </button>
+
+        <button mat-raised-button 
+                data-toggle="tooltip"
+                title="Update unit price"
+                (click)="updateQuantity()" 
+                [disabled]="!updateQuantityFormValid">  Update
+                <i class="material-icons">
+                        cached
+                </i>
+        </button>
+    </div>
+</form>
