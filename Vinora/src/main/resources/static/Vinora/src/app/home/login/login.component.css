@@ -5,6 +5,8 @@
   
   .example-container > * {
     width: 100%;
+    background-color: rgb(54, 158, 122);
+    opacity: 0.3;
   }
   
   .example-right-align {
@@ -37,8 +39,8 @@
   height:60em;
   background-size:cover;
   width:auto;
-  background-color: #00010;
-  /* opacity: ; */
+  /* background-color: #00010; */
+  /* opacity: 0.5; */
   background-image:url('../../../assets/images/nik-macmillan-YXemfQiPR_E-unsplash.jpg');
   background-position:50% 50%;
   text-align: center;
