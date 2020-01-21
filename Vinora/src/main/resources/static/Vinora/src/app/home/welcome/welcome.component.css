@@ -70,6 +70,14 @@ footer{
   color: white;
 }
 
+footer.container-fluid-text-center{
+  /* width: 50%; */
+  padding: 20px;
+  text-align: center;
+  background: rgb(22, 22, 189);
+  margin-top: 20px;
+}
+
 .fa {
   padding: 15px;
   font-size: 25px;
