@@ -137,6 +137,8 @@ import { StmCompanyProfileComponent } from './stock-manager/stm-company-profile/
 import { CompanyMainStockComponent } from './stock-manager/company-main-stock/company-main-stock.component';
 import { UpdateItemDetailsComponent } from './stock-manager/update-items/update-item-element/update-item-details/update-item-details.component';
 import { RegisteredRetailersComponent } from './registered-retailers/registered-retailers.component';
+import { CompanyRegisteredRetailersComponent } from './manager/company-retailers/company-registered-retailers/company-registered-retailers.component';
+import { CompanyNotRegisteredRetailersComponent } from './manager/company-retailers/company-not-registered-retailers/company-not-registered-retailers.component';
 
 
 @NgModule({
@@ -235,6 +237,8 @@ import { RegisteredRetailersComponent } from './registered-retailers/registered-
     CompanyMainStockComponent,
     UpdateItemDetailsComponent,
     RegisteredRetailersComponent,
+    CompanyRegisteredRetailersComponent,
+    CompanyNotRegisteredRetailersComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
