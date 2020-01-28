@@ -10,19 +10,19 @@ import { getMatFormFieldMissingControlError } from '@angular/material';
 import { RetailerEmailTokenId, RetailerEmailToken,Retailer,RetailerId } from './retailer.service';
 import { Item, ItemId } from './item.service';
 
-
 export interface Company{
-  managerName: string;
-  managerNic: string;
-  companyName: string;
-  email: string;
+  
+  retailerId:string;
   address: string;
   contactNumber: string;
-  imagePath: string;
+  email: string;
+  shopName: string;
   state: string;
-  companyId: string;
-  coord: firebase.firestore.GeoPoint;
+  url: string;
+  coord: string; 
 }
+
+
 
 export interface CompanyId extends Company{ id: string}
 
@@ -49,6 +49,9 @@ export class CompanyService {
  
   private companyCollection: AngularFirestoreDocument<Company> = null;
   company: Observable<CompanyId[]>;
+
+  private retailerCollection: AngularFirestoreDocument<Retailer> = null;
+  retailer: Observable<RetailerId[]>;
 
   private itemCollection: AngularFirestoreCollection<Item>;
   items: Observable<ItemId[]>;
@@ -133,6 +136,17 @@ export class CompanyService {
     return this.company;
   }
 
+  getRegisteredRetailerById(uid:string){
+    this.retailer =this.afs.collection(this.dbPath , ref => ref.where('retailerId', '==',uid).limit(1)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Retailer;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  
+    return this.company;
+  }
 
 
   getVehicle(uid:string){
@@ -170,7 +184,7 @@ export class CompanyService {
 // for find retailers of an each company
   getRegisteredRetailers(uid:string){
 
-    this.registeredRetailersCollection = this.afs.collection<RetailerEmailTokenId>(`companies/${uid}/registeredRetailers`);
+    this.registeredRetailersCollection = this.afs.collection<RetailerEmailTokenId>(`companies/${uid}/retailerRegistrations`);
     
     const RetailerEmailTokens: Observable<RetailerEmailTokenId[]> = this.registeredRetailersCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
