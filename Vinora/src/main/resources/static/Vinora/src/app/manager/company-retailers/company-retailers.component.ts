@@ -19,6 +19,11 @@ export class CompanyRetailersComponent implements OnInit {
 
   ngOnInit() {
     this.registeredRetailersKey= this.companyService.getRegisteredRetailers(this.companyId);
+    this.registeredRetailersKey.subscribe(x=>{
+      console.log(x);
+    })
+    console.log(this.companyId)
+    
   }
   
 }

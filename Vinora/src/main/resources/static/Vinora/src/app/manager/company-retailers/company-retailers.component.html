@@ -1,7 +1,10 @@
-<div class="container">
+<div class="container offset-2">
+    <div *ngFor="let abc of registeredRetailersKey | async">
     <ul>
-        <li *ngFor="let registeredRetailersKey of registeredRetailersKey | async">{{registeredRetailersKey.retailerEmail}} <br> {{registeredRetailersKey.retailerUid}}</li>
+        <li>{{abc.retailerUid}}</li>
+        <li> {{abc.retailerEmail}}</li>
     </ul>
+    </div>
     <p>Hi Udula</p>
 </div>
 
