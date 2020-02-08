@@ -19,7 +19,7 @@ export interface Company{
   shopName: string;
   state: string;
   url: string;
-  coord: string; 
+  coord: firebase.firestore.GeoPoint; 
 }
 
 

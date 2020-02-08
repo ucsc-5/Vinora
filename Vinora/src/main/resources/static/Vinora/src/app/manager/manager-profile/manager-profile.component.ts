@@ -66,7 +66,7 @@ export class ManagerProfileComponent implements OnInit {
   onAddImage(manager:CompanyId){
       console.log(manager.id);
       console.log("logged in");
-      console.log(manager.managerName);
+      // console.log(manager.managerName);
 
       const file = this.selectedFiles.item(0);
       this.selectedFiles = undefined;
