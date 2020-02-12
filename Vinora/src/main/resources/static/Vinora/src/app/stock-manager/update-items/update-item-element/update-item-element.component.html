@@ -1,5 +1,13 @@
-        <mat-card class="example-card" (click)="onSelect()" >
-            <mat-card-header>
+
+
+
+
+<div [ngClass]="{reOrderCss: reOrder}">
+
+        <mat-card class="example-card" (click)="onSelect()"  >
+            
+           
+            <mat-card-header >
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
@@ -8,7 +16,7 @@
                 <p>
                     <!-- {{item.description}}<br> -->
                     Unit Price: <b>{{item.unitPrice}}</b><br>
-                    Available:  <b></b>{{item.quantity}}<br>  {{item.type}}                
+                    Available:  <b [ngClass]="{reOrderCss: reOrder}">{{item.quantity}}</b><br>  {{item.type}}                
                 </p>
                 
             </mat-card-content>
@@ -106,8 +114,9 @@
                        
                 </form>
             </mat-card-actions> -->
+        
         </mat-card>
-
+    </div> 
 
 
          <!-- <button class="btn"  
