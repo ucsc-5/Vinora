@@ -40,6 +40,7 @@ export class OrderItemElementComponent implements OnInit {
     const value=form.value;
     const message=" Confirm! ";
 
+
     this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
         res=>{
           if(res){
@@ -70,6 +71,7 @@ export class OrderItemElementComponent implements OnInit {
               this.itemService.updateItem(this.item.id,{reOrder:true})
             }
              
+            this.itemService.orderedRetailers(this.item.id,value.quantity,this.retailerId);
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
 
               x=>{

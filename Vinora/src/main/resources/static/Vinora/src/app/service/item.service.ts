@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { RetailerId } from './retailer.service';
 // import { item } from './items';
  
 export interface Item{
@@ -19,6 +20,15 @@ export interface Item{
   type:string;
   reOrderingLevel: number;
   unitValue: number;
+}
+
+export interface orderRet{
+  retailerId:string;
+  itemQuantity:number;
+}
+
+export interface orderRetId extends orderRet{
+  id: string;
 }
 
 export interface ItemId extends Item{
@@ -53,6 +63,7 @@ export class ItemService {
 
   liveQuantity;
  
+  private orderedRetailerCollection: AngularFirestoreCollection<ItemId>;
   constructor(private afs: AngularFirestore) {
     
   }
@@ -89,6 +100,16 @@ export class ItemService {
       }))
     );
     return this.items;
+  }
+
+  orderedRetailers(itemId:string,itemQuantity:number,retailerId:string){
+    const orderRet : orderRet={retailerId,itemQuantity};
+    const id = this.afs.createId();
+    this.afs.collection('items').doc(itemId).collection(`$RetailerId`).doc(id).set(orderRet);
+  }
+
+  oderedRetailerDelete(itemId:string,retailerId:string){
+
   }
 
   updateItem(key: string, value: any): Promise<void> {

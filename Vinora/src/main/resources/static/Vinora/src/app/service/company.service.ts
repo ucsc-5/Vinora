@@ -210,6 +210,7 @@ export class CompanyService {
     );
     return notRegRetailers;
   }
+  //
 
 
   deleteItem(companyKey:string,itemId: string){

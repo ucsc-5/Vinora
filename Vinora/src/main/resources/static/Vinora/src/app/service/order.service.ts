@@ -19,6 +19,12 @@ export interface Order{
     stockManagerId: string;
 }
 
+export interface orderRet{
+  retailerId: string;
+  createDate : string; 
+  quantity: number;
+}
+
 
 
 export interface OrderId extends Order{
@@ -56,6 +62,10 @@ export class OrderService {
     let total:number=this.total;
     cartItems.forEach(element=>{
       this.orderCollection.doc(id).collection('items').doc(element.id).set(element);
+      const tempId=this.afs.createId();
+      const quantity=element.quantity
+      const orderRet: orderRet={retailerId,createDate,quantity}
+      this.afs.collection('items').doc(element.id).collection(`$retailerId`).doc(tempId).set(orderRet);
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
