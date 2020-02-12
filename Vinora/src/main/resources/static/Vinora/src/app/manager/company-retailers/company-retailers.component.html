@@ -3,24 +3,21 @@
     <ul>
         <li>{{abc.retailerUid}}</li>
         <li> {{abc.retailerEmail}}</li>
+        
     </ul>
     </div>
-    <p>Hi Udula 
-
-
-        is this commit
-        
-    </p>
+  
 </div>
 
 
 
-<div class="row">
-    <div class="container col-6">
-        Im working until ...
+<div class="container offset -2">
+    <div *ngFor = "let notReg of notRegisteredRetailersKey | async">
+        <ul>
+            <li>{{notReg.retailerUid}}</li>
+            <li>{{notReg.retailerEmail}}</li>
+        </ul>
+    
     </div>
-    <div class="container col-6">
-        hihi hi hi hi hi ih ih ih
 
-    </div>
 </div>
