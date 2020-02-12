@@ -1,5 +1,8 @@
 <div class="row">
         <h3>Current Orders</h3><br>
+
+        <button mat-button (click)="onSearch()">Search</button>
+
     </div>
     <div class="row">
         <div class="col" *ngIf="orders | async; let orders; else loading">

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { OrderId, OrderService } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { StockManagerService, StockManagerId } from 'src/app/service/stock-manager.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-current-orders-from-retailers',
@@ -15,7 +16,7 @@ export class CurrentOrdersFromRetailersComponent implements OnInit {
   orders: Observable<OrderId[]>;
 
   
-  constructor(private afAuth: AngularFireAuth,private stockManagerService:StockManagerService,private orderService:OrderService) {
+  constructor(private afAuth: AngularFireAuth,private stockManagerService:StockManagerService,private orderService:OrderService,private router:Router,private route:ActivatedRoute) {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
       this.companyId= idTokenResult.claims.cmpId;
@@ -24,6 +25,10 @@ export class CurrentOrdersFromRetailersComponent implements OnInit {
 
   ngOnInit() {
    this.orders= this.orderService.getCurrentOrdersByCompanyId(this.companyId);
+  }
+
+  onSearch(){
+      this.router.navigate(['search'],{relativeTo: this.route})
   }
 
 }

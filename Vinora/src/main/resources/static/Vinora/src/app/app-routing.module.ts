@@ -60,6 +60,7 @@ import { RetailerDashboardForSTMComponent } from './stock-manager/stock-manager-
 import { StmCompanyProfileComponent } from './stock-manager/stm-company-profile/stm-company-profile.component';
 import { CompanyMainStockComponent } from './stock-manager/company-main-stock/company-main-stock.component';
 import { UpdateItemDetailsComponent } from './stock-manager/update-items/update-item-element/update-item-details/update-item-details.component';
+import { ConfirmOrdersSearchComponent } from './stock-manager/confirm-orders-search/confirm-orders-search.component';
 // import { RegisteredRetailersComponent } from './registered-retailers/registered-retailers.component';
 
 
@@ -115,6 +116,7 @@ const routes: Routes = [
             { path: 'myCompany', component: StmCompanyProfileComponent},
             { path: 'requestsOrders',component: CurrentOrdersFromRetailersComponent},
             { path: 'confirmedOrders',component: ConfirmedOrdersOfRetailersComponent},
+            { path: 'confirmedOrders/search',component:ConfirmOrdersSearchComponent},
             { path: 'assignedOrders', component: AssignedOrdersComponent},
             { path: 'retailers', component: StockManagerRetailersComponent},
             { path: 'retailers/:retailerId', component: RetailerDashboardForSTMComponent, children:[      
