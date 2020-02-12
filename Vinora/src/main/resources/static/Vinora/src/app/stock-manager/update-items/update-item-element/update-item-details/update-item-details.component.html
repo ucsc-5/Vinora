@@ -19,11 +19,17 @@
     </div>
 
     <div class="col-4">
+
+        <div class="example-button-row">
+            <button mat-raised-button [disabled]="manual" (click)="onClickManual()">Manual</button>
+            <button mat-raised-button [disabled]="byScaler" (click)="onClickScaler()">By Scaler</button>
+        </div>
+
         <form [formGroup]="updateUnitValueForm">
+            {{(itemsQuantity | async)?.weight}}
+
             <b>Update unit value </b> <br>
-
             current Unit Value:     {{item.unitValue}} <br>
-
             <mat-form-field class="" style="width: 70%">
                 <input 
                     matInput 
@@ -95,7 +101,7 @@
                 <button mat-raised-button 
                         data-toggle="tooltip"
                         title="Update unit price"
-                        (click)="updateQuantity()" >  Update
+                        (click)="updateQuantity()" > Add
                         <i class="material-icons">
                                 cached
                         </i>

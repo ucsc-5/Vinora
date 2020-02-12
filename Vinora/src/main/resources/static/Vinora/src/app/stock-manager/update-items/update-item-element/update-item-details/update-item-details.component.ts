@@ -4,6 +4,7 @@ import { ItemService, Item, ItemId } from 'src/app/service/item.service';
 import { Observable } from 'rxjs';
 import { NgForm,FormGroup, FormControl, Validators} from '@angular/forms';
 import { DialogService } from 'src/app/service/dialog.service';
+import { AngularFireObject,AngularFireDatabase } from 'angularfire2/database';
 
 
 @Component({
@@ -30,9 +31,9 @@ mySubscription: any;
   newQuantity
   quantity
 
-
+  quantityRef: AngularFireObject<any>
   
-  constructor(private router:Router,private route:ActivatedRoute,private itemService:ItemService,private dialogService:DialogService) {
+  constructor(private db: AngularFireDatabase,private router:Router,private route:ActivatedRoute,private itemService:ItemService,private dialogService:DialogService) {
     // this.router.routeReuseStrategy.shouldReuseRoute = function () {
     //   return false;
     // };
@@ -42,6 +43,7 @@ mySubscription: any;
     //     this.router.navigated = false;
     //   }
     // });
+    this.quantityRef = db.object('weights');
 
    }
 
@@ -91,6 +93,7 @@ mySubscription: any;
     })
 
   
+   
   
   }
 

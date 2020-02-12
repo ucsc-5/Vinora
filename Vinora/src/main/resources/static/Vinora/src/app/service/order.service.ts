@@ -16,6 +16,7 @@ export interface Order{
     state: number;
     tempTotal: number;
     saleRepId: string;
+    stockManagerId: string;
 }
 
 
@@ -51,13 +52,14 @@ export class OrderService {
     const state=-1;
     const tempTotal=0;
     const saleRepId="";
+    const stockManagerId= "";
     let total:number=this.total;
     cartItems.forEach(element=>{
       this.orderCollection.doc(id).collection('items').doc(element.id).set(element);
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
-    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId};
+    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId};
     this.orderCollection.doc(id).set(order);
   }
 
@@ -74,7 +76,7 @@ export class OrderService {
   }
 
   getCurrentOrdersByCompanyId(companyId:string){
-    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',-1)).snapshotChanges().pipe(
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',-1).where("saleRepId","==",'').where("stockManagerId",'==','')).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -83,6 +85,8 @@ export class OrderService {
     );
     return currentOordersByCompany;
   }
+
+  
 
   getCurrentOrdersByRetailerIdCompanyId(companyId:string,retailerId:string){
     const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',-1).where('retailerId','==',retailerId)).snapshotChanges().pipe(
@@ -122,6 +126,17 @@ export class OrderService {
         
         getConfirmedOrdersByCompanyId(companyId:string){
           const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',0).where('saleRepId','==',"")).snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+              const data = a.payload.doc.data() as Order;
+              const id = a.payload.doc.id;
+              return { id, ...data };
+            }))
+          );
+          return currentOordersByCompany;
+        }
+
+        getConfirmedOrdersByCompanyIdStockManagerId(companyId:string,stockManagerId:string){
+          const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',0).where('saleRepId','==',"").where('stockManagerId','==',stockManagerId)).snapshotChanges().pipe(
             map(actions => actions.map(a => {
               const data = a.payload.doc.data() as Order;
               const id = a.payload.doc.id;
@@ -208,9 +223,10 @@ getItemsByOrderId(orderKey:string){
   return this.items;
 }
 
-updateState(id:string,stateValue:number){
+updateState(id:string,stateValue:number,stockManagerId:string){
   this.afs.collection('orders').doc(id).update({state:stateValue});
   this.afs.collection('orders').doc(id).update({tempTotal:0});
+  this.afs.collection('orders').doc(id).update({stockManagerId:stockManagerId});
 }
 
 stockManagerAddItem(orderKey:string,itemId:string,itemsPrice:number){
