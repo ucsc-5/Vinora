@@ -1,4 +1,4 @@
-<div class="container offset-2">
+<!-- <div class="container offset-2">
     <div *ngFor="let abc of registeredRetailersKey | async">
     <ul>
         <li>{{abc.retailerUid}}</li>
@@ -7,10 +7,10 @@
     </ul>
     </div>
   
-</div>
+</div> -->
 
 
-
+<!-- 
 <div class="container offset -2">
     <div *ngFor = "let notReg of notRegisteredRetailersKey | async">
         <ul>
@@ -20,4 +20,11 @@
     
     </div>
 
+</div> -->
+
+<div class="row" *ngIf = "notRegisteredRetailer | async; let notRegisteredRetailer else loading">
+    <li *ngFor= "let retailer of notRegisteredRetailer" (click)=onSelect(retailer)>
+        {{retailer.email}}
+    </li>
 </div>
+<ng-template #loading> No Retailers available!! &hellip;</ng-template>

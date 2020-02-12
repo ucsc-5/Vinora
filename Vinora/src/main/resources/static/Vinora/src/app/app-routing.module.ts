@@ -63,6 +63,7 @@ import { UpdateItemDetailsComponent } from './stock-manager/update-items/update-
 import { ConfirmOrdersSearchComponent } from './stock-manager/confirm-orders-search/confirm-orders-search.component';
 import { StmComSalerepsComponent } from './stock-manager/stm-com-salereps/stm-com-salereps.component';
 import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm-salerep-details/stm-salerep-details.component';
+import { CompanyNotRegisteredRetailersComponent } from './manager/company-retailers/company-not-registered-retailers/company-not-registered-retailers.component';
 // import { RegisteredRetailersComponent } from './registered-retailers/registered-retailers.component';
 
 
@@ -141,7 +142,8 @@ const routes: Routes = [
             {path: 'SalesRepresentative' ,component :SalesRepresentativeComponent,children:[
               {path:'registerSalesRepresentative',component:RegisterSalesRepresentativeComponent}
             ]},
-              {path: 'newRetailers', component: CompanyRetailersComponent},
+              // {path: 'newRetailers', component: CompanyRetailersComponent},
+              // {path: 'newRetailers/:notRegRetId', component: CompanyNotRegisteredRetailersComponent},    
               {path: 'registerNewItem', component: RegisterNewItemComponent},
             {path: 'vehicleRegister', component: VehicleComponent,children:[
               {path: 'registerVehicle', component: VehicleRegisterComponent }
@@ -151,7 +153,9 @@ const routes: Routes = [
               {path: 'register' , component: VehicleRegisterComponent}
               ]},
             // {path : 'regisetredRetailer' , component: RegisteredRetailersComponent},
-            {path : 'companyRetailers' , component: CompanyRetailersComponent}
+            {path : 'companyRetailers' , component: CompanyRetailersComponent},
+            {path: 'companyRetailers/:notRegRetId', component: CompanyNotRegisteredRetailersComponent}
+
   ]},
 
 
