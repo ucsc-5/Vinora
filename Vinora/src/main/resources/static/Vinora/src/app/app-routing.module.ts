@@ -92,11 +92,9 @@ const routes: Routes = [
            
             {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
             
-            { path: 'previousOrders', component: PreviousOrdersComponent,children:[
-              {path: ':companyId/chart',component:ReportComponent}
+            { path: 'previousOrders', component: PreviousOrdersComponent},
+              {path: 'previousOrders/:companyId',component:ReportComponent},
                 //  {path: 'chart',component:ReportComponent}
-             
-            ]},
             // {path: 'newStock', component: NewStockComponent},
             { path: 'allCompanies', component: RetailerNewCompaniesComponent},
             { path: 'myProfile', component: RetailerProfileComponent},

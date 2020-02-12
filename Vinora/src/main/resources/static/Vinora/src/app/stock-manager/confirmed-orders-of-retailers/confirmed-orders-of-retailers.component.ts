@@ -12,17 +12,18 @@ export class ConfirmedOrdersOfRetailersComponent implements OnInit {
 
   companyId: string;
   orders: Observable<OrderId[]>;
+  stockManagerId: string;
 
   
   constructor(private afAuth: AngularFireAuth,private orderService:OrderService) {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       this.companyId= idTokenResult.claims.cmpId;
       console.log(this.companyId);
-      
     })
+    this.stockManagerId= this.afAuth.auth.currentUser.uid;
   }
 
   ngOnInit() {
-   this.orders= this.orderService.getConfirmedOrdersByCompanyId(this.companyId);
+   this.orders= this.orderService.getConfirmedOrdersByCompanyIdStockManagerId(this.companyId,this.stockManagerId);
   }
 }

@@ -66,13 +66,13 @@ export class LoginComponent implements OnInit {
     //  this.authService.login('chamod999@gmail.com','0714954149'); //for stock manager
     // this.authService.login('ret1@gmail.com','123123'); //for retailer
     // this.authService.login('vigith@gmail.com','123123'); //for retailer
-    // this.authService.login('vigith@gmail.com','123123'); //for retailer
+    this.authService.login('vigith@gmail.com','123123'); //for retailer
     // this.authService.login('royalvintage@gmail.com','654321'); //for Manager
    
     // this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
     // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
 
-        this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for Manager
+        // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for Manager
         //  this.authService.login('udulacompany@gmail.com','#Vinora@123'); //for Manager
     this.showSpinner=false;
     console.log(this.authService.user.uid); 

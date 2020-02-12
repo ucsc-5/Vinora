@@ -30,7 +30,8 @@ export class RetailerRegComElementComponent implements OnInit {
  
 
   company_chart(company:CompanyId){
-      this.router.navigate(['../','previousOrders',company.id,'chart'],{relativeTo: this.route});
+   this.ngOnInit();   
+      this.router.navigate(['../','previousOrders',company.id],{relativeTo: this.route});
       // this.router.navigate(['../','previousOrders','chart'],{relativeTo: this.route});
     
     }
