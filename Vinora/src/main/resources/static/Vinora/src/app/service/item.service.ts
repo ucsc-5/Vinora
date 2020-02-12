@@ -25,6 +25,7 @@ export interface Item{
 export interface orderRet{
   retailerId:string;
   itemQuantity:number;
+  orderDate: Date;
 }
 
 export interface orderRetId extends orderRet{
@@ -102,10 +103,10 @@ export class ItemService {
     return this.items;
   }
 
-  orderedRetailers(itemId:string,itemQuantity:number,retailerId:string){
-    const orderRet : orderRet={retailerId,itemQuantity};
+  orderedRetailers(itemId:string,itemQuantity:number,retailerId:string,orderDate:Date){
+    const orderRet : orderRet={retailerId,itemQuantity,orderDate};
     const id = this.afs.createId();
-    this.afs.collection('items').doc(itemId).collection(`$RetailerId`).doc(id).set(orderRet);
+    this.afs.collection('items').doc(itemId).collection(`${retailerId}`).doc(id).set(orderRet);
   }
 
   oderedRetailerDelete(itemId:string,retailerId:string){
