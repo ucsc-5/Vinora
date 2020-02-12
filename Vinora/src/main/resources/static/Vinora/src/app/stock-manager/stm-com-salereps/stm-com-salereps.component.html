@@ -1,0 +1,8 @@
+<div class="row" *ngIf="saleRepresentatives | async; let saleRepresentatives; else loading">
+    <li *ngFor="let saleRep of saleRepresentatives" (click)="onSelect(saleRep)">
+        {{saleRep.email}}
+    </li>
+</div>
+
+<ng-template #loading>No Sale representatives available!!&hellip;</ng-template>
+

@@ -1,0 +1,24 @@
+
+
+<div class="row" *ngIf="saleRepresentatives | async let saleRep; else loding">
+    <mat-card class="example-card" *ngFor="let saleRep of saleRep">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+              <img mat-card-image src="{{saleRep.salesRefImagePath}}" alt="Photo of the Retailer">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{saleRep.fullName}}</h5>
+              <p class="card-text">
+                  <p> 
+                     
+                      <b>email: </b>{{saleRep.email}}<br>
+                      <b>Address: </b>{{saleRep.address}}<br>
+                      <b>Contact: </b>{{saleRep.contactNumber}}<br>
+                      <b>NIC:</b> {{saleRep.nic}}<br>
+                  </p>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+</div>

@@ -142,6 +142,8 @@ import { RegisteredRetailersComponent } from './registered-retailers/registered-
 import { CompanyRegisteredRetailersComponent } from './manager/company-retailers/company-registered-retailers/company-registered-retailers.component';
 import { CompanyNotRegisteredRetailersComponent } from './manager/company-retailers/company-not-registered-retailers/company-not-registered-retailers.component';
 import { ConfirmOrdersSearchComponent } from './stock-manager/confirm-orders-search/confirm-orders-search.component';
+import { StmComSalerepsComponent } from './stock-manager/stm-com-salereps/stm-com-salereps.component';
+import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm-salerep-details/stm-salerep-details.component';
 
 
 @NgModule({
@@ -243,6 +245,8 @@ import { ConfirmOrdersSearchComponent } from './stock-manager/confirm-orders-sea
     CompanyRegisteredRetailersComponent,
     CompanyNotRegisteredRetailersComponent,
     ConfirmOrdersSearchComponent,
+    StmComSalerepsComponent,
+    StmSalerepDetailsComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

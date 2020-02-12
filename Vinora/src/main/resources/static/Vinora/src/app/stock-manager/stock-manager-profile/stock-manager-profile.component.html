@@ -31,7 +31,7 @@
               <h5 class="card-title">{{stockManager.fullName}}</h5>
               <p class="card-text">
                   
-                      <!-- <b>State: </b>{{stockManager.state}}<br> -->
+                      
                       <b>email: </b>{{stockManager.email}}<br>
                       <b>Address: </b>{{stockManager.address}}<br>
                       <b>Contact: </b>{{stockManager.contactNumber}}  
@@ -41,17 +41,6 @@
                       
                   </p>
 
-                  <!-- <form class="example-form" (ngSubmit)="onEditContact(f)" #f="ngForm">
-
-                          
-                      <input matInput placeholder="Edit Contact number" [formControl]="contactNumber"ngModel>
-                  
-               
-  
-                  <button type="submit" class="btn btn-success">Save</button>
-  
-                  
-          </form>  -->
           <form (ngSubmit)="updateContactnumber(f,stockManager)" #f="ngForm">
              
                           <mat-form-field class="" style="width: 70%">
@@ -69,8 +58,9 @@
 
 
 
-
+    
       <div class="col-12">
+      <mat-card>
         <h5 class="h5">Reset my password</h5>
         <form class="example-form" [formGroup]="resetPasswordForm">
           <mat-form-field class="example-full-width">
@@ -119,9 +109,12 @@
                      <span *ngIf="confirmPassword?.errors?.notEqual">Password and Confirm Password doesn't match</span>
                  </mat-form-field>
 
+                 <br>
                 
-                     <button mat-raised-button color="primary" [disabled]="!valid" (click)="onResetPassword()">Reset Password</button>
+                 <button mat-raised-button color="primary" [disabled]="!valid" (click)="onResetPassword()">Reset Password</button>
        </form>
+
+       </mat-card>
  </div>
 
 </div>
