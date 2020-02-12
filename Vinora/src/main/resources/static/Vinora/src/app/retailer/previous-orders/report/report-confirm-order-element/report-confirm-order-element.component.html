@@ -4,9 +4,10 @@
         
           <div class="col col-3">    
               <p>
+                <b>{{company.companyName}</b>
                 <b>Purches Date: </b> {{confirmOrder.createDate}}<br>
                 <b>Total Amount: </b> {{confirmOrder.total}} .00 Rs/-<br>
-                <!-- <b>Order State: </b> {{currentOrder.state}}<br> -->
+              
               </p>
             
           </div> 
@@ -18,8 +19,23 @@
 
 
 <div class="row"  *ngIf="items | async; let items ; else">
-    <app-report-confirm-order-item class="col col-2" *ngFor="let item of items" [item]="item"></app-report-confirm-order-item>
+  <table>
+    <th>Item Name</th>
+    <th>Item quantity</th>
+    <th>Item unit Price</th>
+    <th>Item total</th>
+    <div  *ngFor="let item of items">
+      <tr>
+      <td><p>{{item.itemName}}</p></td>
+      <td><p>{{item.quantity}}</p></td>
+      <td><p>{{item.unitPrice}}</p></td>
+      <td><p>{{item.total}}</p></td>
+
+    </tr>
+    </div>
+  </table> 
 </div>
+
 
 <br>
 <br>

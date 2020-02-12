@@ -71,7 +71,8 @@ export class OrderItemElementComponent implements OnInit {
               this.itemService.updateItem(this.item.id,{reOrder:true})
             }
              
-            this.itemService.orderedRetailers(this.item.id,value.quantity,this.retailerId);
+            const orderDate  = new Date();
+            // this.itemService.orderedRetailers(this.item.id,value.quantity,this.retailerId,orderDate);
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
 
               x=>{

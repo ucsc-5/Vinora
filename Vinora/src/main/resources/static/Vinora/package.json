@@ -25,6 +25,7 @@
     "@angular/platform-server": "^8.2.14",
     "@angular/router": "^8.2.14",
     "@nguniversal/module-map-ngfactory-loader": "^8.2.6",
+    "angular-material": "^1.1.21",
     "angularfire2": "^5.4.2",
     "express": "^4.17.1",
     "firebase": "^6.6.2",

@@ -11,6 +11,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import { MAT_LABEL_GLOBAL_OPTIONS} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 // import {MatButtonModule} from '@angular/material/button'; 
 
 import { environment } from '../environments/environment';
@@ -116,7 +118,7 @@ import { WelcomeNewCompanyComponent } from './manager/welcome-new-company/welcom
 import { ValidEmailGuardService } from './shared/routerGuards/valid-email-guard.service';
 import { TemporaryWelcomeComponent } from './home/temporary-welcome/temporary-welcome.component';
 import { ConfirmItemPopupComponent } from './shared/popups/confirm-item-popup/confirm-item-popup.component';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule,MatNativeDateModule } from '@angular/material';
 import { StmConfirmOrderTempService } from './service/stm-confirm-order-temp.service';
 import { ItemDetailsPopupComponent } from './shared/popups/item-details-popup/item-details-popup.component';
 import { ResetPasswordService } from './shared/routerGuards/reset-password.service';
@@ -139,6 +141,9 @@ import { UpdateItemDetailsComponent } from './stock-manager/update-items/update-
 import { RegisteredRetailersComponent } from './registered-retailers/registered-retailers.component';
 import { CompanyRegisteredRetailersComponent } from './manager/company-retailers/company-registered-retailers/company-registered-retailers.component';
 import { CompanyNotRegisteredRetailersComponent } from './manager/company-retailers/company-not-registered-retailers/company-not-registered-retailers.component';
+import { ConfirmOrdersSearchComponent } from './stock-manager/confirm-orders-search/confirm-orders-search.component';
+import { StmComSalerepsComponent } from './stock-manager/stm-com-salereps/stm-com-salereps.component';
+import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm-salerep-details/stm-salerep-details.component';
 
 
 @NgModule({
@@ -239,6 +244,9 @@ import { CompanyNotRegisteredRetailersComponent } from './manager/company-retail
     RegisteredRetailersComponent,
     CompanyRegisteredRetailersComponent,
     CompanyNotRegisteredRetailersComponent,
+    ConfirmOrdersSearchComponent,
+    StmComSalerepsComponent,
+    StmSalerepDetailsComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
@@ -262,6 +270,8 @@ import { CompanyNotRegisteredRetailersComponent } from './manager/company-retail
     AngularFireFunctionsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBhDflq5iJrXIcKpeq0IzLQPQpOboX91lY'
     })
@@ -286,7 +296,8 @@ import { CompanyNotRegisteredRetailersComponent } from './manager/company-retail
     ValidEmailGuardService,
     ResetPasswordService,
     StmConfirmOrderTempService,
-    SalesRepresentativeService
+    SalesRepresentativeService,
+    {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}
     ],
   bootstrap: [AppComponent]
   

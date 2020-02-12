@@ -21,7 +21,7 @@ export interface Order{
 
 export interface orderRet{
   retailerId: string;
-  createDate : string; 
+  orderDa:Date;
   quantity: number;
 }
 
@@ -64,8 +64,10 @@ export class OrderService {
       this.orderCollection.doc(id).collection('items').doc(element.id).set(element);
       const tempId=this.afs.createId();
       const quantity=element.quantity
-      const orderRet: orderRet={retailerId,createDate,quantity}
-      this.afs.collection('items').doc(element.id).collection(`$retailerId`).doc(tempId).set(orderRet);
+      const orderDa = new Date();
+      const orderRet: orderRet={retailerId,orderDa,quantity}
+      this.afs.collection('items').doc(element.itemId).collection(`${retailerId}`).doc(tempId).set(orderRet);
+      console.log("Hashiniii"+element.itemId);
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })

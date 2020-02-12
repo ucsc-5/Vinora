@@ -10,7 +10,6 @@ import { CartItem } from 'src/app/service/cart.service';
   styleUrls: ['./report-confirm-order-element.component.css']
 })
 export class ReportConfirmOrderElementComponent implements OnInit {
-  
 
   @Input() confirmOrder: OrderId;
   company:Observable<CompanyId[]>;
