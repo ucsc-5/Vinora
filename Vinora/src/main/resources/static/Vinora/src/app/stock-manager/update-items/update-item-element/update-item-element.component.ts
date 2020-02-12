@@ -27,6 +27,9 @@ export class UpdateItemElementComponent implements OnInit {
   manual:boolean = true;
   byScaler: boolean = false;
   newQuantity
+
+  
+  reOrder:Boolean=false;
  
 
   constructor(private router:Router,private route:ActivatedRoute,private db: AngularFireDatabase,private dialogService:DialogService,private itemServise:ItemService,private afs: AngularFirestore,private afAuth: AngularFireAuth) { 
@@ -47,7 +50,13 @@ export class UpdateItemElementComponent implements OnInit {
     console.log(this.quantity+" this is the quantity");
 
     this.newQuantity=+this.quantity/this.item.unitValue;
+
     
+    if(this.item.quantity<this.item.reOrderingLevel){
+      this.reOrder=true;
+    }else{
+      this.reOrder=false;
+    }
   }
 
 
