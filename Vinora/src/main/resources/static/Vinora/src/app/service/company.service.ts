@@ -11,14 +11,16 @@ import { RetailerEmailTokenId, RetailerEmailToken,Retailer,RetailerId } from './
 import { Item, ItemId } from './item.service';
 
 export interface Company{
-  
-  retailerId:string;
+
   address: string;
-  contactNumber: string;
+  companyName:string,
+  contactNumber: string,
+  managerNic:string,
+  imagePath:string,
+  companyId:string,
+  managerName:string,
   email: string;
-  shopName: string;
   state: string;
-  url: string;
   coord: firebase.firestore.GeoPoint; 
 }
 
