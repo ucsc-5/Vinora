@@ -144,7 +144,7 @@ import { CompanyNotRegisteredRetailersComponent } from './manager/company-retail
 import { ConfirmOrdersSearchComponent } from './stock-manager/confirm-orders-search/confirm-orders-search.component';
 import { StmComSalerepsComponent } from './stock-manager/stm-com-salereps/stm-com-salereps.component';
 import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm-salerep-details/stm-salerep-details.component';
-
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -297,6 +297,7 @@ import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm
     ResetPasswordService,
     StmConfirmOrderTempService,
     SalesRepresentativeService,
+    DatePipe,
     {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}
     ],
   bootstrap: [AppComponent]

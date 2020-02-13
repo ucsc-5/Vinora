@@ -7,6 +7,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable, Timestamp } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartItem, CartItemId, CartService } from './cart.service';
+import { DatePipe } from '@angular/common';
 
 export interface Order{
     createDate : string; 
@@ -17,6 +18,9 @@ export interface Order{
     tempTotal: number;
     saleRepId: string;
     stockManagerId: string;
+    date: number;
+    month: number;
+    year: number;
 }
 
 export interface orderRet{
@@ -48,13 +52,18 @@ export class OrderService {
   total: number=0;
  
   saleRepId
-  constructor(private cartService:CartService,private afs: AngularFirestore,private db: AngularFireDatabase) {
+  constructor(private datePipe: DatePipe,private cartService:CartService,private afs: AngularFirestore,private db: AngularFireDatabase) {
     this.orderCollection = this.afs.collection<OrderItem>('orders');
     
   }
 
   addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
-    let createDate = new Date().toLocaleString();
+    let theDate= new Date()
+    let createDate = theDate.toString();
+    let date = theDate.getDate();
+    let month = theDate.getMonth();
+    let year = theDate.getFullYear();
+    
     const state=-1;
     const tempTotal=0;
     const saleRepId="";
@@ -71,7 +80,7 @@ export class OrderService {
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
-    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId};
+    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year};
     this.orderCollection.doc(id).set(order);
   }
 
@@ -291,6 +300,24 @@ setStmAddedFeild(orderKey:string,itemId:string){
 
 setSaleRep(saleRepId:string,orderKey:string){
   this.afs.collection('orders').doc(orderKey).update({saleRepId:saleRepId,saleRepAccept:0});
+}
+
+
+getConformOrderByDate(fromDate:Date,toDate:Date){
+ 
+
+  
+
+  // const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where()).snapshotChanges().pipe(
+  //   map(actions => actions.map(a => {
+  //     const data = a.payload.doc.data() as Order;
+  //     const id = a.payload.doc.id;
+  //     return { id, ...data };
+  //   }))
+  // );
+
+  console.log("From the wervice ");
+  // return orders;
 }
   
 }
