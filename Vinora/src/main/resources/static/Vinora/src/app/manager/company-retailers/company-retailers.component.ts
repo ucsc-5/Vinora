@@ -25,9 +25,6 @@ export class CompanyRetailersComponent implements OnInit {
   constructor(private router: Router,private route:ActivatedRoute, private companyService:CompanyService,private afAuth: AngularFireAuth) { 
     this.companyId= this.afAuth.auth.currentUser.uid;
 
-    this.afAuth.auth.currentUser.getIdTokenResult().then(idTokenResult)=>{
-      this.companyId = idTokenResult.claims.cmpId;
-    }
   }
     
   ngOnInit() {
