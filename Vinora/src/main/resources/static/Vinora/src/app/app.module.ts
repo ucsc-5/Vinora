@@ -145,6 +145,8 @@ import { ConfirmOrdersSearchComponent } from './stock-manager/confirm-orders-sea
 import { StmComSalerepsComponent } from './stock-manager/stm-com-salereps/stm-com-salereps.component';
 import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm-salerep-details/stm-salerep-details.component';
 import { DatePipe } from '@angular/common';
+import { DeliveryCompanyReportComponent } from './retailer/delivery-company-report/delivery-company-report.component';
+import { RegDeComElementComponent } from './retailer/delivery-company-report/reg-de-com-element/reg-de-com-element.component';
 
 @NgModule({
   declarations: [
@@ -247,6 +249,8 @@ import { DatePipe } from '@angular/common';
     ConfirmOrdersSearchComponent,
     StmComSalerepsComponent,
     StmSalerepDetailsComponent,
+    DeliveryCompanyReportComponent,
+    RegDeComElementComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
