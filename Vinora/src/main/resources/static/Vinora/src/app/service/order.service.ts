@@ -21,6 +21,7 @@ export interface Order{
     date: number;
     month: number;
     year: number;
+    encDate: number;
 }
 
 export interface orderRet{
@@ -63,6 +64,8 @@ export class OrderService {
     let date = theDate.getDate();
     let month = theDate.getMonth();
     let year = theDate.getFullYear();
+
+    let encDate = (year*10000)+(month*100)+(date);
     
     const state=-1;
     const tempTotal=0;
@@ -80,7 +83,7 @@ export class OrderService {
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
-    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year};
+    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate};
     this.orderCollection.doc(id).set(order);
   }
 
@@ -304,20 +307,30 @@ setSaleRep(saleRepId:string,orderKey:string){
 
 
 getConformOrderByDate(fromDate:Date,toDate:Date){
- 
+   
+  let date1 = fromDate.getDate();
+  let month1 = fromDate.getMonth();
+  let year1 = fromDate.getFullYear();
 
+  let date2 = toDate.getDate();
+  let month2 = toDate.getMonth();
+  let year2 = toDate.getFullYear();
+
+  let min = (year1*10000)+(month1*100)+(date1);
+  let max = (year2*10000)+(month2*100)+(date2);
   
 
-  // const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where()).snapshotChanges().pipe(
-  //   map(actions => actions.map(a => {
-  //     const data = a.payload.doc.data() as Order;
-  //     const id = a.payload.doc.id;
-  //     return { id, ...data };
-  //   }))
-  // );
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('encDate','<=',max).where('encDate','>=',min)).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Order;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
 
   console.log("From the wervice ");
-  // return orders;
+
+  return orders;
 }
   
 }

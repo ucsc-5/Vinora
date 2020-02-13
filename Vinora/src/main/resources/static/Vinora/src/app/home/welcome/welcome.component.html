@@ -7,24 +7,7 @@
     <div class = "landing-text">
         <h1> Vinora Applications</h1>
         <h3>The Next Level Of Ordering</h3>
-        <p>
-            <mat-form-field>
-              <mat-label>From</mat-label>
-              <input matInput [matDatepicker]="dp1" [(ngModel)]="fromDate" disabled>
-              <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-              <mat-datepicker #dp1 disabled="false"></mat-datepicker>
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field>
-              <mat-label>To</mat-label>
-              <input matInput [matDatepicker]="dp2" [(ngModel)]="toDate" disabled>
-              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
-              <mat-datepicker #dp2 disabled="false"></mat-datepicker>
-            </mat-form-field>
-          </p>
-
-    <button mat-button color="primary" (click)="onSearch()">Search</button>
+        
     </div>
 </div>
 

@@ -1,18 +1,62 @@
 <div class="row">
-    <h4>Date Range</h4>
+   
 </div>
 
 <div class="row">
+    
+    <div class="col-12">
+        <h4>Date Range</h4>
+    </div>
+
+    <div class="col-12">
         <p>
             <mat-form-field>
-              <mat-label>Input disabled</mat-label>
-              <input matInput [matDatepicker]="dp3" [(ngModel)]="fromDate" disabled>
-              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+              <mat-label>From</mat-label>
+              <input matInput [matDatepicker]="dp1" [(ngModel)]="fromDate" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+              <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          
+            <mat-form-field>
+              <mat-label>To</mat-label>
+              <input matInput [matDatepicker]="dp2" [(ngModel)]="toDate" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2 disabled="false"></mat-datepicker>
             </mat-form-field>
           </p>
-
-    <button mat-button color="primary" (click)="onSearch()">Search</button>
-     
-     
+    </div>
+    
 </div>
+
+<div class="row">
+    <div class="col-12">
+        <h4>By year and month</h4>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <h4>By Retailers</h4>
+    </div>
+
+    <div class="col-12">
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h4>By total amount</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h4>Sepcific date</h4>
+    </div>
+</div>
+
+
+
+<button mat-button color="primary" (click)="onSearch()">Search</button>
