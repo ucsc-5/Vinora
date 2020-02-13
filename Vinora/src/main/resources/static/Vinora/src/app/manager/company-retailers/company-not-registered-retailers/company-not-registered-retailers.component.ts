@@ -18,6 +18,10 @@ export class CompanyNotRegisteredRetailersComponent implements OnInit {
     this.route.params.subscribe((param:Params)=>{
       this.notRegRetId=param['notRegRetId'];})
 
+      this.notRegisterRetailers = this.retailerservice.getRetailerById(this.notRegRetId)
+
+      // this.saleRepresentatives=this.saleRepservice.getSalesRepByRepId(this.saleRepId);
+
   }
 
 }

@@ -1,2 +1,23 @@
-<p>company-not-registered-retailers works!</p>
-v   vcnc
+
+<div class="row" *ngIf="notRegisterRetailers | async let retailer; else loding">
+    <mat-card class="example-card" *ngFor="let retailer of retailer">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+              <img mat-card-image src="{{retailer.url}}" alt="Photo of the Retailer">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{retailer.shopName}}</h5>
+              <p class="card-text">
+                  <p> 
+                     
+                      <b>email: </b>{{retailer.email}}<br>
+                      <b>Address: </b>{{retailer.address}}<br>
+                      <b>Contact: </b>{{retailer.contactNumber}}<br>
+                      <!-- <b>NIC:</b> {{saleRep.nic}}<br> -->
+                  </p>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+</div>
