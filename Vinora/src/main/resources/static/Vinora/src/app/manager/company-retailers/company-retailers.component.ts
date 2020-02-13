@@ -16,7 +16,7 @@ export class CompanyRetailersComponent implements OnInit {
   retailerId: string
   companyId: string
 
-  notRegisteredRetailersKey: Observable<RetailerId[]>
+  notRegisteredRetailer: Observable<RetailerId[]>
   registeredRetailersKey: Observable<RetailerEmailTokenId[]>
 
   // companyTempId:string;
@@ -24,18 +24,17 @@ export class CompanyRetailersComponent implements OnInit {
   userDetails: Observable<Retailer[]>
   constructor(private router: Router,private route:ActivatedRoute, private companyService:CompanyService,private afAuth: AngularFireAuth) { 
     this.companyId= this.afAuth.auth.currentUser.uid;
-
   }
     
   ngOnInit() {
     // this.registeredRetailersKey= this.companyService.getRegisteredRetailers(this.companyId);
-    this.notRegisteredRetailersKey = this.companyService.getNotRegRetailers(this.companyId);
+    this.notRegisteredRetailer = this.companyService.getNotRegRetailers(this.companyId);
     // this.userDetails= this.companyService.getRegisteredRetailerById(this.userId);
     // console.log(this.registeredRetailersKey)
     console.log(this.companyId)
-    console.log(this.notRegisteredRetailersKey)
+    console.log(this.notRegisteredRetailer)
 
-    this.notRegisteredRetailersKey.subscribe(res=>{
+    this.notRegisteredRetailer.subscribe(res=>{
       res.forEach(element=>{
         console.log(element);
       })
