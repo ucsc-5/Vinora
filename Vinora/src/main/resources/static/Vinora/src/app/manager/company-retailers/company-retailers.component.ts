@@ -50,7 +50,7 @@ export class CompanyRetailersComponent implements OnInit {
     console.log(notRegRet.id);
     this.router.navigate([notRegRet.id],{relativeTo: this.route})
   }
-
+// commit
   
 }
 
