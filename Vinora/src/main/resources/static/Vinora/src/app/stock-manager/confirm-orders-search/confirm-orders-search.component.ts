@@ -7,22 +7,18 @@ import {FormControl, Validators, NgForm, FormGroup} from '@angular/forms';
 })
 export class ConfirmOrdersSearchComponent implements OnInit {
 
-  
-  searchForm: FormGroup;
+
+  fromDate;
+  toDate;
+
   constructor() { }
 
   ngOnInit() {
-    this.searchForm = new FormGroup({
-      'fromDate': new FormControl(null,[Validators.required]),
-      'toDate': new FormControl(null,[Validators.required])
-  })
-
+    this.fromDate= new Date();
   }
 
   onSearch(){
-    console.log(this.searchForm.value.fromDate);    
-    console.log(this.searchForm.value.toDate);
-    
+    console.log(this.fromDate);     
   }
 
 }
