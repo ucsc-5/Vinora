@@ -48,32 +48,19 @@ export class LoginComponent implements OnInit {
       const password = this.loginForm.value.password;
       console.log(email);
       console.log(password);
-      
-      
       this.authService.logout();
-    //   this.authService.login(email,password).then(res=>{
-    //   // setTimeout(() => {
-    //   //   this.message=null;
-    //   //  }, 2000);
+      this.authService.login(email,password).then(res=>{
+      // setTimeout(() => {
+      //   this.message=null;
+      //  }, 2000);
        
-    //  }).catch(error=>{
-    //   this.message="Please check your email and password again!!"
-    //    console.log(" this is the error  "+error);
-    //  })
+     }).catch(error=>{
+      this.message="Please check your email and password again!!"
+       console.log(" this is the error  "+error);
+     })
     this.showSpinner=true;
 
-    // this.authService.login('admin@gmail.com','123123'); //for admin
-    //  this.authService.login('chamod999@gmail.com','0714954149'); //for stock manager
-    // this.authService.login('ret1@gmail.com','123123'); //for retailer
-    // this.authService.login('vigith@gmail.com','123123'); //for retailer
-    // this.authService.login('vigith@gmail.com','123123'); //for retailer
-    // this.authService.login('royalvintage@gmail.com','654321'); //for Manager
-   
-    this.authService.login('udulaindunil@gmail.com','#Udula@1997'); //for stock manager Manager email verified
-    // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for stock manager Manager email verified
 
-        // this.authService.login('2017cs162@stu.ucsc.cmb.ac.lk','#Udula@1997'); //for Manager
-        //  this.authService.login('udulacompany@gmail.com','#Vinora@123'); //for Manager
     this.showSpinner=false;
     console.log(this.authService.user.uid); 
   }

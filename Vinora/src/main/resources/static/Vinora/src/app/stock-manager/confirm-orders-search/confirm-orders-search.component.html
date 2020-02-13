@@ -31,6 +31,27 @@
 <div class="row">
     <div class="col-12">
         <h4>By year and month</h4>
+
+            <mat-form-field>
+                <mat-label>Select an option</mat-label>
+                <mat-select [(value)]="month">
+                    <mat-option>None</mat-option>
+                    <mat-option value="1">January</mat-option>
+                    <mat-option value="2">February</mat-option>
+                    <mat-option value="3">March</mat-option>
+                    <mat-option value="4">April</mat-option>
+                    <mat-option value="5">May</mat-option>
+                    <mat-option value="6">June</mat-option>
+                    <mat-option value="7">July</mat-option>
+                    <mat-option value="8">August</mat-option>
+                    <mat-option value="9">September</mat-option>
+                    <mat-option value="10">Octomber</mat-option>
+                    <mat-option value="11">November</mat-option>
+                    <mat-option value="12">December</mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <p>You selected: {{month}}</p>
     </div>
 </div>
 
@@ -41,7 +62,13 @@
     </div>
 
     <div class="col-12">
-
+        <mat-form-field>
+            <mat-label>Select retailer</mat-label>
+            <mat-select [(value)]="retailer">
+                <mat-option>None</mat-option>
+                <mat-option value="1">January</mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
 </div>
 
@@ -49,11 +76,25 @@
     <div class="col-12">
         <h4>By total amount</h4>
     </div>
+    <div class="col-12">
+        <mat-form-field>
+            <mat-label>Less than</mat-label>
+            <input matInput [(ngModel)]="total" [min]="0">
+        </mat-form-field>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-12">
         <h4>Sepcific date</h4>
+    </div>
+    <div class="col-12">
+            <mat-form-field>
+                <mat-label>From</mat-label>
+                <input matInput [matDatepicker]="spdatep" [(ngModel)]="specificDate" disabled>
+                <mat-datepicker-toggle matSuffix [for]="spdatep"></mat-datepicker-toggle>
+                <mat-datepicker #dp1 disabled="spdatep"></mat-datepicker>
+            </mat-form-field>
     </div>
 </div>
 

@@ -61,6 +61,7 @@ export class RegisterNewItemComponent implements OnInit {
       const filePath = `${basePath}/${itemImage.name}${new Date()}`;
       const storageRef = this.storage.ref(filePath);
       const uploadTask = this.storage.upload(filePath,itemImage);
+      const reOrder = true;
 
       uploadTask.snapshotChanges().pipe(
         finalize(() => {
@@ -68,7 +69,7 @@ export class RegisterNewItemComponent implements OnInit {
             console.log(downloadURL);
              const itemImagePath= downloadURL;
              const id = this.afs.createId();
-             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,type,reOrderingLevel,unitValue};
+             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,type,reOrderingLevel,unitValue,reOrder};
              console.log(item);
              this.itemsCollection.doc(id).set(item);
           });

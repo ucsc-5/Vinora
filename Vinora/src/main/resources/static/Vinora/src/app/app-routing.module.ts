@@ -79,7 +79,7 @@ const routes: Routes = [
     ]},
 
   { path: 'retailer/:retailerId',component: RetailerComponent ,
-        // canActivate: [RetailerGuardService],
+        canActivate: [RetailerGuardService],
         // canActivateChild:[ValidEmailGuardService], 
         children:[
             { path: '' , component: RetailerDashboardComponent},
@@ -108,13 +108,14 @@ const routes: Routes = [
   ]},
 
   {path: 'stockManager/:id' , component: StockManagerComponent,
-        canActivate: [StockManagerGuardService],
-        canActivateChild:[ResetPasswordService], 
+        // canActivate: [StockManagerGuardService],
+        // canActivateChild:[ResetPasswordService], 
         
         
         children:[
             { path: '', component: StockManagerDashboardComponent},
             { path: 'mainStock', component:CompanyMainStockComponent},
+            { path: 'mainStock/:itemId', component:UpdateItemDetailsComponent},
             { path: 'updateItems', component: UpdateItemsComponent},
             { path: 'updateItems/:itemId', component:UpdateItemDetailsComponent},
             { path: 'myProfile', component: StockManagerProfileComponent},
@@ -134,7 +135,7 @@ const routes: Routes = [
   ]},
 
   {path: 'manager/:id', component: ManagerComponent,
-        // canActivate: [ManagerGuardService,CompanyPermisionGuardService],
+        canActivate: [ManagerGuardService,CompanyPermisionGuardService],
         // canActivateChild:[ValidEmailGuardService],
 
         children:[
@@ -162,7 +163,7 @@ const routes: Routes = [
 
 
   {path: 'admin/:id',
-  //  canActivate: [AdminGuardService],
+   canActivate: [AdminGuardService],
    component: AdminComponent, children:[
     { path: 'dashboard', component: AdminDashboardComponent},
     { path: 'companyRequests', component: CompanyRequestsComponent},

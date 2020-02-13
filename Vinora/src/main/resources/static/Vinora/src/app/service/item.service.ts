@@ -20,6 +20,7 @@ export interface Item{
   type:string;
   reOrderingLevel: number;
   unitValue: number;
+  reOrder:Boolean;
 }
 
 export interface orderRet{
@@ -91,6 +92,7 @@ export class ItemService {
     );
     return this.items;
   }
+
 
   getRegularItemsByCompnayId(companyId: string){
     this.items = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"active").where('reOrder','==',false)).snapshotChanges().pipe(

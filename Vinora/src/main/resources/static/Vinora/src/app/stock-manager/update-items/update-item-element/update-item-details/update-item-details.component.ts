@@ -64,7 +64,8 @@ mySubscription: any;
         const type=x.data().type;
         const unitPrice=x.data().unitPrice;
         const unitValue=x.data().unitValue;
-        this.item = {brand,category,companyId,description,itemImagePath,itemName,quantity,reOrderingLevel,state,type,unitPrice,unitValue};
+        const reOrder=x.data().reOrder;
+        this.item = {brand,category,companyId,description,itemImagePath,itemName,quantity,reOrderingLevel,state,type,unitPrice,unitValue,reOrder};
 
         console.log(this.item);
         

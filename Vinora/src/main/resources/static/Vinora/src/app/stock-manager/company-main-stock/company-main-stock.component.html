@@ -17,7 +17,11 @@
         <h3>Available Items</h3>
     </div>
     <div class="col-12">
-        <app-update-item-element *ngFor="let item of items" [item]="item" ></app-update-item-element>
+        <div class="row">
+            <div class="col-3">
+                <app-update-item-element *ngFor="let item of items" [item]="item" ></app-update-item-element>
+            </div>
+        </div>
     </div>
 </div>
 <ng-template #loading2>No Items vailable!!&hellip;</ng-template>

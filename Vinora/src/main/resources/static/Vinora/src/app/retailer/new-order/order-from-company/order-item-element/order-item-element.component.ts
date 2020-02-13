@@ -64,6 +64,7 @@ export class OrderItemElementComponent implements OnInit {
             const stmadded = false;
             const reOrderingLevel = this.item.reOrderingLevel;
             const unitValue = this.item.unitValue;
+            const reOrder = this.item.reOrder;
               
             if(newQuantity>reOrderingLevel){
               this.itemService.updateItem(this.item.id,{reOrder:false})
@@ -76,7 +77,7 @@ export class OrderItemElementComponent implements OnInit {
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
 
               x=>{
-                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded,reOrderingLevel,unitValue};
+                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded,reOrderingLevel,unitValue,reOrder};
                 this.cartService.setItemsToCart(cartItem);
                 return "done";
               }
