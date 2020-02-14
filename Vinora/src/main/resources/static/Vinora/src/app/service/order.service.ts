@@ -87,8 +87,8 @@ export class OrderService {
     })
     const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept};
     this.orderCollection.doc(id).set(order);
-    this.afs.collection('retailers').doc(companyId).collection('purchaseOrders').doc(id).set(order);
-    this.afs.collection('companies').doc(retailerId).collection('purchaseOrders').doc(id).set(order);
+    this.afs.collection('retailers').doc(retailerId).collection('purchaseOrders').doc(id).set(order);
+    this.afs.collection('companies').doc(companyId).collection('purchaseOrders').doc(id).set(order);
   }
 
 

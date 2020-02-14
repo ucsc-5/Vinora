@@ -6,6 +6,7 @@ import { RetailerId, RetailerService } from 'src/app/service/retailer.service';
 import { CartItem, CartItemId } from 'src/app/service/cart.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-cur-order-element',
@@ -22,7 +23,7 @@ export class CurOrderElementComponent implements OnInit {
   orderId
   stockManagerId:string;
 
-  constructor(private afs:AngularFirestore,private orderService:OrderService,private afAuth: AngularFireAuth,private retailerServie:RetailerService) { }
+  constructor(private dialogService:DialogService,private afs:AngularFirestore,private orderService:OrderService,private afAuth: AngularFireAuth,private retailerServie:RetailerService) { }
 
   ngOnInit() {
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
@@ -33,24 +34,29 @@ export class CurOrderElementComponent implements OnInit {
   }
 
   confirmOrder(){
-    this.orderService.updateState(this.order.id,0,this.stockManagerId);
-    this.order.stockManagerId=this.stockManagerId;
-    this.order.tempTotal=0;
-    this.afs.collection('retailers').doc(this.order.companyId).collection('purchaseOrders').doc(this.order.id).set({state:0});
-    this.afs.collection('retailers').doc(this.order.companyId).collection('confirmedOrders').doc(this.order.id).set(this.order);
-    
-    this.afs.collection('companies').doc(this.order.retailerId).collection('purchaseOrders').doc(this.order.id).set({state:0});
-    this.afs.collection('companies').doc(this.order.companyId).collection('confirmedOrders').doc(this.order.id).set(this.order);
-    this.items.forEach(x=>{
-      x.forEach(x2=>{
-        console.log(x2.id);
-        this.orderService.setStmAddedFeild(this.orderId,x2.id); 
-      })
+
+    const message="Confirm !";
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.orderService.updateState(this.order.id,0,this.stockManagerId);
+          this.order.stockManagerId=this.stockManagerId;
+          this.order.tempTotal=0;
+          this.afs.collection('retailers').doc(this.order.companyId).collection('purchaseOrders').doc(this.order.id).set({state:0});
+          this.afs.collection('retailers').doc(this.order.companyId).collection('confirmedOrders').doc(this.order.id).set(this.order);
+          
+          this.afs.collection('companies').doc(this.order.retailerId).collection('purchaseOrders').doc(this.order.id).set({state:0});
+          this.afs.collection('companies').doc(this.order.companyId).collection('confirmedOrders').doc(this.order.id).set(this.order);
+        this.items.forEach(x=>{
+        x.forEach(x2=>{
+          console.log(x2.id);
+           this.orderService.setStmAddedFeild(this.orderId,x2.id); 
+          })
+        })
+      }
+
     })
+
   }
-
-
-
-
   
 }
