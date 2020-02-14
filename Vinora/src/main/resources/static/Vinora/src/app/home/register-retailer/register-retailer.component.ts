@@ -87,7 +87,7 @@ export class RegisterRetailerComponent implements OnInit {
     const shopName = this.firstFormGroup.value['shopName'];
     const address = this.secondFormGroup.value['address'];
     const contactNumber = this.secondFormGroup.value['contactNumber'];
-    const state = "1";
+    const state = 1;
     const url ="https://www.stickpng.com/assets/images/585e4bf3cb11b227491c339a.png";
     const latitude = this.longitude
     const longitude = this.longitude

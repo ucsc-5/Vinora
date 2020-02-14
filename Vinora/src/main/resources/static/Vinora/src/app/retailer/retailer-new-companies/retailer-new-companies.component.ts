@@ -13,7 +13,8 @@ export class RetailerNewCompaniesComponent implements OnInit {
 
  
  
-  companies: Observable<CompanyId[]>;
+  myNotRegisteredCompanies: Observable<CompanyId[]>;
+  pendigCompanies: Observable<CompanyId[]>;
 
   retailerId
 
@@ -22,7 +23,8 @@ export class RetailerNewCompaniesComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.companies = this.retailerService.getMyNotRegisteredCompanies(this.retailerId);
+    this.myNotRegisteredCompanies = this.retailerService.getMyNotRegisteredCompanies(this.retailerId);
+    this.pendigCompanies =this.retailerService.getMyPendingRegisteredCompanies(this.retailerId); 
   }
 
 }

@@ -13,8 +13,12 @@
 
       </mat-card-content>
 
-      <mat-card-actions>   
-                  <button mat-raised-button color="warn" (click)="onRegister()" >Register</button>
+      <mat-card-actions *ngIf="register">   
+                  <button mat-raised-button color="warn" (click)="onRegister()" >Request Registartion</button>
+      </mat-card-actions>
+
+      <mat-card-actions *ngIf="!register">   
+        <button mat-raised-button color="primary" (click)="onCancelRequest()" >Cancel Request</button>
       </mat-card-actions>
       
 </mat-card>

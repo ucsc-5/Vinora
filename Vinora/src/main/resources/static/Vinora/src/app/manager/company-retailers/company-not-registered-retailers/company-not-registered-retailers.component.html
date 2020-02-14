@@ -1,11 +1,11 @@
 
-<div class="row" *ngIf="notRegisterRetailers | async let retailer; else loding">
-    <mat-card class="example-card" *ngFor="let retailer of retailer">
+<div class="row">
+    <mat-card class="example-card" >
         <div class="row no-gutters">
           <div class="col-md-4">
               <img mat-card-image src="{{retailer.url}}" alt="Photo of the Retailer">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8" >
             <div class="card-body">
               <h5 class="card-title">{{retailer.shopName}}</h5>
               <p class="card-text">
@@ -18,6 +18,9 @@
                   </p>
             </div>
           </div>
+          <mat-card-actions>
+            <button mat-button (click)="regsiter()">Register</button>
+          </mat-card-actions>
         </div>
       </mat-card>
 </div>

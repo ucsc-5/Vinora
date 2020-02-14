@@ -62,7 +62,7 @@ export class OrderService {
     let theDate= new Date()
     let createDate = theDate.toString();
     let date = theDate.getDate();
-    let month = theDate.getMonth();
+    let month = theDate.getMonth()+1;
     let year = theDate.getFullYear();
 
     let encDate = (year*10000)+(month*100)+(date);
@@ -306,7 +306,7 @@ setSaleRep(saleRepId:string,orderKey:string){
 }
 
 
-getConformOrderByDateStockManagerId(spDate:Date,companyId:string,stockManagerId:string){
+getConformOrderByDateStockManagerId(spDate:Date,stockManagerId:string){
    
   let date = spDate.getDate();
   let month = spDate.getMonth();
@@ -314,10 +314,10 @@ getConformOrderByDateStockManagerId(spDate:Date,companyId:string,stockManagerId:
   let specificDate = (year*10000)+(month*100)+(date);
 
   console.log(specificDate+" The date");
-  console.log(companyId+" this company id");
+
   console.log(stockManagerId+" stm id");
   
-  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('sate','==','0').where('encDate','==',specificDate).where('companyId','==',companyId).where('stockManagerId','==',stockManagerId)).snapshotChanges().pipe(
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('encDate','==',specificDate).where('stockManagerId','==',stockManagerId)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
@@ -372,5 +372,25 @@ getConformOrderByYearMonthStockManagerId(year:number,month:number,companyId:stri
   return orders;
   // this.year,this.monthIndex,this.companyId,this.stockManagerId
 }
+
+getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManagerId:string,retailerId:string){
+
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('stockManagerId','==',stockManagerId).where('retailerId','==',retailerId).where('sate','==','0')).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Order;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+
+
+  orders.subscribe(x=>{
+    x.forEach(element=>{
+      console.log(element);
+    })
+  })
+  return orders;
+
+  }
 
 }

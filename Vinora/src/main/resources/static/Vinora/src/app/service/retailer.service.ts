@@ -12,7 +12,7 @@ export interface Retailer { shopName: string;
                             email: string;
                             address: string;
                             contactNumber: string;
-                            state: string;
+                            state: number;
                             url: string;
                             retailerId: string;  
                             coord: firebase.firestore.GeoPoint;
@@ -107,7 +107,7 @@ registerRetailer(retailerEmail:string,retailerUid:string,companyUid:string,compa
 }
 
 getMyNotRegisteredCompanies(retailerId:string){
-  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('notRegCompanies').snapshotChanges().pipe(
+  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('notRegCompanies',ref=>ref.where('state','==',1)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Company;
       const id = a.payload.doc.id;
@@ -115,6 +115,18 @@ getMyNotRegisteredCompanies(retailerId:string){
     }))
   );
   return companies;
+}
+
+getMyPendingRegisteredCompanies(retailerId:string){
+  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('notRegCompanies',ref=>ref.where('state','==',2)).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Company;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return companies;
+
 }
 
 
@@ -130,28 +142,45 @@ getMyRegisteredCompanies(retailerId:string){
 }
 
 
-registerWithCompany(retailerId:string,companyId:string,company:CompanyId,retailerEmail:string){
+registerWithCompany(retailerId:string,companyId:string,company:Company,retailerEmail:string){
   
-  this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).set(company).then(res=>{
-    this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).delete().then(response=>{
-      console.log("Registration successfull!");
-      return "Registration success!!"      
-    }).catch(error=>{
-      console.log(error);
-    })
-  })
+  // this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).set(company).then(res=>{
+  //   this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).delete().then(response=>{
+  //     console.log("Registration successfull!");
+  //     return "Registration success!!"      
+  //   }).catch(error=>{
+  //     console.log(error);
+  //   })
+  // })
 
-  const RetailerEmailToken = {retailerEmail,retailerId}
+  // const RetailerEmailToken = {retailerEmail,retailerId}
 
-  this.afs.collection('companies').doc(companyId).collection('registeredRetailers').doc(retailerId).set(RetailerEmailToken);
+  // this.afs.collection('companies').doc(companyId).collection('registeredRetailers').doc(retailerId).set(RetailerEmailToken);
+}
+
+pendingWithCompany(retailerId:string,companyId:string){
+  
+  this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).update({state:2});
+
+  // const RetailerEmailToken = {retailerEmail,retailerId}
+
+  this.afs.collection('companies').doc(companyId).collection('notRegRetailers').doc(retailerId).update({state:2});
 }
 
 
+cancelPendingWithCompany(retailerId:string,companyId:string){
+  
+  this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).update({state:1});
+
+  // const RetailerEmailToken = {retailerEmail,retailerId}
+
+  this.afs.collection('companies').doc(companyId).collection('notRegRetailers').doc(retailerId).update({state:1});
+}
 
 
 getRetailerByEmail(email:string){
   
-  this.retailerByEmail =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==', '1').limit(1)).snapshotChanges().pipe(
+  this.retailerByEmail =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==',1).limit(1)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Retailer;
       const id = a.payload.doc.id;
@@ -164,7 +193,7 @@ getRetailerByEmail(email:string){
 
 getRetailerById(id:string){
   
-  this.retailerById =this.afs.collection(this.dbPath , ref => ref.where('retailerId', '==',id).where('state', '==', '1').limit(1)).snapshotChanges().pipe(
+  this.retailerById =this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',id).where('state','==',1).limit(1)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Retailer;
       const id = a.payload.doc.id;
@@ -178,7 +207,7 @@ getRetailerById(id:string){
 
 getRegisteredAllCompanies(retailerUid:string){
 
-  this.registerCompanyIds =this.afs.collection(`${this.dbPath}/${retailerUid}/companyRegistrations`, ref => ref.where('registerState', '==',"0")).snapshotChanges().pipe(
+  this.registerCompanyIds =this.afs.collection(`${this.dbPath}/${retailerUid}/registeredCompanies`).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as CompanyEmailToken;
       const id = a.payload.doc.id;

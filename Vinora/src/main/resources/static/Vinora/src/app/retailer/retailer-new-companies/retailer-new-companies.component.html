@@ -1,2 +1,9 @@
+<div class="row">
+      <div class="col-6">
+            <app-ret-reg-com-element *ngFor="let company of myNotRegisteredCompanies | async" [company]="company" [register]="true" ></app-ret-reg-com-element>
+      </div>
 
-      <app-ret-reg-com-element *ngFor="let company of companies | async" [company]="company" ></app-ret-reg-com-element>
+      <div class="col-6">
+            <app-ret-reg-com-element *ngFor="let company of pendigCompanies | async" [company]="company" [register]="false"></app-ret-reg-com-element>
+      </div>
+</div>

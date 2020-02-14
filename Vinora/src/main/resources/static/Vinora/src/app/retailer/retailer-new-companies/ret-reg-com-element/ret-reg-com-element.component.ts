@@ -13,7 +13,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class RetRegComElementComponent implements OnInit {
 
   @Input() company:CompanyId;
-
+  @Input() register: boolean;
 
   retailerEmail: string;
   retailerUid: string;
@@ -30,9 +30,16 @@ export class RetRegComElementComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log(this.register);
+    
   }
 
   onRegister(){
-    this.retailerService.registerWithCompany(this.retailerUid,this.company.id,this.company,this.retailerEmail);
+    this.retailerService.pendingWithCompany(this.retailerUid,this.company.id);
+    // this.retailerService.registerWithCompany(this.retailerUid,this.company.id,this.company,this.retailerEmail);
     }
+
+  onCancelRequest(){
+    this.retailerService.cancelPendingWithCompany(this.retailerUid,this.company.id);
+  }
 }

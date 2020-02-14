@@ -20,7 +20,7 @@ export interface Company{
   companyId:string,
   managerName:string,
   email: string;
-  state: string;
+  state: number;
   coord: firebase.firestore.GeoPoint; 
 }
 
@@ -87,7 +87,7 @@ export class CompanyService {
 
   // for use of admin  retailer
   getRegisteredCompanies(){
-    const registeredCompanies: Observable<CompanyId[]> = this.afs.collection(this.dbPath , ref => ref.where('state', '==',"1")).snapshotChanges().pipe(
+    const registeredCompanies: Observable<CompanyId[]> = this.afs.collection(this.dbPath , ref => ref.where('state', '==',1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;
@@ -100,7 +100,7 @@ export class CompanyService {
 
   //for use of admin
   getRequestedCompanies(){
-    const requestededCompanies: Observable<CompanyId[]> =this.afs.collection(this.dbPath , ref => ref.where('state', '==',"0")).snapshotChanges().pipe(
+    const requestededCompanies: Observable<CompanyId[]> =this.afs.collection(this.dbPath , ref => ref.where('state', '==',0)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;
@@ -115,7 +115,7 @@ export class CompanyService {
 
   // for the comapany dashboard and retailer 
   getCompanyByEmail(email:string){
-    this.company =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==',"1").limit(1)).snapshotChanges().pipe(
+    this.company =this.afs.collection(this.dbPath , ref => ref.where('email', '==',email).where('state', '==',1).limit(1)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Company;
         const id = a.payload.doc.id;
@@ -198,9 +198,9 @@ export class CompanyService {
     return RetailerEmailTokens;
   }
 
-  getNotRegRetailers(uid:string){
+  getRequestingRegRetailers(uid:string){
 
-    this.notRegRetailersCollection = this.afs.collection<RetailerId>(`companies/${uid}/notRegRetailers`);  
+    this.notRegRetailersCollection = this.afs.collection('companies').doc(uid).collection('notRegRetailers',ref=>ref.where('state','==',2)); 
     const notRegRetailers: Observable<RetailerId[]> = this.notRegRetailersCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Retailer;
@@ -224,7 +224,7 @@ export class CompanyService {
   }
 
   confirmRegistration(key:string){
-    return this.afs.collection('companies').doc(key).update({state:"1"});
+    return this.afs.collection('companies').doc(key).update({state:1});
   }
 
   updateProfilePicture(key: string, value: any): Promise<void> {

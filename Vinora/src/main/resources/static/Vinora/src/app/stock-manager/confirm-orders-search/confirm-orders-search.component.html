@@ -110,20 +110,19 @@
 
 
             <h4>By Retailers</h4>
-            <!-- <div *ngIf="retailersTakens let retailers">
+            <div *ngIf="retailersTakens | async; let retailers">
 
            
                 <form [formGroup]="selectRetailer">
                 
                     <mat-form-field>
                     <mat-label>Sales Representatives</mat-label>
-                    <mat-select  [(ngModel)]="selectedRetailerId" formControlName="retailer">
+                    <mat-select formControlName="retailer">
                         <mat-option *ngFor="let ret of retailers" [value]="ret.retailerId">
                             {{ret.retailerEmail}}
                         </mat-option>
                     </mat-select>
                     </mat-form-field>
-
                 </form>
 
                 <section class="example-section">
@@ -131,7 +130,7 @@
                 </section>
 
                 <button mat-button color="primary" (click)="onSearchRetailer()" [disabled]="!retailerTag">Search</button>
-            </div> -->
+            </div>
             <hr>
 
 

@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators, NgForm, FormGroup} from '@angular/forms';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { OrderService,OrderId } from 'src/app/service/order.service';
+import { OrderService,OrderId,Order } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { RetailerService,RetailerId,RetailerEmailTokenId } from 'src/app/service/retailer.service';
 import { CompanyService } from 'src/app/service/company.service';
+import { map } from 'rxjs/operators';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+
+
+
 @Component({
   selector: 'app-confirm-orders-search',
   templateUrl: './confirm-orders-search.component.html',
@@ -20,6 +26,7 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   toDate: Date;
   specificDate: Date;
 
+  private dbPath = '/orders';
 
   totalMax: number = 0;
   totalMin: number = 0;
@@ -38,12 +45,12 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   stockManagerId:string;
   retailer: string;
   selectRetailer: FormGroup;
-  selectedRetailerId: string;
+
 
 
   retailersTakens: Observable<RetailerEmailTokenId[]>
 
-  constructor(private orderService:OrderService,private companyService:CompanyService,private afAuth: AngularFireAuth,private retailerService:RetailerService) {
+  constructor(private afs: AngularFirestore,private db: AngularFireDatabase,private orderService:OrderService,private companyService:CompanyService,private afAuth: AngularFireAuth,private retailerService:RetailerService) {
     this.stockManagerId=this.afAuth.auth.currentUser.uid;
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       this.companyId= idTokenResult.claims.cmpId;
@@ -51,19 +58,13 @@ export class ConfirmOrdersSearchComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.fromDate= new Date();
-    console.log("sdhcbkhsdbchsdk");
-    
+    this.fromDate= new Date();    
     this.retailersTakens = this.companyService.getRegisteredRetailers(this.companyId);
-    this.retailersTakens.subscribe(x2=>[
-      x2.forEach(element=>{
-        console.log(element);
-      })
-    ])
-
     this.selectRetailer = new FormGroup({
       'retailer': new FormControl(null,[Validators.required])
     })
+
+ 
   }
 
   onSearch(){
@@ -114,14 +115,57 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchDate(){
-    this.dateRangeTag=false;
-    this.orders= this.orderService.getConformOrderByDateStockManagerId(this.specificDate,this.companyId,this.stockManagerId);
+    let date = this.specificDate.getDate();
+    let month = this.specificDate.getMonth();
+    let year = this.specificDate.getFullYear();
+    var encDate = (year*10000)+(month*100)+(date);
+    this.orders = this.afs.collection('orders',ref=>ref.where('encDate','==',encDate).where('companyId','==',this.stockManagerId)).snapshotChanges().pipe(
+      map(actions => actions.map(a => { 
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+
+
+    // console.log(companyId+" this company id");
+    // console.log(stockManagerId+" stm id");
+    
+    // this.orders = this.afs.collection('orders',ref=>ref.where('ensDate','==',encDate)).snapshotChanges().pipe(
+    //   map(actions => actions.map(a => {
+    //     const data = a.payload.doc.data() as Order;
+    //     const id = a.payload.doc.id;
+    //     return { id, ...data };
+    //   }))
+    // );
+
+    // this.orders = this.afs.collection(this.dbPath , ref => ref.where('sate','==','0').where('encDate','==',encDate).where('companyId','==',this.companyId).where('stockManagerId','==',this.stockManagerId)).snapshotChanges().pipe(
+    //   map(actions => actions.map(a => {
+    //     const data = a.payload.doc.data() as Order;
+    //     const id = a.payload.doc.id;
+    //     return { id, ...data };
+    //   }))
+    // );
+
     this.orders.subscribe(x=>{
       x.forEach(element=>{
         console.log(element);
       })
     })
     console.log("on Search date");
+
+    // return orders;
+
+
+
+    // this.dateRangeTag=false;
+    // this.orders= this.orderService.getConformOrderByDateStockManagerId(this.specificDate,this.companyId,this.stockManagerId);
+    // this.orders.subscribe(x=>{
+    //   x.forEach(element=>{
+    //     console.log(element);
+    //   })
+    // })
+    // console.log("on Search date");
   }
 
   onSearchYearMonth(){
@@ -137,15 +181,18 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchRetailer(){
-    this.retailersTakens.subscribe(x=>{
+ 
+    console.log(this.selectRetailer.value.retailer);
+    var retailerId = this.selectRetailer.value.retailer;
+
+    this.orders = this.orderService.getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(this.companyId,this.stockManagerId,retailerId);
+
+    this.orders.subscribe(x=>{
       x.forEach(ele=>{
         console.log(ele);
         
       })
     })
-    
-    console.log(this.selectedRetailerId);
-    
   }
 
   onSearchTotalRange(){

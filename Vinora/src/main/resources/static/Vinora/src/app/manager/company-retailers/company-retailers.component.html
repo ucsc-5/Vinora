@@ -1,30 +1,31 @@
-<!-- <div class="container offset-2">
-    <div *ngFor="let abc of registeredRetailersKey | async">
-    <ul>
-        <li>{{abc.retailerUid}}</li>
-        <li> {{abc.retailerEmail}}</li>
-        
-    </ul>
-    </div>
-  
-</div> -->
+<div class="row">
+    <div class="col-6">
+        <h4>
+            Registered Retailers
+        </h4>
+        <div *ngIf = "registeredRetailersKey | async; let retailers else loading1">
+            <app-company-not-registered-retailers *ngFor= "let retailer of retailers" [retailer]="retailer">
 
-
-<!-- 
-<div class="container offset -2">
-    <div *ngFor = "let notReg of notRegisteredRetailersKey | async">
-        <ul>
-            <li>{{notReg.retailerUid}}</li>
-            <li>{{notReg.retailerEmail}}</li>
-        </ul>
-    
+            </app-company-not-registered-retailers>
+            <!-- <li  (click)=onSelect(retailer)>
+                {{retailer.email}}
+            </li> -->
+        </div>
+        <ng-template #loading1> No Retailers available!! &hellip;</ng-template>
     </div>
 
-</div> -->
+    <div class="col-6" >
+        <h4>Requested Retailers</h4>
+        <div *ngIf = "requestingRegRetailers | async; let retailers else loading2">
 
-<div class="row" *ngIf = "notRegisteredRetailer | async; let notRegisteredRetailer else loading">
-    <li *ngFor= "let retailer of notRegisteredRetailer" (click)=onSelect(retailer)>
-        {{retailer.email}}
-    </li>
+            <app-company-not-registered-retailers *ngFor= "let retailer of retailers" [retailer]="retailer">
+
+            </app-company-not-registered-retailers>
+            <!-- <li *ngFor= "let retailer of retailers" (click)=onSelect(retailer)>
+                {{retailer.email}}
+            </li> -->
+        </div>
+        <ng-template #loading2> No Retailers available!! &hellip;</ng-template>
+    </div>
 </div>
-<ng-template #loading> No Retailers available!! &hellip;</ng-template>
+
