@@ -1,23 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OrderId } from './order.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
 
-  
-
-
-  constructor() { 
+  constructor(private afs:AngularFirestore) { 
 
   }
 
+
+  
   getreportdetails(companyId:string){
 
   }
   getreportByDate(fromDate:Date,toDate:Date){
+    console.log("fromDate"+fromDate);
+   
+
+    // this.items = this.afs.collection('orders').doc(orderKey).collection('items').snapshotChanges().pipe(
+    //   map(actions => actions.map(a => {
+    //     const data = a.payload.doc.data() as CartItem;
+    //     const id = a.payload.doc.id;
+    //     return { id, ...data };
+    //   }))
+    // );
+    // return this.items;
 
   }
 }

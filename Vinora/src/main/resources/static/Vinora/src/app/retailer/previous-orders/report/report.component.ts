@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { OrderId, OrderService } from 'src/app/service/order.service';
 import * as jsPDF from 'jspdf';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-report',
@@ -17,7 +18,7 @@ export class ReportComponent implements OnInit {
 
 
   companyId: string;
-  
+  @Input() confirmOrder: OrderId;
   company: Observable<CompanyId[]>
   confirmedOrders:Observable<OrderId[]>;
   retailerId;
@@ -26,7 +27,8 @@ export class ReportComponent implements OnInit {
 
   @ViewChild('content',{ static: true }) content:ElementRef;
  
-  constructor(private router:Router,private companyService: CompanyService, private route:ActivatedRoute,private reportService:ReportService, private afAuth: AngularFireAuth,private orderService: OrderService,private formBuilder:FormBuilder) { 
+  constructor(private router:Router,private companyService: CompanyService, private route:ActivatedRoute,private reportService:ReportService
+    , private afAuth: AngularFireAuth,private orderService: OrderService,private formBuilder:FormBuilder) { 
     this.retailerId= this.afAuth.auth.currentUser.uid;
   }
 
@@ -55,6 +57,8 @@ export class ReportComponent implements OnInit {
     });
 
   
+
+    console.log(this.confirmOrder.createDate);
   }
 
   get fromdate(){
@@ -66,12 +70,8 @@ export class ReportComponent implements OnInit {
   }
 
   public onSubmitReport(){
-    this.reportService.getreportByDate(this.fromdate.value,this.toDate.value)
-    // .subscribe((result)=>{
-    //   console.log(result);
-    //   // this.report = result as Report[];
-    // })
-    ;
+    this.reportService.getreportByDate(this.fromdate.value,this.toDate.value);
+   
   }
 
   public downloadPdf(){
