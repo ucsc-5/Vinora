@@ -3,6 +3,7 @@ import { CompanyService, Company, CompanyId } from 'src/app/service/company.serv
 import { Observable } from 'rxjs';
 import { RetailerService,RetailerId } from 'src/app/service/retailer.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DialogService } from 'src/app/service/dialog.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class RetRegComElementComponent implements OnInit {
   retailer: Observable<RetailerId[]>;
  
  
-  constructor(private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
+  constructor(private dialogService:DialogService,private companyServise: CompanyService, private retailerService: RetailerService,private  afAuth:  AngularFireAuth) { 
     this.retailerEmail= this.afAuth.auth.currentUser.email;
     this.retailerUid = this.afAuth.auth.currentUser.uid;    
   }
@@ -35,11 +36,25 @@ export class RetRegComElementComponent implements OnInit {
   }
 
   onRegister(){
-    this.retailerService.pendingWithCompany(this.retailerUid,this.company.id);
-    // this.retailerService.registerWithCompany(this.retailerUid,this.company.id,this.company,this.retailerEmail);
+    const message="Confirm";
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+              this.retailerService.pendingWithCompany(this.retailerUid,this.company.id);
+            }
+          }
+          )
     }
 
   onCancelRequest(){
-    this.retailerService.cancelPendingWithCompany(this.retailerUid,this.company.id);
+    const message="Confirm";
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+                this.retailerService.cancelPendingWithCompany(this.retailerUid,this.company.id);
+              }
+            }
+            )
+  
   }
 }

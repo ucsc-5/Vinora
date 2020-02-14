@@ -132,7 +132,7 @@ getMyPendingRegisteredCompanies(retailerId:string){
 
 
 getMyRegisteredCompanies(retailerId:string){
-  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('registeredCompanies').snapshotChanges().pipe(
+  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('registeredCompanies',ref=>ref.where('state','==',1)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Company;
       const id = a.payload.doc.id;
@@ -141,6 +141,18 @@ getMyRegisteredCompanies(retailerId:string){
   );
   return companies;
 }
+
+getMyHoldCompanies(retailerId:string){
+  const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('registeredCompanies',ref=>ref.where('state','==',3)).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Company;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return companies;
+}
+
 
 
 registerWithCompany(retailerId:string,companyId:string,company:Company,retailerEmail:string){
@@ -172,19 +184,18 @@ registerWithCompany(retailerId:string,companyId:string,company:Company,retailerE
 pendingWithCompany(retailerId:string,companyId:string){
   
   this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).update({state:2});
-
-  // const RetailerEmailToken = {retailerEmail,retailerId}
-
   this.afs.collection('companies').doc(companyId).collection('notRegRetailers').doc(retailerId).update({state:2});
+}
+
+HoldWithCompany(retailerId:string,companyId:string){
+  this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).update({state:3});
+  this.afs.collection('companies').doc(companyId).collection('registeredCompanies').doc(retailerId).update({state:3});
 }
 
 
 cancelPendingWithCompany(retailerId:string,companyId:string){
   
   this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).update({state:1});
-
-  // const RetailerEmailToken = {retailerEmail,retailerId}
-
   this.afs.collection('companies').doc(companyId).collection('notRegRetailers').doc(retailerId).update({state:1});
 }
 

@@ -62,10 +62,10 @@ export class LoginComponent implements OnInit {
 
     // this.authService.login('stm1com3@gmail.com','123456789v');
     // this.authService.login('ret2@gmail.com','Vinora@123');
-    // this.authService.login('ret1@gmail.com','Vinora@123');
+    this.authService.login('ret1@gmail.com','Vinora@123');
       // this.authService.login('admin@gmail.com','123123');
     // this.authService.login('company1@gmail.com','Vinora@123');
-        this.authService.login('company3@gmail.com','Vinora@123');
+        // this.authService.login('company3@gmail.com','Vinora@123');
 
     // this.authService.login('udulaindunil@gmail.com','123456789v');
     this.showSpinner=false;

@@ -90,12 +90,23 @@ export class ConOrderElementComponent implements OnInit {
 
   assign(){
     const message = "Confirm Assigning";
+
+    
+
+    
+   
+
+    this.afs.collection('salesRepresentatives').doc(this.selectedRepId).collection('assignedOrders').doc(this.order.id).set(this.order);
+
     this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
       res=>{
         if(res){
-          this.orderService.setSaleRep(this.selectedRepId,this.orderId)
+          this.order.saleRepId=this.selectedRepId;
+          this.afs.collection('orders').doc(this.orderId).update({saleRepId:this.selectedRepId});
+          this.afs.collection('retailers').doc(this.order.companyId).collection('purchaseOrders').doc(this.order.id).set({state:0});
+          this.afs.collection('companies').doc(this.order.retailerId).collection('purchaseOrders').doc(this.order.id).set({state:0});
+          this.afs.collection('retailers').doc(this.order.companyId).collection('assignedOrders').doc(this.order.id).set(this.order);
+          this.afs.collection('companies').doc(this.order.retailerId).collection('assignedOrders').doc(this.order.id).set(this.order);
         }})
-
   }
-
 }

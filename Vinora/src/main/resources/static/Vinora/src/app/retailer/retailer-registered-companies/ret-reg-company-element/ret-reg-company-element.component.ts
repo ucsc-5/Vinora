@@ -3,6 +3,9 @@ import { CompanyEmailToken } from 'src/app/service/retailer.service';
 import { CompanyService, CompanyId } from 'src/app/service/company.service';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DialogService } from 'src/app/service/dialog.service';
+import { RetailerService,RetailerId } from 'src/app/service/retailer.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-ret-reg-company-element',
@@ -12,17 +15,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RetRegCompanyElementComponent implements OnInit {
 
   @Input() company : CompanyId;
-  
+  retailerId:string;
 
 
-  constructor(private companyService:CompanyService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private  afAuth:  AngularFireAuth,private dialogService:DialogService,private retailerService:RetailerService,private companyService:CompanyService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
-
+    this.retailerId=this.afAuth.auth.currentUser.uid;
   }
 
   onHold(){
-    console.log("This is from the hold function");
+    const message="Confirm";
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+      res=>{
+        if(res){
+          this.retailerService.HoldWithCompany(this.retailerId,this.company.id);}})
+    
   }
 
   OrderNow(company:CompanyId){

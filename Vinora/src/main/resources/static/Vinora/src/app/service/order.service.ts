@@ -22,6 +22,7 @@ export interface Order{
     month: number;
     year: number;
     encDate: number;
+    saleRepAccept: number;
 }
 
 export interface orderRet{
@@ -71,6 +72,7 @@ export class OrderService {
     const tempTotal=0;
     const saleRepId="";
     const stockManagerId= "";
+    const saleRepAccept = 0;
     let total:number=this.total;
     cartItems.forEach(element=>{
       this.orderCollection.doc(id).collection('items').doc(element.id).set(element);
@@ -83,8 +85,10 @@ export class OrderService {
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
-    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate};
+    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept};
     this.orderCollection.doc(id).set(order);
+    this.afs.collection('retailers').doc(companyId).collection('purchaseOrders').doc(id).set(order);
+    this.afs.collection('companies').doc(retailerId).collection('purchaseOrders').doc(id).set(order);
   }
 
 
@@ -301,9 +305,9 @@ setStmAddedFeild(orderKey:string,itemId:string){
   this.afs.collection('orders').doc(orderKey).collection('items').doc(itemId).update({stmadded:false});
 }
 
-setSaleRep(saleRepId:string,orderKey:string){
-  this.afs.collection('orders').doc(orderKey).update({saleRepId:saleRepId,saleRepAccept:0});
-}
+// setSaleRep(saleRepId:string,orderKey:string){
+//   this.afs.collection('orders').doc(orderKey).update({saleRepId:saleRepId,saleRepAccept:0});
+// }
 
 
 getConformOrderByDateStockManagerId(spDate:Date,stockManagerId:string){
