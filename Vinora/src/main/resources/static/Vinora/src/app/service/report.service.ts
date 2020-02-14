@@ -8,17 +8,19 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class ReportService {
 
+  createDate : string;
   constructor(private afs:AngularFirestore) { 
 
   }
 
 
-  
+
   getreportdetails(companyId:string){
 
   }
   getreportByDate(fromDate:Date,toDate:Date){
     console.log("fromDate"+fromDate);
+    console.log("Hashiniiii"+this.createDate);
    
 
     // this.items = this.afs.collection('orders').doc(orderKey).collection('items').snapshotChanges().pipe(
@@ -30,5 +32,8 @@ export class ReportService {
     // );
     // return this.items;
 
+  }
+  getDate(date:string){
+        this.createDate = date;
   }
 }

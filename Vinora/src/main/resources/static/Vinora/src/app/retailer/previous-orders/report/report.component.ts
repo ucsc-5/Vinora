@@ -18,7 +18,6 @@ export class ReportComponent implements OnInit {
 
 
   companyId: string;
-  @Input() confirmOrder: OrderId;
   company: Observable<CompanyId[]>
   confirmedOrders:Observable<OrderId[]>;
   retailerId;
@@ -58,7 +57,7 @@ export class ReportComponent implements OnInit {
 
   
 
-    console.log(this.confirmOrder.createDate);
+    
   }
 
   get fromdate(){
