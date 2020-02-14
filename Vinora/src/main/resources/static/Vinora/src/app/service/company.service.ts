@@ -185,10 +185,7 @@ export class CompanyService {
 
 // for find retailers of an each company
   getRegisteredRetailers(uid:string){
-
-    this.registeredRetailersCollection = this.afs.collection<RetailerEmailTokenId>(`companies/${uid}/registeredRetailers`);
-    
-    const RetailerEmailTokens: Observable<RetailerEmailTokenId[]> = this.registeredRetailersCollection.snapshotChanges().pipe(
+    const RetailerEmailTokens: Observable<RetailerEmailTokenId[]> = this.afs.collection('companies').doc(uid).collection('registeredRetailers',ref=>ref.where('state','==',0)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as RetailerEmailToken;
         const id = a.payload.doc.id;
@@ -197,6 +194,18 @@ export class CompanyService {
     );
     return RetailerEmailTokens;
   }
+
+  getHoldRetailers(uid:string){
+    const RetailerEmailTokens: Observable<RetailerEmailTokenId[]> = this.afs.collection('companies').doc(uid).collection('registeredRetailers',ref=>ref.where('state','==',1)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as RetailerEmailToken;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+    return RetailerEmailTokens;
+  }
+
 
   getRequestingRegRetailers(uid:string){
 

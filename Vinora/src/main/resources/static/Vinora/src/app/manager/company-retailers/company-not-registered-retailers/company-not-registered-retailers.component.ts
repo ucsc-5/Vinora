@@ -14,10 +14,10 @@ import * as firebase from 'firebase/app';
 })
 export class CompanyNotRegisteredRetailersComponent implements OnInit {
 
-  @Input() retailer: RetailerId;
+  @Input()retailer: RetailerId;
   companyId: string;
 
-  notRegRetId:string;
+  
   myCompany:Company;
   notRegisterRetailers: Observable<RetailerId[]>
   constructor (private afs: AngularFirestore,private route:ActivatedRoute, private retailerService: RetailerService,private companyService:CompanyService,private afAuth: AngularFireAuth) { 
@@ -56,7 +56,7 @@ export class CompanyNotRegisteredRetailersComponent implements OnInit {
 
   regsiter(){
     console.log(this.myCompany);
-     this.retailerService.registerWithCompany(this.notRegRetId,this.companyId,this.myCompany,this.retailer.email);
+     this.retailerService.registerWithCompany(this.retailer.id,this.companyId,this.myCompany,this.retailer.email);
   }
 
 }

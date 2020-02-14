@@ -23,7 +23,8 @@ export interface RetailerId extends Retailer{id: string}
 
 export interface RetailerEmailToken{
                 retailerEmail: string;
-                retailerUid: string;           
+                retailerUid: string;
+                state: number;           
 }
 
 export interface RetailerEmailTokenId extends RetailerEmailToken{
@@ -144,18 +145,28 @@ getMyRegisteredCompanies(retailerId:string){
 
 registerWithCompany(retailerId:string,companyId:string,company:Company,retailerEmail:string){
   
-  // this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).set(company).then(res=>{
-  //   this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).delete().then(response=>{
-  //     console.log("Registration successfull!");
-  //     return "Registration success!!"      
-  //   }).catch(error=>{
-  //     console.log(error);
-  //   })
-  // })
+  console.log(retailerId+" retailer Id");
+  console.log(companyId+" companies id");
+  console.log(company+" ");
+  console.log(retailerEmail);
+  
+  
+  
+  
+  this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).set(company).then(res=>{
+    this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).update({state:5}).then(response=>{
+      console.log("Registration successfull!");
+      return "Registration success!!"      
+    }).catch(error=>{
+      console.log(error);
+    })
+  })
+  const state = 0;
+  const RetailerEmailToken = {retailerEmail,retailerId,state}
 
-  // const RetailerEmailToken = {retailerEmail,retailerId}
-
-  // this.afs.collection('companies').doc(companyId).collection('registeredRetailers').doc(retailerId).set(RetailerEmailToken);
+  this.afs.collection('companies').doc(companyId).collection('registeredRetailers').doc(retailerId).set(RetailerEmailToken).then(res=>{
+    this.afs.collection('companies').doc(companyId).collection('notRegRetailers').doc(retailerId).update({state:5});
+  });
 }
 
 pendingWithCompany(retailerId:string,companyId:string){

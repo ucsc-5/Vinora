@@ -31,13 +31,7 @@ export class CompanyRetailersComponent implements OnInit {
   ngOnInit() {
     this.requestingRegRetailers = this.companyService.getRequestingRegRetailers(this.companyId);
     this.myCompany=this.companyService.getCompanyById(this.companyId);
-  
-    // this.requestingRegRetailers.subscribe(res=>{
-    //   res.forEach(element=>{
-    //     console.log(element);
-    //   })
-    // })
-    
+
     this.registeredRetailersKey= this.companyService.getRegisteredRetailers(this.companyId);
     this.registeredRetailersKey.subscribe(res=>{
       res.forEach(element=>{
