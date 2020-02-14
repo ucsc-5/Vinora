@@ -1,4 +1,19 @@
 
+<div>
+    <form (ngSubmit)="onSubmitReport()" [formGroup]="dateForm">
+        <div class="form-group">
+            <label for="InputFormdate">From</label>
+            <input type="Date" formControlName="fromDate" class="form-control" id="InputFormdate">
+        </div>
+
+        <div class="form-group">
+            <label for="InputTodate">From</label>
+            <input type="Date" formControlName="toDate" class="form-control" id="InputTodate">
+        </div>
+
+
+    </form>
+</div>
 <div id="content" #content>
                             
         <button (click)="downloadPdf()">Download pdf</button>

@@ -1,10 +1,10 @@
 
-<mat-card class="example-card" >
+<mat-card class="example-card" fxFlexAlign="stretch">
             <mat-card-header>
                 <mat-card-title>{{item.itemName}}</mat-card-title>
                 <mat-card-subtitle>{{item.brand}}</mat-card-subtitle>
             </mat-card-header>
-            <img *ngIf="!edit" mat-card-image src="{{item.itemImagePath}}" width="300px" height="350px" alt="Photo of the Vehicle">
+            <img *ngIf="!edit" mat-card-image src="{{item.itemImagePath}}"   width="30px" height="300px" alt="Photo of the Vehicle">
             <mat-card-content>   
                 <p>
                     <!-- {{item.description}}<br> -->

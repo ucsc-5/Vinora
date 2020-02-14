@@ -17,4 +17,7 @@ export class ReportService {
   getreportdetails(companyId:string){
 
   }
+  getreportByDate(fromDate:Date,toDate:Date){
+
+  }
 }
