@@ -24,6 +24,7 @@ export class CurrentOrdersFromRetailersComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.companyId);
    this.orders= this.orderService.getCurrentOrdersByCompanyId(this.companyId);
   }
 

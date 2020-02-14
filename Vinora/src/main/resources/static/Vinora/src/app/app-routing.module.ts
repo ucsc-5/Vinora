@@ -113,7 +113,7 @@ const routes: Routes = [
         
         
         children:[
-            { path: '', component: StockManagerDashboardComponent},
+            { path: '', component: ConfirmOrdersSearchComponent},
             { path: 'mainStock', component:CompanyMainStockComponent},
             { path: 'mainStock/:itemId', component:UpdateItemDetailsComponent},
             { path: 'updateItems', component: UpdateItemsComponent},

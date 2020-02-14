@@ -100,7 +100,7 @@ export class OrderService {
   }
 
   getCurrentOrdersByCompanyId(companyId:string){
-    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',-1).where("saleRepId","==",'').where("stockManagerId",'==','')).snapshotChanges().pipe(
+    const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',-1).where("saleRepId","==","").where("stockManagerId",'==',"")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -306,30 +306,29 @@ setSaleRep(saleRepId:string,orderKey:string){
 }
 
 
-getConformOrderByDate(spDate:Date,companyId:string,stockManagerId:string){
+getConformOrderByDateStockManagerId(spDate:Date,companyId:string,stockManagerId:string){
    
   let date = spDate.getDate();
   let month = spDate.getMonth();
   let year = spDate.getFullYear();
-  let specificDate = (date*10000)+(month*100)+(year);
+  let specificDate = (year*10000)+(month*100)+(date);
 
+  console.log(specificDate+" The date");
+  console.log(companyId+" this company id");
+  console.log(stockManagerId+" stm id");
   
-
-  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('encDate','==',specificDate).where('companyId','==',companyId).where('stockManagerId','==',stockManagerId).where('sate','==','0')).snapshotChanges().pipe(
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('sate','==','0').where('encDate','==',specificDate).where('companyId','==',companyId).where('stockManagerId','==',stockManagerId)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
       return { id, ...data };
     }))
   );
-
-  console.log("From the wervice ");
-
   return orders;
 }
   
 
-getConformOrderByDateRange(fromDate:Date,toDate:Date,companyId:string,stockManagerId:string){
+getConformOrdersByDateRange(fromDate:Date,toDate:Date,companyId:string,stockManagerId:string){
    
   let date1 = fromDate.getDate();
   let month1 = fromDate.getMonth();
@@ -341,18 +340,37 @@ getConformOrderByDateRange(fromDate:Date,toDate:Date,companyId:string,stockManag
 
   let min = (year1*10000)+(month1*100)+(date1);
   let max = (year2*10000)+(month2*100)+(date2);
-  
 
-  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('encDate','<=',max).where('encDate','>=',min).where('companyId','==',companyId).where('stockManagerId','==',stockManagerId).where('sate','==','0')).snapshotChanges().pipe(
+  console.log(min+ "min value");
+  console.log(max+ "max Value");
+  console.log(companyId+" company Id");
+  console.log(stockManagerId+ " StockManager Id");
+  
+  
+  // where('encDate','<=',max).where('encDate','>=',min)
+  
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('stockManagerId','==',stockManagerId).where('sate','==','0')).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
       return { id, ...data };
     }))
   );
-
-  console.log("From the wervice ");
-
   return orders;
 }
+
+
+
+getConformOrderByYearMonthStockManagerId(year:number,month:number,companyId:string,stockManagerId:string){
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('year','==',year).where('month','==',month).where('companyId','==',companyId).where('stockManagerId','==',stockManagerId).where('sate','==','0')).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Order;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return orders;
+  // this.year,this.monthIndex,this.companyId,this.stockManagerId
+}
+
 }

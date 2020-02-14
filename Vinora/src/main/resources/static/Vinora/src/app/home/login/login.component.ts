@@ -49,18 +49,20 @@ export class LoginComponent implements OnInit {
       console.log(email);
       console.log(password);
       this.authService.logout();
-      this.authService.login(email,password).then(res=>{
-      // setTimeout(() => {
-      //   this.message=null;
-      //  }, 2000);
+    //   this.authService.login(email,password).then(res=>{
+    //   // setTimeout(() => {
+    //   //   this.message=null;
+    //   //  }, 2000);
        
-     }).catch(error=>{
-      this.message="Please check your email and password again!!"
-       console.log(" this is the error  "+error);
-     })
+    //  }).catch(error=>{
+    //   this.message="Please check your email and password again!!"
+    //    console.log(" this is the error  "+error);
+    //  })
     this.showSpinner=true;
 
+    this.authService.login('stm1com3@gmail.com','123456789v');
 
+    // this.authService.login('udulaindunil@gmail.com','123456789v');
     this.showSpinner=false;
     console.log(this.authService.user.uid); 
   }

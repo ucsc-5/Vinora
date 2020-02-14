@@ -186,7 +186,7 @@ export class CompanyService {
 // for find retailers of an each company
   getRegisteredRetailers(uid:string){
 
-    this.registeredRetailersCollection = this.afs.collection<RetailerEmailTokenId>(`companies/${uid}/retailerRegistrations`);
+    this.registeredRetailersCollection = this.afs.collection<RetailerEmailTokenId>(`companies/${uid}/registeredRetailers`);
     
     const RetailerEmailTokens: Observable<RetailerEmailTokenId[]> = this.registeredRetailersCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
