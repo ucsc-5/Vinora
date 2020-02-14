@@ -19,7 +19,9 @@ export class CompanyNotRegisteredRetailersComponent implements OnInit {
       this.notRegRetId=param['notRegRetId'];})
 
       this.notRegisterRetailers = this.retailerservice.getRetailerById(this.notRegRetId)
-this.notRegisterRetailers.subscribe(x=>{{x.forEach((element=>{{console.log(element)}}))}}
+this.notRegisterRetailers.subscribe(x=>{
+  {x.forEach((element=>{
+    {console.log(element)}}))}}
   )
       // this.saleRepresentatives=this.saleRepservice.getSalesRepByRepId(this.saleRepId);
 

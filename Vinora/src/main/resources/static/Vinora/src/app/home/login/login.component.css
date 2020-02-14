@@ -3,10 +3,10 @@
     flex-direction: column;
   }
   
-  .example-container > * {
+  .loginbox > * {
     width: 100%;
-    background-color: rgb(54, 158, 122);
-    opacity: 0.3;
+    background-color: rgb(219, 228, 208);
+    opacity: 0.4;
   }
   
   .example-right-align {
@@ -44,10 +44,10 @@
   background-image:url('../../../assets/images/nik-macmillan-YXemfQiPR_E-unsplash.jpg');
   background-position:50% 50%;
   text-align: center;
-  color:  rgb(0, 0, 0);
+  color:  rgb(12, 11, 11);
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-
+/* 
 .loginbox{
   width: 320px;
   height: 420px;
@@ -59,4 +59,4 @@
   transform: translate(-50%,-50%);
   box-sizing: border-box;
 
-}
+} */
