@@ -15,7 +15,7 @@ export interface Retailer { shopName: string;
                             state: number;
                             url: string;
                             retailerId: string;  
-                            coord: firebase.firestore.GeoPoint;
+                            iniCoord: firebase.firestore.GeoPoint;
                           }
 
 
@@ -127,7 +127,6 @@ getMyPendingRegisteredCompanies(retailerId:string){
     }))
   );
   return companies;
-
 }
 
 
@@ -166,7 +165,7 @@ registerWithCompany(retailerId:string,companyId:string,company:Company,retailerE
   
   
   this.afs.collection('retailers').doc(retailerId).collection('registeredCompanies').doc(companyId).set(company).then(res=>{
-    this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).update({state:5}).then(response=>{
+    this.afs.collection('retailers').doc(retailerId).collection('notRegCompanies').doc(companyId).delete().then(response=>{
       console.log("Registration successfull!");
       return "Registration success!!"      
     }).catch(error=>{
@@ -177,7 +176,7 @@ registerWithCompany(retailerId:string,companyId:string,company:Company,retailerE
   const RetailerEmailToken = {retailerEmail,retailerId,state}
 
   this.afs.collection('companies').doc(companyId).collection('registeredRetailers').doc(retailerId).set(RetailerEmailToken).then(res=>{
-    this.afs.collection('companies').doc(companyId).collection('notRegRetailers').doc(retailerId).update({state:5});
+    this.afs.collection('companies').doc(companyId).collection('notRegRetailers').doc(retailerId).delete();
   });
 }
 

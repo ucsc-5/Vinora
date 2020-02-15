@@ -87,7 +87,7 @@ export class OrderService {
       this.cartService.deleteItem(element.id);
     })
     const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept,shopName};
-    this.afs.collection('retailers').doc(retailerId).set({orderState:0});
+    this.afs.collection('retailers').doc(retailerId).update({orderState:0});
     this.orderCollection.doc(id).set(order);
     this.afs.collection('retailers').doc(retailerId).collection('purchaseOrders').doc(id).set(order);
     this.afs.collection('companies').doc(companyId).collection('purchaseOrders').doc(id).set(order);

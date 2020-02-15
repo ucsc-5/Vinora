@@ -129,32 +129,25 @@ export class ConfirmOrdersSearchComponent implements OnInit {
         return { id, ...data };
       }))
     );
-
     this.orders.subscribe(x=>{
       x.forEach(element=>{
         console.log(element);
       })
     })
     console.log("on Search date");
-
-    // return orders;
-
-
-
-    // this.dateRangeTag=false;
-    // this.orders= this.orderService.getConformOrderByDateStockManagerId(this.specificDate,this.companyId,this.stockManagerId);
-    // this.orders.subscribe(x=>{
-    //   x.forEach(element=>{
-    //     console.log(element);
-    //   })
-    // })
-    // console.log("on Search date");
   }
 
   onSearchYearMonth(){
     console.log(this.year+"year");
     console.log(this.months[this.monthIndex]);
-    this.orders= this.orderService.getConformOrderByYearMonthStockManagerId(this.year,this.monthIndex,this.companyId,this.stockManagerId);
+    this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('year','==',this.year).where('month','==',this.months[this.monthIndex])).snapshotChanges().pipe(
+      map(actions => actions.map(a => { 
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+
     this.orders.subscribe(x=>{
       x.forEach(element=>{
         console.log(element);
@@ -164,16 +157,20 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchRetailer(){
- 
     console.log(this.selectRetailer.value.retailer);
     var retailerId = this.selectRetailer.value.retailer;
 
-    this.orders = this.orderService.getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(this.companyId,this.stockManagerId,retailerId);
+    this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('retailerId','==',this.retailer)).snapshotChanges().pipe(
+      map(actions => actions.map(a => { 
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
 
     this.orders.subscribe(x=>{
       x.forEach(ele=>{
         console.log(ele);
-        
       })
     })
   }

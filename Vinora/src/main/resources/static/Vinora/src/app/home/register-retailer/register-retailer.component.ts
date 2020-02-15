@@ -89,10 +89,10 @@ export class RegisterRetailerComponent implements OnInit {
     const contactNumber = this.secondFormGroup.value['contactNumber'];
     const state = 1;
     const url ="https://www.stickpng.com/assets/images/585e4bf3cb11b227491c339a.png";
-    const latitude = this.longitude
-    const longitude = this.longitude
+    const latitude = this.latitude;
+    const longitude = this.longitude;
     
-    const coord = new firebase.firestore.GeoPoint(latitude,longitude);
+    const iniCoord = new firebase.firestore.GeoPoint(latitude,longitude);
 
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(res=>{
       if(res.user.email){
@@ -106,7 +106,7 @@ export class RegisterRetailerComponent implements OnInit {
                 ()=>{
                   this.authService.login(email,password).then(x=>{
                     const retailerId = this.afAuth.auth.currentUser.uid;
-                    const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,coord};
+                    const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,iniCoord};
                     this.retailerCollection.doc(retailerId).set(retailer).then(
                                 res=>{
                                   

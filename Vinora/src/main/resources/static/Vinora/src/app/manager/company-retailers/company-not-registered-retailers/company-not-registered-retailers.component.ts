@@ -56,6 +56,8 @@ export class CompanyNotRegisteredRetailersComponent implements OnInit {
 
   regsiter(){
     console.log(this.myCompany);
+
+
      this.retailerService.registerWithCompany(this.retailer.id,this.companyId,this.myCompany,this.retailer.email);
   }
 
