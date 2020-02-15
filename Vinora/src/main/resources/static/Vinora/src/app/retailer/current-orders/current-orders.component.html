@@ -1,6 +1,7 @@
-<div class="row">
-    <h3>Current Orders</h3><br>
-</div>
+
+    <h2 id="heading">Current Orders</h2>
+    <br>
+
 <div class="row">
     <div class="col" *ngIf="currentOrders | async; let currentOrders; else loading">
         <app-current-order-element *ngFor="let currentOrder of currentOrders" [currentOrder]="currentOrder" ></app-current-order-element>

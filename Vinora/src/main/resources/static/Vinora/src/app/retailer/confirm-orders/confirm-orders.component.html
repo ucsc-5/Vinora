@@ -1,6 +1,6 @@
-<div class="row">
-    <h3>Confirmed Orders</h3><br>
-</div>
+<h2 id="heading">Confirmed Orders</h2>
+<br>
+
 <div class="row">
     <div class="col" *ngIf="confirmedOrders | async; let confirmedOrders; else loading">
         <app-confirm-order-element *ngFor="let confirmOrder of confirmedOrders" [confirmOrder]="confirmOrder" ></app-confirm-order-element>

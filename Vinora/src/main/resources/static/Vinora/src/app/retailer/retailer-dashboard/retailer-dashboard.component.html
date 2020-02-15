@@ -1,10 +1,10 @@
 <div class="row" *ngIf="retailer$ | async; let retailer; else loading">
     <mat-card class="example-card" *ngFor="let retailer of retailer" id="content">
         <div class="row no-gutters">
-          <div class="col-md-4">
-              <img mat-card-image src="{{retailer.url}}" alt="Photo of the Retailer">
+          <div class="col-md-3">
+              <img mat-card-image src="{{retailer.url}}" alt="Photo of the Retailer" width="300px" height="350px">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-9">
             <div class="card-body">
               <h5 class="card-title">{{retailer.shopName}}</h5>
               <p class="card-text">
