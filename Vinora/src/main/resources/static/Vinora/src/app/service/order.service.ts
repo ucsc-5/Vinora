@@ -23,6 +23,7 @@ export interface Order{
     year: number;
     encDate: number;
     saleRepAccept: number;
+    shopName:string;
 }
 
 export interface orderRet{
@@ -59,7 +60,7 @@ export class OrderService {
     
   }
 
-  addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
+  addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string,shopName:string){
     let theDate= new Date()
     let createDate = theDate.toString();
     let date = theDate.getDate();
@@ -85,7 +86,8 @@ export class OrderService {
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
-    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept};
+    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept,shopName};
+    this.afs.collection('retailers').doc(retailerId).set({orderState:0});
     this.orderCollection.doc(id).set(order);
     this.afs.collection('retailers').doc(retailerId).collection('purchaseOrders').doc(id).set(order);
     this.afs.collection('companies').doc(companyId).collection('purchaseOrders').doc(id).set(order);

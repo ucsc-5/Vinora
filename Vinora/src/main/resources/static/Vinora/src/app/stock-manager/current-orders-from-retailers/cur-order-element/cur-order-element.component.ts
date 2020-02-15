@@ -42,10 +42,9 @@ export class CurOrderElementComponent implements OnInit {
           this.orderService.updateState(this.order.id,0,this.stockManagerId);
           this.order.stockManagerId=this.stockManagerId;
           this.order.tempTotal=0;
-          this.afs.collection('retailers').doc(this.order.companyId).collection('purchaseOrders').doc(this.order.id).set({state:0});
-          this.afs.collection('retailers').doc(this.order.companyId).collection('confirmedOrders').doc(this.order.id).set(this.order);
-          
-          this.afs.collection('companies').doc(this.order.retailerId).collection('purchaseOrders').doc(this.order.id).set({state:0});
+          this.afs.collection('retailers').doc(this.order.retailerId).collection('purchaseOrders').doc(this.order.id).set({state:0});
+          this.afs.collection('retailers').doc(this.order.retailerId).collection('confirmedOrders').doc(this.order.id).set(this.order);
+          this.afs.collection('companies').doc(this.order.companyId).collection('purchaseOrders').doc(this.order.id).set({state:0});
           this.afs.collection('companies').doc(this.order.companyId).collection('confirmedOrders').doc(this.order.id).set(this.order);
         this.items.forEach(x=>{
         x.forEach(x2=>{
