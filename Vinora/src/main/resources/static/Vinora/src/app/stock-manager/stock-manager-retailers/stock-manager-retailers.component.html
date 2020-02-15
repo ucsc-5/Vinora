@@ -1,8 +1,9 @@
 <div class="col" *ngIf="retailersTakens | async; let retailersTakens; else loading">
-    <ul>
-        <li type="button" (click)="onSelect(retailersTaken.retailerId)" *ngFor="let retailersTaken of retailersTakens" >
+    <ul class="list-group">
+        <!-- <li class="list-group-item list-group-item-primary">This is a primary list group item</li> -->
+        <li class="list-group-item list-group-item-primary" (click)="onSelect(retailersTaken.retailerId)" *ngFor="let retailersTaken of retailersTakens" >
             {{retailersTaken.retailerEmail}}
-            {{retailersTaken.retailerId}}
+            <!-- {{retailersTaken.retailerId}} -->
         </li>
     </ul>
 </div>

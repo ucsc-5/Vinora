@@ -49,25 +49,25 @@ export class LoginComponent implements OnInit {
       console.log(email);
       console.log(password);
       this.authService.logout();
-    //   this.authService.login(email,password).then(res=>{
-    //   // setTimeout(() => {
-    //   //   this.message=null;
-    //   //  }, 2000);
+      this.authService.login(email,password).then(res=>{
+      // setTimeout(() => {
+      //   this.message=null;
+      //  }, 2000);
        
-    //  }).catch(error=>{
-    //   this.message="Please check your email and password again!!"
-    //    console.log(" this is the error  "+error);
-    //  })
+     }).catch(error=>{
+      this.message="Please check your email and password again!!"
+       console.log(" this is the error  "+error);
+     })
     this.showSpinner=true;
 
-    this.authService.login('stm1com3@gmail.com','123456789v');
+    // this.authService.login('stm1com3@gmail.com','123456789v');
     //  this.authService.login('stm1com1@gmail.com','987654321v');
     // this.authService.login('ret2@gmail.com','Vinora@123');
     // this.authService.login('ret1@gmail.com','Vinora@123');
       // this.authService.login('admin@gmail.com','123123');
     // this.authService.login('company1@gmail.com','Vinora@123');
         // this.authService.login('company3@gmail.com','Vinora@123');
-         // this.authService.login('company1@gmail.com','Vinora@123');
+        //  this.authService.login('company1@gmail.com','Vinora@123');
 
     // this.authService.login('udulaindunil@gmail.com','123456789v');
     this.showSpinner=false;

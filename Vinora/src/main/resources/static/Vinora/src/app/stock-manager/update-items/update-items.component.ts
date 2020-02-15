@@ -25,22 +25,21 @@ export class UpdateItemsComponent implements OnInit {
 
   companyId: string;
   items: Observable<ItemId[]>;
-  // itemsRef: AngularFireList<any>;
-  quantityRef: AngularFireObject<any>
- 
-  itemsQuantity: Observable<any[]>;
+  
+  // quantityRef: AngularFireObject<any>
+  // itemsQuantity: Observable<any[]>;
 
   constructor(private db: AngularFireDatabase,private StockManagerService:StockManagerService,private afAuth: AngularFireAuth,private itemService:ItemService){
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
       this.companyId= idTokenResult.claims.cmpId;
-      console.log(this.companyId+" this is the compnay id of retailer");
-      console.log(idTokenResult);      
+      // console.log(this.companyId+" this is the compnay id of retailer");
+      // console.log(idTokenResult);      
     })  
 
   
-    this.quantityRef = db.object('weights');
-    this.itemsQuantity = this.quantityRef.valueChanges();
+    // this.quantityRef = db.object('weights');
+    // this.itemsQuantity = this.quantityRef.valueChanges();
     
   }
  

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { NgForm,FormGroup, FormControl, Validators} from '@angular/forms';
 import { DialogService } from 'src/app/service/dialog.service';
 import { AngularFireObject,AngularFireDatabase } from 'angularfire2/database';
-
+import { map, switchMap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-item-details',
@@ -32,7 +32,8 @@ mySubscription: any;
   quantity
 
   quantityRef: AngularFireObject<any>
-  
+  itemsQuantity: Observable<any[]>;
+
   constructor(private db: AngularFireDatabase,private router:Router,private route:ActivatedRoute,private itemService:ItemService,private dialogService:DialogService) {
     // this.router.routeReuseStrategy.shouldReuseRoute = function () {
     //   return false;
@@ -43,7 +44,15 @@ mySubscription: any;
     //     this.router.navigated = false;
     //   }
     // });
+
     this.quantityRef = db.object('weights');
+    this.itemsQuantity = this.quantityRef.valueChanges();
+
+    // this.quantityRef = db.object('weights');
+    // this.quantityRef.snapshotChanges();
+    // console.log(this.itemsQuantity);
+    
+    
 
    }
 
@@ -67,7 +76,7 @@ mySubscription: any;
         const reOrder=x.data().reOrder;
         this.item = {brand,category,companyId,description,itemImagePath,itemName,quantity,reOrderingLevel,state,type,unitPrice,unitValue,reOrder};
 
-        console.log(this.item);
+        // console.log(this.item);
         
         // this.item.brand=x.data().brand;
 

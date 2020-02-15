@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RetailerService,RetailerId,RetailerEmailTokenId } from 'src/app/service/retailer.service';
+import { RetailerService,RetailerId,RetailerEmailTokenId,RetailerEmailToken } from 'src/app/service/retailer.service';
 import { CompanyService } from 'src/app/service/company.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router,ActivatedRoute} from '@angular/router';
-
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreCollectionGroup, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { finalize, switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stock-manager-retailers',
@@ -16,15 +17,20 @@ export class StockManagerRetailersComponent implements OnInit {
   retailersTakens: Observable<RetailerEmailTokenId[]>
   companyId: string
   
-  constructor(private companyService :CompanyService,private afAuth: AngularFireAuth,private router:Router,private route:ActivatedRoute) {
+  constructor(private companyService :CompanyService,private afAuth: AngularFireAuth,private router:Router,private route:ActivatedRoute,private afs: AngularFirestore) {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
-      // console.log("This is the needed"+idTokenResult.claims.cmpId.cmpId);
       this.companyId= idTokenResult.claims.cmpId;
     })
   }
 
   ngOnInit() {
-    this.retailersTakens = this.companyService.getRegisteredRetailers(this.companyId);
+    this.retailersTakens = this.afs.collection('companies').doc(this.companyId).collection('registeredRetailers').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as RetailerEmailToken;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 
   onSelect(retailerId:string){

@@ -11,7 +11,8 @@
                 <p>
                     {{item.description}}<br>
                     Unit Price: <b>{{item.unitPrice}}</b><br>
-                    Available:  <b></b>{{item.quantity}}<br>  {{item.type}}                
+                    Available:  <b></b>{{item.quantity}}  {{item.type}}  
+                           
                 </p>
                 
             </mat-card-content>
@@ -21,15 +22,13 @@
     <div class="col-4">
 
         <div class="example-button-row">
-            <button mat-raised-button [disabled]="manual" (click)="onClickManual()">Manual</button>
-            <button mat-raised-button [disabled]="byScaler" (click)="onClickScaler()">By Scaler</button>
+            <!-- <button mat-raised-button [disabled]="manual" (click)="onClickManual()">Manual</button>
+            <button mat-raised-button [disabled]="byScaler" (click)="onClickScaler()">By Scaler</button> -->
         </div>
 
         <form [formGroup]="updateUnitValueForm">
-            {{(itemsQuantity | async)?.weight}}
-
             <b>Update unit value </b> <br>
-            current Unit Value:     {{item.unitValue}} <br>
+            current Unit Value:  {{item.unitValue}} <br>
             <mat-form-field class="" style="width: 70%">
                 <input 
                     matInput 
@@ -70,10 +69,17 @@
                     </div>
             
         </form>
+
+        <br>
+        <br>
+        <br>
+        <h4>Scaler reading</h4>
+        {{(itemsQuantity | async)?.weight}}
     </div>
     <div class="col-4" >
         <form [formGroup]="updateQuantityForm">
-
+            <b>Update Quantity </b> <br>
+            Current quantity:  {{item.quantity}} <br>
             <mat-form-field class="" style="width: 70%">
                 <input 
                     matInput 
@@ -83,9 +89,7 @@
                 >
             </mat-form-field>
 
-            <div class="input-group-append">
-                <span class="input-group-text">{{item.type}}</span>
-            </div>
+            <span>{{item.type}}</span>
 
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button  mat-raised-button  

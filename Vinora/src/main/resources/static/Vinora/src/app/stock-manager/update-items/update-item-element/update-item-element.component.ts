@@ -47,14 +47,14 @@ export class UpdateItemElementComponent implements OnInit {
     })
 
     this.updateForm.value.quantity = this.quantity;
-    console.log(this.quantity+" this is the quantity");
+    // console.log(this.quantity+" this is the quantity");
 
     this.newQuantity=+this.quantity/this.item.unitValue;
 
     
     if(this.item.quantity<this.item.reOrderingLevel){
       this.reOrder=true;
-    }else{
+    }else{  
       this.reOrder=false;
     }
   }
@@ -99,7 +99,6 @@ export class UpdateItemElementComponent implements OnInit {
 
   itemDetails(item:ItemId){
     console.log(item+" This is the item from");
-    
     this.dialogService.openItemDetailsDialog(item).afterClosed();
   }
 
