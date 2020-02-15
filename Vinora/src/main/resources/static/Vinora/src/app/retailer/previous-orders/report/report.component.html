@@ -1,18 +1,8 @@
+<h2 id="heading">Confirmed order report</h2>
 <div>
-    <!-- <form (ngSubmit)="onSubmitReport()" [formGroup]="dateForm"> -->
-        <!-- <div class="form-group">
-            <label for="InputFormdate">From</label>
-            <input type="Date" formControlName="fromDate" class="form-control" id="InputFormdate">
-        </div>
-
-        <div class="form-group">
-            <label for="InputTodate">From</label>
-            <input type="Date" formControlName="toDate" class="form-control" id="InputTodate">
-        </div> -->
-
 
         <div class="col-5">
-            <h4>Date Range</h4>
+            <h4>Report Time Period</h4>
     
                 <mat-form-field>
                   <mat-label>From</mat-label>
@@ -20,7 +10,9 @@
                   <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
                   <mat-datepicker #dp1 disabled="false"></mat-datepicker>
                 </mat-form-field>
-              <br>
+              
+                &nbsp;
+                &nbsp;
     
                 <mat-form-field>
                   <mat-label>To</mat-label>
@@ -36,22 +28,17 @@
                 <button mat-button color="primary" (click)="onSearchDateRange()" [disabled]="!dateRangeTag">Search</button>
     
               <hr>
-    
-    
-    
-    
-    
+       
                 
               
         </div>
         <button (click)="downloadPdf()">Download pdf</button>
-<!--         
-    </form> -->
+
 </div>
 <div id="content" #content>
                             
       
-        <h2>Confirmed order report</h2>
+  
 
 
         <div class="row">

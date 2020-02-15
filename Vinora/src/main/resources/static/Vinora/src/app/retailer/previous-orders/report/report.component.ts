@@ -63,11 +63,11 @@ export class ReportComponent implements OnInit {
     this.company= this.companyService.getCompanyById(this.companyId);
   
 
-    this.confirmedOrders = this.orderService.getOrdersByRetailerIdCompanyId(this.retailerId,this.companyId);
-    this.confirmedOrders.subscribe(x=>{
-      console.log(x);
+    // this.confirmedOrders = this.orderService.getOrdersByRetailerIdCompanyId(this.retailerId,this.companyId);
+    // this.confirmedOrders.subscribe(x=>{
+    //   console.log(x);
       
-    });
+    // });
 
     this.dateForm = this.formBuilder.group({
       fromDate:[ '',[
@@ -122,9 +122,9 @@ export class ReportComponent implements OnInit {
     console.log(this.toDate+ " To date");
     
     // this.orders= this.orderService.getConformOrdersByDateRange(this.fromDate,this.toDate,this.companyId,this.stockManagerId);
-    this.orders= this.orderService. getreportByDate(this.fromDate,this.toDate,this.companyId,this.retailerId);
+    this.confirmedOrders= this.orderService. getreportByDate(this.fromDate,this.toDate,this.companyId,this.retailerId);
 
-     this.orders.subscribe(x=>{
+     this.confirmedOrders.subscribe(x=>{
       x.forEach(element=>{
         console.log(element);
       })
