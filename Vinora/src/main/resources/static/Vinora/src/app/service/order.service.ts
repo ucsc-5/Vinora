@@ -306,6 +306,10 @@ stockManagerDropItem(orderKey:string,itemId:string,itemsPrice:number){
 
 setStmAddedFeild(orderKey:string,itemId:string){
   this.afs.collection('orders').doc(orderKey).collection('items').doc(itemId).update({stmadded:false});
+  console.log("rangalaaa"+itemId);
+}
+setItemCount(){
+
 }
 
 // setSaleRep(saleRepId:string,orderKey:string){

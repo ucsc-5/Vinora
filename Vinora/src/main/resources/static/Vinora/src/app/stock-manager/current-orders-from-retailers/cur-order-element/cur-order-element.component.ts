@@ -46,10 +46,14 @@ export class CurOrderElementComponent implements OnInit {
           this.afs.collection('retailers').doc(this.order.retailerId).collection('confirmedOrders').doc(this.order.id).set(this.order);
           this.afs.collection('companies').doc(this.order.companyId).collection('purchaseOrders').doc(this.order.id).set({state:0});
           this.afs.collection('companies').doc(this.order.companyId).collection('confirmedOrders').doc(this.order.id).set(this.order);
+        
+          console.log(this.items);
         this.items.forEach(x=>{
         x.forEach(x2=>{
           console.log(x2.id);
            this.orderService.setStmAddedFeild(this.orderId,x2.id); 
+            this.afs.collection('retailers').doc(this.order.retailerId).collection('companyWithItems').doc(this.order.companyId).collection('items').doc(x2.itemId).set(this.items);
+            console.log("registere item"+x2.itemName);
           })
         })
       }
