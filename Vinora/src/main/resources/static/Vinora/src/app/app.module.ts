@@ -148,6 +148,7 @@ import { DatePipe } from '@angular/common';
 import { DeliveryCompanyReportComponent } from './retailer/delivery-company-report/delivery-company-report.component';
 import { RegDeComElementComponent } from './retailer/delivery-company-report/reg-de-com-element/reg-de-com-element.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -304,7 +305,9 @@ import { RegDeComElementComponent } from './retailer/delivery-company-report/reg
     DatePipe,
     {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}
     ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
   
 })
 export class AppModule { }
