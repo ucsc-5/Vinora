@@ -21,11 +21,11 @@ export class StmCrtOrderItemElemetComponent implements OnInit {
   constructor(private dialogService:DialogService,private tempOrder:StmConfirmOrderTempService,private itemService:ItemService) { }
 
   ngOnInit() {
-    // this.available = this.itemService.getStockItem(this.item.id).get().subscribe(x=>{
-    //    return x.data().quantity;
-    // })
+    this.available = this.itemService.getStockItem(this.item.id).get().subscribe(x=>{
+       return x.data().quantity;
+    })
 
-  // console.log(this.available.quantity);
+  console.log(this.available.quantity);
     
     
   }

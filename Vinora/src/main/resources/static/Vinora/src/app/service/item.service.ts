@@ -21,6 +21,7 @@ export interface Item{
   reOrderingLevel: number;
   unitValue: number;
   reOrder:Boolean;
+  itemCount:number;
 }
 
 export interface orderRet{
@@ -119,6 +120,9 @@ export class ItemService {
     return this.afs.collection('items').doc(key).update(value);
   }  
 
+  updateQuantityItem(key: string, value: any,retailerId:string,companyId:string){
+    this.afs.collection('retailers').doc(`${retailerId}`).collection('companyWithItems').doc(`${companyId}`).collection('items').doc(key).update(value);
+  }
   getStockItem(key:string){
     const items = this.afs.collection('items').doc(key);
     return items;

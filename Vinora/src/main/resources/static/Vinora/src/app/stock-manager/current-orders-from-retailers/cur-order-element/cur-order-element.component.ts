@@ -3,7 +3,7 @@ import { OrderId, OrderService, Order } from 'src/app/service/order.service';
 import { StockManagerId } from 'src/app/service/stock-manager.service';
 import { Observable } from 'rxjs';
 import { RetailerId, RetailerService } from 'src/app/service/retailer.service';
-import { CartItem, CartItemId } from 'src/app/service/cart.service';
+import { CartItem, CartItemId, CartService } from 'src/app/service/cart.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { DialogService } from 'src/app/service/dialog.service';
@@ -22,14 +22,15 @@ export class CurOrderElementComponent implements OnInit {
   items: Observable<CartItemId[]>
   orderId
   stockManagerId:string;
+  newQuantity: number;
 
-  constructor(private dialogService:DialogService,private afs:AngularFirestore,private orderService:OrderService,private afAuth: AngularFireAuth,private retailerServie:RetailerService) { }
+  constructor(private dialogService:DialogService,private afs:AngularFirestore,private orderService:OrderService,private afAuth: AngularFireAuth,private retailerServie:RetailerService,private cartservice:CartService) { }
 
   ngOnInit() {
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.orderId=this.order.id;
     this.stockManagerId=this.afAuth.auth.currentUser.uid;
-
+    this.items=this.orderService.getItemsByOrderId(this.order.id);
     
     
   }
@@ -58,6 +59,7 @@ export class CurOrderElementComponent implements OnInit {
           console.log(x2.id);
            this.orderService.setStmAddedFeild(this.orderId,x2.id); 
             this.afs.collection('retailers').doc(this.order.retailerId).collection('companyWithItems').doc(this.order.companyId).collection('items').doc(x2.itemId).set(x2);
+            this.cartservice.addQuantitytItem(x2.itemCount,x2,this.order.retailerId,this.order.companyId);
            console.log(x2.itemName);
           })
         })

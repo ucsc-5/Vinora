@@ -45,6 +45,7 @@ export class RegisterNewItemComponent implements OnInit {
       const itemName = value.itemName;
       const brand = value.brandName;
       const quantity = 0;
+      const itemCount = 0;
       const unitPrice = value.unitPrice;
       const companyId =  this.managerId;
       // const itemImagePath = value.itemImagePath
@@ -69,7 +70,7 @@ export class RegisterNewItemComponent implements OnInit {
             console.log(downloadURL);
              const itemImagePath= downloadURL;
              const id = this.afs.createId();
-             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,type,reOrderingLevel,unitValue,reOrder};
+             const item:Item = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,type,reOrderingLevel,unitValue,reOrder,itemCount};
              console.log(item);
              this.itemsCollection.doc(id).set(item);
           });

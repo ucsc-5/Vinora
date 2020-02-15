@@ -76,6 +76,22 @@ export class CartService {
     })
   }
 
+  addQuantitytItem(quantity:number,item:CartItemId,retailerId:string,companyId:string){
+    const newCartQuantity= item.itemCount+quantity;
+    
+    
+    this.afs.collection('retailers').doc(`${retailerId}`).collection('companyWithItems').doc(`${companyId}`).collection('items').doc(item.itemId).get().subscribe(x=>{
+      this.newQuantity=+x.data().itemCount+quantity;
+    
+
+   
+      console.log("item count"+this.newQuantity);
+    
+      this.itemService.updateQuantityItem(item.itemId,{itemCount:this.newQuantity},retailerId,companyId);
+    
+    })
+  }
+
   redeuseQuantityCartItem(quantity:number,item:CartItemId){
     const newCartQuantity= item.quantity-quantity;
     this.afs.collection('items').doc(`${item.itemId}`).get().subscribe(x=>{

@@ -62,7 +62,7 @@ export class OrderItemElementComponent implements OnInit {
             const type = this.item.type;
             const total = quantity*this.item.unitPrice;
             const stmadded = false;
-            const itemCount = value.itemCount+this.item.quantity;
+            const itemCount = this.item.itemCount+value.quantity;
             const reOrderingLevel = this.item.reOrderingLevel;
             const unitValue = this.item.unitValue;
             const reOrder = this.item.reOrder;
