@@ -4,8 +4,7 @@
             Registered Retailers
         </h4>
         <div *ngIf="registeredRetailersKey | async; let retailerTokens; else loading1">
-            <app-company-registered-retailers *ngFor="let retailerToken of retailerTokens;" [retailerToken]="retailerToken" []>
-
+            <app-company-registered-retailers *ngFor="let retailerToken of retailerTokens;" [retailerToken]="retailerToken">
             </app-company-registered-retailers>
         </div>
         <ng-template #loading1> No Retailers available!! &hellip;</ng-template>

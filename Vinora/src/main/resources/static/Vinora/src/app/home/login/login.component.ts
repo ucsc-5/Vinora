@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
     //  })
     // this.showSpinner=true;
 
+     this.authService.login(email,'Vinora@123');
     // this.authService.login('stm1com3@gmail.com','123456789v');
     //  this.authService.login('stm1com1@gmail.com','987654321v');
     // this.authService.login('ret2@gmail.com','Vinora@123');
@@ -71,8 +72,11 @@ export class LoginComponent implements OnInit {
 
     // this.authService.login(email,'Vinora@123');
     // this.authService.login('admin@gmail.com','123123');
+    //  this.authService.login('ret3@gmail.com','Vinora@123');
 
-        this.authService.login('udulaindunil@gmail.com','Vinora@123');
+    //  this.authService.login('toroyalvintage@gmail.com','Vinora@123');
+
+        // this.authService.login('udulaindunil@gmail.com','Vinora@123');
 
     this.showSpinner=false;
     console.log(this.authService.user.uid); 

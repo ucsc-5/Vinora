@@ -50,6 +50,8 @@ export class StmConOrderElementComponent implements OnInit {
         
         })
 
+        this.ngOnInit()
+
     console.log(this.item);
     
   }
