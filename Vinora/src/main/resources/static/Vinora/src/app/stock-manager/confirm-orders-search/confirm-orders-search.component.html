@@ -1,5 +1,5 @@
 <div class="row">
-<div class="col-5"> 
+<div class="col-3"> 
     
         <!-- <h4>Date Range</h4>
 
@@ -51,7 +51,6 @@
             <mat-form-field>
                 <mat-label>Year</mat-label>
                 <mat-select [(value)]="year">
-                    <mat-option>None</mat-option>
                     <mat-option value="2019">2019</mat-option>
                     <mat-option value="2020">2020</mat-option>
                     <mat-option value="2021">2021</mat-option>
@@ -68,7 +67,7 @@
             <mat-form-field>
                 <mat-label>Month</mat-label>
                 <mat-select [(value)]="monthIndex">
-                    <mat-option>None</mat-option>
+                    <!-- <mat-option>None</mat-option> -->
                     <mat-option value="1">January</mat-option>
                     <mat-option value="2">February</mat-option>
                     <mat-option value="3">March</mat-option>
@@ -154,7 +153,7 @@
             <button mat-button color="primary" (click)="onSearch()">Search</button>
     </div>
 
-    <div class="col-7">
+    <div class="col-9">
         <div *ngIf="orders | async; let orders; else loading">
         
         <app-con-order-element *ngFor="let order of orders" [order]="order" ></app-con-order-element>

@@ -54,7 +54,10 @@ export class MyCartComponent implements OnInit {
       const id = this.afs.createId();
       this.afs.collection('retailers').doc(this.retailerId).get().subscribe(res=>{
         const shopName = res.data().shopName;
-        this.orderService.addItems(cartItems,this.companyId,this.retailerId,id,shopName);
+        this.afs.collection('companies').doc(this.companyId).get().subscribe(res2=>{
+          const companyName= res2.data().companyName;
+          this.orderService.addItems(cartItems,this.companyId,this.retailerId,id,shopName,companyName);
+        })
       })
     }
   })

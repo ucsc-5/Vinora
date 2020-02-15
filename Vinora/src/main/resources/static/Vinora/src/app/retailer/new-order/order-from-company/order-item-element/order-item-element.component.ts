@@ -62,6 +62,7 @@ export class OrderItemElementComponent implements OnInit {
             const type = this.item.type;
             const total = quantity*this.item.unitPrice;
             const stmadded = false;
+            const itemCount = value.itemCount+this.item.quantity;
             const reOrderingLevel = this.item.reOrderingLevel;
             const unitValue = this.item.unitValue;
             const reOrder = this.item.reOrder;
@@ -77,7 +78,7 @@ export class OrderItemElementComponent implements OnInit {
             this.messageOfRootItem = this.itemService.updateItem(this.item.id,{quantity: newQuantity}).then(
 
               x=>{
-                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded,reOrderingLevel,unitValue,reOrder};
+                const  cartItem: CartItem = {itemName,brand,quantity,unitPrice,itemImagePath,description,category,state,companyId,itemId,retailerId,type,total,stmadded,itemCount,reOrderingLevel,unitValue,reOrder};
                 this.cartService.setItemsToCart(cartItem);
                 return "done";
               }

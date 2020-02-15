@@ -3,7 +3,6 @@
 
 <div class="col-8">
 
-
     <mat-card class="example-card" *ngFor="let stockManager of stockManager | async">
         <div class="row no-gutters">
           <div class="col-md-4">
@@ -41,14 +40,28 @@
                       
                   </p>
 
-          <form (ngSubmit)="updateContactnumber(f,stockManager)" #f="ngForm">
-             
-                          <mat-form-field class="" style="width: 70%">
-                                  <input matInput type="string" placeholder="Edit contact number" name="contactNumber" ngModel>
-                          </mat-form-field>    
-             
-              <button mat-raised-button color="primary" type="submit">Save</button>
-      </form>
+          <!-- <form [fromGroup]="updateNumber">
+            <mat-form-field class="example-full-width">
+                  <span matPrefix>+94 &nbsp;</span>
+                    <input 
+                        type="tel"
+                        formControlName="contactNumber"
+                        matInput 
+                        placeholder="Mobile Number">
+
+                <mat-icon matSuffix>mode_edit</mat-icon>
+                
+                
+
+                <mat-error *ngIf="!registerForm.get('contactNumber').valid && registerForm.get('contactNumber').touched">
+                            Please enter a valid contact number here!
+                </mat-error>
+              </mat-form-field>  
+              
+              <p style="text-align: center; color: red;"> {{message}}</p><br>
+              
+              <button mat-raised-button color="primary" type="submit" [disabled]="!validtp">Save</button>
+      </form> -->
           
             </div>
           </div>

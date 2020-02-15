@@ -20,11 +20,19 @@ export class ReportConfirmOrderElementComponent implements OnInit {
 
   ngOnInit() {
 
+    
     console.log(this.confirmOrder.createDate);
     
     this.company = this.companyService.getCompanyById(this.confirmOrder.companyId);
     this.items = this.orderService.getItemsByOrderId(this.confirmOrder.id);
     // this.reportService.getDate(this.confirmOrder.createDate);
+
+    this.items.subscribe(x=>{
+      x.forEach(element=>{
+        console.log(element.quantity);
+
+      })
+    });
   
   }
 
