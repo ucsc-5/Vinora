@@ -10,7 +10,7 @@ import { CartItem, CartItemId, CartService } from './cart.service';
 import { DatePipe } from '@angular/common';
 
 export interface Order{
-    createDate : string; 
+    createDate : Date; 
     retailerId: string;
     companyId: string;
     total: number;
@@ -61,7 +61,8 @@ export class OrderService {
 
   addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
     let theDate= new Date()
-    let createDate = theDate.toString();
+    // let createDate = theDate.toString();
+    let createDate = theDate;
     let date = theDate.getDate();
     let month = theDate.getMonth()+1;
     let year = theDate.getFullYear();
@@ -394,6 +395,39 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
     })
   })
   return orders;
+
+  }
+
+  getreportByDate(fromDate:Date,toDate:Date,companyId:string,retailerId:string){
+
+    console.log("Rangala"+companyId);
+    console.log("Rangala"+retailerId);
+    let date1 = fromDate.getDate();
+  let month1 = fromDate.getMonth();
+  let year1 = fromDate.getFullYear();
+
+  let date2 = toDate.getDate();
+  let month2 = toDate.getMonth();
+  let year2 = toDate.getFullYear();
+
+  let min = (year1*10000)+(month1*100)+(date1);
+  let max = (year2*10000)+(month2*100)+(date2);
+
+  console.log(min+ "min value");
+  console.log(max+ "max Value");
+
+  
+  // where('encDate','<=',max).where('encDate','>=',min)
+  
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0).where('saleRepId','==',"")).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Order;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+  return orders;
+   
 
   }
 
