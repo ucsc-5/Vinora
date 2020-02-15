@@ -52,7 +52,10 @@ export class MyCartComponent implements OnInit {
       res=>{
         if(res){
       const id = this.afs.createId();
-     this.orderService.addItems(cartItems,this.companyId,this.retailerId,id);
+      this.afs.collection('retailers').doc(this.retailerId).get().subscribe(res=>{
+        const shopName = res.data().shopName;
+        this.orderService.addItems(cartItems,this.companyId,this.retailerId,id,shopName);
+      })
     }
   })
 

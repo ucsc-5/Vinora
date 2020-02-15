@@ -119,33 +119,16 @@ export class ConfirmOrdersSearchComponent implements OnInit {
     let month = this.specificDate.getMonth();
     let year = this.specificDate.getFullYear();
     var encDate = (year*10000)+(month*100)+(date);
-    this.orders = this.afs.collection('orders',ref=>ref.where('encDate','==',encDate).where('companyId','==',this.stockManagerId)).snapshotChanges().pipe(
+
+    console.log(encDate);
+    
+    this.orders = this.afs.collection('orders',ref=>ref.where('encDate','==',encDate).where('stockManagerId','==',this.stockManagerId)).snapshotChanges().pipe(
       map(actions => actions.map(a => { 
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     );
-
-
-    // console.log(companyId+" this company id");
-    // console.log(stockManagerId+" stm id");
-    
-    // this.orders = this.afs.collection('orders',ref=>ref.where('ensDate','==',encDate)).snapshotChanges().pipe(
-    //   map(actions => actions.map(a => {
-    //     const data = a.payload.doc.data() as Order;
-    //     const id = a.payload.doc.id;
-    //     return { id, ...data };
-    //   }))
-    // );
-
-    // this.orders = this.afs.collection(this.dbPath , ref => ref.where('sate','==','0').where('encDate','==',encDate).where('companyId','==',this.companyId).where('stockManagerId','==',this.stockManagerId)).snapshotChanges().pipe(
-    //   map(actions => actions.map(a => {
-    //     const data = a.payload.doc.data() as Order;
-    //     const id = a.payload.doc.id;
-    //     return { id, ...data };
-    //   }))
-    // );
 
     this.orders.subscribe(x=>{
       x.forEach(element=>{

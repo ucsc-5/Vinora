@@ -17,6 +17,29 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ReportComponent implements OnInit {
 
 
+  months = ['January','February','March','April','MAy','June','July','August','September','November','December'];
+
+  disabled = false;
+  fromDate: Date;
+  toDate: Date;
+  specificDate: Date;
+
+  private dbPath = '/orders';
+
+  totalMax: number = 0;
+  totalMin: number = 0;
+  orders: Observable<OrderId[]>;
+
+
+  dateRangeTag = false;
+  yearMonthTag = false;
+  retailerTag = false;
+  totalRangeTag = false;
+  specificDatetag = false;
+
+  monthIndex:number;
+  year:number;
+
   companyId: string;
   company: Observable<CompanyId[]>
   confirmedOrders:Observable<OrderId[]>;
@@ -64,13 +87,14 @@ export class ReportComponent implements OnInit {
     return this.dateForm.get('fromDate');
   }
 
-  get toDate(){
+  get todate(){
     return this.dateForm.get('toDate');
   }
 
   public onSubmitReport(){
-    this.reportService.getreportByDate(this.fromdate.value,this.toDate.value);
-    this.orderService. getreportByDate(this.fromdate.value,this.toDate.value,this.companyId,this.retailerId);
+    this.reportService.getreportByDate(this.fromdate.value,this.todate.value);
+    this.orderService. getreportByDate(this.fromdate.value,this.todate.value,this.companyId,this.retailerId);
+    this.orderService.getConformOrdersByDateRange(this.fromdate.value,this.todate.value,this.companyId,this.retailerId);
    
   }
 
@@ -89,6 +113,22 @@ export class ReportComponent implements OnInit {
       'elementHandlers':specialElementHandlers
     });
     doc.save('report.pdf');
+  }
+
+  
+  onSearchDateRange(){
+    this.specificDatetag=false;
+    console.log(this.fromDate + " form date");
+    console.log(this.toDate+ " To date");
+    
+    // this.orders= this.orderService.getConformOrdersByDateRange(this.fromDate,this.toDate,this.companyId,this.stockManagerId);
+    this.orders= this.orderService. getreportByDate(this.fromDate,this.toDate,this.companyId,this.retailerId);
+
+     this.orders.subscribe(x=>{
+      x.forEach(element=>{
+        console.log(element);
+      })
+    })
   }
 
 }

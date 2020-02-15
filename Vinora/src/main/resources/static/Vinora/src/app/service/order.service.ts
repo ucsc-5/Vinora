@@ -10,7 +10,7 @@ import { CartItem, CartItemId, CartService } from './cart.service';
 import { DatePipe } from '@angular/common';
 
 export interface Order{
-    createDate : Date; 
+    createDate : string; 
     retailerId: string;
     companyId: string;
     total: number;
@@ -23,6 +23,7 @@ export interface Order{
     year: number;
     encDate: number;
     saleRepAccept: number;
+    shopName:string;
 }
 
 export interface orderRet{
@@ -59,10 +60,9 @@ export class OrderService {
     
   }
 
-  addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
+  addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string,shopName:string){
     let theDate= new Date()
-    // let createDate = theDate.toString();
-    let createDate = theDate;
+    let createDate = theDate.toString();
     let date = theDate.getDate();
     let month = theDate.getMonth()+1;
     let year = theDate.getFullYear();
@@ -86,7 +86,8 @@ export class OrderService {
       total= element.total+total;
       this.cartService.deleteItem(element.id);
     })
-    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept};
+    const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept,shopName};
+    this.afs.collection('retailers').doc(retailerId).set({orderState:0});
     this.orderCollection.doc(id).set(order);
     this.afs.collection('retailers').doc(retailerId).collection('purchaseOrders').doc(id).set(order);
     this.afs.collection('companies').doc(companyId).collection('purchaseOrders').doc(id).set(order);
@@ -402,6 +403,12 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
 
     console.log("Rangala"+companyId);
     console.log("Rangala"+retailerId);
+    console.log("Hashini"+fromDate);
+    console.log("Hashini"+toDate);
+
+
+
+
     let date1 = fromDate.getDate();
   let month1 = fromDate.getMonth();
   let year1 = fromDate.getFullYear();
@@ -419,7 +426,7 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
   
   // where('encDate','<=',max).where('encDate','>=',min)
   
-  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0).where('saleRepId','==',"")).snapshotChanges().pipe(
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0).where('saleRepId','==',"").where('encDate','<=',max)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
@@ -430,5 +437,6 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
    
 
   }
+  
 
 }

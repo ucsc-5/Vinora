@@ -1,7 +1,7 @@
 <div class="row">
-
-    <div class="col-5">
-        <h4>Date Range</h4>
+<div class="col-5"> 
+    
+        <!-- <h4>Date Range</h4>
 
             <mat-form-field>
               <mat-label>From</mat-label>
@@ -24,11 +24,7 @@
 
             <button mat-button color="primary" (click)="onSearchDateRange()" [disabled]="!dateRangeTag">Search</button>
 
-          <hr>
-
-
-
-
+          <hr>  -->
 
 
 
@@ -48,11 +44,6 @@
           <button mat-button color="primary" (click)="onSearchDate()" [disabled]="!specificDatetag">Search</button>
 
           <hr>
-
-
-
-
-
 
 
           <h4>By year and month</h4>
@@ -164,7 +155,12 @@
     </div>
 
     <div class="col-7">
-
+        <div *ngIf="orders | async; let orders; else loading">
+        
+        <app-con-order-element *ngFor="let order of orders" [order]="order" ></app-con-order-element>
+        <!-- <li *ngFor="let order of orders" (click)="onSelectOrder(order.id)" [order]="order"> -->
+        </div>
+        <ng-template #loading>Search Result here&hellip;</ng-template>
     </div>
 </div>
 
