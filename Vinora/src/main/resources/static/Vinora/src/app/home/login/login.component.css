@@ -3,10 +3,13 @@
     flex-direction: column;
   }
   
-  .loginbox > * {
+  .loginbox {
+    margin-top: 100px;
     width: 100%;
-    background-color: rgb(219, 228, 208);
-    opacity: 0.4;
+    color: rgb(1, 5, 7);
+    opacity: 0.8;
+    background-color: rgb(223, 220, 230);
+   
   }
   
   .example-right-align {
@@ -38,10 +41,11 @@
 .container-fluid{
   height:60em;
   background-size:cover;
-  width:auto;
+  widows: 500px;
+  height: 700px;
   /* background-color: #00010; */
   /* opacity: 0.5; */
-  background-image:url('../../../assets/images/nik-macmillan-YXemfQiPR_E-unsplash.jpg');
+  background-image:url('../../../assets/images/a.jpg');
   background-position:50% 50%;
   text-align: center;
   color:  rgb(12, 11, 11);
