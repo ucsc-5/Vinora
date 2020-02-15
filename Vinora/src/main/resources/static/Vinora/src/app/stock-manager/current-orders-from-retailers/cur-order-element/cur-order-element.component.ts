@@ -27,20 +27,23 @@ export class CurOrderElementComponent implements OnInit {
 
   ngOnInit() {
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
-    this.items=this.orderService.getItemsByOrderId(this.order.id);
     this.orderId=this.order.id;
     this.stockManagerId=this.afAuth.auth.currentUser.uid;
+
+    
     
   }
 
   confirmOrder(){
 
     const message="Confirm !";
+  
     this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
       res=>{
         if(res){
           this.orderService.updateState(this.order.id,0,this.stockManagerId);
           this.order.stockManagerId=this.stockManagerId;
+          this.items=this.orderService.getItemsByOrderId(this.order.id);
           this.order.tempTotal=0;
           this.afs.collection('retailers').doc(this.order.retailerId).collection('purchaseOrders').doc(this.order.id).set({state:0});
           this.afs.collection('retailers').doc(this.order.retailerId).collection('confirmedOrders').doc(this.order.id).set(this.order);
@@ -49,11 +52,13 @@ export class CurOrderElementComponent implements OnInit {
         
           console.log(this.items);
         this.items.forEach(x=>{
+
+          
         x.forEach(x2=>{
           console.log(x2.id);
            this.orderService.setStmAddedFeild(this.orderId,x2.id); 
-            this.afs.collection('retailers').doc(this.order.retailerId).collection('companyWithItems').doc(this.order.companyId).collection('items').doc(x2.itemId).set(this.items);
-            console.log("registere item"+x2.itemName);
+            this.afs.collection('retailers').doc(this.order.retailerId).collection('companyWithItems').doc(this.order.companyId).collection('items').doc(x2.itemId).set(x2);
+           console.log(x2.itemName);
           })
         })
       }

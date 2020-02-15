@@ -11,6 +11,7 @@ export interface CartItem extends Item{
   retailerId: string;
   total: number;
   stmadded: boolean;
+  itemCount:number;
 }
 
 export interface CartItemId extends CartItem{
