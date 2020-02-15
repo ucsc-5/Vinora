@@ -6,6 +6,48 @@
                         No Registered Companies&hellip;
                 </div>
         </div>  
+
+        <button mat-raised-button (click)="Report()">Basic</button>
+</div>
+
+
+<div class="row" id="content" #content style="height: auto;">
+        <caption>Registered Companies on Vinora</caption>
+        <!-- <p> Date: {{date}}</p> -->
+        <table *ngIf="companies | async;  let companies2" >
+                <tr>
+
+                        <td>
+                                Company Name
+                        </td>
+                        <td>
+                                Email
+                        </td>
+                        <td>
+                                Address
+                        </td>
+                        <td>
+                                Contact number
+                        </td>
+                </tr>
+                <tr *ngFor="let company of companies2">
+                        <td>
+                                {{company.companyName}}  
+                        </td>
+                        <td>
+                                {{company.email}}
+                        </td>
+                        <td>
+                                {{company.address}}    
+                        </td>
+                        <td>
+                                {{company.contactNumber}}
+                        </td>
+                </tr>
+        </table>
+
+        <button mat-raised-button (click)=downloadPdf()>Download PDF</button>
+
 </div>
    
     <ng-template #loadingReg>
@@ -14,3 +56,4 @@
            </div>             
    
    </ng-template>
+

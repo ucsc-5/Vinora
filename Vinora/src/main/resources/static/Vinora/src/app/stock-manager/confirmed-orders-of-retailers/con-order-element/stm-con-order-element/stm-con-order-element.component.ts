@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ElementRef, ViewChild } from '@angular/core';
 import { CartItemId } from 'src/app/service/cart.service';
 import { DialogService } from 'src/app/service/dialog.service';
 import { OrderService } from 'src/app/service/order.service';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-
+import * as jsPDF from 'jspdf';
 @Component({
   selector: 'app-stm-con-order-element',
   templateUrl: './stm-con-order-element.component.html',
@@ -16,6 +16,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 })
 export class StmConOrderElementComponent implements OnInit {
 
+
   @Input() item:CartItemId
   @Input() orderId:string
   added: Boolean
@@ -23,7 +24,8 @@ export class StmConOrderElementComponent implements OnInit {
   @Input() orderTotal: number
 
   constructor(private dialogService:DialogService,private orderService:OrderService,private afs: AngularFirestore) { }
-
+  @ViewChild('content',{ static: true }) content:ElementRef;
+  
   ngOnInit() {
     if(this.item.stmadded){
       this.added=true;
@@ -104,6 +106,24 @@ export class StmConOrderElementComponent implements OnInit {
 
         this.ngOnInit() 
   }
+
+  public downloadPdf(){
+
+    let doc = new jsPDF();
+    let specialElementHandlers={
+      '#editor' :function(element,renderer) {
+        return true;
+        
+      }
+    };
+    let content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML,15,15,{
+      'width':190,
+      'elementHandlers':specialElementHandlers
+    });
+    doc.save('report.pdf');
+  }
+
 
 }
 
