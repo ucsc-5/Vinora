@@ -417,8 +417,8 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
   let month2 = toDate.getMonth();
   let year2 = toDate.getFullYear();
 
-  let min = (year1*10000)+(month1*100)+(date1);
-  let max = (year2*10000)+(month2*100)+(date2);
+  let min = (year1*10000)+((month1+1)*100)+(date1);
+  let max = (year2*10000)+((month2+1)*100)+(date2);
 
   console.log(min+ "min value");
   console.log(max+ "max Value");
@@ -426,7 +426,7 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
   
   // where('encDate','<=',max).where('encDate','>=',min)
   
-  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0).where('saleRepId','==',"").where('encDate','<=',max)).snapshotChanges().pipe(
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0).where('saleRepId','==',"").where('encDate','>=',min).where('encDate','<=',max)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
@@ -437,6 +437,7 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
    
 
   }
+
   
 
 }

@@ -8,24 +8,26 @@
           
                       
                     
-                  <div class="list-group " id="list-tab" role="tablist">
-                      <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="currentOrders" >Current Orders</a>                  
-                      <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="newItems" >New Items</a>
-                      <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="registredConpanies" >Registered Companies</a>
-                      <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="allCompanies" >New Companies</a>
-                      <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="newStock" >New Stock</a>
-                      <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="confirmedOrders" >Confirmed Orders</a>
+              
+  <div class="list-group " id="list-tab" role="tablist">
+    <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="currentOrders" >Current Orders</a>                  
+    <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="registredConpanies" >Registered Companies</a>
+    <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="allCompanies" >New Companies</a>
+    <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="newStock" >New Stock</a>
+    <a class="list-group-item list-group-item-action transparent" routerLinkActive="active" routerLink="confirmedOrders" >Confirmed Orders</a>
 
-                      <button  class="transparent" mat-button   [matMenuTriggerFor]="reports">Reports</button>
+    <button  class="transparent" mat-button   [matMenuTriggerFor]="reports">Reports</button>
 
-                        <mat-menu #reports="matMenu">
-                          <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="previousOrders" >Purchased orders</a>
-                          <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="previousOrders" >Confirmed orders</a>
-                          <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="previousOrders" >Previous Deliveries</a>
-                          <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="registeredDeliveryCompany" >Registered Delivery companies</a>
-                        </mat-menu>
+      <mat-menu #reports="matMenu">
+        <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="previousOrders" >By Company</a>
+        <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="previousOrders" >By Item</a>
+        <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="registeredDeliveryCompany" >Registered Delivery companies</a>
+        <a class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="previousOrders" >Previous Deliveries</a>
+    
+      </mat-menu>
 
-                    </div>
+  </div>
+
               </div>  
          </div>
       </div>
