@@ -91,6 +91,7 @@ export class RegisterRetailerComponent implements OnInit {
     const url ="https://www.stickpng.com/assets/images/585e4bf3cb11b227491c339a.png";
     const latitude = this.latitude;
     const longitude = this.longitude;
+    const orderState = 0;
     
     const iniCoord = new firebase.firestore.GeoPoint(latitude,longitude);
 
@@ -106,7 +107,7 @@ export class RegisterRetailerComponent implements OnInit {
                 ()=>{
                   this.authService.login(email,password).then(x=>{
                     const retailerId = this.afAuth.auth.currentUser.uid;
-                    const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,iniCoord};
+                    const retailer: Retailer= {shopName,email,address,contactNumber,state,url,retailerId,iniCoord,orderState};
                     this.retailerCollection.doc(retailerId).set(retailer).then(
                                 res=>{
                                   

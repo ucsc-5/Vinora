@@ -20,6 +20,10 @@ export class CompanyRegisteredRetailersComponent implements OnInit {
   ngOnInit() {
     console.log(this.retailerToken.id);
     this.registeredRetailers=this.reatailerService.getRetailerById(this.retailerToken.id);
+    this.registeredRetailers.subscribe(x=>{
+      x.length
+      
+    })
   }
 
   hold(){

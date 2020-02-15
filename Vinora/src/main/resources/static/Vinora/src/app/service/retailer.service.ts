@@ -16,6 +16,7 @@ export interface Retailer { shopName: string;
                             url: string;
                             retailerId: string;  
                             iniCoord: firebase.firestore.GeoPoint;
+                            orderState:number;
                           }
 
 
