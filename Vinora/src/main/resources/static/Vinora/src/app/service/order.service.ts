@@ -406,27 +406,27 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
     console.log("Hashini"+fromDate);
     console.log("Hashini"+toDate);
 
+
+
+
     let date1 = fromDate.getDate();
-    console.log(date1);
+  let month1 = fromDate.getMonth();
+  let year1 = fromDate.getFullYear();
 
-  //   let date1 = fromDate.getDate();
-  // let month1 = fromDate.getMonth();
-  // let year1 = fromDate.getFullYear();
+  let date2 = toDate.getDate();
+  let month2 = toDate.getMonth();
+  let year2 = toDate.getFullYear();
 
-  // let date2 = toDate.getDate();
-  // let month2 = toDate.getMonth();
-  // let year2 = toDate.getFullYear();
+  let min = (year1*10000)+(month1*100)+(date1);
+  let max = (year2*10000)+(month2*100)+(date2);
 
-  // let min = (year1*10000)+(month1*100)+(date1);
-  // let max = (year2*10000)+(month2*100)+(date2);
-
-  // console.log(min+ "min value");
-  // console.log(max+ "max Value");
+  console.log(min+ "min value");
+  console.log(max+ "max Value");
 
   
   // where('encDate','<=',max).where('encDate','>=',min)
   
-  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0).where('saleRepId','==',"")).snapshotChanges().pipe(
+  const orders:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('retailerId','==',retailerId).where('state','==',0).where('saleRepId','==',"").where('encDate','<=',max)).snapshotChanges().pipe(
     map(actions => actions.map(a => {
       const data = a.payload.doc.data() as Order;
       const id = a.payload.doc.id;
@@ -437,5 +437,6 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
    
 
   }
+  
 
 }

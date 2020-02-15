@@ -1,7 +1,6 @@
-
 <div>
-    <form (ngSubmit)="onSubmitReport()" [formGroup]="dateForm">
-        <div class="form-group">
+    <!-- <form (ngSubmit)="onSubmitReport()" [formGroup]="dateForm"> -->
+        <!-- <div class="form-group">
             <label for="InputFormdate">From</label>
             <input type="Date" formControlName="fromDate" class="form-control" id="InputFormdate">
         </div>
@@ -9,11 +8,45 @@
         <div class="form-group">
             <label for="InputTodate">From</label>
             <input type="Date" formControlName="toDate" class="form-control" id="InputTodate">
-        </div>
+        </div> -->
 
+
+        <div class="col-5">
+            <h4>Date Range</h4>
+    
+                <mat-form-field>
+                  <mat-label>From</mat-label>
+                  <input matInput [matDatepicker]="dp1" [(ngModel)]="fromDate" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                  <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+                </mat-form-field>
+              <br>
+    
+                <mat-form-field>
+                  <mat-label>To</mat-label>
+                  <input matInput [matDatepicker]="dp2" [(ngModel)]="toDate" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                  <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+                </mat-form-field>
+    
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="dateRangeTag">Active</mat-checkbox>
+                </section>
+    
+                <button mat-button color="primary" (click)="onSearchDateRange()" [disabled]="!dateRangeTag">Search</button>
+    
+              <hr>
+    
+    
+    
+    
+    
+                
+              
+        </div>
         <button (click)="downloadPdf()">Download pdf</button>
-        
-    </form>
+<!--         
+    </form> -->
 </div>
 <div id="content" #content>
                             

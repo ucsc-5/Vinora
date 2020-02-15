@@ -100,19 +100,19 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
 
-  // onSearchDateRange(){
-  //   this.specificDatetag=false;
-  //   console.log(this.fromDate + " form date");
-  //   console.log(this.toDate+ " To date");
+  onSearchDateRange(){
+    this.specificDatetag=false;
+    console.log(this.fromDate + " form date");
+    console.log(this.toDate+ " To date");
     
-  //   this.orders= this.orderService.getConformOrdersByDateRange(this.fromDate,this.toDate,this.companyId,this.stockManagerId);
+    this.orders= this.orderService.getConformOrdersByDateRange(this.fromDate,this.toDate,this.companyId,this.stockManagerId);
 
-  //    this.orders.subscribe(x=>{
-  //     x.forEach(element=>{
-  //       console.log(element);
-  //     })
-  //   })
-  // }
+     this.orders.subscribe(x=>{
+      x.forEach(element=>{
+        console.log(element);
+      })
+    })
+  }
 
   onSearchDate(){
     let date = this.specificDate.getDate();
