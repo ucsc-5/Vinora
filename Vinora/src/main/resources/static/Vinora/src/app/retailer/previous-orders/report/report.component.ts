@@ -71,6 +71,7 @@ export class ReportComponent implements OnInit {
   public onSubmitReport(){
     this.reportService.getreportByDate(this.fromdate.value,this.toDate.value);
     this.orderService. getreportByDate(this.fromdate.value,this.toDate.value,this.companyId,this.retailerId);
+    this.orderService.getConformOrdersByDateRange(this.fromdate.value,this.toDate.value,this.companyId,this.retailerId);
    
   }
 

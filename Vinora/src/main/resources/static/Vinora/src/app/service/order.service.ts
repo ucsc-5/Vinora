@@ -10,7 +10,7 @@ import { CartItem, CartItemId, CartService } from './cart.service';
 import { DatePipe } from '@angular/common';
 
 export interface Order{
-    createDate : Date; 
+    createDate : string; 
     retailerId: string;
     companyId: string;
     total: number;
@@ -61,8 +61,7 @@ export class OrderService {
 
   addItems(cartItems:CartItemId[],companyId:string,retailerId:string,id:string){
     let theDate= new Date()
-    // let createDate = theDate.toString();
-    let createDate = theDate;
+    let createDate = theDate.toString();
     let date = theDate.getDate();
     let month = theDate.getMonth()+1;
     let year = theDate.getFullYear();
@@ -402,19 +401,25 @@ getConfirmedOrdersByRetaiilerIdCompanyIdRetailerId(companyId:string,stockManager
 
     console.log("Rangala"+companyId);
     console.log("Rangala"+retailerId);
+    console.log("Hashini"+fromDate);
+    console.log("Hashini"+toDate);
+
     let date1 = fromDate.getDate();
-  let month1 = fromDate.getMonth();
-  let year1 = fromDate.getFullYear();
+    console.log(date1);
 
-  let date2 = toDate.getDate();
-  let month2 = toDate.getMonth();
-  let year2 = toDate.getFullYear();
+  //   let date1 = fromDate.getDate();
+  // let month1 = fromDate.getMonth();
+  // let year1 = fromDate.getFullYear();
 
-  let min = (year1*10000)+(month1*100)+(date1);
-  let max = (year2*10000)+(month2*100)+(date2);
+  // let date2 = toDate.getDate();
+  // let month2 = toDate.getMonth();
+  // let year2 = toDate.getFullYear();
 
-  console.log(min+ "min value");
-  console.log(max+ "max Value");
+  // let min = (year1*10000)+(month1*100)+(date1);
+  // let max = (year2*10000)+(month2*100)+(date2);
+
+  // console.log(min+ "min value");
+  // console.log(max+ "max Value");
 
   
   // where('encDate','<=',max).where('encDate','>=',min)

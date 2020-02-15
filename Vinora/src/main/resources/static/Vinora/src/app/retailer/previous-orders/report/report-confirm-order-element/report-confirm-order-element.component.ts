@@ -24,7 +24,7 @@ export class ReportConfirmOrderElementComponent implements OnInit {
     
     this.company = this.companyService.getCompanyById(this.confirmOrder.companyId);
     this.items = this.orderService.getItemsByOrderId(this.confirmOrder.id);
-    this.reportService.getDate(this.confirmOrder.createDate);
+    // this.reportService.getDate(this.confirmOrder.createDate);
   
   }
 
