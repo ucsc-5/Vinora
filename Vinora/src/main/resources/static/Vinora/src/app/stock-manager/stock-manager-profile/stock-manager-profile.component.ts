@@ -17,7 +17,11 @@ import { CustomPasswordValidator } from 'src/app/shared/custom-password-validato
 export class StockManagerProfileComponent implements OnInit {
 
   message: any;
+  frobiddenContactNumbers: Array<string> = ['000000000','0000000000'];
   
+  updateNumber: FormGroup;
+  resetPasswordForm: FormGroup;
+
   private basePath = 'stockManagers';
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
@@ -26,7 +30,7 @@ export class StockManagerProfileComponent implements OnInit {
   stockManagerEmail: string;
   downloadURL: Observable<any>;
   valid;
-  resetPasswordForm: FormGroup;
+  validtp;
 
 
   constructor(private StockManagerService:StockManagerService,private afAuth:AngularFireAuth,private storage:AngularFireStorage,private dialogService:DialogService) {
@@ -35,6 +39,10 @@ export class StockManagerProfileComponent implements OnInit {
 
   ngOnInit() {
     this.stockManager= this.StockManagerService.getStockManagerByEmail(this.stockManagerEmail); 
+
+    let numericRegex = /^[0-9]+$/;
+
+    let nicRanger = /^[vV0-9]+$/;
 
 
     this.resetPasswordForm = new FormGroup({
@@ -50,6 +58,10 @@ export class StockManagerProfileComponent implements OnInit {
       'confirmPassword': new FormControl(null,[Validators.required,Validators.minLength(6)])
     });
 
+    this.updateNumber = new FormGroup({
+      'contactNumber' : new FormControl(null,[Validators.required,Validators.minLength(9),Validators.maxLength(9),this.forbiddenContactNumbersValidator.bind(this),Validators.pattern(numericRegex)])
+    });
+
     this.resetPasswordForm.statusChanges.subscribe(state=>{
       console.log(state);
       
@@ -58,8 +70,29 @@ export class StockManagerProfileComponent implements OnInit {
       }else{
         this.valid=false;
       }
-    })   
+    }) 
 
+    this.updateNumber.statusChanges.subscribe(state=>{
+      console.log(state);
+      
+      if(state=="VALID"){
+        this.validtp=true;
+      }else{
+        this.validtp=false;
+      }
+    }) 
+
+    
+    
+    
+
+  }
+
+  forbiddenContactNumbersValidator(control: FormControl):{[s:string]: boolean}{
+    if(this.frobiddenContactNumbers.indexOf(control.value) != -1){
+      return {'contactNumberForbidden': true};
+    }
+    return null;
   }
 
   

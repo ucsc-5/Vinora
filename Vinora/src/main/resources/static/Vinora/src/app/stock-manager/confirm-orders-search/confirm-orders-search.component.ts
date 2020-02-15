@@ -116,13 +116,13 @@ export class ConfirmOrdersSearchComponent implements OnInit {
 
   onSearchDate(){
     let date = this.specificDate.getDate();
-    let month = this.specificDate.getMonth();
+    let month = this.specificDate.getMonth()+1;
     let year = this.specificDate.getFullYear();
     var encDate = (year*10000)+(month*100)+(date);
 
     console.log(encDate);
     
-    this.orders = this.afs.collection('orders',ref=>ref.where('encDate','==',encDate).where('stockManagerId','==',this.stockManagerId)).snapshotChanges().pipe(
+    this.orders = this.afs.collection('orders',ref=>ref.where('encDate','==',encDate).where('state','==',0).where('companyId','==',this.companyId)).snapshotChanges().pipe(
       map(actions => actions.map(a => { 
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -138,9 +138,15 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchYearMonth(){
-    console.log(this.year+"year");
-    console.log(this.months[this.monthIndex]);
-    this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('year','==',this.year).where('month','==',this.months[this.monthIndex])).snapshotChanges().pipe(
+    console.log(this.year);
+
+    console.log(this.monthIndex);
+    
+    // console.log(this.months[this.monthIndex]);
+
+    // this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('year','==',this.year).where('month','==',this.months[this.monthIndex])).snapshotChanges().pipe(
+    this.orders = this.afs.collection('orders',ref=>ref.where('year','==',this.year).where('month','==',this.monthIndex)).snapshotChanges().pipe(
+     
       map(actions => actions.map(a => { 
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -160,8 +166,9 @@ export class ConfirmOrdersSearchComponent implements OnInit {
     console.log(this.selectRetailer.value.retailer);
     var retailerId = this.selectRetailer.value.retailer;
 
-    this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('retailerId','==',this.retailer)).snapshotChanges().pipe(
-      map(actions => actions.map(a => { 
+    // this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('retailerId','==',this.retailer)).snapshotChanges().pipe(
+      this.orders = this.afs.collection('orders',ref=>ref.where('retailerId','==',retailerId)).snapshotChanges().pipe(
+        map(actions => actions.map(a => { 
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
         return { id, ...data };

@@ -37,8 +37,8 @@ export class CompanyRegisteredComponent implements OnInit {
       }
     };
     let content = this.content.nativeElement;
-    doc.fromHTML(content.innerHTML,5,5,{
-      'width':50,
+    doc.fromHTML(content.innerHTML,20,20,{
+      'width':190,
       'elementHandlers':specialElementHandlers
     });
     doc.save('report.pdf');

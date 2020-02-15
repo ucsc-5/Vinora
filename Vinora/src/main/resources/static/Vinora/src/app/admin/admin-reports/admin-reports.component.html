@@ -1,1 +1,102 @@
-<p>admin-reports works!</p>
+
+<div class="row" id="content1" #content1 style="height: auto;">
+    <div class="col-12">
+
+    <h2>Requested companies</h2>
+   
+    <!-- <p> Date: {{date}}</p> -->
+    <table *ngIf="requestedCompanies | async;  let companies2" >
+            <caption>Registered Companies on Vinora</caption><br>
+            <thead>
+                    <tr>
+                            <th>
+                                    Company Name
+                            </th>
+                            <th>
+                                    Email 
+                            </th>
+                            <th>
+                                    Address
+                            </th>
+                            <th>
+                                    Contact number
+                            </th>
+                    </tr>
+            </thead>
+            <tbody>
+            
+            <tr *ngFor="let company of companies2">
+                    <td>
+                            {{company.companyName}}  
+                    </td>
+                    <td>
+                            {{company.email}}
+                    </td>
+                    <td>
+                            {{company.address}}    
+                    </td>
+                    <td>
+                            {{company.contactNumber}}
+                    </td>
+            </tr>
+            </tbody>
+    </table>
+    <br>
+
+    <button mat-raised-button (click)=requestedDownloadPdf()>Download PDF</button>
+</div>
+</div>
+
+<br>
+<hr>
+<br>
+
+
+<div class="row" id="content2" #content2 style="height: auto;">
+    <div class="col-12">
+
+    <h2>Registered companies</h2>
+   
+    <!-- <p> Date: {{date}}</p> -->
+    <table *ngIf="registeredCompanies | async;  let companies2" >
+            <caption>Registered Companies on Vinora</caption><br>
+            <thead>
+                    <tr>
+                            <th>
+                                    Company Name
+                            </th>
+                            <th>
+                                    Email 
+                            </th>
+                            <th>
+                                    Address
+                            </th>
+                            <th>
+                                    Contact number
+                            </th>
+                    </tr>
+            </thead>
+            <tbody>
+            
+            <tr *ngFor="let company of companies2">
+                    <td>
+                            {{company.companyName}}  
+                    </td>
+                    <td>
+                            {{company.email}}
+                    </td>
+                    <td>
+                            {{company.address}}    
+                    </td>
+                    <td>
+                            {{company.contactNumber}}
+                    </td>
+            </tr>
+            </tbody>
+    </table>
+    <br>
+
+    <button mat-raised-button (click)=registeredDownloadPdf()>Download PDF</button>
+</div>
+</div>
+
