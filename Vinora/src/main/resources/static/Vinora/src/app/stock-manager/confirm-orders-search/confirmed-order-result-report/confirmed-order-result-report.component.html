@@ -1,0 +1,42 @@
+<div class="row" *ngIf="items | async; let items;" >
+        <table *ngFor="let item of items">
+            <thead>
+                <tr>
+                    <th>
+                        Brand
+                    </th>
+
+                    <th>
+                        Item Name
+                    </th>
+
+                    <th>
+                        Unit price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        {{item.brand}}
+                    </td>
+                    <td>
+                        {{item.itemName}}
+                    </td>
+                    <td>
+                        {{item.unitPrice}}
+                    </td>
+                    <td>
+                        {{item.quantity}}
+                    </td>
+                   
+                </tr>
+            </tbody>
+
+        </table>        
+    
+</div>

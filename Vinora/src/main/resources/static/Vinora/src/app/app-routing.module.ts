@@ -69,6 +69,7 @@ import { DeliveryCompanyReportComponent } from './retailer/delivery-company-repo
 import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.component';
 import { ReturnGoodsComponent } from './stock-manager/return-goods/return-goods.component';
 import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
+import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-orders-search/confirmed-order-result-report/confirmed-order-result-report.component';
 
 
 
@@ -138,6 +139,7 @@ const routes: Routes = [
             { path: 'salesRepresentatives/:saleRepId', component: StmSalerepDetailsComponent},
             { path: 'returnGoods', component: ReturnGoodsComponent},
             { path: 'ConfirmOrdersSearchComponent', component: ConfirmOrdersSearchComponent},
+            { path: 'ConfirmOrdersSearchComponent/report', component: ConfirmedOrderResultReportComponent},
 
   ]},
 
