@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { OrderItem, OrderItemId } from './item.service';
+import { OrderItem, OrderItemId, ItemService } from './item.service';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable, Timestamp } from 'rxjs';
@@ -56,7 +56,8 @@ export class OrderService {
   total: number=0;
  
   saleRepId
-  constructor(private datePipe: DatePipe,private cartService:CartService,private afs: AngularFirestore,private db: AngularFireDatabase) {
+  newQuantity: number;
+  constructor(private datePipe: DatePipe,private cartService:CartService,private afs: AngularFirestore,private db: AngularFireDatabase,private itemService:ItemService) {
     this.orderCollection = this.afs.collection<OrderItem>('orders');
     
   }
@@ -83,9 +84,35 @@ export class OrderService {
       const orderDa = new Date();
       const orderRet: orderRet={retailerId,orderDa,quantity}
       this.afs.collection('items').doc(element.itemId).collection(`${retailerId}`).doc(tempId).set(orderRet);
-      console.log("Hashiniii"+element.itemId);
+    
       total= element.total+total;
       this.cartService.deleteItem(element.id);
+      this.afs.collection('retailers').doc(`${retailerId}`).collection('companyWithItems').doc(`${companyId}`).collection('items').doc(element.itemId).get().subscribe(x=>{
+       
+        const brand = x.data().brand;
+        const category = x.data().category;
+        const companyId = x.data().companyId;
+        const description = x.data().description;
+        const itemCount =+x.data().itemCount+element.quantity;
+        const itemImagePath = x.data().itemImagePath;
+        const itemName = x.data().itemName;
+        const quantity = +x.data().quantity;
+        const reOrder = x.data().reOrder;
+        const reOrderingLevel = +x.data().reOrderingLevel;
+        const state = x.data().state;
+        const type = x.data().type;
+        const unitPrice =+x.data().unitPrice;
+        const unitValue = +x.data().unitValue;
+
+
+      
+  
+     
+        console.log("item count"+this.newQuantity);
+      
+        this.itemService.updateQuantityItem(element.itemId,{itemCount:this.newQuantity},retailerId,companyId);
+      
+      })
     })
     const order: Order ={createDate,retailerId,companyId,total,state,tempTotal,saleRepId,stockManagerId,date,month,year,encDate,saleRepAccept,shopName,companyName};
     this.afs.collection('retailers').doc(retailerId).update({orderState:0});
