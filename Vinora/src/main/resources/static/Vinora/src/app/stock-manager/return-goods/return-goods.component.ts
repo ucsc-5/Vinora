@@ -37,25 +37,25 @@ export class ReturnGoodsComponent implements OnInit {
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       console.log(idTokenResult.claims.cmpId);
       this.companyId= idTokenResult.claims.cmpId;
-      
     })
 
-      this.returnGoods = this.afs.collection('returnGoods',ref=>ref.where('companyId','==',this.companyId)).snapshotChanges().pipe(
-       map(actions => actions.map(a => {
-         const data = a.payload.doc.data() as ReturnGoods;
-         const id = a.payload.doc.id;
-         return { id, ...data };
-       }))
-     );
-
-     this.returnGoods.subscribe(x=>{
-       x.forEach(element=>{
-         console.log(element);
-       })
-     })
+      
   }
 
   ngOnInit() {
+    this.returnGoods = this.afs.collection('returnGoods',ref=>ref.where('companyId','==',this.companyId)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as ReturnGoods;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+
+    this.returnGoods.subscribe(x=>{
+      x.forEach(element=>{
+        console.log(element);
+      })
+    })
   }
 
 }

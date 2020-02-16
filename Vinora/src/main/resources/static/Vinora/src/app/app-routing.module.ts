@@ -118,7 +118,7 @@ const routes: Routes = [
         
         
         children:[
-            { path: '', component: ConfirmOrdersSearchComponent},
+            { path: '', component: StockManagerDashboardComponent},
             { path: 'mainStock', component:CompanyMainStockComponent},
             { path: 'mainStock/:itemId', component:UpdateItemDetailsComponent},
             { path: 'updateItems', component: UpdateItemsComponent},
@@ -136,7 +136,8 @@ const routes: Routes = [
               ]},
             { path: 'salesRepresentatives', component: StmComSalerepsComponent},
             { path: 'salesRepresentatives/:saleRepId', component: StmSalerepDetailsComponent},
-            { path: 'returnGoods', component: ReturnGoodsComponent}
+            { path: 'returnGoods', component: ReturnGoodsComponent},
+            { path: 'ConfirmOrdersSearchComponent', component: ConfirmOrdersSearchComponent},
 
   ]},
 
