@@ -157,9 +157,6 @@ import { ReportByItemElementComponent } from './retailer/report-by-item/report-b
 import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
 import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-orders-search/confirmed-order-result-report/confirmed-order-result-report.component';
 
-// import { WelcomeRegisteredCompanyComponent } from './home/welcome/welcome-registered-company/welcome-registered-company.component';
-// import { WelcomeRegisteredCompanyElementComponent } from './home/welcome/welcome-registered-company/welcome-registered-company-element/welcome-registered-company-element.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -270,8 +267,6 @@ import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-ord
     ReportByItemElementComponent,
     ItemReportComponent,
     ConfirmedOrderResultReportComponent
-    // WelcomeRegisteredCompanyComponent,
-    // WelcomeRegisteredCompanyElementComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
