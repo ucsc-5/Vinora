@@ -16,7 +16,7 @@ export class RetailerDashboardForSTMComponent implements OnInit {
   retailer: Observable<RetailerId[]>;
   currentOrders: Observable<OrderId[]>;
   confirmedOrders: Observable<OrderId[]>;
-  assignedOrders: Observable<OrderId[]>;
+  deleveredOrders: Observable<OrderId[]>;
 
   latitude = 6.902196;
   longitude = 79.861133;
@@ -42,7 +42,9 @@ export class RetailerDashboardForSTMComponent implements OnInit {
     this.retailer = this.retailerService.getRetailerById(this.retailerId);
     this.currentOrders = this.orderService.getCurrentOrdersByRetailerIdCompanyId(this.companyId,this.retailerId);
     this.confirmedOrders = this.orderService.getConfirmedOrdersByRetaiilerIdCompanyId(this.companyId,this.retailerId);
-    this.assignedOrders = this.orderService.getAssignedOrdersByRetailerIdCompanyId(this.companyId,this.retailerId);
+    // this.assignedOrders = this.orderService.getAssignedOrdersByRetailerIdCompanyId(this.companyId,this.retailerId);
+    this.deleveredOrders = this.orderService.getDeleveredOrdersByRetailerIdCompanyId(this.companyId,this.retailerId);
+    
   }
 
 

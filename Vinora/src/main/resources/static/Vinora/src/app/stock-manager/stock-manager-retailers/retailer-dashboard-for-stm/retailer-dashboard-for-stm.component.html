@@ -3,7 +3,7 @@
     <button (click)="onProfile()">Profile</button>
     <button (click)="onPurches()">Purches</button>
     <button (click)="onConfirmed()">Confirmed</button>
-    <button (click)="onAssigned()">Assigned</button>
+    <!-- <button (click)="onAssigned()">Assigned</button> -->
     <button (click)="onDelivered()">Delivered</button>
   </div>
 
@@ -57,13 +57,13 @@
         <!-- <app-retailer-orders-for-stm *ngFor="let order of orders" [order]="order" ></app-retailer-orders-for-stm> -->
    
 
-    <div class="col-12" *ngIf="assigned" >
-        <app-retailer-orders-for-stm *ngFor="let order of assignedOrders | async" [order]="order" ></app-retailer-orders-for-stm>
-    </div>
+    <!-- <div class="col-12" *ngIf="assigned" >
+       
+    </div> -->
 
 
     <div class="col-12" *ngIf="delivered">
-
+      <app-retailer-orders-for-stm *ngFor="let order of deleveredOrders | async" [order]="order" ></app-retailer-orders-for-stm>
     </div>
     
     
