@@ -48,37 +48,41 @@ export class LoginComponent implements OnInit {
       console.log(email);
       console.log(password);
       this.authService.logout();
+      this.showSpinner=false;
       var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((res)=>{
+
         this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
           const uid= idTokenResult.claims.user_id;
           console.log(uid+" this is the uid");
           
           if(idTokenResult.claims.retailer){
             this.router.navigate(['/retailer/',uid]);
+            return;
           }else if(idTokenResult.claims.manager){
             this.router.navigate(['/manager/',uid]);
+            return;
           }else if(idTokenResult.claims.admin){
             this.router.navigate(['/admin/',uid]);
+            return;
           }else if(idTokenResult.claims.stockManager){
             this.router.navigate(['/stockManager/',uid]);
+            return;
           }else if(idTokenResult.claims.salesRef){
             this.router.navigate(['/salesRepresntative/',uid]);
+            return;
           }
           else{
-            this.router.navigate(['/']);
-            console.log("another user");
+            const uidFromMob=this.afAuth.auth.currentUser.uid
+            this.router.navigate(['/retailer/',uidFromMob]);
+            console.log("this is the elese part");
+            console.log(uidFromMob+"     uidFromMob");            
           }
-        }
-        )   
+        }  )   
         
       }).catch(function(error){
         console.log("this is the new error"+error);
-        
-      return error.message
-      });
-
-    this.showSpinner=false;
-    console.log(this.authService.user.uid); 
+        return error.message
+      });   
   }
 
   logout() {

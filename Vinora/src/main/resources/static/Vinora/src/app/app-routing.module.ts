@@ -81,7 +81,7 @@ const routes: Routes = [
     ]},
 
   { path: 'retailer/:retailerId',component: RetailerComponent ,
-        canActivate: [RetailerGuardService],
+        // canActivate: [RetailerGuardService],
         // canActivateChild:[ValidEmailGuardService], 
         children:[
             { path: '' , component: RetailerDashboardComponent},
