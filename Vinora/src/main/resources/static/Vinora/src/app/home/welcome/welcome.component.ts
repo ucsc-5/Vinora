@@ -16,6 +16,9 @@ export class WelcomeComponent implements OnInit {
   constructor(private companyServise:CompanyService,private router:Router,private route:ActivatedRoute) { }
   ngOnInit() {
     this.registeredCompanies= this.companyServise.getRegisteredCompanies();
+    this.registeredCompanies.subscribe(s=>{
+      console.log(s.length);
+    })
   }
   
   onToRegisteredCompanies(){
