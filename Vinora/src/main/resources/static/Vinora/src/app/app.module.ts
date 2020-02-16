@@ -147,6 +147,7 @@ import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm
 import { DatePipe } from '@angular/common';
 import { DeliveryCompanyReportComponent } from './retailer/delivery-company-report/delivery-company-report.component';
 import { RegDeComElementComponent } from './retailer/delivery-company-report/reg-de-com-element/reg-de-com-element.component';
+import { StmUpdateTepnumComponent } from './stock-manager/stock-manager-profile/stm-update-tepnum/stm-update-tepnum.component';
 
 
 @NgModule({
@@ -252,6 +253,7 @@ import { RegDeComElementComponent } from './retailer/delivery-company-report/reg
     StmSalerepDetailsComponent,
     DeliveryCompanyReportComponent,
     RegDeComElementComponent,
+    StmUpdateTepnumComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

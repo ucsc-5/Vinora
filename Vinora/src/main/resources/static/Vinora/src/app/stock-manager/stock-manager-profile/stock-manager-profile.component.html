@@ -19,26 +19,25 @@
                         <input type="file" (change)="selectFile($event)">
                         <!-- <input type="file" (change)="uploadFile($event)"> -->
                 </label>
-
                 <!-- <button type="submit" class="btn btn-success">Upload Image</button> -->
-                <button mat-raised-button type="submit">Upload Image</button>
-                
+                <button mat-raised-button type="submit">Upload Image</button>      
         </form> 
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{stockManager.fullName}}</h5>
               <p class="card-text">
-                  
-                      
+                     
                       <b>email: </b>{{stockManager.email}}<br>
                       <b>Address: </b>{{stockManager.address}}<br>
                       <b>Contact: </b>{{stockManager.contactNumber}}  
                     
                       <br>
-                    
-                      
                   </p>
+
+                  <app-stm-update-tepnum [stockManager]="stockManager">
+
+                  </app-stm-update-tepnum>
 
           <!-- <form [fromGroup]="updateNumber">
             <mat-form-field class="example-full-width">

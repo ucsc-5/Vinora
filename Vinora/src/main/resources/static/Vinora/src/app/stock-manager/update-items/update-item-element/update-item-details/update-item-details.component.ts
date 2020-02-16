@@ -6,6 +6,7 @@ import { NgForm,FormGroup, FormControl, Validators} from '@angular/forms';
 import { DialogService } from 'src/app/service/dialog.service';
 import { AngularFireObject,AngularFireDatabase } from 'angularfire2/database';
 import { map, switchMap, finalize } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-update-item-details',
@@ -34,7 +35,7 @@ mySubscription: any;
   quantityRef: AngularFireObject<any>
   itemsQuantity: Observable<any[]>;
 
-  constructor(private db: AngularFireDatabase,private router:Router,private route:ActivatedRoute,private itemService:ItemService,private dialogService:DialogService) {
+  constructor(private afs: AngularFirestore,private db: AngularFireDatabase,private router:Router,private route:ActivatedRoute,private itemService:ItemService,private dialogService:DialogService) {
     // this.router.routeReuseStrategy.shouldReuseRoute = function () {
     //   return false;
     // };
@@ -143,26 +144,50 @@ mySubscription: any;
 
   updateQuantity() {
     const quantity = this.updateQuantityForm.value.quantity;
-    console.log(quantity);
+    // console.log(this.item.reOrder);
+    
+    // console.log(quantity+ " from the form");
+    // console.log(this.item.reOrder+ " reorder");
+    // console.log(this.item.reOrderingLevel+" re ordering lebel");
+    // console.log(this.item.quantity+" the quantity availabale");
+  
+    
+    const message="Confrim"
     
     const newQuantity= this.item.quantity+quantity;
-    const message="Confrim"
-    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
-      res=>{
-        if(res){
-          this.message = this.itemService.updateItem(this.itemId,{quantity: newQuantity}).then(
-            x=>{
-              this.ngOnInit();
-              return "Update is done";
-             
-            }
-          ).catch(
-            error=>{error}
-          )
+
+    if(newQuantity>this.item.reOrderingLevel){
+      this.dialogService.openConfirmDialog(message).afterClosed().subscribe(
+        res=>{
+          if(res){
+            // this.message = this.itemService.updateItem(this.itemId,{quantity: newQuantity}).then(
+              this.afs.collection('items').doc(this.itemId).update({quantity:newQuantity,reOrder:false}).then(
+              x=>{
+                this.ngOnInit();
+                return "Update is done";
+              }
+            ).catch(
+              error=>{error}
+            )
+          }
         }
-      }
-    );
-    console.log(this.message);
+      );
+      console.log(this.message);
+    }else{
+
+      this.afs.collection('items').doc(this.itemId).update({quantity:newQuantity}).then(
+        x=>{
+          this.ngOnInit();
+          return "Update is done";
+        }
+      ).catch(
+        error=>{error}
+      )
+
+    }
+    
+    
+ 
       
   }
 

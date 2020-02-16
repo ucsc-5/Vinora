@@ -17,9 +17,9 @@ import { CustomPasswordValidator } from 'src/app/shared/custom-password-validato
 export class StockManagerProfileComponent implements OnInit {
 
   message: any;
-  frobiddenContactNumbers: Array<string> = ['000000000','0000000000'];
+
   
-  updateNumber: FormGroup;
+
   resetPasswordForm: FormGroup;
 
   private basePath = 'stockManagers';
@@ -30,7 +30,7 @@ export class StockManagerProfileComponent implements OnInit {
   stockManagerEmail: string;
   downloadURL: Observable<any>;
   valid;
-  validtp;
+
 
 
   constructor(private StockManagerService:StockManagerService,private afAuth:AngularFireAuth,private storage:AngularFireStorage,private dialogService:DialogService) {
@@ -58,9 +58,7 @@ export class StockManagerProfileComponent implements OnInit {
       'confirmPassword': new FormControl(null,[Validators.required,Validators.minLength(6)])
     });
 
-    this.updateNumber = new FormGroup({
-      'contactNumber' : new FormControl(null,[Validators.required,Validators.minLength(9),Validators.maxLength(9),this.forbiddenContactNumbersValidator.bind(this),Validators.pattern(numericRegex)])
-    });
+   
 
     this.resetPasswordForm.statusChanges.subscribe(state=>{
       console.log(state);
@@ -72,15 +70,7 @@ export class StockManagerProfileComponent implements OnInit {
       }
     }) 
 
-    this.updateNumber.statusChanges.subscribe(state=>{
-      console.log(state);
-      
-      if(state=="VALID"){
-        this.validtp=true;
-      }else{
-        this.validtp=false;
-      }
-    }) 
+
 
     
     
@@ -88,12 +78,6 @@ export class StockManagerProfileComponent implements OnInit {
 
   }
 
-  forbiddenContactNumbersValidator(control: FormControl):{[s:string]: boolean}{
-    if(this.frobiddenContactNumbers.indexOf(control.value) != -1){
-      return {'contactNumberForbidden': true};
-    }
-    return null;
-  }
 
   
   onAddImage(stockManager:StockManagerId){
@@ -122,22 +106,7 @@ export class StockManagerProfileComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
-  updateContactnumber(form:NgForm,stockManager:StockManagerId){
 
-    
-    const value1=form.value;
- 
-  this.message = this.StockManagerService.updatePhoneNumber(stockManager.id,value1);
-       
-
-  
-
-    console.log(this.message);
-
-
-    // this.StockManagerService.updatePhoneNumber(stockManager.id,{contactNumber:value1});
-
-  }
 
 
 

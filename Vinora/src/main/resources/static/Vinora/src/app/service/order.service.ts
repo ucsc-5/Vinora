@@ -11,11 +11,11 @@ import { DatePipe } from '@angular/common';
 
 export interface Order{
     createDate : string; 
-    retailerId: string;
-    companyId: string;
-    total: number;
-    state: number;
-    tempTotal: number;
+    retailerId: string; 
+    companyId: string; 
+    total: number; 
+    state: number; 
+    tempTotal: number; 
     saleRepId: string;
     stockManagerId: string;
     date: number;
@@ -23,7 +23,7 @@ export interface Order{
     year: number;
     encDate: number;
     saleRepAccept: number;
-    shopName:string;
+    shopName:string; 
     companyName:string;
 }
 
