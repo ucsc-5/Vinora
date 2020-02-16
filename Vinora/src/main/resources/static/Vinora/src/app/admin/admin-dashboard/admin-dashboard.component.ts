@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AdminDashboardComponent implements OnInit {
 
 
-  requestCompanies: Observable<CompanyId[]>;
+  requestCompanies: Observable<CompanyId[]>; 
   registeredCompanies: Observable<CompanyId[]>;
   constructor(private companyServise:CompanyService,private router:Router,private route:ActivatedRoute) { 
   }

@@ -180,7 +180,7 @@ export class CompanyService {
     return this.items;
   }
 
-
+ 
 
 
 // for find retailers of an each company
