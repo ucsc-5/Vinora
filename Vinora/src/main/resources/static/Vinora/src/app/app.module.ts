@@ -149,7 +149,9 @@ import { DeliveryCompanyReportComponent } from './retailer/delivery-company-repo
 import { RegDeComElementComponent } from './retailer/delivery-company-report/reg-de-com-element/reg-de-com-element.component';
 import { StmUpdateTepnumComponent } from './stock-manager/stock-manager-profile/stm-update-tepnum/stm-update-tepnum.component';
 import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.component';
-
+import { ReturnGoodsComponent } from './stock-manager/return-goods/return-goods.component';
+import { ReturnGoodRetailerComponent } from './stock-manager/return-goods/return-good-retailer/return-good-retailer.component';
+import { ReturnGoodsService } from './service/return-goods.service';
 
 @NgModule({
   declarations: [
@@ -256,6 +258,8 @@ import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.
     RegDeComElementComponent,
     StmUpdateTepnumComponent,
     ReportByItemComponent,
+    ReturnGoodsComponent,
+    ReturnGoodRetailerComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
@@ -307,6 +311,7 @@ import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.
     StmConfirmOrderTempService,
     SalesRepresentativeService,
     DatePipe,
+    ReturnGoodsService,
     {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}
     ],
   bootstrap: [

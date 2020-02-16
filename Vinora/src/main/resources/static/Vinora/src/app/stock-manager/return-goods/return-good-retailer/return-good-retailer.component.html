@@ -1,0 +1,31 @@
+<div class="row" *ngIf="retailer | async; let retailer;">
+    <div class="example-card" *ngFor="let retailer of retailer">
+        <table>
+            <tr>
+                <td>Retailer</td>
+                <td>{{retailer.shopName}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{retailer.address}}</td>
+            </tr>
+            <tr>
+                <td>
+                    Email
+                </td>
+                <td>
+                    {{retailer.email}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Contact
+                </td>
+                <td>
+                    {{retailer.contactNumber}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+</div>

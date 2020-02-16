@@ -67,6 +67,7 @@ import { CompanyNotRegisteredRetailersComponent } from './manager/company-retail
 // import { RegisteredRetailersComponent } from './registered-retailers/registered-retailers.component';
 import { DeliveryCompanyReportComponent } from './retailer/delivery-company-report/delivery-company-report.component';
 import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.component';
+import { ReturnGoodsComponent } from './stock-manager/return-goods/return-goods.component';
 
 
 
@@ -133,6 +134,7 @@ const routes: Routes = [
               ]},
             { path: 'salesRepresentatives', component: StmComSalerepsComponent},
             { path: 'salesRepresentatives/:saleRepId', component: StmSalerepDetailsComponent},
+            { path: 'returnGoods', component: ReturnGoodsComponent}
 
   ]},
 

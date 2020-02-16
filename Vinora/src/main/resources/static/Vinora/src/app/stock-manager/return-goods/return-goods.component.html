@@ -1,0 +1,57 @@
+<div class="row" *ngIf="returnGoods | async; let returnGood;">
+    <mat-card  class="col-4 example-card" *ngFor="let good of returnGood">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title> {{good.items.itemName}}</mat-card-title>
+          <mat-card-subtitle>{{good.items.brand}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image width="200px" height="200px" src="{{good.items.itemImagePath}}" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+     
+              <table>
+                  <tr>
+                      <td>
+                        <b>Ordered Quantity</b>:
+                      </td>
+                      <td>
+                        {{good.items.quantity}}
+                      </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <b>Returned Quantity</b>:
+                    </td>
+                    <td>
+                      {{good.returnGoodsQuantity}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <b>Reason</b>:
+                    </td>
+                    <td style="color:#ff5e5e;">
+                      {{good.comment}}
+                    </td>
+                  </tr>
+              </table>
+              <br>
+        
+
+              <app-return-good-retailer *ngFor="let good2 of returnGood" [good]="good2">
+
+              </app-return-good-retailer>
+          
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div> 
+
+    <!-- <div class="row" *ngIf="returnRetailer | async; let returnGood2;">
+      
+    </div> -->
