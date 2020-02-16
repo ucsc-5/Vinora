@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable,Inject } from '@angular/core';
-
+import { User } from  'firebase';
 import {FormControl, Validators, NgForm, FormGroup} from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
@@ -9,6 +9,7 @@ import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogOverviewExampleDialogComponent } from './dialog-overview-example-dialog/dialog-overview-example-dialog.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 
@@ -19,16 +20,14 @@ import { DialogOverviewExampleDialogComponent } from './dialog-overview-example-
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
- 
+  user:  User;
   showSpinner=false;
   loginForm: FormGroup;
   hide = true;
   message: string
-  // // email:string;
-  // emailFeild = new FormControl('', [Validators.required, Validators.email]);
-  // passwordFeild = new FormControl(null,[Validators.required,Validators.min(6)]);
 
-  constructor(public dialog: MatDialog,public afAuth: AngularFireAuth, private authService : AuthenticationService,private db: AngularFireDatabase) {
+  constructor(public  router:  Router,public dialog: MatDialog,public afAuth: AngularFireAuth, private authService : AuthenticationService,private db: AngularFireDatabase) {
+
   }
 
 
@@ -43,40 +42,40 @@ export class LoginComponent implements OnInit {
   openDialog(): void {
      this.dialog.open(DialogOverviewExampleDialogComponent);
   }
-  signUp() {
+  async signUp() {
       const email=this.loginForm.value.email;
       const password = this.loginForm.value.password;
       console.log(email);
       console.log(password);
       this.authService.logout();
-    //   this.authService.login(email,password).then(res=>{
-    //   // setTimeout(() => {
-    //   //   this.message=null;
-    //   //  }, 2000);
-       
-    //  }).catch(error=>{
-    //   this.message="Please check your email and password again!!"
-    //    console.log(" this is the error  "+error);
-    //  })
-    // this.showSpinner=true;
-
-    //  this.authService.login(email,'Vinora@123');
-    // this.authService.login('stm1com3@gmail.com','123456789v');
-    //  this.authService.login('stm1com1@gmail.com','987654321v');
-       this.authService.login('ret2@gmail.com','Vinora@123');
-    // this.authService.login('ret1@gmail.com','Vinora@123');
-      // this.authService.login('admin@gmail.com','123123');
-    // this.authService.login('company1@gmail.com','Vinora@123');
-        // this.authService.login('company3@gmail.com','Vinora@123');
-        //  this.authService.login('company1@gmail.com','Vinora@123');
-
-    // this.authService.login(email,'Vinora@123');
-    // this.authService.login('admin@gmail.com','123123');
-      // this.authService.login('ret3@gmail.com','Vinora@123');
-
-    //  this.authService.login('toroyalvintage@gmail.com','Vinora@123');
-
-    //  this.authService.login('udulaindunil@gmail.com','Vinora@123');
+      var result = await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((res)=>{
+        this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
+          const uid= idTokenResult.claims.user_id;
+          console.log(uid+" this is the uid");
+          
+          if(idTokenResult.claims.retailer){
+            this.router.navigate(['/retailer/',uid]);
+          }else if(idTokenResult.claims.manager){
+            this.router.navigate(['/manager/',uid]);
+          }else if(idTokenResult.claims.admin){
+            this.router.navigate(['/admin/',uid]);
+          }else if(idTokenResult.claims.stockManager){
+            this.router.navigate(['/stockManager/',uid]);
+          }else if(idTokenResult.claims.salesRef){
+            this.router.navigate(['/salesRepresntative/',uid]);
+          }
+          else{
+            this.router.navigate(['/']);
+            console.log("another user");
+          }
+        }
+        )   
+        
+      }).catch(function(error){
+        console.log("this is the new error"+error);
+        
+      return error.message
+      });
 
     this.showSpinner=false;
     console.log(this.authService.user.uid); 
