@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { MAT_LABEL_GLOBAL_OPTIONS} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ChartsModule } from 'ng2-charts';
 // import {MatButtonModule} from '@angular/material/button'; 
 
 import { environment } from '../environments/environment';
@@ -154,7 +155,6 @@ import { ReturnGoodRetailerComponent } from './stock-manager/return-goods/return
 import { ReturnGoodsService } from './service/return-goods.service';
 import { ReportByItemElementComponent } from './retailer/report-by-item/report-by-item-element/report-by-item-element.component';
 import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
-import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-orders-search/confirmed-order-result-report/confirmed-order-result-report.component';
 
 @NgModule({
   declarations: [
@@ -265,7 +265,6 @@ import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-ord
     ReturnGoodRetailerComponent,
     ReportByItemElementComponent,
     ItemReportComponent,
-    ConfirmedOrderResultReportComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
@@ -289,6 +288,7 @@ import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-ord
     AngularFireFunctionsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
+    ChartsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     AgmCoreModule.forRoot({

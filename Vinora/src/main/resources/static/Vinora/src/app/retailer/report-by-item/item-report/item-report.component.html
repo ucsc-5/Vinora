@@ -37,21 +37,31 @@
 </div>
 <div id="content" #content>
                             
-      
-  
-
-
-        <div class="row">
-
-
+        <!-- <div class="row">
             <div class="col" *ngIf="confirmedItems | async; let confirmedItems; else loading">
                                                 
             <app-report-confirm-order-element *ngFor="let confirmedItem of confirmedItems" [confirmOrder]="confirmItem" ></app-report-confirm-order-element>
             </div>
 
-            <ng-template #loading>No current orders available!!&hellip;</ng-template>
-                    
-         </div>
+            <ng-template #loading>No current orders available!!&hellip;</ng-template>             
+         </div> -->
+
+         <div class="row">
+           <div class="col-md-6">
+                 <div class="card-body">
+                   <h5 class="card-title">All items</h5>
+                   <div style="display:block;">
+                    <canvas baseChart [data]="PieChartData"
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                    </canvas>
+                  </div>
+                 </div>
+               </div>
  
- 
+              </div>
 </div>
