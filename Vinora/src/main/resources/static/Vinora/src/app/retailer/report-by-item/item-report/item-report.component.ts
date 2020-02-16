@@ -102,7 +102,7 @@ export class ItemReportComponent implements OnInit {
     this.reportService.getreportByDate(this.fromdate.value,this.todate.value);
     this.orderService. getreportByDate(this.fromdate.value,this.todate.value,this.companyId,this.retailerId);
     this.orderService.getConformOrdersByDateRange(this.fromdate.value,this.todate.value,this.companyId,this.retailerId);
-    // this.itemService.getItemReportsByDateRange(this.fromdate.value,this.todate.value,this.itemId,this.retailerId);
+    this.itemService.getItemReportsByDateRange(this.fromdate.value,this.todate.value,this.itemId,this.retailerId);
   }
 
   public downloadPdf(){
