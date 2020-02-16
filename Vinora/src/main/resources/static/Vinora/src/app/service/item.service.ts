@@ -142,8 +142,9 @@ export class ItemService {
  
 }
 
-getItemReportsByDateRange(fromDate:Date,toDate:Date,itemId:String,retailerId:string){
-     
+getItemReportsByDateRange(fromDate:Date,toDate:Date,itemId:string,retailerId:string){
+
+  
   let date1 = fromDate.getDate();
   let month1 = fromDate.getMonth();
   let year1 = fromDate.getFullYear();
@@ -152,21 +153,16 @@ getItemReportsByDateRange(fromDate:Date,toDate:Date,itemId:String,retailerId:str
   let month2 = toDate.getMonth();
   let year2 = toDate.getFullYear();
 
-  let min = (year1*10000)+(month1*100)+(date1);
-  let max = (year2*10000)+(month2*100)+(date2);
+  let min = (year1*10000)+((month1+1)*100)+(date1);
+  let max = (year2*10000)+((month2+1)*100)+(date2);
 
   console.log(min+ "min value");
   console.log(max+ "max Value");
+
   
-  
-  // this.afs.collection('retailers').doc(`${retailerId}`).collection('items').doc(`${itemId}`).get().subscribe(x=>{
-  //  x.array.forEach(element => {
-     
-  //  });
-  
-  // })
-  
-  
+
+   
+
 }
 
 
