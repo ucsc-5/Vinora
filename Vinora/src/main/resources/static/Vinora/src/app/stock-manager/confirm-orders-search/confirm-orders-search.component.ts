@@ -101,28 +101,48 @@ export class ConfirmOrdersSearchComponent implements OnInit {
 
 
   onSearchDateRange(){
-    this.specificDatetag=false;
-    console.log(this.fromDate + " form date");
-    console.log(this.toDate+ " To date");
-    
-    this.orders= this.orderService.getConformOrdersByDateRange(this.fromDate,this.toDate,this.companyId,this.stockManagerId);
 
+    var dateMin = this.fromDate.getDate();
+    var monthMin = this.fromDate.getMonth()+1;
+    var yearMin = this.fromDate.getFullYear();
+    var encDateMin = (yearMin*10000)+(monthMin*100)+(dateMin);
+
+    var dateMax = this.toDate.getDate();
+    var monthMax = this.toDate.getMonth()+1;
+    var yearMax = this.toDate.getFullYear();
+    var encDateMax = (yearMax*10000)+(monthMax*100)+(dateMax);
+
+    console.log("From"+encDateMin);
+    
+    console.log("To"+encDateMax);
+    this.orders= this.afs.collection('companies').doc(this.companyId).collection('confirmedOrders',ref=>ref.where('encDate','<=',encDateMax).where('encDate','>=',encDateMin))
+    .snapshotChanges().pipe(
+      map(actions => actions.map(a => { 
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
      this.orders.subscribe(x=>{
       x.forEach(element=>{
         console.log(element);
       })
     })
+
   }
 
   onSearchDate(){
-    let date = this.specificDate.getDate();
-    let month = this.specificDate.getMonth()+1;
-    let year = this.specificDate.getFullYear();
+    var date = this.specificDate.getDate();
+    var month = this.specificDate.getMonth()+1;
+    var year = this.specificDate.getFullYear();
     var encDate = (year*10000)+(month*100)+(date);
+
+  
 
     console.log(encDate);
     
-    this.orders = this.afs.collection('orders',ref=>ref.where('encDate','==',encDate).where('state','==',0).where('companyId','==',this.companyId)).snapshotChanges().pipe(
+    this.orders= this.afs.collection('companies').doc(this.companyId).collection('confirmedOrders',ref=>ref.where('encDate','==',encDate))
+    .snapshotChanges().pipe(
       map(actions => actions.map(a => { 
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -139,14 +159,13 @@ export class ConfirmOrdersSearchComponent implements OnInit {
 
   onSearchYearMonth(){
     console.log(this.year);
-
-    console.log(this.monthIndex);
+    // console.log(this.monthIndex);
+    var month = +this.monthIndex;
+    var year = +this.year
+    console.log(month);
     
-    // console.log(this.months[this.monthIndex]);
-
-    // this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('year','==',this.year).where('month','==',this.months[this.monthIndex])).snapshotChanges().pipe(
-    this.orders = this.afs.collection('orders',ref=>ref.where('year','==',this.year).where('month','==',this.monthIndex)).snapshotChanges().pipe(
-     
+    this.orders= this.afs.collection('companies').doc(this.companyId).collection('confirmedOrders',ref=>ref.where('month','==',month).where('year','==',year))
+    .snapshotChanges().pipe(
       map(actions => actions.map(a => { 
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -159,15 +178,13 @@ export class ConfirmOrdersSearchComponent implements OnInit {
         console.log(element);
       })
     })
-    console.log("on Search date");
   }
 
   onSearchRetailer(){
     console.log(this.selectRetailer.value.retailer);
     var retailerId = this.selectRetailer.value.retailer;
-
-    // this.orders = this.afs.collection('companies').doc(this.companyId).collection('confirmOrders',ref=>ref.where('retailerId','==',this.retailer)).snapshotChanges().pipe(
-      this.orders = this.afs.collection('orders',ref=>ref.where('retailerId','==',retailerId)).snapshotChanges().pipe(
+    this.orders= this.afs.collection('companies').doc(this.companyId).collection('confirmedOrders',ref=>ref.where('retailerId','==',retailerId))
+      .snapshotChanges().pipe(
         map(actions => actions.map(a => { 
         const data = a.payload.doc.data() as Order;
         const id = a.payload.doc.id;
@@ -183,7 +200,22 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchTotalRange(){
+    var min = +this.totalMin;
+    var max = +this.totalMax;
+    this.orders= this.afs.collection('companies').doc(this.companyId).collection('confirmedOrders',ref=>ref.where('total','<=',max).where('total','>=',min))
+      .snapshotChanges().pipe(
+        map(actions => actions.map(a => { 
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
 
+    this.orders.subscribe(x=>{
+      x.forEach(ele=>{
+        console.log(ele);
+      })
+    })
   }
 
 
