@@ -68,6 +68,7 @@ import { CompanyNotRegisteredRetailersComponent } from './manager/company-retail
 import { DeliveryCompanyReportComponent } from './retailer/delivery-company-report/delivery-company-report.component';
 import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.component';
 import { ReturnGoodsComponent } from './stock-manager/return-goods/return-goods.component';
+import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
 
 
 
@@ -101,6 +102,7 @@ const routes: Routes = [
             
             { path: 'previousOrders', component: PreviousOrdersComponent},
             {path:'orderedItems',component: ReportByItemComponent},
+            {path:'orderedItems/:itemId',component:ItemReportComponent},
                {path:'registeredDeliveryCompany',component:DeliveryCompanyReportComponent},
               {path: 'previousOrders/:companyId',component:ReportComponent},
                 //  {path: 'chart',component:ReportComponent}

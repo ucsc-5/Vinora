@@ -58,7 +58,7 @@ export class CurOrderElementComponent implements OnInit {
         x.forEach(x2=>{
           console.log(x2.id);
            this.orderService.setStmAddedFeild(this.orderId,x2.id); 
-            this.afs.collection('retailers').doc(this.order.retailerId).collection('companyWithItems').doc(this.order.companyId).collection('items').doc(x2.itemId).set(x2);
+            this.afs.collection('retailers').doc(this.order.retailerId).collection('items').doc(x2.itemId).set(x2);
             this.cartservice.addQuantitytItem(x2.itemCount,x2,this.order.retailerId,this.order.companyId);
            console.log(x2.itemName);
           })

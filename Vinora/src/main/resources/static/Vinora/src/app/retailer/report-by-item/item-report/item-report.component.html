@@ -1,0 +1,57 @@
+<h2 id="heading">Item order report</h2>
+<div>
+
+        <div class="col-5">
+            <h4>Report Time Period</h4>
+    
+                <mat-form-field>
+                  <mat-label>From</mat-label>
+                  <input matInput [matDatepicker]="dp1" [(ngModel)]="fromDate" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                  <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+                </mat-form-field>
+              
+                &nbsp;
+                &nbsp;
+    
+                <mat-form-field>
+                  <mat-label>To</mat-label>
+                  <input matInput [matDatepicker]="dp2" [(ngModel)]="toDate" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                  <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+                </mat-form-field>
+    
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="dateRangeTag">Active</mat-checkbox>
+                </section>
+    
+                <button mat-button color="primary" (click)="onSearchDateRange()" [disabled]="!dateRangeTag">Search</button>
+    
+              <hr>
+       
+                
+              
+        </div>
+        <button (click)="downloadPdf()">Download pdf</button>
+
+</div>
+<div id="content" #content>
+                            
+      
+  
+
+
+        <div class="row">
+
+
+            <div class="col" *ngIf="confirmedItems | async; let confirmedItems; else loading">
+                                                
+            <app-report-confirm-order-element *ngFor="let confirmedItem of confirmedItems" [confirmOrder]="confirmItem" ></app-report-confirm-order-element>
+            </div>
+
+            <ng-template #loading>No current orders available!!&hellip;</ng-template>
+                    
+         </div>
+ 
+ 
+</div>

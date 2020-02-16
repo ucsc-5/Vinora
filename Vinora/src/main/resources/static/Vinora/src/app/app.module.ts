@@ -152,6 +152,8 @@ import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.
 import { ReturnGoodsComponent } from './stock-manager/return-goods/return-goods.component';
 import { ReturnGoodRetailerComponent } from './stock-manager/return-goods/return-good-retailer/return-good-retailer.component';
 import { ReturnGoodsService } from './service/return-goods.service';
+import { ReportByItemElementComponent } from './retailer/report-by-item/report-by-item-element/report-by-item-element.component';
+import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
 
 @NgModule({
   declarations: [
@@ -260,6 +262,8 @@ import { ReturnGoodsService } from './service/return-goods.service';
     ReportByItemComponent,
     ReturnGoodsComponent,
     ReturnGoodRetailerComponent,
+    ReportByItemElementComponent,
+    ItemReportComponent,
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,

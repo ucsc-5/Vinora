@@ -80,7 +80,7 @@ export class CartService {
     const newCartQuantity= item.itemCount+quantity;
     
     
-    this.afs.collection('retailers').doc(`${retailerId}`).collection('companyWithItems').doc(`${companyId}`).collection('items').doc(item.itemId).get().subscribe(x=>{
+    this.afs.collection('retailers').doc(`${retailerId}`).collection('items').doc(item.itemId).get().subscribe(x=>{
       this.newQuantity=+x.data().itemCount+quantity;
     
 

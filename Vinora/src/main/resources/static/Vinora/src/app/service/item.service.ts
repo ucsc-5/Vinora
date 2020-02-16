@@ -83,6 +83,8 @@ export class ItemService {
     return this.items;
   }
 
+  
+
   getReorderItemsByCompanyId(companyId: string){
     this.items = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',"active").where('reOrder','==',true)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -121,7 +123,7 @@ export class ItemService {
   }  
 
   updateQuantityItem(key: string, value: any,retailerId:string,companyId:string){
-    this.afs.collection('retailers').doc(`${retailerId}`).collection('companyWithItems').doc(`${companyId}`).collection('items').doc(key).update(value);
+    this.afs.collection('retailers').doc(`${retailerId}`).collection('items').doc(key).update(value);
   }
   getStockItem(key:string){
     const items = this.afs.collection('items').doc(key);
@@ -139,6 +141,8 @@ export class ItemService {
   });
  
 }
+
+
 
   
 

@@ -6,6 +6,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreCollectionGroup, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Company, CompanyId } from './company.service';
+import { Item } from './item.service';
 
 
 export interface Retailer { shopName: string;
@@ -142,6 +143,17 @@ getMyRegisteredCompanies(retailerId:string){
   return companies;
 }
 
+getMyOrderedItems(retailerId:string){
+  const items = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('items',ref=>ref.where('state','==','active')).snapshotChanges().pipe(
+    map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as Item;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    }))
+  );
+
+  return items;
+}
 getMyHoldCompanies(retailerId:string){
   const companies = this.afs.collection<RetailerId>(this.dbPath).doc(retailerId).collection('registeredCompanies',ref=>ref.where('state','==',3)).snapshotChanges().pipe(
     map(actions => actions.map(a => {

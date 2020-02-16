@@ -1,0 +1,17 @@
+
+<mat-card class="example-card" >
+    <mat-card-header>
+        <mat-card-title>{{item.itemName}}</mat-card-title>
+        <mat-card-title>Company Id :{{item.companyId}}</mat-card-title>
+        <!-- <mat-card-subtitle>{{ company.email }} </mat-card-subtitle> -->
+    </mat-card-header>
+    <!-- <img mat-card-image src="{{item.itemImagePath}}" alt="Photo of the Vehicle"> -->
+
+    <mat-card-actions>   
+        <button mat-raised-button color="warn" type="submit" (click)="itemReport(item)">Generate report</button>
+       
+</mat-card-actions>
+  
+ 
+    
+</mat-card>
