@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild  } from '@angular/core';
 import {FormControl, Validators, NgForm, FormGroup} from '@angular/forms';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { OrderService,OrderId,Order } from 'src/app/service/order.service';
@@ -8,6 +8,7 @@ import { CompanyService } from 'src/app/service/company.service';
 import { map } from 'rxjs/operators';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import * as jsPDF from 'jspdf';
 
 
 
@@ -17,9 +18,11 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
   styleUrls: ['./confirm-orders-search.component.css']
 })
 export class ConfirmOrdersSearchComponent implements OnInit {
-
+  @ViewChild('content1',{ static: true }) content1:ElementRef;
 
   months = ['January','February','March','April','MAy','June','July','August','September','November','December'];
+
+  report: boolean = false;
 
   disabled = false;
   fromDate: Date;
@@ -101,6 +104,11 @@ export class ConfirmOrdersSearchComponent implements OnInit {
 
 
   onSearchDateRange(){
+    this.dateRangeTag = true;
+    this.yearMonthTag = false;
+    this.retailerTag = false;
+    this.totalRangeTag = false;
+    this.specificDatetag = false;
 
     var dateMin = this.fromDate.getDate();
     var monthMin = this.fromDate.getMonth()+1;
@@ -132,6 +140,12 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchDate(){
+    this.dateRangeTag = false;
+    this.yearMonthTag = false;
+    this.retailerTag = false;
+    this.totalRangeTag = false;
+    this.specificDatetag = true;
+
     var date = this.specificDate.getDate();
     var month = this.specificDate.getMonth()+1;
     var year = this.specificDate.getFullYear();
@@ -158,6 +172,13 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchYearMonth(){
+
+    this.dateRangeTag = false;
+    this.yearMonthTag = true;
+    this.retailerTag = false;
+    this.totalRangeTag = false;
+    this.specificDatetag = false;
+
     console.log(this.year);
     // console.log(this.monthIndex);
     var month = +this.monthIndex;
@@ -181,6 +202,14 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchRetailer(){
+
+    this.dateRangeTag = false;
+    this.yearMonthTag = false;
+    this.retailerTag = true;
+    this.totalRangeTag = false;
+    this.specificDatetag = false;
+
+
     console.log(this.selectRetailer.value.retailer);
     var retailerId = this.selectRetailer.value.retailer;
     this.orders= this.afs.collection('companies').doc(this.companyId).collection('confirmedOrders',ref=>ref.where('retailerId','==',retailerId))
@@ -200,6 +229,13 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   }
 
   onSearchTotalRange(){
+
+    this.dateRangeTag = false;
+    this.yearMonthTag = false;
+    this.retailerTag = false;
+    this.totalRangeTag = true;
+    this.specificDatetag = false;
+
     var min = +this.totalMin;
     var max = +this.totalMax;
     this.orders= this.afs.collection('companies').doc(this.companyId).collection('confirmedOrders',ref=>ref.where('total','<=',max).where('total','>=',min))
@@ -218,5 +254,30 @@ export class ConfirmOrdersSearchComponent implements OnInit {
     })
   }
 
+  onReport(){
+    this.report=!this.report;
+  }
+
+
+
+    public requestedDownloadPdf(){
+      console.log("Report Generated");
+      
+
+      let doc = new jsPDF();
+      let specialElementHandlers={
+        '#editor' :function(element,renderer) {
+          return true;
+          
+        }
+      };
+      let content1 = this.content1.nativeElement;
+      doc.fromHTML(content1.innerHTML,20,20,{
+        'width':190,
+        'elementHandlers':specialElementHandlers
+      });
+      doc.save('report.pdf');      
+    }
+  
 
 }

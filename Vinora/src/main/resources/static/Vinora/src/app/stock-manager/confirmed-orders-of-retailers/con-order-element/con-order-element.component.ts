@@ -45,9 +45,9 @@ export class ConOrderElementComponent implements OnInit {
     this.retailers=this.retailerServie.getRetailerById(this.order.retailerId);
     this.items=this.orderService.getItemsByOrderId(this.order.id);
     
-    console.log("Total :"+this.order.total);
-    console.log("Temp total "+this.order.tempTotal);
-    console.log("Precentage "+this.precentage);
+    // console.log("Total :"+this.order.total);
+    // console.log("Temp total "+this.order.tempTotal);
+    // console.log("Precentage "+this.precentage);
     
     
     

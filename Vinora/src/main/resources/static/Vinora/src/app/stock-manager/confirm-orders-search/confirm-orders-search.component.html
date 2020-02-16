@@ -1,6 +1,7 @@
 <div class="row">
 <div class="col-3"> 
-    
+    <button mat-button color="primary" (click)="onReport()">Summary</button>
+
         <h4>Date Range</h4>
 
             <mat-form-field>
@@ -27,7 +28,9 @@
           <hr> 
 
 
-
+<br>
+<br>
+<br>
           <h4>Sepcific date</h4>
             
           <mat-form-field>
@@ -45,6 +48,9 @@
 
           <hr>
 
+          <br>
+          <br>
+          <br>
 
           <h4>By year and month</h4>
 
@@ -91,7 +97,9 @@
 
             <button mat-button color="primary" (click)="onSearchYearMonth()" [disabled]="!yearMonthTag">Search</button>
 
-            <hr>
+            <br>
+            <br>
+            <br>
          
 
 
@@ -123,10 +131,9 @@
             <hr>
 
 
-
-
-
-
+            <br>
+            <br>    
+            <br>
 
             <h4>By total amount</h4>
             
@@ -149,10 +156,10 @@
 
             <hr>
 
-            <button mat-button color="primary" (click)="onSearch()">Search</button>
+            
     </div>
 
-    <div class="col-9">
+    <div *ngIf="!report" class="col-9">
         <div *ngIf="orders | async; let orders; else loading">
         
         <app-con-order-element *ngFor="let order of orders" [order]="order" ></app-con-order-element>
@@ -160,6 +167,80 @@
         </div>
         <ng-template #loading>Search Result here&hellip;</ng-template>
     </div>
+
+    <div  *ngIf="report" class="col-9">
+        <div *ngIf="orders | async; let orders; else loading">
+            <div class="row" id="content1" #content1 >
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Shop Name
+                        </th>
+                        <th>
+                            Create Date
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr *ngFor="let order of orders">
+                            <td>
+                                {{order.shopName}}
+                            </td>
+                            <td>
+                                {{order.year}}/{{order.month}}/{{order.date}}
+                            </td>
+                            <td>
+                                {{order.total}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                
+            </div>
+        </div>
+        <ng-template #loading>Search Result here&hellip;</ng-template>
+    </div>
+
 </div>
+<!-- <div class="row" *ngIf="orders | async; let orders; else loading">
+    <div class="col-12" >
+        <app-confirmed-order-result-report *ngFor="let order of orders" [order]="order">
+        </app-confirmed-order-result-report>
+    </div>
+</div> -->
+
+<div class="row" id="content1" #content1 style="height: auto;">
+    <div class="col-12" *ngIf="orders | async; let orders;">
+    <h2>Confirmed Orders</h2>
+    <!-- <p> Date: {{date}}</p> -->
+
+    <div class="row" *ngFor="let order of orders" >
+        <div class="col-2">
+            <b>Shop Name</b><br>
+            <b>Create Date</b><br>
+            <b>Total</b><br>
+        </div>
+        <div class="col-2" >
+            <b> {{order.shopName}}</b><br>
+            <b> {{order.year}}/{{order.month}}/{{order.date}}</b><br>
+            <b> {{order.total}}</b><br>
+        </div>
+        <div class="col-8" >
+            <app-confirmed-order-result-report [order]="order">
+
+            </app-confirmed-order-result-report>
+        </div>
+    </div>
+   
+    <br>
+    <button mat-raised-button (click)=requestedDownloadPdf()>Download PDF</button>
+</div>
+</div>
+
 
 

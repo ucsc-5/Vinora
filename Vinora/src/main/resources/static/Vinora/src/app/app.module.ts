@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { MAT_LABEL_GLOBAL_OPTIONS} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ChartsModule } from 'ng2-charts';
 // import {MatButtonModule} from '@angular/material/button'; 
 
 import { environment } from '../environments/environment';
@@ -291,6 +292,7 @@ import { ItemReportComponent } from './retailer/report-by-item/item-report/item-
     AngularFireFunctionsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
+    ChartsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     AgmCoreModule.forRoot({
