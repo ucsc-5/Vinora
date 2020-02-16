@@ -66,6 +66,7 @@ import { StmSalerepDetailsComponent } from './stock-manager/stm-com-salereps/stm
 import { CompanyNotRegisteredRetailersComponent } from './manager/company-retailers/company-not-registered-retailers/company-not-registered-retailers.component';
 // import { RegisteredRetailersComponent } from './registered-retailers/registered-retailers.component';
 import { DeliveryCompanyReportComponent } from './retailer/delivery-company-report/delivery-company-report.component';
+import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.component';
 
 
 
@@ -98,6 +99,7 @@ const routes: Routes = [
             {path: 'registredConpanies', component: RetailerRegisteredCompaniesComponent},
             
             { path: 'previousOrders', component: PreviousOrdersComponent},
+            {path:'orderedItems',component: ReportByItemComponent},
                {path:'registeredDeliveryCompany',component:DeliveryCompanyReportComponent},
               {path: 'previousOrders/:companyId',component:ReportComponent},
                 //  {path: 'chart',component:ReportComponent}
