@@ -155,8 +155,7 @@ import { ReturnGoodRetailerComponent } from './stock-manager/return-goods/return
 import { ReturnGoodsService } from './service/return-goods.service';
 import { ReportByItemElementComponent } from './retailer/report-by-item/report-by-item-element/report-by-item-element.component';
 import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
-// import { WelcomeRegisteredCompanyComponent } from './home/welcome/welcome-registered-company/welcome-registered-company.component';
-// import { WelcomeRegisteredCompanyElementComponent } from './home/welcome/welcome-registered-company/welcome-registered-company-element/welcome-registered-company-element.component';
+import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-orders-search/confirmed-order-result-report/confirmed-order-result-report.component';
 
 @NgModule({
   declarations: [
@@ -267,8 +266,7 @@ import { ItemReportComponent } from './retailer/report-by-item/item-report/item-
     ReturnGoodRetailerComponent,
     ReportByItemElementComponent,
     ItemReportComponent,
-    // WelcomeRegisteredCompanyComponent,
-    // WelcomeRegisteredCompanyElementComponent,
+    ConfirmedOrderResultReportComponent
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
