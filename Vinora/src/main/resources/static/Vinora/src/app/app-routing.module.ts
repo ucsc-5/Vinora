@@ -71,6 +71,7 @@ import { ReturnGoodsComponent } from './stock-manager/return-goods/return-goods.
 import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
 import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-orders-search/confirmed-order-result-report/confirmed-order-result-report.component';
 import { CompanyReportComponent } from './retailer/delivery-company-report/company-report/company-report.component';
+import { RetailerDeliveredOrdersComponent } from './retailer/retailer-delivered-orders/retailer-delivered-orders.component';
 
 
 
@@ -112,6 +113,8 @@ const routes: Routes = [
             // {path: 'newStock', component: NewStockComponent},
             { path: 'allCompanies', component: RetailerNewCompaniesComponent},
             { path: 'myProfile', component: RetailerProfileComponent},
+            { path: 'deliveredOrders', component: RetailerDeliveredOrdersComponent},
+            
           
   ]},
 

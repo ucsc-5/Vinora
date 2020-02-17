@@ -1,0 +1,10 @@
+
+    <h2 id="heading">Delivered Orders</h2>
+    <br>
+
+<div class="row">
+    <div class="col" *ngIf="deliveredOrders | async; let deliveredOrders; else loading">
+        <app-current-order-element *ngFor="let order of deliveredOrders" [currentOrder]="order" ></app-current-order-element>
+    </div>
+    <ng-template #loading>No current orders available!!&hellip;</ng-template>
+</div>

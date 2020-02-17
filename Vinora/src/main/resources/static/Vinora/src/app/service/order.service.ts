@@ -157,6 +157,17 @@ export class OrderService {
     return currentOordersByCompany;
   }
 
+  getDeliveredOrdersByRetailerId(retailerId:string){  
+    const currnetOrdersByRetailer:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('retailerId','==',retailerId).where('state','==',1)).snapshotChanges().pipe(
+     map(actions => actions.map(a => {
+       const data = a.payload.doc.data() as Order;
+       const id = a.payload.doc.id;
+       return { id, ...data };
+     }))
+   );
+   return currnetOrdersByRetailer;
+   }
+
   getDeleveredOrdersByRetailerIdCompanyId(companyId:string,retailerId:string){
     const currentOordersByCompany:Observable<OrderId[]> = this.afs.collection(this.dbPath , ref => ref.where('companyId','==',companyId).where('state','==',1).where('retailerId','==',retailerId)).snapshotChanges().pipe(
       map(actions => actions.map(a => {

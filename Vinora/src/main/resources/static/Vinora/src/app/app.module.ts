@@ -157,6 +157,7 @@ import { ReportByItemElementComponent } from './retailer/report-by-item/report-b
 import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
 import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-orders-search/confirmed-order-result-report/confirmed-order-result-report.component';
 import { CompanyReportComponent } from './retailer/delivery-company-report/company-report/company-report.component';
+import { RetailerDeliveredOrdersComponent } from './retailer/retailer-delivered-orders/retailer-delivered-orders.component';
 
 @NgModule({
   declarations: [
@@ -268,7 +269,8 @@ import { CompanyReportComponent } from './retailer/delivery-company-report/compa
     ReportByItemElementComponent,
     ItemReportComponent,
     ConfirmedOrderResultReportComponent,
-    CompanyReportComponent
+    CompanyReportComponent,
+    RetailerDeliveredOrdersComponent
   ], 
   entryComponents:[
     DialogOverviewExampleDialogComponent,
