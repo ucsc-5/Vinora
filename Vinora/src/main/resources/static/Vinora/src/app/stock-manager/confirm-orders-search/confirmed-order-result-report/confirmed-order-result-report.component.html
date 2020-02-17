@@ -1,15 +1,19 @@
-<div class="row" *ngIf="items | async; let items;" >
-        <table *ngFor="let item of items">
+<div class="row" *ngIf="items | async; let items;" style="background-color: aliceblue;">
+    <div class="col-12">
+        <b>Ordered Items</b><br>
+    </div>
+    <div class="col-12" *ngFor="let item of items">
+        <table >
             <thead>
                 <tr>
                     <th>
                         Brand
                     </th>
-
+    
                     <th>
                         Item Name
                     </th>
-
+    
                     <th>
                         Unit price
                     </th>
@@ -18,7 +22,6 @@
                     </th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr>
                     <td>
@@ -36,7 +39,10 @@
                    
                 </tr>
             </tbody>
-
-        </table>        
     
-</div>
+        </table>  
+    </div>
+          
+        
+    </div>
+    

@@ -18,13 +18,13 @@ import * as jsPDF from 'jspdf';
   styleUrls: ['./confirm-orders-search.component.css']
 })
 export class ConfirmOrdersSearchComponent implements OnInit {
+
   @ViewChild('content1',{ static: true }) content1:ElementRef;
 
   months = ['January','February','March','April','MAy','June','July','August','September','November','December'];
 
-  report: boolean = false;
-
-  disabled = false;
+ 
+  theDate:Date
   fromDate: Date;
   toDate: Date;
   specificDate: Date;
@@ -35,6 +35,9 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   totalMin: number = 0;
   orders: Observable<OrderId[]>;
 
+  report: boolean = false;
+  disabled = false;
+  searching = false;
 
   dateRangeTag = false;
   yearMonthTag = false;
@@ -48,6 +51,7 @@ export class ConfirmOrdersSearchComponent implements OnInit {
   stockManagerId:string;
   retailer: string;
   selectRetailer: FormGroup;
+  stockManagerEmail: string;
 
 
 
@@ -55,8 +59,11 @@ export class ConfirmOrdersSearchComponent implements OnInit {
 
   constructor(private afs: AngularFirestore,private db: AngularFireDatabase,private orderService:OrderService,private companyService:CompanyService,private afAuth: AngularFireAuth,private retailerService:RetailerService) {
     this.stockManagerId=this.afAuth.auth.currentUser.uid;
+    this.stockManagerEmail=this.afAuth.auth.currentUser.email;
     this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult)=>{
       this.companyId= idTokenResult.claims.cmpId;
+      
+
     })
    }
 
@@ -67,6 +74,8 @@ export class ConfirmOrdersSearchComponent implements OnInit {
       'retailer': new FormControl(null,[Validators.required])
     })
 
+    this.theDate= new Date();
+    this.stockManagerEmail=this.afAuth.auth.currentUser.email;
  
   }
 
@@ -254,10 +263,6 @@ export class ConfirmOrdersSearchComponent implements OnInit {
     })
   }
 
-  onReport(){
-    this.report=!this.report;
-  }
-
 
 
     public requestedDownloadPdf(){
@@ -278,6 +283,14 @@ export class ConfirmOrdersSearchComponent implements OnInit {
       });
       doc.save('report.pdf');      
     }
-  
+
+    onReport(){
+      this.searching=!this.searching;
+      // this.requestedDownloadPdf();
+    }
+    onSummary(){
+      this.report=!this.report;
+      this.searching=false;
+    }
 
 }
