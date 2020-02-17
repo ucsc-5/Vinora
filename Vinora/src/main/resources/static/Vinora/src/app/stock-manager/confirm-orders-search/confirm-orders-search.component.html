@@ -228,7 +228,8 @@
 
     <div class="row" *ngFor="let order of orders" style="margin-top: 20px;">
         <div class="col-3" style="background-color: beige;">
-            <p>
+            <p> 
+                <b>Company</b>     : {{order.companyName}}
                 <b>Shop Name</b>   : {{order.shopName}}<br>
                 <b>Create Date</b> : {{order.year}}/{{order.month}}/{{order.date}}<br>
                 <b>Total</b>       : {{order.total}}<br>

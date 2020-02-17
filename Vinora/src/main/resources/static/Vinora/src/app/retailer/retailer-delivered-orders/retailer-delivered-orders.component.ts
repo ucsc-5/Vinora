@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild  } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OrderId, OrderService,Order } from 'src/app/service/order.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -6,6 +6,7 @@ import { CompanyId, CompanyService } from 'src/app/service/company.service';
 import { CartItemId, CartService } from 'src/app/service/cart.service';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-retailer-delivered-orders',
@@ -14,7 +15,7 @@ import { map } from 'rxjs/operators';
 })
 export class RetailerDeliveredOrdersComponent implements OnInit {
 
-
+  @ViewChild('content1',{ static: true }) content1:ElementRef;
   deliveredOrders:Observable<OrderId[]>;
   retailerId:string;
 
@@ -32,6 +33,25 @@ export class RetailerDeliveredOrdersComponent implements OnInit {
         return { id, ...data };
       }))
     );
+  }
+
+  requestedDownloadPdf(){
+    console.log("Report Generated");
+      
+
+    let doc = new jsPDF();
+    let specialElementHandlers={
+      '#editor' :function(element,renderer) {
+        return true;
+        
+      }
+    };
+    let content1 = this.content1.nativeElement;
+    doc.fromHTML(content1.innerHTML,20,20,{
+      'width':190,
+      'elementHandlers':specialElementHandlers
+    });
+    doc.save('report.pdf');  
   }
 
 }

@@ -8,3 +8,31 @@
     </div>
     <ng-template #loading>No current orders available!!&hellip;</ng-template>
 </div>
+
+<div class="row" id="content1" #content1 style="height: auto;">
+    <div class="col-12" *ngIf="deliveredOrders | async; let orders;">
+    <h4>Confirmed Orders by {{stockManagerEmail}}</h4>
+
+    <button mat-raised-button (click)=requestedDownloadPdf()>Download PDF</button>
+    <!-- <p> Date: {{date}}</p> -->
+
+    <div class="row" *ngFor="let order of orders" style="margin-top: 20px;">
+        <div class="col-3" style="background-color: beige;">
+            <p>
+                <b>Shop Name</b>   : {{order.shopName}}<br>
+                <b>Create Date</b> : {{order.year}}/{{order.month}}/{{order.date}}<br>
+                <b>Total</b>       : {{order.total}}<br>
+                <b>Report Date</b> : {{theDate}}
+            </p>
+        </div>
+        <div class="col-9" >
+            <app-confirmed-order-result-report [order]="order">
+
+            </app-confirmed-order-result-report>
+        </div>
+    </div>
+   
+    <br>
+   
+</div>
+</div>
