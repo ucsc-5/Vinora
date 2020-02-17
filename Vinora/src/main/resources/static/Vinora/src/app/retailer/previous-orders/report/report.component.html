@@ -42,7 +42,12 @@
 
 
         <div class="row">
+          <h3>Retailer Report</h3>
+        <p> <b> from : {{fromDate}}</b></p>
+        <p><b>to : {{toDate}}</b></p>
 
+        <p>Company Name : {{confirmOrder.companyName}}</p>
+        <p>Shop Name : {{confirmOrder.shopName}}</p>
 
             <div class="col" *ngIf="confirmedOrders | async; let confirmedOrders; else loading">
                                                 

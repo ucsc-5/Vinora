@@ -1,4 +1,8 @@
 <div class="row">
+ 
+  <!-- <p>Company Name : {{confirmOrder.companyName}}</p>
+  <p>Shop Name : {{confirmOrder.shopName}}</p> -->
+
     <div class="col" *ngIf="company | async; let company; else ">
         <div class="row" *ngFor="let company of company" > 
         
@@ -18,7 +22,8 @@
 
 
 <div   *ngIf="items | async; let items ; else">
-  <table>
+ 
+  <table style="font-size: 10px;">
     <th>Item Name</th>
     <th>Item quantity</th>
     <th>Item unit Price</th>

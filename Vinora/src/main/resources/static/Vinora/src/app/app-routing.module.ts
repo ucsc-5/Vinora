@@ -70,6 +70,7 @@ import { ReportByItemComponent } from './retailer/report-by-item/report-by-item.
 import { ReturnGoodsComponent } from './stock-manager/return-goods/return-goods.component';
 import { ItemReportComponent } from './retailer/report-by-item/item-report/item-report.component';
 import { ConfirmedOrderResultReportComponent } from './stock-manager/confirm-orders-search/confirmed-order-result-report/confirmed-order-result-report.component';
+import { CompanyReportComponent } from './retailer/delivery-company-report/company-report/company-report.component';
 
 
 
@@ -105,6 +106,7 @@ const routes: Routes = [
             {path:'orderedItems',component: ReportByItemComponent},
             {path:'orderedItems/:itemId',component:ItemReportComponent},
                {path:'registeredDeliveryCompany',component:DeliveryCompanyReportComponent},
+               {path:'registeredDeliveryCompany/:companyId',component:CompanyReportComponent},
               {path: 'previousOrders/:companyId',component:ReportComponent},
                 //  {path: 'chart',component:ReportComponent}
             // {path: 'newStock', component: NewStockComponent},

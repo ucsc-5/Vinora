@@ -58,7 +58,7 @@ export class ItemReportComponent implements OnInit {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];// ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+  barChartLabels: Label[] = ['Royal Vintage','Company1'];// ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
@@ -66,7 +66,7 @@ export class ItemReportComponent implements OnInit {
   //   backgroundColor:['rgba(250,0,0,4,3)','rgba(0,255,0,0,3)','rgba(0,0,255,0,3)'],
   // }];
 
-  barChartData: ChartDataSets[] = [{ data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }];//[{ data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }];
+  barChartData: ChartDataSets[] = [{ data: [45, 56], label: 'Registered Companies' }];//[{ data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }];
 
   @ViewChild('content',{ static: true }) content:ElementRef;
   

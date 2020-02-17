@@ -22,6 +22,8 @@ export class ReportComponent implements OnInit {
   disabled = false;
   fromDate: Date;
   toDate: Date;
+  fromDatetoReport: Date;
+  toDatetoReport:Date;
   specificDate: Date;
 
   private dbPath = '/orders';
@@ -57,9 +59,11 @@ export class ReportComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((param:Params)=>{
       this.companyId = param['companyId'];
+      
     });
    
-   
+   this.fromDatetoReport=this.fromDate;
+   this.toDatetoReport = this.toDate;
     this.company= this.companyService.getCompanyById(this.companyId);
   
 
